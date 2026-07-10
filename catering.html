@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sumathi Catering Service</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+:root {
+  --primary: #008080;
+  --primary-light: #20B2AA;
+  --primary-dark: #006666;
+  --secondary: #B87333;
+  --secondary-light: #D4A574;
+  --secondary-dark: #8B5A2B;
+  --dark: #1a2a3a;
+  --light: #F0FFF4;
+  --white: #ffffff;
+  --gray: #f0f4f0;
+  --text: #2d3748;
+  --text-light: #718096;
+  --shadow: 0 4px 20px rgba(0,128,128,0.12);
+  --shadow-hover: 0 8px 30px rgba(0,128,128,0.2);
+  --copper-glow: 0 4px 15px rgba(184,115,51,0.3);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Poppins',sans-serif; background:var(--light); color:var(--text); overflow-x:hidden; }
+
+/* ── NAV ── */
+.nav {
+  position:fixed; top:0; left:0; right:0; z-index:1000;
+  background:rgba(0,102,102,0.97); backdrop-filter:blur(10px);
+  display:flex; align-items:center; justify-content:space-between;
+  padding:0 20px; height:60px; box-shadow:0 2px 20px rgba(0,0,0,0.2);
+}
+
+/* Leaf Logo */
+.nav-logo {
+  display:flex; align-items:center; gap:0;
+  cursor:pointer; text-decoration:none;
+}
+.leaf-logo-wrap {
+  position:relative; display:flex; align-items:center; justify-content:center;
+}
+.leaf-svg {
+  width:110px; height:44px;
+}
+.leaf-logo-text {
+  position:absolute;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  top:50%; left:50%; transform:translate(-50%,-52%);
+  pointer-events:none;
+}
+.leaf-logo-text .brand {
+  font-family:'Playfair Display',serif;
+  font-size:13px; font-weight:700; color:#fff;
+  letter-spacing:0.5px; line-height:1; white-space:nowrap;
+}
+.leaf-logo-text .sub {
+  font-size:7px; color:#FFD700; font-weight:600;
+  letter-spacing:1px; text-transform:uppercase; white-space:nowrap;
+}
+
+.nav-links { display:flex; gap:4px; }
+.nav-links button {
+  background:transparent; border:none; color:rgba(255,255,255,0.8);
+  font-size:13px; font-weight:500; padding:8px 14px; border-radius:8px;
+  cursor:pointer; transition:all 0.3s; font-family:'Poppins',sans-serif;
+}
+.nav-links button:hover, .nav-links button.active { background:var(--secondary); color:#fff; }
+.nav-links button i { margin-right:5px; }
+
+/* ── PAGES ── */
+.page { display:none; padding-top:60px; min-height:100vh; }
+.page.active { display:block; }
+
+/* ══════════════════════════
+   HOME PAGE
+══════════════════════════ */
+.slider-wrap { position:relative; overflow:hidden; height:420px; }
+.slides { display:flex; transition:transform 0.6s ease; height:100%; }
+.slide {
+  min-width:100%; height:100%; position:relative; flex-shrink:0;
+  background-size:cover; background-position:center;
+}
+.slide-overlay {
+  position:absolute; inset:0;
+  background:linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,102,102,0.7));
+  display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:20px;
+}
+.slide-overlay h2 { font-family:'Playfair Display',serif; color:#fff; font-size:2rem; text-shadow:0 2px 8px rgba(0,0,0,0.5); margin-bottom:8px; }
+.slide-overlay p { color:rgba(255,255,255,0.85); font-size:14px; }
+.slider-btn {
+  position:absolute; top:50%; transform:translateY(-50%);
+  background:rgba(255,255,255,0.2); border:none; color:#fff;
+  width:44px; height:44px; border-radius:50%; font-size:18px;
+  cursor:pointer; transition:all 0.3s; z-index:10; backdrop-filter:blur(5px);
+}
+.slider-btn:hover { background:var(--secondary); }
+.slider-btn.prev { left:15px; }
+.slider-btn.next { right:15px; }
+.slider-dots { position:absolute; bottom:15px; left:50%; transform:translateX(-50%); display:flex; gap:8px; }
+.dot { width:8px; height:8px; border-radius:50%; background:rgba(255,255,255,0.5); cursor:pointer; transition:all 0.3s; }
+.dot.active { background:var(--secondary); width:24px; border-radius:4px; }
+
+.home-section { padding:40px 20px; max-width:1100px; margin:0 auto; }
+.home-section h2 { font-family:'Playfair Display',serif; font-size:1.8rem; color:var(--primary-dark); margin-bottom:8px; }
+.home-section .tagline { color:var(--text-light); font-size:14px; margin-bottom:25px; }
+.home-cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:15px; }
+.home-card {
+  background:var(--white); border-radius:16px; padding:20px 15px;
+  text-align:center; box-shadow:var(--shadow);
+  border-bottom:3px solid var(--secondary); cursor:pointer; transition:all 0.3s;
+}
+.home-card:hover { transform:translateY(-4px); box-shadow:var(--shadow-hover); }
+.home-card .icon { font-size:2rem; margin-bottom:10px; }
+.home-card h3 { font-size:13px; font-weight:600; color:var(--primary-dark); }
+
+.home-why { background:linear-gradient(135deg,var(--primary),var(--primary-dark)); border-radius:20px; padding:35px; color:#fff; margin:20px 20px 40px; }
+.home-why h3 { font-family:'Playfair Display',serif; font-size:1.5rem; margin-bottom:20px; }
+.why-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:15px; }
+.why-item { background:rgba(255,255,255,0.1); border-radius:12px; padding:18px; text-align:center; backdrop-filter:blur(5px); }
+.why-item i { font-size:24px; color:var(--secondary-light); margin-bottom:8px; display:block; }
+.why-item p { font-size:12px; opacity:0.9; }
+
+/* ══════════════════════════
+   ABOUT PAGE
+══════════════════════════ */
+.about-header {
+  background:linear-gradient(135deg,var(--primary),var(--primary-dark));
+  color:#fff; padding:50px 20px; text-align:center; position:relative; overflow:hidden;
+}
+.about-header::before { content:''; position:absolute; inset:0; background:url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E"); }
+.about-header h2 { font-family:'Playfair Display',serif; font-size:2rem; position:relative; }
+.about-header p { opacity:0.85; position:relative; margin-top:8px; }
+.exp-tag { display:inline-block; background:linear-gradient(135deg,var(--secondary),var(--secondary-light)); color:var(--dark); padding:8px 25px; border-radius:25px; font-size:13px; font-weight:700; margin-top:15px; position:relative; box-shadow:var(--copper-glow); }
+
+.about-body { padding:30px 20px; max-width:1100px; margin:0 auto; }
+.about-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:25px; }
+
+.info-card { background:var(--white); border-radius:20px; padding:30px; border:1px solid rgba(0,128,128,0.1); box-shadow:var(--shadow); }
+.info-card h3 { color:var(--primary); margin-bottom:15px; font-size:18px; display:flex; align-items:center; gap:10px; }
+.info-card p { color:var(--text-light); line-height:1.7; margin-bottom:12px; font-size:14px; }
+.info-card .quote { padding:15px; background:linear-gradient(135deg,rgba(0,128,128,0.06),rgba(184,115,51,0.06)); border-radius:12px; border-left:4px solid var(--secondary); font-style:italic; color:var(--text); font-size:13px; }
+
+.contact-card {
+  background:linear-gradient(135deg,var(--primary) 0%,var(--primary-dark) 100%);
+  color:#fff; border:none; position:relative; overflow:hidden;
+}
+.contact-card::before { content:''; position:absolute; top:-50px; right:-50px; width:150px; height:150px; background:rgba(255,255,255,0.05); border-radius:50%; }
+.contact-card::after { content:''; position:absolute; bottom:-30px; left:-30px; width:100px; height:100px; background:rgba(255,255,255,0.05); border-radius:50%; }
+.contact-card h3 { color:var(--secondary-light); position:relative; z-index:1; }
+.contact-card > p { color:rgba(255,255,255,0.85); position:relative; z-index:1; font-size:14px; margin-bottom:15px; }
+.contact-links { display:flex; flex-direction:column; gap:10px; position:relative; z-index:1; }
+.contact-links a {
+  display:flex; align-items:center; gap:12px; padding:12px 15px;
+  background:rgba(255,255,255,0.12); border-radius:12px; text-decoration:none;
+  color:#fff; font-size:13px; transition:all 0.3s; border:1px solid rgba(255,255,255,0.2);
+}
+.contact-links a:hover { background:rgba(255,255,255,0.22); transform:translateX(5px); }
+.contact-links a i { font-size:18px; width:28px; text-align:center; }
+.contact-links a i.fa-phone { color:var(--secondary-light); }
+.contact-links a i.fa-whatsapp { color:#25D366; }
+.contact-links a i.fa-envelope { color:var(--secondary-light); }
+.contact-links a i.fa-globe { color:#64B5F6; }
+.contact-links a .lbl { font-size:10px; opacity:0.7; }
+.contact-links a .val { font-weight:600; }
+
+.quick-actions { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:15px; position:relative; z-index:1; }
+.quick-actions a { padding:12px; border-radius:12px; text-decoration:none; text-align:center; font-weight:600; font-size:13px; transition:all 0.3s; display:flex; align-items:center; justify-content:center; gap:8px; }
+.btn-book { background:linear-gradient(135deg,var(--secondary),var(--secondary-light)); color:var(--dark); box-shadow:var(--copper-glow); }
+.btn-book:hover { transform:translateY(-2px); }
+.btn-call { background:rgba(255,255,255,0.15); color:#fff; border:1px solid rgba(255,255,255,0.3); }
+.btn-call:hover { background:rgba(255,255,255,0.25); transform:translateY(-2px); }
+
+.working-hours { margin-top:15px; padding:14px; background:rgba(255,255,255,0.08); border-radius:12px; border:1px solid rgba(255,255,255,0.1); position:relative; z-index:1; }
+.working-hours-header { display:flex; align-items:center; gap:8px; margin-bottom:6px; font-weight:600; font-size:13px; }
+.working-hours-header i { color:var(--secondary-light); }
+.working-hours-time { display:flex; justify-content:space-between; font-size:12px; opacity:0.9; }
+
+/* ══ QR CODE (About page contact card) ══ */
+.qr-section {
+  margin-top:15px;
+  padding:16px;
+  background:rgba(255,255,255,0.08);
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,0.1);
+  position:relative; z-index:1;
+  text-align:center;
+}
+.qr-head {
+  display:flex; align-items:center; justify-content:center; gap:6px;
+  font-weight:600; font-size:13px; margin-bottom:12px;
+  letter-spacing:0.5px; text-transform:uppercase;
+}
+.qr-head i { color:var(--secondary-light); }
+.qr-box {
+  background:#fff;
+  border-radius:10px;
+  padding:10px;
+  display:inline-block;
+}
+.qr-box img {
+  width:240px;
+  height:240px;
+  display:block;
+  border-radius:4px;
+}
+.qr-caption { font-size:11px; opacity:0.8; margin-top:8px; }
+
+.map-box { margin-top:25px; border-radius:16px; overflow:hidden; box-shadow:var(--shadow); border:2px solid rgba(0,128,128,0.12); }
+.map-head { background:linear-gradient(135deg,var(--primary),var(--primary-dark)); padding:13px 20px; color:#fff; display:flex; align-items:center; gap:10px; font-weight:600; font-size:14px; }
+.map-head i { color:var(--secondary-light); }
+.map-box iframe { width:100%; height:280px; border:none; display:block; }
+
+.director-section {
+  display: flex;
+  gap: 30px;
+  align-items: flex-start;
+  background: #fff;
+  border-radius: 12px;
+  padding: 25px;
+  margin: 20px 0;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+  flex-wrap: wrap;
+}
+.director-photo {
+  flex: 0 0 280px;
+}
+.director-photo img {
+  width: 100%;
+  border-radius: 8px;
+  object-fit: cover;
+}
+.director-info {
+  flex: 1;
+  min-width: 250px;
+}
+.director-info h4 {
+  color: #333;
+  margin: 15px 0 10px;
+  font-size: 20px;
+}
+.director-info h4:first-child { margin-top: 0; }
+.highlight-letter {
+  color: #6aa84f;
+  font-size: 26px;
+}
+.director-info p {
+  color: #444;
+  line-height: 1.7;
+  font-size: 15px;
+}
+.award-tag {
+  background: #2fa8a0;
+  color: #fff;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-weight: 600;
+  margin-right: 6px;
+  display: inline-block;
+}
+@media (max-width: 600px) {
+  .director-section { flex-direction: column; }
+  .director-photo { flex: 0 0 auto; }
+}
+
+/* ══════════════════════════
+   GALLERY PAGE
+══════════════════════════ */
+.gallery-header {
+  background:linear-gradient(135deg,var(--primary),var(--primary-dark));
+  color:#fff; padding:40px 20px; text-align:center;
+}
+.gallery-header h2 { font-family:'Playfair Display',serif; font-size:1.8rem; }
+.gallery-header p { opacity:0.85; margin-top:6px; font-size:14px; }
+
+.gallery-body { padding:30px 20px; max-width:1100px; margin:0 auto; }
+.gallery-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:14px; }
+.gallery-item { position:relative; border-radius:14px; overflow:hidden; box-shadow:var(--shadow); cursor:pointer; }
+.gallery-item img { width:100%; height:200px; object-fit:cover; display:block; transition:transform 0.4s; }
+.gallery-item:hover img { transform:scale(1.06); }
+.gallery-item .overlay { position:absolute; inset:0; background:rgba(0,102,102,0.0); display:flex; align-items:center; justify-content:center; transition:all 0.3s; }
+.gallery-item:hover .overlay { background:rgba(0,102,102,0.45); }
+.gallery-item .overlay i { color:#fff; font-size:28px; opacity:0; transition:all 0.3s; }
+.gallery-item:hover .overlay i { opacity:1; }
+
+.lightbox { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.92); z-index:9999; align-items:center; justify-content:center; }
+.lightbox.open { display:flex; }
+.lightbox img { max-width:90vw; max-height:85vh; border-radius:10px; box-shadow:0 0 60px rgba(0,0,0,0.5); }
+.lightbox-close { position:absolute; top:20px; right:25px; color:#fff; font-size:28px; cursor:pointer; background:rgba(255,255,255,0.15); width:44px; height:44px; border-radius:50%; display:flex; align-items:center; justify-content:center; transition:all 0.3s; }
+.lightbox-close:hover { background:var(--secondary); }
+
+/* ══════════════════════════
+   CONTACT PAGE
+══════════════════════════ */
+.contact-page-header {
+  background:linear-gradient(135deg,var(--primary),var(--primary-dark));
+  color:#fff; padding:40px 20px; text-align:center;
+}
+.contact-page-header h2 { font-family:'Playfair Display',serif; font-size:1.8rem; }
+.contact-page-header p { opacity:0.85; margin-top:6px; font-size:14px; }
+
+.contact-body { padding:30px 20px; max-width:1000px; margin:0 auto; }
+.contact-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:25px; }
+
+.get-in-touch {
+  background:var(--white); border-radius:20px; padding:30px;
+  box-shadow:var(--shadow); border:1px solid rgba(0,128,128,0.1);
+}
+.get-in-touch h3 { color:var(--primary); font-size:18px; margin-bottom:20px; display:flex; align-items:center; gap:10px; }
+.form-group { margin-bottom:15px; }
+.form-group label { display:block; font-size:12px; font-weight:600; color:var(--text); margin-bottom:6px; }
+.form-group input, .form-group select, .form-group textarea {
+  width:100%; padding:11px 14px; border:1.5px solid rgba(0,128,128,0.2);
+  border-radius:10px; font-size:13px; font-family:'Poppins',sans-serif;
+  color:var(--text); background:#fff; transition:all 0.3s; outline:none;
+}
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color:var(--primary); box-shadow:0 0 0 3px rgba(0,128,128,0.1); }
+.form-group textarea { height:90px; resize:none; }
+.submit-btn {
+  width:100%; background:linear-gradient(135deg,var(--primary),var(--primary-dark));
+  color:#fff; border:none; padding:13px; border-radius:12px; font-size:14px;
+  font-weight:600; cursor:pointer; transition:all 0.3s; font-family:'Poppins',sans-serif;
+  display:flex; align-items:center; justify-content:center; gap:8px;
+}
+.submit-btn:hover { transform:translateY(-2px); box-shadow:0 6px 20px rgba(0,128,128,0.35); }
+
+.visit-banner {
+  margin-top:25px; background:linear-gradient(135deg,var(--secondary),var(--secondary-light));
+  border-radius:16px; padding:20px 25px; display:flex; align-items:center; justify-content:space-between; gap:15px;
+  box-shadow:var(--copper-glow); flex-wrap:wrap;
+}
+.visit-banner p { color:var(--dark); font-size:13px; font-weight:500; }
+.visit-banner a {
+  background:var(--dark); color:#fff; text-decoration:none; padding:10px 20px;
+  border-radius:10px; font-size:13px; font-weight:600; display:flex; align-items:center; gap:7px; transition:all 0.3s;
+}
+.visit-banner a:hover { background:var(--primary-dark); transform:translateY(-2px); }
+
+/* ══════════════════════════
+   REVIEWS PAGE
+══════════════════════════ */
+.reviews-header {
+  background:linear-gradient(135deg,var(--primary),var(--primary-dark));
+  color:#fff; padding:40px 20px; text-align:center;
+}
+.reviews-header h2 { font-family:'Playfair Display',serif; font-size:1.8rem; }
+.reviews-header p { opacity:0.85; margin-top:6px; font-size:14px; }
+
+.reviews-body { padding:30px 20px; max-width:900px; margin:0 auto; }
+
+.rating-summary {
+  background:var(--white); border-radius:20px; padding:30px; box-shadow:var(--shadow);
+  display:flex; align-items:center; gap:30px; margin-bottom:25px; flex-wrap:wrap;
+}
+.rating-big { text-align:center; }
+.rating-big .num { font-size:3.5rem; font-weight:700; color:var(--primary); line-height:1; }
+.rating-big .stars { color:var(--secondary); font-size:20px; margin:6px 0; }
+.rating-big .count { font-size:12px; color:var(--text-light); }
+.rating-bars { flex:1; min-width:200px; }
+.rating-bar-row { display:flex; align-items:center; gap:10px; margin-bottom:8px; font-size:12px; color:var(--text-light); }
+.rating-bar-row .bar-bg { flex:1; height:8px; background:var(--gray); border-radius:4px; overflow:hidden; }
+.rating-bar-row .bar-fill { height:100%; background:linear-gradient(90deg,var(--secondary),var(--secondary-light)); border-radius:4px; }
+
+.review-card {
+  background:var(--white); border-radius:16px; padding:25px; margin-bottom:16px;
+  box-shadow:var(--shadow); border-left:4px solid var(--secondary); transition:all 0.3s;
+}
+.review-card:hover { box-shadow:var(--shadow-hover); transform:translateY(-2px); }
+.review-card .top { display:flex; align-items:center; justify-content:space-between; margin-bottom:12px; }
+.review-card .reviewer { display:flex; align-items:center; gap:12px; }
+.reviewer-avatar { width:44px; height:44px; border-radius:50%; background:linear-gradient(135deg,var(--primary),var(--primary-light)); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:16px; }
+.reviewer-name { font-weight:600; font-size:14px; color:var(--text); }
+.reviewer-event { font-size:11px; color:var(--text-light); margin-top:2px; }
+.review-stars { color:var(--secondary); font-size:15px; }
+.review-text { color:var(--text-light); font-size:13px; line-height:1.7; }
+
+.add-review-btn {
+  width:100%; margin-top:20px;
+  background:linear-gradient(135deg,var(--secondary),var(--secondary-light));
+  color:var(--dark); border:none; padding:14px; border-radius:14px;
+  font-size:14px; font-weight:700; cursor:pointer; font-family:'Poppins',sans-serif;
+  display:flex; align-items:center; justify-content:center; gap:8px; transition:all 0.3s;
+}
+.add-review-btn:hover { transform:translateY(-2px); box-shadow:var(--copper-glow); }
+
+/* ══════════════════════════
+   FOOTER
+══════════════════════════ */
+.footer {
+  background:var(--dark);
+  color:#fff;
+  padding:50px 20px 20px;
+  margin-top:0;
+}
+.footer-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(200px,1fr));
+  gap:35px;
+  max-width:1100px;
+  margin:0 auto 35px;
+}
+
+/* Footer Logo */
+.footer-leaf-wrap {
+  display:inline-flex; align-items:center; justify-content:center;
+  position:relative; margin-bottom:14px;
+}
+.footer-leaf-svg { width:140px; height:58px; }
+.footer-leaf-text {
+  position:absolute;
+  top:50%; left:50%; transform:translate(-50%,-52%);
+  display:flex; flex-direction:column; align-items:center;
+  pointer-events:none;
+}
+.footer-leaf-text .fbrand {
+  font-family:'Playfair Display',serif;
+  font-size:16px; font-weight:700; color:#fff;
+  letter-spacing:0.5px; line-height:1; white-space:nowrap;
+}
+.footer-leaf-text .fsub {
+  font-size:8px; color:#FFD700; font-weight:600;
+  letter-spacing:1.5px; text-transform:uppercase; white-space:nowrap;
+}
+.footer-tagline {
+  font-size:13px; color:rgba(255,255,255,0.6); line-height:1.7; margin-bottom:16px;
+}
+.footer-exp-badge {
+  display:inline-flex; align-items:center; gap:7px;
+  background:linear-gradient(135deg,var(--secondary),var(--secondary-light));
+  color:var(--dark); padding:7px 16px; border-radius:20px;
+  font-size:12px; font-weight:700; margin-bottom:18px;
+}
+.footer-social { display:flex; gap:10px; margin-top:4px; }
+.footer-social a {
+  width:36px; height:36px; border-radius:50%;
+  background:rgba(255,255,255,0.1); color:#fff;
+  display:flex; align-items:center; justify-content:center;
+  font-size:15px; text-decoration:none; transition:all 0.3s;
+  border:1px solid rgba(255,255,255,0.15);
+}
+.footer-social a:hover { background:var(--secondary); transform:translateY(-3px); }
+
+/* Footer Columns */
+.footer-col h4 {
+  font-family:'Playfair Display',serif;
+  font-size:16px; color:var(--secondary-light);
+  margin-bottom:18px; padding-bottom:8px;
+  border-bottom:2px solid rgba(184,115,51,0.3);
+}
+.footer-col ul { list-style:none; }
+.footer-col ul li { margin-bottom:10px; }
+.footer-col ul li a {
+  color:rgba(255,255,255,0.65); text-decoration:none;
+  font-size:13px; display:flex; align-items:center; gap:8px;
+  transition:all 0.3s;
+}
+.footer-col ul li a:hover { color:var(--secondary-light); padding-left:4px; }
+.footer-col ul li a i { font-size:11px; color:var(--secondary); width:14px; }
+
+/* Contact col */
+.footer-contact-item {
+  display:flex; align-items:flex-start; gap:12px;
+  margin-bottom:14px;
+}
+.footer-contact-item i {
+  color:var(--secondary-light); font-size:15px;
+  margin-top:2px; width:18px; flex-shrink:0;
+}
+.footer-contact-item .fc-text { font-size:13px; color:rgba(255,255,255,0.75); line-height:1.5; }
+.footer-contact-item .fc-label { font-size:10px; color:rgba(255,255,255,0.4); text-transform:uppercase; letter-spacing:0.05em; }
+.footer-contact-item .fc-val { font-weight:500; color:rgba(255,255,255,0.85); }
+
+/* Footer Bottom */
+.footer-bottom {
+  max-width:1100px; margin:0 auto;
+  padding-top:18px;
+  border-top:1px solid rgba(255,255,255,0.08);
+  display:flex; align-items:center; justify-content:space-between;
+  flex-wrap:wrap; gap:10px;
+}
+.footer-bottom p { font-size:12px; color:rgb(255, 255, 255); }
+.footer-bottom span { color:var(--secondary-light); }
+
+.footer { background: linear-gradient(135deg, var(--dark) 0%, var(--primary-dark) 100%); color: var(--white); padding: 60px 20px 20px; position: relative; overflow: hidden; }
+
+/* Toast */
+.toast {
+  position:fixed; bottom:30px; left:50%; transform:translateX(-50%) translateY(100px);
+  background:var(--dark); color:#fff; padding:12px 24px; border-radius:12px;
+  font-size:13px; z-index:9999; transition:transform 0.4s; box-shadow:0 4px 20px rgba(0,0,0,0.3);
+  display:flex; align-items:center; gap:8px;
+}
+.toast.show { transform:translateX(-50%) translateY(0); }
+.toast i { color:var(--secondary-light); }
+
+/* Responsive */
+@media(max-width:640px){
+  .nav-links button span { display:none; }
+  .nav-links button { padding:8px 10px; }
+  .gallery-grid { grid-template-columns:repeat(2,1fr); }
+  .home-cards { grid-template-columns:repeat(2,1fr); }
+  .contact-grid { grid-template-columns:1fr; }
+  .about-grid { grid-template-columns:1fr; }
+  .quick-actions { grid-template-columns:1fr; }
+  .footer-grid { grid-template-columns:1fr 1fr; }
+  .footer-bottom { flex-direction:column; text-align:center; }
+}
+@media(max-width:400px){
+  .footer-grid { grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <!-- Leaf Logo -->
+  <div class="leaf-logo-wrap" onclick="showPage('home', document.querySelector('.nav-links button'))" style="cursor:pointer;">
+    <svg class="leaf-svg" viewBox="0 0 180 72" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="90" cy="36" rx="85" ry="30" fill="#2e7d32" transform="rotate(-5 90 36)"/>
+      <ellipse cx="90" cy="36" rx="83" ry="28" fill="none" stroke="#4caf50" stroke-width="1.5" transform="rotate(-5 90 36)" opacity="0.4"/>
+      <line x1="15" y1="38" x2="165" y2="34" stroke="#1b5e20" stroke-width="1.5" opacity="0.6"/>
+      <line x1="50" y1="36" x2="60" y2="18" stroke="#1b5e20" stroke-width="0.8" opacity="0.5"/>
+      <line x1="75" y1="35" x2="82" y2="14" stroke="#1b5e20" stroke-width="0.8" opacity="0.5"/>
+      <line x1="100" y1="35" x2="104" y2="14" stroke="#1b5e20" stroke-width="0.8" opacity="0.5"/>
+      <line x1="125" y1="35" x2="126" y2="16" stroke="#1b5e20" stroke-width="0.8" opacity="0.5"/>
+      <line x1="50" y1="36" x2="60" y2="54" stroke="#1b5e20" stroke-width="0.8" opacity="0.5"/>
+      <line x1="75" y1="35" x2="82" y2="56" stroke="#1b5e20" stroke-width="0.8" opacity="0.5"/>
+      <line x1="100" y1="35" x2="104" y2="56" stroke="#1b5e20" stroke-width="0.8" opacity="0.5"/>
+      <line x1="125" y1="35" x2="126" y2="54" stroke="#1b5e20" stroke-width="0.8" opacity="0.5"/>
+    </svg>
+    <div class="leaf-logo-text">
+      <span class="brand">Sumathi</span>
+      <span class="sub">CATERING</span>
+    </div>
+  </div>
+
+  <div class="nav-links">
+    <button onclick="showPage('home',this)" class="active"><i class="fas fa-home"></i><span> Home</span></button>
+    <button onclick="showPage('about',this)"><i class="fas fa-info-circle"></i><span> About</span></button>
+    <button onclick="showPage('gallery',this)"><i class="fas fa-images"></i><span> Gallery</span></button>
+    <button onclick="showPage('contact',this)"><i class="fas fa-envelope"></i><span> Contact</span></button>
+    <button onclick="showPage('reviews',this)"><i class="fas fa-star"></i><span> Reviews</span></button>
+  </div>
+</nav>
+
+<!-- ══ HOME ══ -->
+<div id="page-home" class="page active">
+  <div class="slider-wrap">
+    <div class="slides" id="slides">
+      <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=1200')">
+        <div class="slide-overlay"><h2>Authentic Tamil Wedding Feasts</h2><p>Traditional flavors for your most special day</p></div>
+      </div>
+      <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=1200')">
+        <div class="slide-overlay"><h2>Grand Reception Dinners</h2><p>Lavish spreads that leave lasting memories</p></div>
+      </div>
+      <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1200')">
+        <div class="slide-overlay"><h2>Full Sadhya Meals</h2><p>Complete traditional meals with all accompaniments</p></div>
+      </div>
+      <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=1200')">
+        <div class="slide-overlay"><h2>Morning Tiffin Specials</h2><p>Start celebrations with our signature tiffin items</p></div>
+      </div>
+      <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=1200')">
+        <div class="slide-overlay"><h2>Sumathi Catering Services</h2><p>Everything you need under one roof</p></div>
+      </div>
+    </div>
+    <button class="slider-btn prev" onclick="moveSlide(-1)"><i class="fas fa-chevron-left"></i></button>
+    <button class="slider-btn next" onclick="moveSlide(1)"><i class="fas fa-chevron-right"></i></button>
+    <div class="slider-dots" id="dots"></div>
+  </div>
+
+  <div class="home-section">
+    <h2>Our Menu</h2>
+    <p class="tagline">Traditional recipes crafted with care for every occasion</p>
+    <div class="home-cards">
+      <div class="home-card"><div class="icon">🌅</div><h3>Morning Tiffin</h3></div>
+      <div class="home-card"><div class="icon">🌙</div><h3>Reception Dinner</h3></div>
+      <div class="home-card"><div class="icon">🍛</div><h3>Lunch Sadhya</h3></div>
+      <div class="home-card"><div class="icon">🌇</div><h3>Evening Tiffin</h3></div>
+      <div class="home-card"><div class="icon">💍</div><h3>Marriage Package</h3></div>
+      <div class="home-card"><div class="icon">📋</div><h3>General Package</h3></div>
+    </div>
+  </div>
+
+  <div class="home-why">
+    <h3>Why Choose Sumathi Catering?</h3>
+    <div class="why-grid">
+      <div class="why-item"><i class="fas fa-award"></i><p>30+ Years Experience</p></div>
+      <div class="why-item"><i class="fas fa-users"></i><p>5000+ Weddings Catered</p></div>
+      <div class="why-item"><i class="fas fa-leaf"></i><p>Fresh Ingredients Daily</p></div>
+      <div class="why-item"><i class="fas fa-truck"></i><p>On-Time Delivery</p></div>
+      <div class="why-item"><i class="fas fa-star"></i><p>Top Rated in Chennai</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ ABOUT ══ -->
+<div id="page-about" class="page">
+  <div class="about-header">
+    <h2><i class="fas fa-utensils"></i> About Sumathi Catering</h2>
+    <p>Delicious authentic South Indian food for all occasions</p>
+    <div class="exp-tag"><i class="fas fa-award"></i> 30 Years of Catering Excellence</div>
+  </div>
+  <div class="about-body">
+    <div class="about-grid">
+      <div class="info-card">
+        <h3><i class="fas fa-info-circle"></i> Company Profile</h3>
+       <p>Founded in the 19th century as Sumathi Catering Service, we're proud pure vegetarian caterers with a legacy spanning generations. With over 25 years under our branded name, quality and excellence have made us one of the top names in the profession. From intimate home parties to grand events, we blend experience with creativity to make every occasion special. We also undertake labour charge and contract basis catering at budget-friendly rates — every detail planned around your needs, taste, and budget.<br>
+Team: Murali (Director) | 50 Cooks | 50 Hospitality Staff | 50 Reception | 50 Supervisors.</p>
+
+<!-- ══ DIRECTOR PROFILE (fills empty space) ══ -->
+  <div class="director-section">
+    <div class="director-photo">
+      <img src="dir.jpg" alt="Director Murali">
+    </div>
+    <div class="director-info">
+      <h4><span class="highlight-letter">D</span>IRECTOR PROFILE</h4>
+      <p>The entire business processes are proficiently managed under the dexterous administration of our company director <b>Doctor. Mr. Murali</b>, who has relevant industry experience of more than fifteen years. The ability of our director to resolve problems at site and his innovative ideas have perfected the blend of creativity and services in taking Sumathi Catering Service to greater heights.</p>
+
+      <h4><span class="highlight-letter">A</span>WARDS</h4>
+      <p><span class="award-tag">Arusuvai Nayagan (2009 - 2010)</span> Issued By: Film Director Mr. S.P. Muthuraman, Tamil Nadu Cinema Kalai Mandram.</p>
+    </div>
+  </div>
+    </div>
+ 
+     <div class="info-card contact-card">
+
+        <h3><i class="fas fa-headset"></i> Contact Us</h3>
+        <p>Reach out to us for your next event 💛 We're just a message away! Share your event details and we'll help you plan a menu your guests will remember.</p>
+        <div class="contact-links">
+          <a href="tel:9941013323"><i class="fas fa-phone"></i><div><div class="lbl">Call Us</div><div class="val">99410 13323</div></div></a>
+          <a href="tel:9382290034"><i class="fas fa-phone"></i><div><div class="lbl">Alternate</div><div class="val">93822 90034</div></div></a>
+          <a href="https://wa.me/919941013323" target="_blank"><i class="fab fa-whatsapp"></i><div><div class="lbl">WhatsApp</div><div class="val">99410 13323</div></div></a>
+          <a href="mailto:murali@sumathicatering.com"><i class="fas fa-envelope"></i><div><div class="lbl">Email</div><div class="val">murali@sumathicatering.com</div></div></a>
+          <a href="https://www.sumathicatering.com/" target="_blank"><i class="fas fa-globe"></i><div><div class="lbl">Visit Our Website</div><div class="val">sumathicatering.com</div></div></a>
+        </div>
+        <div class="quick-actions">
+          <a href="https://wa.me/919941013323?text=Hi%20Sumathi%20Catering,%20I%20want%20to%20book%20catering%20for%20my%20event." target="_blank" class="btn-book"><i class="fab fa-whatsapp"></i> Book Now</a>
+          <a href="tel:9941013323" class="btn-call"><i class="fas fa-phone"></i> Call Us</a>
+        </div>
+        <div class="working-hours">
+          <div class="working-hours-header"><i class="fas fa-clock"></i><span>Working Hours</span></div>
+          <div class="working-hours-time"><span>Monday - Sunday</span><span style="font-weight:600;color:var(--secondary-light);">8:00 AM - 10:00 PM</span></div>
+        </div>
+
+        <!-- ══ QR CODE ══ -->
+        <div class="qr-section">
+          <div class="qr-head"><i class="fas fa-qrcode"></i><span>Scan Our QR Code</span></div>
+          <div class="qr-box">
+            <img src="QR Code.png" alt="Sumathi Catering QR Code">
+          </div>
+          <div class="qr-caption">Scan to save our contact / visit our page</div>
+        </div>
+      </div>
+    </div>
+    <div class="map-box">
+      <div class="map-head"><i class="fas fa-map-marker-alt"></i><span>Find Us —No.2/707, Medavakkam, Main Road, Kovilambakkam Chennai - 600 117</span></div>
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.5!2d80.2049!3d12.9141!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a525d4b7490de91%3A0x5a20e4e8bf12e33a!2sKovilambakkam%2C%20Chennai%2C%20Tamil%20Nadu!5e0!3m2!1sen!2sin!4v1234567890" allowfullscreen loading="lazy"></iframe>
+    </div>
+  </div>
+</div>
+
+<!-- ══ GALLERY ══ -->
+<div id="page-gallery" class="page">
+  <div class="gallery-header">
+    <h2><i class="fas fa-images"></i> Our Gallery</h2>
+    <p>Moments captured from our events and celebrations</p>
+  </div>
+  <div class="gallery-body">
+    <div class="gallery-grid" id="galleryGrid"></div>
+  </div>
+</div>
+
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <span class="lightbox-close"><i class="fas fa-times"></i></span>
+  <img id="lightboxImg" src="" alt="">
+</div>
+
+<!-- ══ CONTACT ══ -->
+<div id="page-contact" class="page">
+  <div class="contact-page-header">
+    <h2><i class="fas fa-envelope"></i> Contact Us</h2>
+    <p>We'd love to cater your next event!</p>
+  </div>
+  <div class="contact-body">
+    <div class="contact-grid">
+      <div class="get-in-touch">
+        <h3><i class="fas fa-paper-plane"></i> Get in Touch</h3>
+        <form id="cateringContactForm" onsubmit="submitCateringContact(event)">
+          <div class="form-group"><label>Your Name</label><input id="cateringContactName" type="text" placeholder="Enter your name" required></div>
+          <div class="form-group"><label>Mobile Number</label><input id="cateringContactPhone" type="tel" placeholder="+91 XXXXX XXXXX"></div>
+          <div class="form-group"><label>Email</label><input id="cateringContactEmail" type="email" placeholder="your@email.com"></div>
+          <div class="form-group">
+            <label>Service Required</label>
+            <select id="cateringContactService">
+              <option value="">Select a service</option>
+              <option>Marriage Package (A to Z)</option>
+              <option>Reception Dinner</option>
+              <option>Morning Tiffin</option>
+              <option>Lunch</option>
+              <option>Evening Tiffin</option>
+              <option>General Package</option>
+              <option>Corporate Event</option>
+              <option>Birthday Party</option>
+            </select>
+          </div>
+          <div class="form-group"><label>Message</label><textarea id="cateringContactMessage" placeholder="Tell us about your event..." required></textarea></div>
+          <button type="submit" class="submit-btn"><i class="fas fa-paper-plane"></i> Send Enquiry</button>
+        </form>
+      </div>
+      <div class="info-card contact-card">
+        <h3><i class="fas fa-headset"></i> Reach Us Directly</h3>
+        <p>Available every day from 8 AM to 10 PM for bookings and enquiries.</p>
+        <div class="contact-links">
+          <a href="tel:9941013323"><i class="fas fa-phone"></i><div><div class="lbl">Primary</div><div class="val">99410 13323</div></div></a>
+          <a href="tel:9382290034"><i class="fas fa-phone"></i><div><div class="lbl">Alternate</div><div class="val">93822 90034</div></div></a>
+          <a href="tel:9042013323"><i class="fas fa-phone"></i><div><div class="lbl">Alternate 2</div><div class="val">90420 13323</div></div></a>
+          <a href="https://wa.me/919941013323" target="_blank"><i class="fab fa-whatsapp"></i><div><div class="lbl">WhatsApp</div><div class="val">99410 13323</div></div></a>
+          <a href="mailto:murali@sumathicatering.com"><i class="fas fa-envelope"></i><div><div class="lbl">Email</div><div class="val">murali@sumathicatering.com</div></div></a>
+        </div>
+        <div class="quick-actions">
+          <a href="https://wa.me/919941013323?text=Hi%20Sumathi%20Catering,%20I%20want%20to%20book%20catering." target="_blank" class="btn-book"><i class="fab fa-whatsapp"></i> Book Now</a>
+          <a href="tel:9941013323" class="btn-call"><i class="fas fa-phone"></i> Call Us</a>
+        </div>
+        <div class="working-hours">
+          <div class="working-hours-header"><i class="fas fa-clock"></i><span>Working Hours</span></div>
+          <div class="working-hours-time"><span>Monday - Sunday</span><span style="font-weight:600;color:var(--secondary-light);">8:00 AM - 10:00 PM</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="visit-banner">
+      <p><i class="fas fa-globe" style="margin-right:8px;"></i>For full menu, photos & more details visit our official website</p>
+      <a href="https://www.sumathicatering.com/" target="_blank"><i class="fas fa-external-link-alt"></i> Visit Our Website</a>
+    </div>
+  </div>
+</div>
+
+<!-- ══ REVIEWS ══ -->
+<div id="page-reviews" class="page">
+  <div class="reviews-header">
+    <h2><i class="fas fa-star"></i> Customer Reviews</h2>
+    <p>What our happy customers say about us</p>
+  </div>
+  <div class="reviews-body">
+    <div class="rating-summary">
+      <div class="rating-big">
+        <div class="num">4.9</div>
+        <div class="stars">★★★★★</div>
+        <div class="count">Based on 200+ reviews</div>
+      </div>
+      <div class="rating-bars">
+        <div class="rating-bar-row"><span>5★</span><div class="bar-bg"><div class="bar-fill" style="width:88%"></div></div><span>88%</span></div>
+        <div class="rating-bar-row"><span>4★</span><div class="bar-bg"><div class="bar-fill" style="width:9%"></div></div><span>9%</span></div>
+        <div class="rating-bar-row"><span>3★</span><div class="bar-bg"><div class="bar-fill" style="width:2%"></div></div><span>2%</span></div>
+        <div class="rating-bar-row"><span>2★</span><div class="bar-bg"><div class="bar-fill" style="width:1%"></div></div><span>1%</span></div>
+        <div class="rating-bar-row"><span>1★</span><div class="bar-bg"><div class="bar-fill" style="width:0%"></div></div><span>0%</span></div>
+      </div>
+    </div>
+    <div id="cateringReviewsList">
+      <div class="review-card">
+        <div class="top"><div class="reviewer"><div class="reviewer-avatar">P</div><div><div class="reviewer-name">Priya & Rajesh</div><div class="reviewer-event">Wedding Event</div></div></div><div class="review-stars">★★★★★</div></div>
+        <div class="review-text">"Amazing food quality! Sumathi Catering made our wedding truly special. The briyani was outstanding and everyone loved the full meals!"</div>
+      </div>
+      <div class="review-card">
+        <div class="top"><div class="reviewer"><div class="reviewer-avatar">L</div><div><div class="reviewer-name">Lakshmi Family</div><div class="reviewer-event">T. Nagar, Chennai</div></div></div><div class="review-stars">★★★★★</div></div>
+        <div class="review-text">"Best catering in Chennai. We have been using their service for 10 years now. Consistent quality, timely delivery, and amazing taste every single time!"</div>
+      </div>
+      <div class="review-card">
+        <div class="top"><div class="reviewer"><div class="reviewer-avatar">K</div><div><div class="reviewer-name">Karthik</div><div class="reviewer-event">House Warming</div></div></div><div class="review-stars">★★★★½</div></div>
+        <div class="review-text">"The full meals at our house warming was absolutely delicious. Authentic South Indian taste with perfect spice levels. Highly recommended!"</div>
+      </div>
+      <div class="review-card">
+        <div class="top"><div class="reviewer"><div class="reviewer-avatar">A</div><div><div class="reviewer-name">Anand</div><div class="reviewer-event">Corporate Event</div></div></div><div class="review-stars">★★★★★</div></div>
+        <div class="review-text">"Professional service, timely delivery, and the food was absolutely divine! Our corporate event was a huge success thanks to Sumathi Catering."</div>
+      </div>
+      <div class="review-card">
+        <div class="top"><div class="reviewer"><div class="reviewer-avatar">S</div><div><div class="reviewer-name">Sundar & Meena</div><div class="reviewer-event">Engagement Ceremony</div></div></div><div class="review-stars">★★★★★</div></div>
+        <div class="review-text">"From the morning tiffin to the evening snacks, everything was perfect. The staff were professional and the service was top-notch. Will definitely use again!"</div>
+      </div>
+    </div>
+    <form id="cateringReviewForm" onsubmit="submitCateringReview(event)" style="margin-top:20px; background:#fff; padding:18px; border-radius:14px; box-shadow:var(--shadow);">
+      <div class="form-group"><label>Your Name</label><input id="cateringReviewName" type="text" placeholder="Enter your name" required></div>
+      <div class="form-group"><label>Rating</label><select id="cateringReviewRating"><option value="5">5 Stars</option><option value="4">4 Stars</option><option value="3">3 Stars</option><option value="2">2 Stars</option><option value="1">1 Star</option></select></div>
+      <div class="form-group"><label>Your Review</label><textarea id="cateringReviewText" placeholder="Tell us about your experience..." required></textarea></div>
+      <button type="submit" class="add-review-btn" style="width:100%; margin-top:4px;"><i class="fas fa-plus"></i> Add Your Review</button>
+    </form>
+  </div>
+</div>
+
+<!-- ══ FOOTER ══ -->
+<footer class="footer">
+  <div class="footer-grid">
+
+    <!-- Brand -->
+    <div class="footer-brand">
+      <div class="footer-leaf-wrap">
+        <svg class="footer-leaf-svg" viewBox="0 0 220 88" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="110" cy="44" rx="105" ry="37" fill="#2e7d32" transform="rotate(-4 110 44)"/>
+          <ellipse cx="110" cy="44" rx="103" ry="35" fill="none" stroke="#4caf50" stroke-width="2" transform="rotate(-4 110 44)" opacity="0.4"/>
+          <line x1="18" y1="46" x2="202" y2="42" stroke="#1b5e20" stroke-width="1.8" opacity="0.6"/>
+          <line x1="55" y1="44" x2="68" y2="22" stroke="#1b5e20" stroke-width="1" opacity="0.5"/>
+          <line x1="85" y1="43" x2="95" y2="18" stroke="#1b5e20" stroke-width="1" opacity="0.5"/>
+          <line x1="115" y1="43" x2="120" y2="17" stroke="#1b5e20" stroke-width="1" opacity="0.5"/>
+          <line x1="148" y1="43" x2="150" y2="20" stroke="#1b5e20" stroke-width="1" opacity="0.5"/>
+          <line x1="55" y1="44" x2="68" y2="66" stroke="#1b5e20" stroke-width="1" opacity="0.5"/>
+          <line x1="85" y1="43" x2="95" y2="68" stroke="#1b5e20" stroke-width="1" opacity="0.5"/>
+          <line x1="115" y1="43" x2="120" y2="69" stroke="#1b5e20" stroke-width="1" opacity="0.5"/>
+          <line x1="148" y1="43" x2="150" y2="66" stroke="#1b5e20" stroke-width="1" opacity="0.5"/>
+        </svg>
+        <div class="footer-leaf-text">
+          <span class="fbrand">Sumathi</span>
+          <span class="fsub">CATERING</span>
+        </div>
+      </div>
+      <p class="footer-tagline">Traditional Elegance, Modern Service.<br>Trusted partner for authentic catering for over 30 years.</p>
+      <div class="footer-exp-badge"><i class="fas fa-award"></i> 30 Years Experience</div>
+      <div class="footer-social">
+        <a href="https://www.facebook.com/people/Sumathi-Catering/100067237284718/" title="Facebook"><i class="fab fa-facebook"></i></a>
+        <a href="https://www.youtube.com/@sumathicateringserviceoffi4046/shorts" target="_blank" class="yt"><i class="fab fa-youtube"></i></a>
+        <a href="https://wa.me/919941013323" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        <a href="tel:9941013323" title="Call"><i class="fas fa-phone"></i></a>
+      </div>
+    </div>
+
+    <!-- Quick Links -->
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="#" onclick="showPage('home',document.querySelectorAll('.nav-links button')[0]);return false;"><i class="fas fa-chevron-right"></i> Home</a></li>
+        <li><a href="#" onclick="showPage('about',document.querySelectorAll('.nav-links button')[1]);return false;"><i class="fas fa-chevron-right"></i> About</a></li>
+        <li><a href="#" onclick="showPage('gallery',document.querySelectorAll('.nav-links button')[2]);return false;"><i class="fas fa-chevron-right"></i> Gallery</a></li>
+        <li><a href="#" onclick="showPage('contact',document.querySelectorAll('.nav-links button')[3]);return false;"><i class="fas fa-chevron-right"></i> Contact</a></li>
+        <li><a href="#" onclick="showPage('reviews',document.querySelectorAll('.nav-links button')[4]);return false;"><i class="fas fa-chevron-right"></i> Reviews</a></li>
+        <li><a href="https://wa.me/919941013323?text=Hi%20Sumathi%20Catering,%20I%20want%20to%20book%20catering." target="_blank"><i class="fas fa-chevron-right"></i> Book Now</a></li>
+      </ul>
+    </div>
+
+    <!-- Categories -->
+    <div class="footer-col">
+      <h4>Our Services</h4>
+      <ul>
+        <li><a href="#"><i class="fas fa-utensils"></i> Morning Tiffin</a></li>
+        <li><a href="#"><i class="fas fa-moon"></i> Reception Dinner</a></li>
+        <li><a href="#"><i class="fas fa-leaf"></i> Lunch Sadhya</a></li>
+        <li><a href="#"><i class="fas fa-sun"></i> Evening Tiffin</a></li>
+        <li><a href="#"><i class="fas fa-ring"></i> Marriage Package</a></li>
+        <li><a href="#"><i class="fas fa-clipboard-list"></i> General Package</a></li>
+        <li><a href="#"><i class="fas fa-briefcase"></i> Corporate Events</a></li>
+        <li><a href="#"><i class="fas fa-birthday-cake"></i> Birthday Parties</a></li>
+      </ul>
+    </div>
+
+    <!-- Contact -->
+    <div class="footer-col">
+      <h4>Contact Us</h4>
+      <div class="footer-contact-item">
+        <i class="fas fa-phone"></i>
+        <div class="fc-text">
+          <div class="fc-label">Primary</div>
+          <div class="fc-val">994 101 3323</div>
+          <div class="fc-val">93822 90034</div>
+        </div>
+      </div>
+      <div class="footer-contact-item">
+        <i class="fab fa-whatsapp" ></i>
+        <div class="fc-text">
+          <div class="fc-label">WhatsApp</div>
+          <div class="fc-val">994 101 3323</div>
+        </div>
+      </div>
+      <div class="footer-contact-item">
+        <i class="fas fa-envelope"></i>
+        <div class="fc-text">
+          <div class="fc-label">Email</div>
+          <div class="fc-val">murali@sumathicatering.com</div>
+        </div>
+      </div>
+      <div class="footer-contact-item">
+        <i class="fas fa-map-marker-alt"></i>
+        <div class="fc-text">
+          <div class="fc-label">Location</div>
+          <div class="fc-val">No.2/707, Medavakkam, Main Road, Kovilambakkam <br>Chennai - 600 117</div>
+        </div>
+      </div>
+      <div class="footer-contact-item">
+        <i class="fas fa-clock"></i>
+        <div class="fc-text">
+          <div class="fc-label">Working Hours</div>
+          <div class="fc-val">Mon–Sun: 8 AM – 10 PM</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Footer Bottom -->
+   <div class="footer-bottom">
+            <p>© 2024 Sumathi Catering Service. All rights reserved. | 30 Years of Excellence</p>
+        </div>
+</footer>
+
+<!-- TOAST -->
+<div class="toast" id="toast"><i class="fas fa-check-circle"></i><span id="toastMsg"></span></div>
+
+<script>
+// ── PAGE NAV ──
+function showPage(id, btn) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-links button').forEach(b => b.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  if(btn) btn.classList.add('active');
+  window.scrollTo(0,0);
+}
+
+// ── SLIDER ──
+let cur = 0;
+const total = 5;
+function moveSlide(dir) {
+  cur = (cur + dir + total) % total;
+  document.getElementById('slides').style.transform = `translateX(-${cur * 100}%)`;
+  updateDots();
+}
+function goSlide(i) { cur = i; document.getElementById('slides').style.transform = `translateX(-${cur * 100}%)`; updateDots(); }
+function updateDots() {
+  document.querySelectorAll('.dot').forEach((d,i) => d.classList.toggle('active', i === cur));
+}
+const dotsEl = document.getElementById('dots');
+for(let i=0;i<total;i++){const d=document.createElement('div');d.className='dot'+(i===0?' active':'');d.onclick=()=>goSlide(i);dotsEl.appendChild(d);}
+setInterval(()=>moveSlide(1), 4000);
+
+// ── GALLERY ──
+const galleryImgs = [
+  'uploads/Gal1.jpg',
+  'uploads/Gal2.jpg',
+  'uploads/Gal3.jpg',
+  'uploads/Gal4.jpg',
+  'uploads/Gal5.jpg',
+  'uploads/Gal6.jpg',
+  'uploads/Gal7.jpg',
+  'uploads/Gal8.jpg',
+  'uploads/Gal9.jpg',
+  'uploads/Gal10.jpg',
+  'uploads/Gal11.jpg',
+  'uploads/Gal12.jpg',
+  'uploads/Gal13.jpg',
+  'uploads/Gal14.jpg',
+  'uploads/Gal15.jpg',
+  'uploads/Gal16.jpeg',
+
+];
+
+
+const grid = document.getElementById('galleryGrid');
+galleryImgs.forEach((src,i) => {
+  const div = document.createElement('div');
+  div.className = 'gallery-item';
+  div.innerHTML = `<img src="${src}" alt="Gallery ${i+1}" loading="lazy"><div class="overlay"><i class="fas fa-expand"></i></div>`;
+  div.onclick = () => openLightbox(src);
+  grid.appendChild(div);
+});
+function openLightbox(src) {
+  document.getElementById('lightboxImg').src = src;
+  document.getElementById('lightbox').classList.add('open');
+}
+function closeLightbox() { document.getElementById('lightbox').classList.remove('open'); }
+
+async function submitCateringContact(e) {
+  e.preventDefault();
+  const payload = {
+    type: 'contact',
+    name: document.getElementById('cateringContactName').value.trim(),
+    phone: document.getElementById('cateringContactPhone').value.trim(),
+    email: document.getElementById('cateringContactEmail').value.trim(),
+    service: document.getElementById('cateringContactService').value,
+    message: document.getElementById('cateringContactMessage').value.trim(),
+    source: 'catering'
+  };
+  try {
+    const res = await fetch('submit_forms.php', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+    const data = await res.json();
+    if (data.status === 'success') {
+      showToast('✅ Enquiry sent! We will contact you soon.');
+      e.target.reset();
+    } else {
+      showToast(data.message || 'Unable to send enquiry');
+    }
+  } catch (err) {
+    showToast('Unable to send enquiry right now');
+  }
+}
+
+async function submitCateringReview(e) {
+  e.preventDefault();
+  const payload = {
+    type: 'review',
+    name: document.getElementById('cateringReviewName').value.trim(),
+    rating: Number(document.getElementById('cateringReviewRating').value || 5),
+    review_text: document.getElementById('cateringReviewText').value.trim(),
+    source: 'catering'
+  };
+  try {
+    const res = await fetch('submit_forms.php', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+    const data = await res.json();
+    if (data.status === 'success') {
+      const container = document.getElementById('cateringReviewsList');
+      const name = payload.name;
+      const rating = payload.rating;
+      const review = payload.review_text;
+      const card = document.createElement('div');
+      card.className = 'review-card';
+      card.innerHTML = `<div class="top"><div class="reviewer"><div class="reviewer-avatar">${name.charAt(0).toUpperCase()}</div><div><div class="reviewer-name">${name}</div><div class="reviewer-event">Catering Review</div></div></div><div class="review-stars">${'★'.repeat(rating)}${'☆'.repeat(5-rating)}</div></div><div class="review-text">"${review}"</div>`;
+      container.prepend(card);
+      showToast('⭐ Review submitted successfully!');
+      e.target.reset();
+    } else {
+      showToast(data.message || 'Unable to save review');
+    }
+  } catch (err) {
+    showToast('Unable to save review right now');
+  }
+}
+
+// ── TOAST ──
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  document.getElementById('toastMsg').textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+</script>
+</body>
+</html>

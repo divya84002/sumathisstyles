@@ -1,0 +1,2017 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sumathi's Style - Tailoring Boutique | 30 Years Experience</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #008080;
+            --primary-light: #20B2AA;
+            --primary-dark: #006666;
+            --secondary: #B87333;
+            --secondary-light: #D4A574;
+            --secondary-dark: #8B5A2B;
+            --dark: #1a2a3a;
+            --light: #F0FFF4;
+            --white: #ffffff;
+            --gray: #f0f4f0;
+            --text: #2d3748;
+            --text-light: #718096;
+            --success: #28a745;
+            --danger: #dc3545;
+            --shadow: 0 4px 20px rgba(0,128,128,0.12);
+            --shadow-hover: 0 8px 30px rgba(0,128,128,0.2);
+            --copper-glow: 0 4px 15px rgba(184,115,51,0.3);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Poppins', sans-serif; background: var(--light); color: var(--text); overflow-x: hidden; }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--light); }
+        ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 4px; }
+
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideInLeft { from { opacity: 0; transform: translateX(-30px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+        .fade-in { animation: fadeInUp 0.6s ease forwards; }
+        .fade-in-delay-1 { animation: fadeInUp 0.6s ease 0.1s forwards; opacity: 0; }
+        .fade-in-delay-2 { animation: fadeInUp 0.6s ease 0.2s forwards; opacity: 0; }
+        .fade-in-delay-3 { animation: fadeInUp 0.6s ease 0.3s forwards; opacity: 0; }
+
+        .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); padding: 10px 0; position: fixed; top: 0; width: 100%; z-index: 1000; box-shadow: var(--shadow); }
+        .top-bar { display: flex; justify-content: space-between; align-items: center; max-width: 1400px; margin: 0 auto; padding: 0 20px; font-size: 13px; color: var(--secondary-light); flex-wrap: wrap; gap: 8px; }
+        .top-bar a { color: var(--secondary-light); text-decoration: none; margin-left: 15px; transition: color 0.3s; }
+        .top-bar a:hover { color: var(--white); }
+        .experience-badge { background: linear-gradient(135deg, var(--secondary), var(--secondary-light)); color: var(--dark); padding: 5px 15px; border-radius: 20px; font-weight: 700; font-size: 12px; display: inline-flex; align-items: center; gap: 5px; box-shadow: var(--copper-glow); }
+
+        .navbar { background: var(--white); padding: 12px 0; position: fixed; top: 40px; width: 100%; z-index: 999; box-shadow: var(--shadow); transition: all 0.3s; }
+        .navbar.scrolled { top: 0; }
+        .nav-container { max-width: 1400px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; }
+        .logo { display: flex; align-items: center; gap: 12px; cursor: pointer; }
+        .logo-icon { width: 58px; height: 58px; border-radius: 50%; overflow: hidden; display: flex; align-items: center; justify-content: center; box-shadow: var(--copper-glow); }
+        .logo-img { width: 100%; height: 100%; object-fit: cover; filter: contrast(1.1) saturate(1.2) drop-shadow(0 0 6px rgba(0,0,0,0.3)); border-radius: 50%; }
+        .logo h2 { color: #008080; font-size: 20px; font-weight: 700; line-height: 1.2; margin: 0; }
+        .logo span { color: #B87333; font-size: 11px; font-weight: 600; letter-spacing: 1px; display: block; }
+        .nav-links { display: flex; gap: 5px; align-items: center; }
+        .nav-links a { text-decoration: none; color: var(--text); font-size: 13px; font-weight: 500; padding: 8px 16px; border-radius: 25px; transition: all 0.3s; white-space: nowrap; }
+        .nav-links a.active { color: var(--white); background: linear-gradient(135deg, var(--secondary), var(--secondary-light)); box-shadow: var(--copper-glow); }
+        .nav-actions { display: flex; gap: 12px; align-items: center; }
+        .nav-btn { background: none; border: none; font-size: 20px; color: var(--primary); cursor: pointer; position: relative; padding: 8px; border-radius: 50%; transition: all 0.3s; }
+        .nav-btn:hover { background: rgba(0,128,128,0.1); }
+        .cart-count { position: absolute; top: -2px; right: -2px; background: var(--secondary); color: var(--white); font-size: 10px; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; }
+        .login-btn { background: linear-gradient(135deg, var(--primary), var(--primary-light)); color: var(--white); border: none; padding: 10px 22px; border-radius: 25px; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.3s; }
+        .login-btn:hover { transform: translateY(-2px); box-shadow: 0 5px 20px rgba(0,128,128,0.4); }
+        .mobile-menu-btn { display: none; background: none; border: none; font-size: 24px; color: var(--primary); cursor: pointer; }
+
+        .hero { margin-top: 104px; min-height: 92vh; background: linear-gradient(135deg, rgba(0,128,128,0.93) 0%, rgba(26,42,58,0.95) 100%), url('https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=1920') center/cover; display: flex; align-items: center; justify-content: center; text-align: center; color: var(--white); position: relative; overflow: hidden; }
+        .hero::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); }
+        .hero-content { position: relative; z-index: 2; max-width: 900px; padding: 0 20px; }
+        .hero-badge { display: inline-block; background: linear-gradient(135deg, var(--secondary), var(--secondary-light)); color: var(--dark); padding: 10px 28px; border-radius: 30px; font-size: 13px; font-weight: 700; letter-spacing: 2px; margin-bottom: 25px; animation: fadeInUp 0.6s ease forwards; box-shadow: var(--copper-glow); }
+        .hero h2 { font-family: 'Playfair Display', serif; font-size: 58px; line-height: 1.15; margin-bottom: 20px; animation: fadeInUp 0.6s ease 0.2s forwards; opacity: 0; }
+        .hero h2 span { color: var(--secondary-light); }
+        .hero p { font-size: 18px; opacity: 0.9; margin-bottom: 15px; animation: fadeInUp 0.6s ease 0.4s forwards; opacity: 0; }
+        .hero-exp { font-size: 16px; color: var(--secondary-light); margin-bottom: 35px; animation: fadeInUp 0.6s ease 0.5s forwards; opacity: 0; }
+        .hero-exp i { color: var(--secondary); margin-right: 8px; }
+        .hero-btns { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; animation: fadeInUp 0.6s ease 0.6s forwards; opacity: 0; }
+        .btn-primary { background: linear-gradient(135deg, var(--secondary), var(--secondary-light)); color: var(--dark); padding: 14px 35px; border-radius: 30px; font-size: 15px; font-weight: 700; border: none; cursor: pointer; transition: all 0.3s; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; box-shadow: var(--copper-glow); }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(184,115,51,0.4); }
+        .btn-outline { background: transparent; color: var(--white); padding: 14px 35px; border-radius: 30px; font-size: 15px; font-weight: 700; border: 2px solid var(--secondary); cursor: pointer; transition: all 0.3s; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; }
+        .btn-outline:hover { background: var(--secondary); color: var(--dark); }
+        .btn-secondary { background: linear-gradient(135deg, var(--primary), var(--primary-light)); color: var(--white); padding: 14px 35px; border-radius: 30px; font-size: 15px; font-weight: 700; border: none; cursor: pointer; transition: all 0.3s; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; }
+        .btn-secondary:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0,128,128,0.4); }
+        .btn-call { background: linear-gradient(135deg, var(--secondary), var(--secondary-light)); color: var(--dark); padding: 14px 35px; border-radius: 30px; font-size: 15px; font-weight: 700; border: none; cursor: pointer; transition: all 0.3s; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; box-shadow: var(--copper-glow); }
+        .btn-call:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(184,115,51,0.5); }
+
+        .stats-bar { background: linear-gradient(135deg, var(--dark) 0%, var(--primary-dark) 50%, var(--primary) 100%); padding: 50px 20px; position: relative; overflow: hidden; }
+        .stats-bar::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(184,115,51,0.05) 10px, rgba(184,115,51,0.05) 20px); }
+        .stats-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; text-align: center; position: relative; z-index: 1; }
+        .stat-item { color: var(--white); padding: 20px; border-radius: 20px; background: rgba(255,255,255,0.05); backdrop-filter: blur(10px); border: 1px solid rgba(184,115,51,0.2); transition: all 0.3s; }
+        .stat-item:hover { transform: translateY(-5px); background: rgba(255,255,255,0.1); border-color: var(--secondary); }
+        .stat-item h3 { font-family: 'Playfair Display', serif; font-size: 48px; color: var(--secondary); margin-bottom: 8px; text-shadow: 0 2px 10px rgba(184,115,51,0.3); }
+        .stat-item p { font-size: 15px; opacity: 0.9; font-weight: 500; }
+        .stat-item i { font-size: 32px; color: var(--secondary-light); margin-bottom: 10px; display: block; }
+
+        .section { padding: 80px 20px; max-width: 1400px; margin: 0 auto; }
+        .section-header { text-align: center; margin-bottom: 50px; }
+        .section-header h2 { font-family: 'Playfair Display', serif; font-size: 40px; color: var(--primary); margin-bottom: 12px; }
+        .section-header p { color: var(--text-light); font-size: 16px; max-width: 600px; margin: 0 auto; }
+        .section-header .line { width: 80px; height: 4px; background: linear-gradient(90deg, var(--primary), var(--secondary)); margin: 15px auto 0; border-radius: 3px; }
+
+        .categories-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px; }
+        .category-card { background: var(--white); border-radius: 20px; padding: 30px 15px; text-align: center; cursor: pointer; transition: all 0.3s; box-shadow: var(--shadow); border: 2px solid transparent; position: relative; overflow: hidden; }
+        .category-card:hover { transform: translateY(-8px); border-color: var(--secondary); box-shadow: var(--shadow-hover); }
+        .category-card::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: linear-gradient(90deg, var(--primary), var(--secondary)); opacity: 0; transition: opacity 0.3s; }
+        .category-card:hover::after { opacity: 1; }
+        .category-icon { width: 70px; height: 70px; background: linear-gradient(135deg, var(--primary), var(--primary-light)); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; color: var(--white); font-size: 28px; box-shadow: 0 4px 15px rgba(0,128,128,0.3); }
+        .category-card h3 { font-size: 15px; color: var(--text); margin-bottom: 6px; }
+        .category-card p { font-size: 12px; color: var(--text-light); }
+
+        .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; }
+        .product-card { background: var(--white); border-radius: 20px; overflow: hidden; box-shadow: var(--shadow); transition: all 0.3s; position: relative; cursor: pointer; display: flex; flex-direction: column; height: 100%;  }
+        .product-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-hover); }
+        .product-img { width: 100%; height: 280px; object-fit: cover; display: block; }
+        .product-badge { position: absolute; top: 15px; left: 15px; background: linear-gradient(135deg, var(--secondary), var(--secondary-light)); color: var(--dark); padding: 5px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; }
+        .product-badge.hot { background: linear-gradient(135deg, #ff4757, #ff6b81); color: white; }
+        .product-badge.new { background: linear-gradient(135deg, var(--success), #2ed573); color: white; }
+        .product-info { padding: 20px; display: flex; flex-direction: column; flex-grow: 1; }
+        .product-info h3 { font-size: 16px; color: var(--text); margin-bottom: 6px; }
+        .product-info p { font-size: 13px; color: var(--text-light); margin-bottom: 12px; flex-grow: 1; }
+        .product-price { font-size: 20px; font-weight: 700; color: var(--primary); margin-bottom: 15px; }
+        .product-actions { display: flex; gap: 10px;  margin-top: auto; }
+        .btn-add-cart { flex: 1; background: linear-gradient(135deg, var(--primary), var(--primary-light)); color: var(--white); border: none; padding: 10px; border-radius: 10px; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.3s; }
+        .btn-add-cart:hover { background: linear-gradient(135deg, var(--primary-dark), var(--primary)); }
+        .btn-buy { flex: 1; background: linear-gradient(135deg, var(--secondary), var(--secondary-light)); color: var(--dark); border: none; padding: 10px; border-radius: 10px; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.3s; }
+        .btn-buy:hover { box-shadow: var(--copper-glow); }
+
+        .classes-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; }
+        .class-card { background: var(--white); border-radius: 20px; overflow: hidden; box-shadow: var(--shadow); transition: all 0.3s; }
+        .class-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-hover); }
+        .class-img { width: 100%; height: 200px; object-fit: cover; }
+        .class-content { padding: 25px; }
+        .class-content h3 { font-size: 20px; color: var(--primary); margin-bottom: 10px; }
+        .class-content p { font-size: 14px; color: var(--text-light); margin-bottom: 15px; line-height: 1.6; }
+        .class-meta { display: flex; gap: 15px; margin-bottom: 15px; font-size: 13px; color: var(--text-light); flex-wrap: wrap; }
+        .class-meta i { color: var(--secondary); margin-right: 5px; }
+        .btn-enroll { background: linear-gradient(135deg, var(--primary), var(--primary-light)); color: var(--white); border: none; padding: 12px 30px; border-radius: 25px; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.3s; width: 100%; }
+        .btn-enroll:hover { transform: translateY(-2px); box-shadow: 0 5px 20px rgba(0,128,128,0.3); }
+
+        .custom-order { background: linear-gradient(135deg, var(--primary) 0%, var(--dark) 100%); border-radius: 30px; padding: 60px; color: var(--white); display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
+        .custom-order h2 { font-family: 'Playfair Display', serif; font-size: 38px; margin-bottom: 15px; }
+        .custom-order p { opacity: 0.9; margin-bottom: 25px; line-height: 1.7; }
+        .custom-features { display: flex; flex-direction: column; gap: 15px; }
+        .custom-feature { display: flex; align-items: center; gap: 12px; }
+        .custom-feature i { width: 40px; height: 40px; background: linear-gradient(135deg, var(--secondary), var(--secondary-light)); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--dark); font-size: 16px; }
+        .custom-form { background: var(--white); border-radius: 20px; padding: 40px; color: var(--text); }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; font-size: 14px; font-weight: 500; margin-bottom: 8px; color: var(--text); }
+        .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 12px 15px; border: 2px solid #e0e0e0; border-radius: 12px; font-size: 14px; font-family: 'Poppins', sans-serif; transition: all 0.3s; }
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus { outline: none; border-color: var(--primary); }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .voice-record { display: flex; align-items: center; gap: 10px; padding: 12px; border: 2px dashed var(--primary-light); border-radius: 12px; cursor: pointer; transition: all 0.3s; }
+        .voice-record:hover { background: rgba(0,128,128,0.05); }
+        .voice-record.recording { border-color: #ff4757; background: rgba(255, 71, 87, 0.1); }
+        .voice-record i { color: var(--primary); font-size: 20px; }
+        .voice-record.recording i { color: #ff4757; animation: pulse 1s infinite; }
+        .voice-record span { font-size: 14px; color: var(--text-light); }
+
+        .reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
+        .review-card { background: var(--white); border-radius: 20px; padding: 30px; box-shadow: var(--shadow); transition: all 0.3s; border-top: 4px solid var(--secondary); }
+        .review-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-hover); }
+        .review-header { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; }
+        .review-avatar { width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(135deg, var(--primary), var(--secondary)); display: flex; align-items: center; justify-content: center; color: var(--white); font-weight: 600; font-size: 18px; }
+        .review-meta h4 { font-size: 16px; color: var(--text); }
+        .review-meta .stars { color: var(--secondary); font-size: 14px; }
+        .review-card p { color: var(--text-light); font-size: 14px; line-height: 1.7; }
+
+        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; max-width: 1000px; margin: 0 auto; }
+        .contact-info { background: var(--white); border-radius: 20px; padding: 40px; box-shadow: var(--shadow); }
+        .contact-info h3 { font-family: 'Playfair Display', serif; color: var(--primary); font-size: 24px; margin-bottom: 25px; display: flex; align-items: center; gap: 10px; }
+        .contact-item { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; padding: 15px; background: var(--gray); border-radius: 15px; transition: all 0.3s; }
+        .contact-item:hover { transform: translateX(5px); background: linear-gradient(135deg, rgba(0,128,128,0.05), rgba(184,115,51,0.05)); }
+        .contact-item i { width: 45px; height: 45px; background: linear-gradient(135deg, var(--primary), var(--primary-light)); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--white); font-size: 18px; flex-shrink: 0; }
+        .contact-item div h4 { font-size: 14px; color: var(--text); margin-bottom: 2px; }
+        .contact-item div p, .contact-item div a { font-size: 14px; color: var(--text-light); text-decoration: none; }
+        .contact-item div a:hover { color: var(--primary); }
+        .contact-form { background: var(--white); border-radius: 20px; padding: 40px; box-shadow: var(--shadow); }
+        .contact-social { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 20px; }
+        .contact-social a { display: flex; align-items: center; gap: 10px; padding: 12px 15px; border-radius: 12px; text-decoration: none; color: var(--white); font-size: 13px; font-weight: 500; transition: all 0.3s; }
+        .contact-social a:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
+        .contact-social .wa { background: linear-gradient(135deg, #25D366, #128C7E); }
+        .contact-social .ig { background: linear-gradient(135deg, #833AB4, #E1306C, #F77737); }
+        .contact-social .yt { background: linear-gradient(135deg, #FF0000, #CC0000); }
+        .contact-social .ph { background: linear-gradient(135deg, var(--secondary), var(--secondary-dark)); }
+
+        .settings-card { background: var(--white); border-radius: 20px; padding: 30px; box-shadow: var(--shadow); margin-bottom: 20px; }
+        .settings-card h3 { font-size: 18px; color: var(--primary); margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+        .settings-item { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; border-bottom: 1px solid #eee; }
+        .settings-item:last-child { border-bottom: none; }
+        .settings-item-info h4 { font-size: 15px; color: var(--text); margin-bottom: 3px; }
+        .settings-item-info p { font-size: 13px; color: var(--text-light); }
+        .toggle-switch { width: 50px; height: 26px; background: #ddd; border-radius: 13px; position: relative; cursor: pointer; transition: all 0.3s; }
+        .toggle-switch.active { background: var(--primary); }
+        .toggle-switch::after { content: ''; position: absolute; width: 22px; height: 22px; background: var(--white); border-radius: 50%; top: 2px; left: 2px; transition: all 0.3s; }
+        .toggle-switch.active::after { left: 26px; }
+        .btn-logout { width: 100%; background: linear-gradient(135deg, var(--danger), #c82333); color: var(--white); border: none; padding: 15px; border-radius: 12px; font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.3s; margin-top: 10px; }
+        .btn-logout:hover { transform: translateY(-2px); box-shadow: 0 5px 20px rgba(220,53,69,0.3); }
+
+        .footer { background: linear-gradient(135deg, var(--dark) 0%, var(--primary-dark) 100%); color: var(--white); padding: 60px 20px 20px; position: relative; overflow: hidden; }
+        .footer::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--primary), var(--secondary)); }
+        .footer-grid { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; margin-bottom: 40px; }
+        .footer-col h3 { font-family: 'Playfair Display', serif; font-size: 20px; margin-bottom: 20px; color: var(--secondary-light); }
+        .footer-col p, .footer-col a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 14px; line-height: 2; display: block; transition: color 0.3s; }
+        .footer-col a:hover { color: var(--secondary-light); }
+        .footer-col i { margin-right: 10px; width: 20px; }
+        .social-links { display: flex; gap: 12px; margin-top: 15px; }
+        .social-links a { width: 40px; height: 40px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.3s; color: var(--white); text-decoration: none; }
+        .social-links a:hover { background: linear-gradient(135deg, var(--secondary), var(--secondary-light)); transform: translateY(-3px); color: var(--dark); }
+        .footer-bottom { text-align: center; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 13px; color: rgba(255,255,255,0.6); }
+        .footer-badge { display: inline-block; background: linear-gradient(135deg, var(--secondary), var(--secondary-light)); color: var(--dark); padding: 5px 15px; border-radius: 20px; font-size: 12px; font-weight: 700; margin-top: 10px; }
+
+        .modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.6); display: flex; align-items: center; justify-content: center; z-index: 2000; opacity: 0; visibility: hidden; transition: all 0.3s; }
+        .modal-overlay.active { opacity: 1; visibility: visible; }
+        .modal { background: var(--white); border-radius: 20px; padding: 40px; max-width: 500px; width: 90%; max-height: 90vh; overflow-y: auto; transform: scale(0.9); transition: all 0.3s; position: relative; }
+        .modal-overlay.active .modal { transform: scale(1); }
+        .modal h2 { font-family: 'Playfair Display', serif; color: var(--primary); margin-bottom: 25px; text-align: center; }
+        .modal-close { position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 24px; color: var(--text-light); cursor: pointer; }
+        .otp-inputs { display: flex; gap: 10px; justify-content: center; margin: 20px 0; }
+        .otp-inputs input { width: 50px; height: 50px; text-align: center; font-size: 20px; border: 2px solid #e0e0e0; border-radius: 12px; outline: none; transition: all 0.3s; }
+        .otp-inputs input:focus { border-color: var(--primary); transform: scale(1.1); }
+
+        .cart-sidebar { position: fixed; top: 0; right: -400px; width: 400px; max-width: 100%; height: 100vh; background: var(--white); z-index: 2000; box-shadow: -5px 0 30px rgba(0,0,0,0.2); transition: right 0.4s ease; display: flex; flex-direction: column; }
+        .cart-sidebar.active { right: 0; }
+        .cart-header { padding: 20px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
+        .cart-header h3 { color: var(--primary); font-size: 20px; }
+        .cart-close { background: none; border: none; font-size: 24px; color: var(--text-light); cursor: pointer; }
+        .cart-items { flex: 1; overflow-y: auto; padding: 20px; }
+        .cart-item { display: flex; gap: 15px; padding: 15px; background: var(--gray); border-radius: 15px; margin-bottom: 15px; }
+        .cart-item img { width: 80px; height: 80px; object-fit: cover; border-radius: 10px; }
+        .cart-item-info { flex: 1; }
+        .cart-item-info h4 { font-size: 14px; margin-bottom: 5px; }
+        .cart-item-info p { font-size: 16px; font-weight: 700; color: var(--primary); }
+        .cart-item-actions { display: flex; align-items: center; gap: 10px; margin-top: 8px; }
+        .qty-btn { width: 28px; height: 28px; border: none; background: var(--white); border-radius: 50%; cursor: pointer; font-size: 14px; color: var(--primary); }
+        .remove-btn { background: none; border: none; color: var(--danger); font-size: 13px; cursor: pointer; margin-left: auto; }
+        .cart-footer { padding: 20px; border-top: 1px solid #eee; }
+        .cart-total { display: flex; justify-content: space-between; font-size: 18px; font-weight: 700; margin-bottom: 15px; color: var(--primary); }
+        .btn-checkout { width: 100%; background: linear-gradient(135deg, var(--primary), var(--primary-light)); color: var(--white); border: none; padding: 15px; border-radius: 12px; font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.3s; }
+        .btn-checkout:hover { transform: translateY(-2px); box-shadow: 0 5px 20px rgba(0,128,128,0.3); }
+        .cart-empty { text-align: center; padding: 60px 20px; color: var(--text-light); }
+        .cart-empty i { font-size: 60px; color: #ddd; margin-bottom: 15px; }
+
+        .order-card { background: var(--white); border: 1px solid #e8e8e8; border-radius: 12px; margin-bottom: 16px; overflow: hidden; transition: box-shadow 0.2s; }
+        .order-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
+        .order-card-header { background: #f9f9f9; padding: 14px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; flex-wrap: wrap; gap: 8px; }
+        .order-id { font-size: 13px; color: var(--text-light); }
+        .order-id span { color: var(--text); font-weight: 600; }
+        .order-date { font-size: 12px; color: var(--text-light); }
+        .order-status-badge { padding: 5px 14px; border-radius: 20px; font-size: 12px; font-weight: 700; letter-spacing: 0.5px; }
+        .status-placed { background: #fff3e0; color: #0b1a0c; }
+        .status-submitted { background: #fff3e0; color: #e6b000; }
+        .status-processing{ background: #fff8e1; color: #f57f17; }
+        .status-cancelled { background: #e3f2fd; color: #c02c15; }
+        .status-delivered { background: #e3f2fd; color: #1565c0; }
+        .order-card-body { padding: 16px 20px; display: flex; gap: 16px; align-items: flex-start; }
+        .order-product-img { width: 80px; height: 80px; border-radius: 10px; object-fit: cover; flex-shrink: 0; border: 1px solid #eee; }
+        .order-product-info { flex: 1; }
+        .order-product-info h4 { font-size: 15px; color: var(--text); margin-bottom: 4px; }
+        .order-product-info p { font-size: 13px; color: var(--text-light); margin-bottom: 6px; }
+        .order-price { font-size: 16px; font-weight: 700; color: var(--primary); }
+        .order-tracker { padding: 16px 20px; border-top: 1px solid #f0f0f0; }
+        .tracker-steps { display: flex; align-items: center; justify-content: space-between; position: relative; margin-bottom: 8px; }
+        .tracker-steps::before { content: ''; position: absolute; top: 14px; left: 0; right: 0; height: 2px; background: #e0e0e0; z-index: 0; }
+        .tracker-line-fill { position: absolute; top: 14px; left: 0; height: 2px; background: linear-gradient(90deg, var(--primary), var(--primary-light)); z-index: 0; transition: width 0.5s; }
+        .tracker-step { display: flex; flex-direction: column; align-items: center; gap: 6px; z-index: 1; }
+        .tracker-dot { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; border: 2px solid #e0e0e0; background: white; transition: all 0.3s; }
+        .tracker-dot.done { background: var(--primary); border-color: var(--primary); color: white; }
+        .tracker-dot.active { background: var(--secondary); border-color: var(--secondary); color: white; animation: pulse 1.5s infinite; }
+        .tracker-dot.cancelled-dot { background: var(--danger); border-color: var(--danger); color: white; }
+        .tracker-label { font-size: 10px; color: var(--text-light); text-align: center; white-space: nowrap; }
+        .tracker-label.done-label { color: var(--primary); font-weight: 600; }
+        .tracker-label.active-label { color: var(--secondary); font-weight: 600; }
+        .order-card-footer { padding: 12px 20px; border-top: 1px solid #f0f0f0; display: flex; gap: 10px; justify-content: flex-end; flex-wrap: wrap; }
+        .btn-cancel-order { background: none; border: 1.5px solid var(--danger); color: var(--danger); padding: 8px 20px; border-radius: 20px; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+        .btn-cancel-order:hover { background: #fff0f0; }
+        .btn-reorder { background: linear-gradient(135deg, var(--primary), var(--primary-light)); color: white; border: none; padding: 8px 20px; border-radius: 20px; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+        .btn-reorder:hover { opacity: 0.9; }
+        .orders-empty { text-align: center; padding: 50px 20px; }
+        .orders-empty i { font-size: 60px; color: #ddd; margin-bottom: 16px; display: block; }
+        .orders-empty h4 { color: var(--text-light); margin-bottom: 8px; }
+        .orders-empty p { color: var(--text-light); font-size: 14px; margin-bottom: 20px; }
+
+        .toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(100px); background: var(--dark); color: var(--white); padding: 15px 30px; border-radius: 12px; font-size: 14px; z-index: 3000; opacity: 0; transition: all 0.4s; box-shadow: var(--shadow-hover); }
+        .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+        .toast.success { background: linear-gradient(135deg, var(--success), #2ed573); }
+        .toast.error { background: linear-gradient(135deg, var(--danger), #ff6b81); }
+
+        .chat-widget { position: fixed; bottom: 30px; right: 30px; z-index: 1500; }
+        .chat-btn { width: 60px; height: 60px; background: linear-gradient(135deg, var(--primary), var(--primary-light)); border-radius: 50%; border: none; color: var(--white); font-size: 24px; cursor: pointer; box-shadow: var(--shadow-hover); transition: all 0.3s; display: flex; align-items: center; justify-content: center; animation: float 3s ease-in-out infinite; }
+        .chat-btn:hover { transform: scale(1.1); }
+        .chat-box { position: absolute; bottom: 75px; right: 0; width: 350px; height: 450px; background: var(--white); border-radius: 20px; box-shadow: var(--shadow-hover); display: flex; flex-direction: column; overflow: hidden; opacity: 0; visibility: hidden; transform: translateY(20px); transition: all 0.3s; }
+        .chat-box.active { opacity: 1; visibility: visible; transform: translateY(0); }
+        .chat-header { background: linear-gradient(135deg, var(--primary), var(--primary-light)); color: var(--white); padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; }
+        .chat-header h4 { font-size: 16px; }
+        .chat-status { display: flex; align-items: center; gap: 6px; font-size: 12px; opacity: 0.9; }
+        .chat-status::before { content: ''; width: 8px; height: 8px; background: #2ed573; border-radius: 50%; }
+        .chat-close { background: none; border: none; color: var(--white); font-size: 18px; cursor: pointer; }
+        .chat-messages { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; }
+        .chat-msg { max-width: 80%; padding: 10px 15px; border-radius: 15px; font-size: 13px; line-height: 1.5; }
+        .chat-msg.bot { background: var(--gray); color: var(--text); align-self: flex-start; border-bottom-left-radius: 5px; }
+        .chat-msg.user { background: linear-gradient(135deg, var(--primary), var(--primary-light)); color: var(--white); align-self: flex-end; border-bottom-right-radius: 5px; }
+        .chat-input { padding: 15px; border-top: 1px solid #eee; display: flex; gap: 10px; }
+        .chat-input input { flex: 1; padding: 10px 15px; border: 2px solid #e0e0e0; border-radius: 25px; font-size: 14px; outline: none; }
+        .chat-input input:focus { border-color: var(--primary); }
+        .chat-send { width: 40px; height: 40px; background: linear-gradient(135deg, var(--primary), var(--primary-light)); border: none; border-radius: 50%; color: var(--white); cursor: pointer; transition: all 0.3s; }
+        .chat-send:hover { transform: scale(1.1); }
+
+        .mobile-nav { position: fixed; top: 0; left: -100%; width: 80%; max-width: 350px; height: 100vh; background: var(--white); z-index: 2000; padding: 80px 30px 30px; transition: left 0.4s ease; box-shadow: 5px 0 30px rgba(0,0,0,0.2); }
+        .mobile-nav.active { left: 0; }
+        .mobile-nav a { display: block; padding: 15px 0; color: var(--text); text-decoration: none; font-size: 16px; font-weight: 500; border-bottom: 1px solid #eee; }
+        .mobile-nav a i { margin-right: 12px; color: var(--primary); width: 20px; }
+        .mobile-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 1999; opacity: 0; visibility: hidden; transition: all 0.3s; }
+        .mobile-overlay.active { opacity: 1; visibility: visible; }
+
+        .buy-now-summary { background: var(--gray); border-radius: 15px; padding: 20px; margin-bottom: 10px; }
+        .buy-now-summary h4 { color: var(--primary); margin-bottom: 10px; }
+        .buy-now-summary .item { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 14px; }
+        .buy-now-summary .total { display: flex; justify-content: space-between; font-weight: 700; color: var(--primary); font-size: 18px; border-top: 1px solid #ddd; padding-top: 10px; margin-top: 10px; }
+        .payment-options { display: flex; gap: 10px; margin: 15px 0; }
+        .payment-option { flex: 1; padding: 15px; border: 2px solid #e0e0e0; border-radius: 12px; text-align: center; cursor: pointer; transition: all 0.3s; }
+        .payment-option:hover, .payment-option.selected { border-color: var(--primary); background: rgba(0,128,128,0.05); }
+        .payment-option i { font-size: 24px; color: var(--primary); margin-bottom: 8px; }
+        .payment-option p { font-size: 13px; font-weight: 600; }
+
+        .lightbox { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.9); z-index: 3000; display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: all 0.3s; }
+        .lightbox.active { opacity: 1; visibility: visible; }
+        .lightbox img { max-width: 90%; max-height: 90%; border-radius: 10px; }
+        .lightbox-close { position: absolute; top: 20px; right: 30px; color: white; font-size: 40px; cursor: pointer; }
+
+        /* PRODUCT DETAIL POPUP */
+        .pd-overlay {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.65);
+            z-index: 4000; display: flex; align-items: center; justify-content: center;
+            opacity: 0; visibility: hidden; transition: all 0.3s; padding: 15px;
+        }
+        .pd-overlay.active { opacity: 1; visibility: visible; }
+        .pd-modal {
+            background: #fff; border-radius: 12px; width: 100%; max-width: 900px;
+            max-height: 92vh; overflow-y: auto; display: grid;
+            grid-template-columns: 1fr 1fr; position: relative;
+            transform: scale(0.92); transition: transform 0.3s;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+        }
+        .pd-overlay.active .pd-modal { transform: scale(1); }
+        .pd-left {
+            position: sticky; top: 0; padding: 20px;
+            display: flex; flex-direction: column; gap: 12px;
+            background: #f8f8f8; border-radius: 12px 0 0 12px;
+            max-height: 92vh; overflow-y: auto;
+        }
+        .pd-main-img-wrap {
+            position: relative; border-radius: 10px; overflow: hidden;
+            background: #fff; aspect-ratio: 3/4;
+        }
+       .pd-main-img {
+    width: 100%; height: 100%; object-fit: contain; display: block;
+    transition: transform 0.4s;
+}
+    .pd-main-img-wrap:hover .pd-main-img { transform: scale(1.02); }
+        .pd-badge-new {
+            position: absolute; top: 12px; left: 12px;
+            background: #388e3c; color: #fff;
+            font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 4px;
+        }
+        .pd-thumbs { display: none; }
+        .pd-thumb {
+            width: 64px; height: 64px; border-radius: 8px; overflow: hidden;
+            border: 2px solid #e0e0e0; cursor: pointer; transition: all 0.2s; flex-shrink: 0;
+        }
+        .pd-thumb:hover, .pd-thumb.active { border-color: #008080; }
+        .pd-thumb img { width: 100%; height: 100%; object-fit: cover; }
+        .pd-wishlist-btn {
+            position: absolute; top: 12px; right: 12px;
+            background: #fff; border: none; width: 36px; height: 36px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            font-size: 16px; color: #bbb; transition: all 0.2s;
+        }
+        .pd-wishlist-btn.wishlisted { color: #e53935; }
+        .pd-right { padding: 28px 28px 28px 24px; display: flex; flex-direction: column; gap: 0; }
+        .pd-close {
+            position: absolute; top: 14px; right: 16px;
+            background: #fff; border: none; width: 34px; height: 34px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 18px; cursor: pointer; color: #555;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.12); z-index: 10; transition: all 0.2s;
+        }
+        .pd-close:hover { background: #f5f5f5; color: #222; }
+        .pd-brand { font-size: 12px; color: #008080; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 6px; }
+        .pd-title { font-size: 20px; font-weight: 600; color: #212121; line-height: 1.35; margin-bottom: 6px; }
+        .pd-rating-row { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+        .pd-rating-pill {
+            display: inline-flex; align-items: center; gap: 4px;
+            background: #388e3c; color: #fff; font-size: 13px; font-weight: 700;
+            padding: 3px 10px; border-radius: 4px;
+        }
+        .pd-rating-pill i { font-size: 11px; }
+        .pd-rating-count { font-size: 13px; color: #878787; }
+        .pd-divider { border: none; border-top: 1px solid #f0f0f0; margin: 12px 0; }
+        /* SINGLE PRICE — no strikethrough, no discount % */
+        .pd-price-row { display: flex; align-items: baseline; gap: 12px; margin-bottom: 6px; flex-wrap: wrap; }
+        .pd-price { font-size: 28px; font-weight: 700; color: #212121; }
+        .pd-offer-tag {
+            display: inline-block; background: #e8f5e9; color: #2e7d32;
+            font-size: 12px; font-weight: 600; padding: 4px 12px;
+            border-radius: 4px; margin-bottom: 16px;
+        }
+        .pd-label { font-size: 13px; font-weight: 600; color: #212121; margin-bottom: 10px; }
+        .pd-label span { font-weight: 400; color: #878787; }
+        .pd-sizes { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 16px; }
+        .pd-size-btn {
+            min-width: 52px; padding: 7px 12px; border-radius: 6px;
+            border: 1.5px solid #e0e0e0; background: #fff; font-size: 13px;
+            font-weight: 600; color: #212121; cursor: pointer; transition: all 0.2s;
+            text-align: center;
+        }
+        .pd-size-btn:hover { border-color: #008080; color: #008080; }
+        .pd-size-btn.active { border-color: #008080; background: #008080; color: #fff; }
+        .pd-size-btn.out { border-color: #e0e0e0; color: #bbb; cursor: not-allowed; text-decoration: line-through; }
+        .pd-size-chart { font-size: 12px; color: #008080; font-weight: 600; cursor: pointer; margin-bottom: 16px; display: inline-flex; align-items: center; gap: 5px; text-decoration: underline; }
+        .pd-qty-row { display: flex; align-items: center; gap: 14px; margin-bottom: 18px; }
+        .pd-qty-label { font-size: 13px; font-weight: 600; color: #212121; }
+        .pd-qty-ctrl { display: flex; align-items: center; gap: 0; border: 1.5px solid #e0e0e0; border-radius: 6px; overflow: hidden; }
+        .pd-qty-ctrl button {
+            width: 34px; height: 34px; border: none; background: #f5f5f5;
+            font-size: 18px; color: #212121; cursor: pointer; transition: background 0.15s;
+        }
+        .pd-qty-ctrl button:hover { background: #e0f0f0; }
+        .pd-qty-ctrl span { width: 36px; text-align: center; font-size: 15px; font-weight: 600; color: #212121; }
+        .pd-cta { display: flex; gap: 12px; margin-bottom: 16px; }
+        .pd-btn-cart {
+            flex: 1; padding: 14px; border: none; border-radius: 8px;
+            font-size: 15px; font-weight: 700; cursor: pointer; transition: all 0.2s;
+            background: #008080; color: #fff; display: flex; align-items: center; justify-content: center; gap: 8px;
+        }
+        .pd-btn-cart:hover { background: #006666; transform: translateY(-1px); }
+        .pd-btn-buy {
+            flex: 1; padding: 14px; border: none; border-radius: 8px;
+            font-size: 15px; font-weight: 700; cursor: pointer; transition: all 0.2s;
+            background: linear-gradient(135deg, #B87333, #D4A574); color: #fff;
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+        }
+        .pd-btn-buy:hover { opacity: 0.92; transform: translateY(-1px); }
+        .pd-description { margin-bottom: 14px; }
+        .pd-description-title { font-size: 15px; font-weight: 700; color: #212121; margin-bottom: 8px; }
+        .pd-description-text { font-size: 13px; color: #555; line-height: 1.6; }
+        .pd-highlights { background: #f8f8f8; border-radius: 8px; padding: 14px 16px; margin-bottom: 14px; }
+        .pd-highlights-title { font-size: 13px; font-weight: 700; color: #212121; margin-bottom: 10px; }
+        .pd-highlight-item { display: flex; gap: 8px; font-size: 13px; color: #444; margin-bottom: 6px; align-items: flex-start; }
+        .pd-highlight-item:last-child { margin-bottom: 0; }
+        .pd-highlight-item i { color: #008080; margin-top: 2px; flex-shrink: 0; }
+        .pd-delivery { border: 1px solid #e0e0e0; border-radius: 8px; padding: 16px; margin-bottom: 14px; }
+        .pd-delivery-title { font-size: 16px; font-weight: 700; color: #212121; margin-bottom: 12px; }
+        .pd-delivery-loc-pill {
+            display: flex; align-items: center; gap: 10px; background: #e8f2fd;
+            padding: 12px 14px; border-radius: 8px; margin-bottom: 10px; cursor: pointer;
+        }
+        .pd-delivery-loc-pill i.fa-map-marker-alt { color: #212121; font-size: 15px; }
+        .pd-delivery-loc-text { font-size: 14px; font-weight: 700; color: #212121; }
+        .pd-delivery-loc-link { font-size: 14px; font-weight: 600; color: #1a73e8; margin-left: 4px; }
+        .pd-delivery-loc-pill i.fa-chevron-right { color: #1a73e8; font-size: 11px; margin-left: 4px; }
+        .pd-delivery-date-box { display: flex; align-items: flex-start; gap: 10px; background: #f5f5f5; padding: 12px 14px; border-radius: 8px; }
+        .pd-delivery-date-box i.fa-truck { color: #212121; font-size: 16px; margin-top: 2px; }
+        .pd-delivery-date-text { font-size: 14px; font-weight: 700; color: #212121; margin-bottom: 3px; }
+        .pd-delivery-countdown { font-size: 13px; font-weight: 600; color: #e65100; }
+        .pd-delivery-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; margin-top: 12px; }
+        .pd-delivery-input {
+            flex: 1; padding: 8px 12px; border: 1.5px solid #e0e0e0; border-radius: 6px;
+            font-size: 13px; font-family: 'Poppins',sans-serif; outline: none;
+        }
+        .pd-delivery-input:focus { border-color: #008080; }
+        .pd-delivery-check {
+            padding: 8px 18px; background: #008080; color: #fff; border: none;
+            border-radius: 6px; font-size: 13px; font-weight: 600; cursor: pointer;
+        }
+        .pd-delivery-info { font-size: 12px; color: #388e3c; font-weight: 600; }
+        .pd-returns { display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 7px; }
+        .pd-return-item { display: flex; align-items: center; gap: 6px; font-size: 11.5px; color: #555; }
+        .pd-return-item i { color: #008080; font-size: 14px; }
+
+        @media (max-width: 700px) {
+            .pd-modal { grid-template-columns: 1fr; max-width: 100%; }
+            .pd-left { border-radius: 12px 12px 0 0; max-height: none; position: relative; }
+            .pd-right { padding: 20px; }
+            .pd-cta { flex-direction: column; }
+            .pd-price { font-size: 22px; }
+        }
+        @media (max-width: 1024px) {
+            .custom-order { grid-template-columns: 1fr; }
+            .contact-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .mobile-menu-btn { display: block; }
+            .hero h2 { font-size: 32px; }
+            .hero { min-height: 70vh; }
+            .section { padding: 50px 15px; }
+            .custom-order { padding: 30px; }
+            .cart-sidebar { width: 100%; }
+            .chat-box { width: 100vw; height: 60vh; bottom: 70px; right: -30px; border-radius: 20px 20px 0 0; }
+            .form-row { grid-template-columns: 1fr; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .top-bar { font-size: 10px; }
+            .contact-social { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Bar -->
+    <div class="header">
+        <div class="top-bar">
+            <div>
+                <i class="fas fa-phone"></i> 86107 03658 |
+                <i class="fas fa-envelope"></i> sumathisstyle@gmail.com |
+                <span class="experience-badge"><i class="fas fa-award"></i> 30 Years Experience</span>
+            </div>
+            <div style="display:flex; align-items:center; gap:15px;">
+                <div id="locPill" onclick="document.getElementById('locPanel').style.display='flex';"
+                  style="display:flex;align-items:center;gap:5px;cursor:pointer;padding:3px 8px;border-radius:4px;"
+                  onmouseover="this.style.background='rgba(255,255,255,0.1)'"
+                  onmouseout="this.style.background='transparent'">
+                  <i class="fas fa-map-marker-alt" style="color:#fff;font-size:12px;"></i>
+                  <span id="locLabel" style="color:rgba(255,255,255,0.75);font-size:12px;">Location not set</span>
+                  <span id="locLink" style="color:#D4A574;font-size:12px;font-weight:600;">Select delivery location</span>
+                  <i class="fas fa-chevron-right" style="color:#D4A574;font-size:10px;"></i>
+                </div>
+                <div id="locPanel" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:99999;align-items:flex-start;justify-content:flex-end;" onclick="if(event.target===this)this.style.display='none';">
+                  <div style="background:#fff;width:360px;height:100vh;overflow-y:auto;box-shadow:-4px 0 24px rgba(0,0,0,0.18);display:flex;flex-direction:column;">
+                    <div style="background:linear-gradient(135deg,#0F6E56,#1D9E75);padding:18px 20px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;">
+                      <h3 style="font-size:16px;font-weight:700;color:#fff;font-family:'Poppins',sans-serif;margin:0;">📍 Select delivery address</h3>
+                      <button onclick="document.getElementById('locPanel').style.display='none';" style="background:rgba(255,255,255,0.2);border:none;color:#fff;width:30px;height:30px;border-radius:50%;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;">✕</button>
+                    </div>
+                    <div style="padding:14px 16px;border-bottom:1px solid #f0f0f0;flex-shrink:0;">
+                      <div style="display:flex;align-items:center;gap:10px;border:1.5px solid #1D9E75;border-radius:8px;padding:9px 13px;background:#fff;">
+                        <i class="fas fa-search" style="color:#878787;font-size:13px;"></i>
+                        <input id="locSearchBox" type="text" placeholder="Search by area, street name, pin code" oninput="locSearch(this.value)" style="border:none;outline:none;font-size:13px;color:#212121;width:100%;font-family:'Poppins',sans-serif;background:transparent;">
+                      </div>
+                    </div>
+                    <div onclick="locUseGPS()" style="display:flex;align-items:center;gap:12px;padding:14px 16px;cursor:pointer;border-bottom:1px solid #f0f0f0;flex-shrink:0;" onmouseover="this.style.background='#f0f9f6'" onmouseout="this.style.background='transparent'">
+                      <div style="width:36px;height:36px;border-radius:50%;background:#e8f5f0;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="fas fa-location-arrow" style="color:#0F6E56;font-size:15px;"></i></div>
+                      <span style="color:#0F6E56;font-size:13px;font-weight:600;font-family:'Poppins',sans-serif;">Use my current location</span>
+                    </div>
+                    <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 16px 8px;flex-shrink:0;">
+                      <span style="font-size:13px;font-weight:700;color:#212121;font-family:'Poppins',sans-serif;">Saved addresses</span>
+                      <button onclick="locAddNew()" style="background:none;border:none;color:#D4A574;font-size:13px;font-weight:600;cursor:pointer;font-family:'Poppins',sans-serif;display:flex;align-items:center;gap:4px;"><i class="fas fa-plus"></i> Add New</button>
+                    </div>
+                    <div id="locAddrList" style="flex:1;"></div>
+                    <div style="padding:16px;flex-shrink:0;border-top:1px solid #f0f0f0;">
+                      <button onclick="locConfirm()" style="width:100%;padding:13px;border:none;background:linear-gradient(135deg,#D4A574,#B8864E);color:#fff;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;font-family:'Poppins',sans-serif;letter-spacing:0.3px;">✅ Confirm Location</button>
+                    </div>
+                  </div>
+                </div>
+                <div id="locAddModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.65);z-index:999999;align-items:center;justify-content:center;" onclick="if(event.target===this)this.style.display='none';">
+                  <div style="background:#fff;border-radius:14px;padding:24px;width:90%;max-width:400px;">
+                    <h3 id="locModalTitle" style="font-size:16px;font-weight:700;color:#0F6E56;font-family:'Poppins',sans-serif;margin-bottom:16px;">Add New Address</h3>
+                    <input id="locNewName" type="text" placeholder="Name (e.g. Home, Office)" style="width:100%;padding:11px 14px;border:1.5px solid #e0e0e0;border-radius:8px;font-size:14px;font-family:'Poppins',sans-serif;margin-bottom:12px;outline:none;box-sizing:border-box;" onfocus="this.style.borderColor='#1D9E75'" onblur="this.style.borderColor='#e0e0e0'">
+                    <input id="locNewAddr" type="text" placeholder="Area, Street, City" style="width:100%;padding:11px 14px;border:1.5px solid #e0e0e0;border-radius:8px;font-size:14px;font-family:'Poppins',sans-serif;margin-bottom:12px;outline:none;box-sizing:border-box;" onfocus="this.style.borderColor='#1D9E75'" onblur="this.style.borderColor='#e0e0e0'">
+                    <input id="locNewPin" type="text" placeholder="Pincode (optional)" style="width:100%;padding:11px 14px;border:1.5px solid #e0e0e0;border-radius:8px;font-size:14px;font-family:'Poppins',sans-serif;margin-bottom:16px;outline:none;box-sizing:border-box;" onfocus="this.style.borderColor='#1D9E75'" onblur="this.style.borderColor='#e0e0e0'">
+                    <div style="display:flex;gap:10px;">
+                      <button onclick="locCancelModal()" style="flex:1;padding:11px;border:1.5px solid #ddd;background:#fff;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;color:#666;font-family:'Poppins',sans-serif;">Cancel</button>
+                      <button onclick="locSaveAddress()" style="flex:1;padding:11px;border:none;background:linear-gradient(135deg,#1D9E75,#0F6E56);color:#fff;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;font-family:'Poppins',sans-serif;">Save Address</button>
+                    </div>
+                  </div>
+                </div>
+                <div id="locToast" style="display:none;position:fixed;bottom:30px;left:50%;transform:translateX(-50%);background:#212121;color:#fff;padding:12px 24px;border-radius:8px;font-size:13px;z-index:999999;font-family:'Poppins',sans-serif;white-space:nowrap;"></div>
+                <script>
+                var locAddresses=[{name:'Office',detail:'Medavakkam Main Road, Kovilambakkam, Chennai - 600117',icon:'fa-briefcase'}];
+                var locEditIndex=-1,locSelectedIndex=-1,locOpenDropdown=-1;
+                function locRender(list){var src=list||locAddresses;var el=document.getElementById('locAddrList');if(!src||src.length===0){el.innerHTML='<div style="padding:20px;text-align:center;color:#878787;font-size:13px;font-family:Poppins,sans-serif;">No addresses found</div>';return;}el.innerHTML=src.map(function(a,i){var realIdx=list?locAddresses.indexOf(a):i;var selected=(realIdx===locSelectedIndex);return'<div style="display:flex;align-items:flex-start;justify-content:space-between;padding:13px 16px;cursor:pointer;border-bottom:1px solid #f5f5f5;position:relative;'+(selected?'background:#f0f9f6;border-left:3px solid #1D9E75;':'')+'" onclick="locSelectAddr('+realIdx+',event)" onmouseover="if('+realIdx+'!=='+locSelectedIndex+')this.style.background=\'#f9f9f9\'" onmouseout="if('+realIdx+'!=='+locSelectedIndex+')this.style.background=\'transparent\'">'+'<div style="display:flex;align-items:flex-start;gap:10px;flex:1;">'+'<div style="width:32px;height:32px;border-radius:50%;background:'+(selected?'#1D9E75':'#e8f5f0')+';display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;">'+(selected?'<i class="fas fa-check" style="color:#fff;font-size:12px;"></i>':'<i class="fas '+a.icon+'" style="color:#0F6E56;font-size:12px;"></i>')+'</div>'+'<div><div style="font-size:13px;font-weight:600;color:#212121;font-family:Poppins,sans-serif;margin-bottom:3px;">'+a.name+'</div>'+'<div style="font-size:11px;color:#878787;line-height:1.5;font-family:Poppins,sans-serif;">'+a.detail+'</div></div></div>'+'<button onclick="event.stopPropagation();locToggleDD('+realIdx+')" style="background:none;border:none;cursor:pointer;color:#666;font-size:18px;font-weight:700;padding:2px 6px;border-radius:4px;line-height:1;flex-shrink:0;" title="Options">⋯</button>'+(locOpenDropdown===realIdx?'<div style="position:absolute;right:12px;top:36px;background:#fff;border:1px solid #e0e0e0;border-radius:10px;box-shadow:0 4px 16px rgba(0,0,0,0.13);z-index:10;min-width:130px;overflow:hidden;"><div onclick="event.stopPropagation();locOpenEdit('+realIdx+')" style="display:flex;align-items:center;gap:10px;padding:11px 16px;cursor:pointer;font-size:13px;color:#212121;font-family:Poppins,sans-serif;" onmouseover="this.style.background=\'#f5f5f5\'" onmouseout="this.style.background=\'#fff\'"><i class="fas fa-edit" style="color:#0F6E56;font-size:13px;"></i> Edit</div><div onclick="event.stopPropagation();locDeleteAddr('+realIdx+')" style="display:flex;align-items:center;gap:10px;padding:11px 16px;cursor:pointer;font-size:13px;color:#dc3545;font-family:Poppins,sans-serif;" onmouseover="this.style.background=\'#f5f5f5\'" onmouseout="this.style.background=\'#fff\'"><i class="fas fa-trash" style="color:#dc3545;font-size:13px;"></i> Delete</div></div>':'')+'</div>';}).join('');}
+                function locToggleDD(i){locOpenDropdown=(locOpenDropdown===i)?-1:i;locRender();}
+                function locSelectAddr(i,e){locOpenDropdown=-1;locSelectedIndex=i;locRender();}
+                function locConfirm(){if(locSelectedIndex<0){locToastMsg('⚠️ Please select an address first');return;}var a=locAddresses[locSelectedIndex];document.getElementById('locLabel').textContent='Deliver to '+a.name+' –';document.getElementById('locLink').textContent=a.detail.substring(0,28)+'...';document.getElementById('locPanel').style.display='none';locToastMsg('📍 Delivering to '+a.name+'!');}
+                function locOpenEdit(i){locEditIndex=i;locOpenDropdown=-1;var a=locAddresses[i];document.getElementById('locModalTitle').textContent='Edit Address';document.getElementById('locNewName').value=a.name;document.getElementById('locNewAddr').value=a.detail;document.getElementById('locNewPin').value='';document.getElementById('locPanel').style.display='none';document.getElementById('locAddModal').style.display='flex';}
+                function locDeleteAddr(i){if(confirm('Delete "'+locAddresses[i].name+'" address?')){locAddresses.splice(i,1);if(locSelectedIndex===i)locSelectedIndex=-1;locOpenDropdown=-1;locRender();locToastMsg('🗑️ Address deleted');}}
+                function locAddNew(){locEditIndex=-1;document.getElementById('locModalTitle').textContent='Add New Address';document.getElementById('locNewName').value='';document.getElementById('locNewAddr').value='';document.getElementById('locNewPin').value='';document.getElementById('locPanel').style.display='none';document.getElementById('locAddModal').style.display='flex';}
+                function locCancelModal(){document.getElementById('locAddModal').style.display='none';document.getElementById('locPanel').style.display='flex';}
+                function locSaveAddress(){var n=document.getElementById('locNewName').value.trim();var a=document.getElementById('locNewAddr').value.trim();var p=document.getElementById('locNewPin').value.trim();if(!n||!a){locToastMsg('⚠️ Please enter name and address');return;}var full=a+(p?', '+p:'');if(locEditIndex>=0){locAddresses[locEditIndex]={name:n,detail:full,icon:locAddresses[locEditIndex].icon};locToastMsg('✅ Address updated!');locEditIndex=-1;}else{locAddresses.push({name:n,detail:full,icon:'fa-map-marker-alt'});locToastMsg('✅ Address saved!');}document.getElementById('locAddModal').style.display='none';document.getElementById('locPanel').style.display='flex';locRender();}
+                function locSearch(q){if(!q){locRender();return;}var filtered=locAddresses.filter(function(a){return a.name.toLowerCase().includes(q.toLowerCase())||a.detail.toLowerCase().includes(q.toLowerCase());});locRender(filtered);}
+                function locUseGPS(){if(navigator.geolocation){navigator.geolocation.getCurrentPosition(function(){document.getElementById('locLabel').textContent='Delivering to –';document.getElementById('locLink').textContent='Current Location';document.getElementById('locPanel').style.display='none';locToastMsg('📍 Location detected!');},function(){locToastMsg('⚠️ Location access denied');});}else{locToastMsg('⚠️ GPS not supported');}}
+                function locToastMsg(msg){var t=document.getElementById('locToast');t.textContent=msg;t.style.display='block';setTimeout(function(){t.style.display='none';},2500);}
+                document.addEventListener('DOMContentLoaded',function(){locRender();});
+                </script>
+                <a href="https://www.instagram.com/_bridal__designer_/" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.youtube.com/@sumathicateringserviceoffi4046/shorts" target="_blank"><i class="fab fa-youtube"></i></a>
+                <a href="https://wa.me/918610703658" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="logo" onclick="showSection('home')">
+                <div class="logo-icon">
+                    <img src="general-profile-picture.png" alt="Sumathi's Style" class="logo-img">
+                </div>
+                <div>
+                    <h2>Sumathi's Style</h2>
+                    <span>TAILORING BOUTIQUE</span>
+                </div>
+            </div>
+ <div class="nav-links">
+                <a href="#" onclick="showSection('home')">Home</a>
+                <a href="#" onclick="showSection('shop')">Shop</a>
+                <a href="#" onclick="showSection('classes')">Classes</a>
+                <a href="#" onclick="showSection('custom')">Custom Order</a>
+                <a href="#" onclick="showSection('catering')">Catering Site</a>
+                <a href="#" onclick="showSection('contact')">Contact</a>
+                <a href="#" onclick="showSection('reviews')">Reviews</a>
+            </div>
+            <div class="nav-actions">
+                <button class="nav-btn" onclick="toggleCart()" title="Cart">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count" id="cartCount">0</span>
+                </button>
+                <button class="nav-btn" onclick="showSection('wishlist')" title="Wishlist" id="wishlistNavBtn">
+                    <i class="fas fa-heart"></i>
+                    <span class="cart-count" id="wishlistCount" style="background:var(--danger);">0</span>
+                </button>
+                <button class="nav-btn" onclick="showSection('settings')" title="Settings">
+                    <i class="fas fa-user-cog"></i>
+                </button>
+                <button class="login-btn" onclick="showModal('login')" id="loginBtn">Login</button>
+                <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-overlay" id="mobileOverlay" onclick="toggleMobileMenu()"></div>
+    <div class="mobile-nav" id="mobileNav">
+        <a href="#" onclick="showSection('home'); toggleMobileMenu()"><i class="fas fa-home"></i> Home</a>
+        <a href="#" onclick="showSection('shop'); toggleMobileMenu()"><i class="fas fa-shopping-bag"></i> Shop</a>
+        <a href="#" onclick="showSection('classes'); toggleMobileMenu()"><i class="fas fa-graduation-cap"></i> Classes</a>
+        <a href="#" onclick="showSection('custom'); toggleMobileMenu()"><i class="fas fa-ruler-combined"></i> Custom Order</a>
+        <a href="#" onclick="showSection('catering'); toggleMobileMenu()"><i class="fas fa-utensils"></i> Catering</a>
+        <a href="#" onclick="showSection('contact'); toggleMobileMenu()"><i class="fas fa-phone"></i> Contact</a>
+        <a href="#" onclick="showSection('reviews'); toggleMobileMenu()"><i class="fas fa-star"></i> Reviews</a>
+        <a href="#" onclick="showSection('settings'); toggleMobileMenu()"><i class="fas fa-cog"></i> Settings</a>
+    </div>
+
+    <!-- PRODUCT DETAIL POPUP -->
+    <div class="pd-overlay" id="pdOverlay" onclick="if(event.target===this)closePDModal()">
+        <div class="pd-modal" id="pdModal">
+            <button class="pd-close" onclick="closePDModal()"><i class="fas fa-times"></i></button>
+            <div class="pd-left" id="pdLeft">
+                <div class="pd-main-img-wrap">
+                    <img id="pdMainImg" src="" alt="" class="pd-main-img">
+                    <span class="pd-badge-new" id="pdBadge">NEW</span>
+                    <button class="pd-wishlist-btn" id="pdWishBtn" onclick="pdToggleWish()">
+                        <i class="far fa-heart" id="pdWishIcon"></i>
+                    </button>
+                </div>
+                <div class="pd-thumbs" id="pdThumbs"></div>
+            </div>
+            <div class="pd-right">
+                <div class="pd-brand" id="pdBrand">SUMATHI'S STYLE</div>
+                <div class="pd-title" id="pdTitle">Product Name</div>
+                <div class="pd-rating-row">
+                    <span class="pd-rating-pill">
+                        <span id="pdRatingNum">4.3</span> <i class="fas fa-star"></i>
+                    </span>
+                     <span class="pd-rating-count" id="pdRatingCount">1,248 Ratings & 312 Reviews</span>
+                </div>
+                <hr class="pd-divider">
+                <!-- SINGLE PRICE ONLY — no strikethrough, no discount % -->
+                <div class="pd-price-row">
+                    <span class="pd-price" id="pdPrice">₹400</span>
+                </div>
+                <div class="pd-offer-tag" id="pdOfferTag">Free delivery above ₹500</div>
+
+                <!-- Sizes only — color panel removed -->
+                <div id="pdSizesSection">
+                    <div class="pd-label">Size: <span id="pdSelectedSize">Select size</span></div>
+                    <div class="pd-sizes" id="pdSizes"></div>
+                    <span class="pd-size-chart" onclick="showToast('Size chart coming soon!','success')">
+                        <i class="fas fa-ruler-horizontal"></i> Size Chart
+                    </span>
+                </div>
+
+                <!-- Quantity -->
+                <div class="pd-qty-row">
+                    <span class="pd-qty-label">Qty:</span>
+                    <div class="pd-qty-ctrl">
+                        <button onclick="pdChangeQty(-1)">−</button>
+                        <span id="pdQty">1</span>
+                        <button onclick="pdChangeQty(1)">+</button>
+                    </div>
+                </div>
+
+                <!-- CTA -->
+                <div class="pd-cta">
+                    <button class="pd-btn-cart" onclick="pdAddToCart()">
+                        <i class="fas fa-shopping-cart"></i> Add to Cart
+                    </button>
+                    <button class="pd-btn-buy" onclick="pdBuyNow()">
+                        <i class="fas fa-bolt"></i> Buy Now
+                    </button>
+                </div>
+
+                <!-- Delivery Check -->
+                 <div class="pd-delivery">
+                    <div class="pd-delivery-title">Delivery details</div>
+                    <div class="pd-delivery-loc-pill" onclick="document.getElementById('locPanel').style.display='flex';">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span class="pd-delivery-loc-text">Location not set</span>
+                        <span class="pd-delivery-loc-link">Select delivery location</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                    <div class="pd-delivery-date-box">
+                        <i class="fas fa-truck"></i>
+                        <div>
+                            <div class="pd-delivery-date-text" id="pdDeliveryDate">Delivery by --</div>
+                            <div class="pd-delivery-countdown" id="pdDeliveryCountdown">Order in --</div>
+                        </div>
+                    </div>
+                    <div class="pd-delivery-row">
+                        <input class="pd-delivery-input" type="text" id="pdPincodeInput" placeholder="Enter delivery pincode" maxlength="6">
+                        <button class="pd-delivery-check" onclick="pdCheckDelivery()">Check</button>
+                    </div>
+                    <div class="pd-delivery-info" id="pdDeliveryInfo" style="display:none;"></div>
+                </div>
+
+                <!-- Returns -->
+                <div class="pd-returns">
+                    <div class="pd-return-item"><i class="fas fa-shield-alt"></i> Secure Payment</div>
+                    <div class="pd-return-item"><i class="fas fa-medal"></i> Authentic Quality</div>
+                </div>
+
+                <hr class="pd-divider">
+
+                   <!-- Description -->
+                <div class="pd-description" id="pdDescription">
+                    <div class="pd-description-title">Description</div>
+                    <p class="pd-description-text" id="pdDescText">Product description here</p>
+                </div>
+
+                <!-- Highlights -->
+                <div class="pd-highlights" id="pdHighlights">
+                    <div class="pd-highlights-title">Product Highlights</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div id="mainContent">
+
+        <!-- HOME -->
+        <div id="home" class="page-section">
+            <section class="hero">
+                <div class="hero-content">
+                    <div class="hero-badge">✨ WOMEN'S EXCLUSIVE ✨</div>
+                    <h2>Traditional Elegance,<br><span>Modern Style</span></h2>
+                    <p>Custom tailoring, designer blouses, aari work & more — crafted with love by Sumathi</p>
+                    <div class="hero-exp"><i class="fas fa-award"></i> 30+ Years of Trusted Experience in Tailoring & Catering</div>
+                    <div class="hero-btns">
+                        <a href="#" class="btn-primary" onclick="showSection('shop')"><i class="fas fa-shopping-bag"></i> Shop Now</a>
+                        <a href="#" class="btn-primary" onclick="showSection('custom')"><i class="fas fa-ruler-combined"></i> Custom Order</a>
+                        <a href="tel:8610703658" class="btn-call"><i class="fas fa-phone"></i> Call Now</a>
+                    </div>
+                </div>
+            </section>
+
+            <div class="stats-bar">
+                <div class="stats-grid">
+                    <div class="stat-item"><i class="fas fa-award"></i><h3>30+</h3><p>Years Experience</p></div>
+                    <div class="stat-item"><i class="fas fa-users"></i><h3>5000+</h3><p>Happy Customers</p></div>
+                    <div class="stat-item"><i class="fas fa-tshirt"></i><h3>50+</h3><p>Designs Available</p></div>
+                    <div class="stat-item"><i class="fas fa-heart"></i><h3>100%</h3><p>Satisfaction</p></div>
+                </div>
+            </div>
+
+            <section class="section">
+                <div class="section-header">
+                    <h2>Our Categories</h2>
+                    <p>Explore our exclusive women's wear collections</p>
+                    <div class="line"></div>
+                </div>
+                <div class="categories-grid">
+                    <div class="category-card" onclick="filterProducts('Kids')"><div class="category-icon"><i class="fas fa-child"></i></div><h3>Kids Wear</h3><p>Adorable outfits</p></div>
+                    <div class="category-card" onclick="filterProducts('Uniform')"><div class="category-icon"><i class="fas fa-user-tie"></i></div><h3>Uniform</h3><p>School & work</p></div>
+                    <div class="category-card" onclick="filterProducts('Modern')"><div class="category-icon"><i class="fas fa-tshirt"></i></div><h3>Modern Wear</h3><p>Western styles</p></div>
+                    <div class="category-card" onclick="filterProducts('Salwar')"><div class="category-icon"><i class="fas fa-female"></i></div><h3>Salwar</h3><p>Designer suits</p></div>
+                    <div class="category-card" onclick="filterProducts('Blouse')"><div class="category-icon"><i class="fas fa-cut"></i></div><h3>Blouse</h3><p>From ₹400</p></div>
+                </div>
+                <div class="categories-grid" style="margin-top:1.5rem;">
+                    <div class="category-card" onclick="filterProducts('Aari')"><div class="category-icon"><i class="fas fa-pencil-ruler"></i></div><h3>Aari Work</h3><p>Hand embroidery</p></div>
+                    <div class="category-card" onclick="filterProducts('Saree')"><div class="category-icon"><i class="fas fa-ribbon"></i></div><h3>Saree</h3><p>Pre-pleating</p></div>
+                    <div class="category-card" onclick="filterProducts('Frock')"><div class="category-icon"><i class="fas fa-female"></i></div><h3>Frocks</h3><p>Party & daily</p></div>
+                    <div class="category-card" onclick="filterProducts('Lehenga')"><div class="category-icon"><i class="fas fa-female"></i></div><h3>Lehenga</h3><p>Bridal & party</p></div>
+                    <div class="category-card" onclick="filterProducts('Kurthi')"><div class="category-icon"><i class="fas fa-tshirt"></i></div><h3>Kurthi</h3><p>Ethnic wear</p></div>
+                </div>
+            </section>
+
+            <section class="section" style="background: var(--gray); padding-top:60px; padding-bottom:60px; max-width:100%;">
+                <div style="max-width:1400px; margin:0 auto;">
+                    <div class="section-header">
+                        <h2>Featured Collection</h2>
+                        <p>Handpicked designs — 30 years of crafting perfection</p>
+                        <div class="line"></div>
+                    </div>
+                    <div class="products-grid" id="featuredProducts"></div>
+                    <div style="text-align:center; margin-top:40px;">
+                        <button class="btn-primary" onclick="filterProducts('All')"><i class="fas fa-arrow-right"></i> View All Products</button>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- SHOP -->
+        <div id="shop" class="page-section" style="display:none; margin-top:104px;">
+            <section class="section">
+                <div class="section-header">
+                    <h2>Shop Collection</h2>
+                    <p>Browse all our women's wear — crafted with 30 years of expertise</p>
+                    <div class="line"></div>
+                </div>
+                <div style="display:flex; gap:10px; margin-bottom:30px; flex-wrap:wrap; justify-content:center;">
+    <button class="btn-primary shop-filter-btn" data-cat="all" style="padding:8px 20px; font-size:13px;" onclick="filterProducts('All', this)">All</button>
+    <button class="btn-outline shop-filter-btn" data-cat="kids" style="padding:8px 20px; font-size:13px; color:var(--primary); border-color:var(--primary);" onclick="filterProducts('Kids', this)">Kids</button>
+    <button class="btn-outline shop-filter-btn" data-cat="uniform" style="padding:8px 20px; font-size:13px; color:var(--primary); border-color:var(--primary);" onclick="filterProducts('Uniform', this)">Uniform</button>
+    <button class="btn-outline shop-filter-btn" data-cat="modern" style="padding:8px 20px; font-size:13px; color:var(--primary); border-color:var(--primary);" onclick="filterProducts('Modern', this)">Modern</button>
+    <button class="btn-outline shop-filter-btn" data-cat="salwar" style="padding:8px 20px; font-size:13px; color:var(--primary); border-color:var(--primary);" onclick="filterProducts('Salwar', this)">Salwar</button>
+    <button class="btn-outline shop-filter-btn" data-cat="blouse" style="padding:8px 20px; font-size:13px; color:var(--primary); border-color:var(--primary);" onclick="filterProducts('Blouse', this)">Blouse</button>
+    <button class="btn-outline shop-filter-btn" data-cat="aari" style="padding:8px 20px; font-size:13px; color:var(--primary); border-color:var(--primary);" onclick="filterProducts('Aari', this)">Aari</button>
+    <button class="btn-outline shop-filter-btn" data-cat="saree" style="padding:8px 20px; font-size:13px; color:var(--primary); border-color:var(--primary);" onclick="filterProducts('Saree', this)">Saree</button>
+    <button class="btn-outline shop-filter-btn" data-cat="frock" style="padding:8px 20px; font-size:13px; color:var(--primary); border-color:var(--primary);" onclick="filterProducts('Frock', this)">Frock</button>
+    <button class="btn-outline shop-filter-btn" data-cat="lehenga" style="padding:8px 20px; font-size:13px; color:var(--primary); border-color:var(--primary);" onclick="filterProducts('Lehenga', this)">Lehenga</button>
+    <button class="btn-outline shop-filter-btn" data-cat="kurthi" style="padding:8px 20px; font-size:13px; color:var(--primary); border-color:var(--primary);" onclick="filterProducts('Kurthi', this)">Kurthi</button>
+</div>
+<div class="products-grid" id="shopProducts"></div>
+            </section>
+        </div>
+
+        <!-- CLASSES -->
+        <div id="classes" class="page-section" style="display:none; margin-top:104px;">
+            <section class="section">
+                <div class="section-header"><h2>Our Classes</h2><p>Learn from 30 years experienced experts</p><div class="line"></div></div>
+                <div class="classes-grid">
+                    <div class="class-card">
+                        <img src="aaricls.jpg" class="class-img" alt="Aari Work Class">
+                        <div class="class-content"><h3>Aari Work Class</h3><p>Learn traditional South Indian aari embroidery. Master chain stitch, bead work, and zardosi patterns.</p><div class="class-meta"><span><i class="fas fa-clock"></i> 1 Month </span><span><i class="fas fa-users"></i> 10 Students</span><span><i class="fas fa-rupee-sign"></i> ₹10,000</span></div><button class="btn-enroll" onclick="enrollClass('Aari Work Class')"><i class="fab fa-whatsapp"></i> Enroll Now</button></div>
+                    </div>
+                    <div class="class-card">
+                        <img src="tailocls.jpg" class="class-img" alt="Tailoring Class">
+                        <div class="class-content"><h3>Tailoring Class</h3><p>Complete course from basics to advanced. Measurements, cutting, stitching for all garments.</p><div class="class-meta"><span><i class="fas fa-clock"></i> 3 Months</span><span><i class="fas fa-users"></i> 25 Students</span><span><i class="fas fa-rupee-sign"></i> ₹2,000</span></div><button class="btn-enroll" onclick="enrollClass('Tailoring Class')"><i class="fab fa-whatsapp"></i> Enroll Now</button></div>
+                    </div>
+                    <div class="class-card">
+                        <img src="Saree.jpg" class="class-img" alt="Saree Class">
+                        <div class="class-content"><h3>Saree Pre-pleating Class</h3><p>Master perfect saree pleating. Different styles, petticoat stitching, draping techniques.</p><div class="class-meta"><span><i class="fas fa-clock"></i> 2 Weeks</span><span><i class="fas fa-users"></i> 50 Students</span><span><i class="fas fa-rupee-sign"></i> ₹500</span></div><button class="btn-enroll" onclick="enrollClass('Saree Pre-pleating Class')"><i class="fab fa-whatsapp"></i> Enroll Now</button></div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- CUSTOM ORDER -->
+        <div id="custom" class="page-section" style="display:none; margin-top:104px;">
+            <section class="section">
+                <div class="custom-order">
+                    <div>
+                        <h2>Customized Order</h2>
+                        <p>Turn Your Dream Outfit Into Reality! ✂️ Got a special occasion, a wedding, or your own design idea in mind? Just tell us — we'll custom stitch it for you. Perfect fit, your style, your choice.</p>
+                        <div class="custom-features">
+                            <div class="custom-feature"><i class="fas fa-check"></i><span>Personalized Measurements</span></div>
+                            <div class="custom-feature"><i class="fas fa-check"></i><span>Any Design, Any Fabric</span></div>
+                            <div class="custom-feature"><i class="fas fa-check"></i><span>Voice Message Support</span></div>
+                            <div class="custom-feature"><i class="fas fa-check"></i><span>Home Delivery Available</span></div>
+                            <div class="custom-feature"><i class="fas fa-check"></i><span>30 Years of Trusted Craft</span></div>
+                        </div>
+                    </div>
+                    <div class="custom-form">
+                        <h3 style="font-family:'Playfair Display',serif; color:var(--primary); margin-bottom:20px; text-align:center;">Place Your Custom Order</h3>
+                        <form id="customOrderForm" onsubmit="submitCustomOrder(event)">
+                            <div class="form-row">
+                                <div class="form-group"><label>Your Name *</label><input type="text" id="customName" placeholder="Enter your name" required></div>
+                                <div class="form-group"><label>Phone Number *</label><input type="tel" id="customPhone" placeholder="Enter phone number" required></div>
+                            </div>
+                            <div class="form-group"><label>Order Type *</label><select id="customType" required><option value="">Select type</option><option>All</option><option>Kids</option><option>Uniform</option><option>Modern</option><option>Salwar</option><option>Blouse</option><option>Aari</option><option>Saree</option><option>Frock</option><option>Lehenga</option><option>Kurthi</option></select></div>
+                            <div class="form-group"><label>Measurements (inches)</label><div class="form-row"><input type="text" id="customBust" placeholder="Bust"><input type="text" id="customWaist" placeholder="Waist"><input type="text" id="customHip" placeholder="Hip"><input type="text" id="customLength" placeholder="Length"></div></div>
+                            <div class="form-group"><label>Requirements / Notes</label><textarea id="customNotes" rows="3" placeholder="Describe your design, fabric, color, occasion..."></textarea></div>
+                            <div class="form-group"><label>Voice Message (Optional)</label><div class="voice-record" id="voiceRecord" onclick="recordVoice()"><i class="fas fa-microphone" id="voiceIcon"></i><span id="voiceText">Click to record voice message</span></div></div>
+                            <button type="submit" class="btn-enroll" style="margin-top:10px;"><i class="fas fa-paper-plane"></i> Submit Order</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- CATERING -->
+        <div id="catering" class="page-section" style="display:none; margin-top:104px;">
+          <iframe id="cateringFrame" src="catering.html" style="width:100%; height:100vh; border:none; display:block;" title="Sumathi Catering Site"></iframe>
+            <script>
+             document.getElementById('cateringFrame').src = 'catering.html?v=' + new Date().getTime();
+            </script>
+        </div>
+
+        <!-- REVIEWS -->
+        <div id="reviews" class="page-section" style="display:none; margin-top:104px;">
+            <section class="section">
+                <div class="section-header"><h2>Customer Reviews</h2><p>What our happy customers say about 30 years of service</p><div class="line"></div></div>
+                <div class="reviews-grid" id="reviewsGrid"></div>
+                <div style="text-align:center; margin-top:40px;">
+                    <button class="btn-primary" onclick="showModal('review')"><i class="fas fa-star"></i> Write a Review</button>
+                </div>
+            </section>
+        </div>
+
+        <!-- CONTACT -->
+        <div id="contact" class="page-section" style="display:none; margin-top:104px;">
+            <section class="section">
+                <div class="section-header"><h2>Contact Us</h2><p>Get in touch — 30 years of trust</p><div class="line"></div></div>
+                <div class="contact-grid">
+                    <div class="contact-info">
+                        <h3><i class="fas fa-cut"></i> Sumathi's Style Boutique</h3>
+                        <div class="contact-item"><i class="fas fa-map-marker-alt"></i><div><h4>Address</h4><p>Injambakkam, Chennai</p></div></div>
+                        <div class="contact-item"><i class="fas fa-phone"></i><div><h4>Phone</h4><p><a href="tel:8610703658">86107 03658</a></p></div></div>
+                        <div class="contact-item"><i class="fas fa-envelope"></i><div><h4>Email</h4><p><a href="mailto:sumathisstyle@gmail.com">sumathisstyle@gmail.com</a></p></div></div>
+                        <div class="contact-item"><i class="fas fa-utensils"></i><div><h4>Catering</h4><p><a href="tel:9941013323">99410 13323</a></p></div></div>
+                        <div class="contact-social">
+                            <a href="https://wa.me/918610703658" target="_blank" class="wa"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                            <a href="https://www.instagram.com/_bridal__designer_/" target="_blank" class="ig"><i class="fab fa-instagram"></i> Instagram</a>
+                            <a href="https://www.youtube.com/@sumathicateringserviceoffi4046/shorts" target="_blank" class="yt"><i class="fab fa-youtube"></i> YouTube</a>
+                            <a href="tel:8610703658" class="ph"><i class="fas fa-phone"></i> Call Now</a>
+                        </div>
+                        <div style="margin-top:20px; border-radius:15px; overflow:hidden; height:200px; box-shadow:var(--shadow);">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15550.857123456789!2d80.2436!3d12.9141!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTLCsDU0JzUwLjgiTiA4MMKwMTQnMzcuMCJF!5e0!3m2!1sen!2sin!4v1234567890" width="100%" height="100%" style="border:0;" allowfullscreen loading="lazy"></iframe>
+                        </div>
+                    </div>
+                    <div class="contact-form">
+                        <h3 style="font-family:'Playfair Display',serif; color:var(--primary); margin-bottom:25px;">Send us a Message</h3>
+                        <form id="contactForm" onsubmit="submitContact(event)">
+                            <div class="form-group"><label>Your Name</label><input type="text" id="contactName" placeholder="Enter your name" required></div>
+                            <div class="form-group"><label>Phone Number</label><input type="tel" id="contactPhone" placeholder="Enter phone number" required></div>
+                            <div class="form-group"><label>Email</label><input type="email" id="contactEmail" placeholder="Enter email address"></div>
+                            <div class="form-group"><label>Message</label><textarea id="contactMessage" rows="4" placeholder="How can we help you?" required></textarea></div>
+                            <button type="submit" class="btn-enroll"><i class="fas fa-paper-plane"></i> Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- SETTINGS -->
+        <div id="settings" class="page-section" style="display:none; margin-top:104px;">
+            <section class="section">
+                <div class="section-header"><h2><i class="fas fa-user-cog"></i> My Account</h2><p>Manage your profile and preferences</p><div class="line"></div></div>
+                <div style="display:grid; grid-template-columns:280px 1fr; gap:30px; align-items:start;">
+                    <div class="settings-card" style="padding:0; overflow:hidden; position:sticky; top:120px;">
+                        <div style="background:linear-gradient(135deg,var(--primary),var(--primary-dark)); padding:25px; text-align:center; color:white;">
+                            <div style="width:70px;height:70px;background:rgba(255,255,255,0.2);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;font-size:32px;"><i class="fas fa-user"></i></div>
+                            <h4 id="profileName" style="font-size:18px;margin-bottom:4px;">Guest User</h4>
+                            <p id="profilePhone" style="font-size:13px;opacity:0.85;">Not logged in</p>
+                        </div>
+                        <div style="padding:10px 0;" id="accountSidebarMenu">
+                            <div onclick="showAccountTab('profileTab', this)" class="acc-menu-item active-tab-item" style="padding:14px 20px;cursor:pointer;display:flex;align-items:center;gap:12px;font-size:14px;font-weight:500;color:var(--primary);background:rgba(0,128,128,0.08);border-left:3px solid var(--primary);"><i class="fas fa-user-edit"></i> Profile Information</div>
+                            <div onclick="showAccountTab('ordersTab', this)" class="acc-menu-item" style="padding:14px 20px;cursor:pointer;display:flex;align-items:center;gap:12px;font-size:14px;color:var(--text);transition:all 0.2s;" onmouseover="this.style.background='#f5f5f5'" onmouseout="this.style.background='none'"><i class="fas fa-box" style="color:var(--primary);"></i> My Orders</div>
+                            <div onclick="showSection('wishlist')" style="padding:14px 20px;cursor:pointer;display:flex;align-items:center;gap:12px;font-size:14px;color:var(--text);transition:all 0.2s;" onmouseover="this.style.background='#f5f5f5'" onmouseout="this.style.background='none'"><i class="fas fa-heart" style="color:var(--danger);"></i> My Wishlist</div>
+                            <div onclick="showAccountTab('notifTab', this)" class="acc-menu-item" style="padding:14px 20px;cursor:pointer;display:flex;align-items:center;gap:12px;font-size:14px;color:var(--text);transition:all 0.2s;" onmouseover="this.style.background='#f5f5f5'" onmouseout="this.style.background='none'"><i class="fas fa-bell" style="color:var(--secondary);"></i> Notifications</div>
+                            <div onclick="showAccountTab('privacyTab', this)" class="acc-menu-item" style="padding:14px 20px;cursor:pointer;display:flex;align-items:center;gap:12px;font-size:14px;color:var(--text);transition:all 0.2s;" onmouseover="this.style.background='#f5f5f5'" onmouseout="this.style.background='none'"><i class="fas fa-shield-alt" style="color:var(--success);"></i> Privacy</div>
+                            <div style="border-top:1px solid #eee;margin:8px 0;"></div>
+                            <div onclick="logout()" style="padding:14px 20px;cursor:pointer;display:flex;align-items:center;gap:12px;font-size:14px;color:var(--danger);font-weight:600;transition:all 0.2s;" onmouseover="this.style.background='#fff5f5'" onmouseout="this.style.background='none'"><i class="fas fa-sign-out-alt"></i> Logout</div>
+                        </div>
+                    </div>
+                    <div>
+                        <div id="profileTab" style="display:flex;flex-direction:column;gap:20px;">
+                            <div class="settings-card" id="personalInfo">
+                                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;"><h3 style="color:var(--primary);font-size:18px;"><i class="fas fa-user"></i> Personal Information</h3><button onclick="toggleEditSection('personalEdit', this)" style="background:none;border:1.5px solid var(--primary);color:var(--primary);font-size:14px;font-weight:600;cursor:pointer;padding:6px 16px;border-radius:20px;"><i class="fas fa-pen"></i> Edit</button></div>
+                                <div id="personalView"><div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;"><div><p style="font-size:12px;color:var(--text-light);margin-bottom:4px;">First Name</p><p id="viewFirstName" style="font-size:15px;font-weight:500;color:var(--text);">—</p></div><div><p style="font-size:12px;color:var(--text-light);margin-bottom:4px;">Last Name</p><p id="viewLastName" style="font-size:15px;font-weight:500;color:var(--text);">—</p></div></div><div style="margin-top:20px;"><p style="font-size:12px;color:var(--text-light);margin-bottom:8px;">Your Gender</p><div style="display:flex;gap:20px;"><label style="display:flex;align-items:center;gap:8px;font-size:14px;"><input type="radio" name="viewGender" value="male" disabled> Male</label><label style="display:flex;align-items:center;gap:8px;font-size:14px;"><input type="radio" name="viewGender" value="female" disabled checked> Female</label></div></div></div>
+                                <div id="personalEdit" style="display:none;"><div style="display:grid;grid-template-columns:1fr 1fr;gap:15px;margin-bottom:15px;"><div class="form-group" style="margin:0;"><label>First Name</label><input type="text" id="editFirstName" placeholder="First name"></div><div class="form-group" style="margin:0;"><label>Last Name</label><input type="text" id="editLastName" placeholder="Last name"></div></div><div style="margin-bottom:15px;"><p style="font-size:13px;font-weight:500;margin-bottom:8px;">Your Gender</p><div style="display:flex;gap:20px;"><label style="display:flex;align-items:center;gap:8px;font-size:14px;cursor:pointer;"><input type="radio" name="editGender" value="male"> Male</label><label style="display:flex;align-items:center;gap:8px;font-size:14px;cursor:pointer;"><input type="radio" name="editGender" value="female" checked> Female</label></div></div><button onclick="savePersonalInfo()" style="background:linear-gradient(135deg,var(--primary),var(--primary-light));color:white;border:none;padding:10px 28px;border-radius:20px;font-size:14px;font-weight:600;cursor:pointer;">Save</button><button onclick="toggleEditSection('personalEdit', null, true)" style="background:none;border:1.5px solid #ccc;color:var(--text);padding:10px 20px;border-radius:20px;font-size:14px;cursor:pointer;margin-left:10px;">Cancel</button></div>
+                            </div>
+                            <div class="settings-card">
+                                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;"><h3 style="color:var(--primary);font-size:18px;"><i class="fas fa-envelope"></i> Email Address</h3><button onclick="toggleEditSection('emailEdit', this)" style="background:none;border:1.5px solid var(--primary);color:var(--primary);font-size:14px;font-weight:600;cursor:pointer;padding:6px 16px;border-radius:20px;"><i class="fas fa-pen"></i> Edit</button></div>
+                                <div id="emailView"><p style="font-size:12px;color:var(--text-light);margin-bottom:4px;">Email</p><p id="profileEmail" style="font-size:15px;font-weight:500;color:var(--text);">Not provided</p></div>
+                                <div id="emailEdit" style="display:none;"><div class="form-group" style="margin-bottom:15px;"><label>Email Address</label><input type="email" id="editEmail" placeholder="Enter email address"></div><button onclick="saveEmail()" style="background:linear-gradient(135deg,var(--primary),var(--primary-light));color:white;border:none;padding:10px 28px;border-radius:20px;font-size:14px;font-weight:600;cursor:pointer;">Save</button><button onclick="toggleEditSection('emailEdit', null, true)" style="background:none;border:1.5px solid #ccc;color:var(--text);padding:10px 20px;border-radius:20px;font-size:14px;cursor:pointer;margin-left:10px;">Cancel</button></div>
+                            </div>
+                            <div class="settings-card">
+                                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;"><h3 style="color:var(--primary);font-size:18px;"><i class="fas fa-mobile-alt"></i> Mobile Number</h3><button onclick="toggleEditSection('mobileEdit', this)" style="background:none;border:1.5px solid var(--primary);color:var(--primary);font-size:14px;font-weight:600;cursor:pointer;padding:6px 16px;border-radius:20px;"><i class="fas fa-pen"></i> Edit</button></div>
+                                <div id="mobileView"><p style="font-size:12px;color:var(--text-light);margin-bottom:4px;">Mobile</p><p id="viewMobile" style="font-size:15px;font-weight:500;color:var(--text);">Not provided</p></div>
+                                <div id="mobileEdit" style="display:none;"><div class="form-group" style="margin-bottom:15px;"><label>Mobile Number</label><input type="tel" id="editMobile" placeholder="Enter 10-digit number" maxlength="10"></div><button onclick="saveMobile()" style="background:linear-gradient(135deg,var(--primary),var(--primary-light));color:white;border:none;padding:10px 28px;border-radius:20px;font-size:14px;font-weight:600;cursor:pointer;">Save</button><button onclick="toggleEditSection('mobileEdit', null, true)" style="background:none;border:1.5px solid #ccc;color:var(--text);padding:10px 20px;border-radius:20px;font-size:14px;cursor:pointer;margin-left:10px;">Cancel</button></div>
+                            </div>
+                        </div>
+                        <div id="ordersTab" style="display:none;">
+                            
+                                <button onclick="filterOrders('all', this)" data-type="all" class="order-filter-btn active-filter" style="padding:6px 16px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;border:1.5px solid var(--primary);background:var(--primary);color:white;">All</button><button onclick="filterOrders('Ordered', this)" data-type="Ordered" class="order-filter-btn" style="padding:6px 16px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;border:1.5px solid var(--primary);background:none;color:var(--primary);">Ordered</button><button onclick="filterOrders('Processing', this)" data-type="Processing" class="order-filter-btn" style="padding:6px 16px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;border:1.5px solid var(--secondary);background:none;color:var(--secondary);">Processing</button><button onclick="filterOrders('Delivered', this)" data-type="Delivered" class="order-filter-btn" style="padding:6px 16px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;border:1.5px solid #1565c0;background:none;color:#1565c0;">Delivered</button><button onclick="filterOrders('Cancelled', this)" data-type="Cancelled" class="order-filter-btn" style="padding:6px 16px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;border:1.5px solid var(--danger);background:none;color:var(--danger);">Cancelled</button>
+                                <div id="ordersListContainer"></div>
+                            </div>
+                        </div>
+                        <div id="notifTab" style="display:none;">
+                            <div class="settings-card"><h3 style="color:var(--primary);font-size:18px;margin-bottom:20px;"><i class="fas fa-bell"></i> Notifications</h3><div class="settings-item"><div class="settings-item-info"><h4>Order Updates</h4><p>Get notified about order status</p></div><div class="toggle-switch active" onclick="toggleSwitch(this)"></div></div><div class="settings-item"><div class="settings-item-info"><h4>Promotions</h4><p>Receive offers and discounts</p></div><div class="toggle-switch active" onclick="toggleSwitch(this)"></div></div><div class="settings-item"><div class="settings-item-info"><h4>Class Reminders</h4><p>Reminders for enrolled classes</p></div><div class="toggle-switch" onclick="toggleSwitch(this)"></div></div></div>
+                        </div>
+                        <div id="privacyTab" style="display:none;flex-direction:column;gap:20px;">
+                            <div class="settings-card"><h3 style="color:var(--primary);font-size:18px;margin-bottom:20px;"><i class="fas fa-shield-alt"></i> Privacy</h3><div class="settings-item"><div class="settings-item-info"><h4>Show Profile</h4><p>Make profile visible to others</p></div><div class="toggle-switch" onclick="toggleSwitch(this)"></div></div><div class="settings-item"><div class="settings-item-info"><h4>Location Access</h4><p>Allow app to access location</p></div><div class="toggle-switch" onclick="toggleSwitch(this)"></div></div></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- WISHLIST -->
+        <div id="wishlist" class="page-section" style="display:none; margin-top:104px;">
+            <section class="section">
+                <div class="section-header"><h2><i class="fas fa-heart" style="color:var(--danger);"></i> My Wishlist</h2><p>Your saved items — pick your favourite anytime!</p><div class="line"></div></div>
+                <div id="wishlistGrid" class="products-grid"></div>
+                <div id="wishlistEmpty" style="text-align:center;padding:60px 20px;display:none;"><i class="fas fa-heart-broken" style="font-size:60px;color:#ddd;margin-bottom:20px;display:block;"></i><h3 style="color:var(--text-light);margin-bottom:10px;">Your wishlist is empty</h3><p style="color:var(--text-light);margin-bottom:25px;">Save your favourite products here!</p><button class="btn-primary" onclick="showSection('shop')"><i class="fas fa-shopping-bag"></i> Explore Shop</button></div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-grid">
+            <div class="footer-col"><h3><i class="fas fa-cut"></i> Sumathi's Style</h3><p>Traditional Elegance, Modern Style</p><p>Trusted partner for custom tailoring and catering for over 30 years.</p><span class="footer-badge"><i class="fas fa-award"></i> 30 Years Experience</span><div class="social-links"><a href="https://www.instagram.com/_bridal__designer_/" target="_blank"><i class="fab fa-instagram"></i></a><a href="https://www.youtube.com/@sumathicateringserviceoffi4046/shorts" target="_blank"><i class="fab fa-youtube"></i></a><a href="https://wa.me/918610703658" target="_blank"><i class="fab fa-whatsapp"></i></a><a href="tel:8610703658"><i class="fas fa-phone"></i></a></div></div>
+            <div class="footer-col"><h3>Quick Links</h3><a href="#" onclick="showSection('shop')"><i class="fas fa-shopping-bag"></i> Shop</a><a href="#" onclick="showSection('classes')"><i class="fas fa-graduation-cap"></i> Classes</a><a href="#" onclick="showSection('custom')"><i class="fas fa-ruler-combined"></i> Custom Order</a><a href="#" onclick="showSection('catering')"><i class="fas fa-utensils"></i> Catering</a><a href="#" onclick="showSection('contact')"><i class="fas fa-phone"></i> Contact</a><a href="#" onclick="showSection('reviews')"><i class="fas fa-star"></i> Reviews</a></div>
+            <div class="footer-col"><h3>Categories</h3><a href="#" onclick="filterProducts('Blouse')"><i class="fas fa-cut"></i> Blouse</a><a href="#" onclick="filterProducts('Salwar')"><i class="fas fa-female"></i> Salwar</a><a href="#" onclick="filterProducts('Aari')"><i class="fas fa-pencil-ruler"></i> Aari Work</a><a href="#" onclick="filterProducts('Saree')"><i class="fas fa-ribbon"></i> Saree</a><a href="#" onclick="filterProducts('Modern')"><i class="fas fa-tshirt"></i> Modern Wear</a><a href="#" onclick="filterProducts('Frock')"><i class="fas fa-female"></i> Frocks</a></div>
+            <div class="footer-col"><h3>Contact Us</h3><a href="tel:8610703658"><i class="fas fa-phone"></i> 86107 03658</a><a href="https://wa.me/918610703658"><i class="fab fa-whatsapp"></i> 86107 03658</a><a href="mailto:sumathisstyle@gmail.com"><i class="fas fa-envelope"></i> sumathisstyle@gmail.com</a><a href="#"><i class="fas fa-map-marker-alt"></i> Injambakkam, Chennai</a><a href="tel:9941013323"><i class="fas fa-utensils"></i> Catering: 99410 13323</a></div>
+        </div>
+        <div class="footer-bottom"><p>© 2024 Sumathi's Style Tailoring Boutique. All rights reserved. | 30 Years of Excellence</p></div>
+    </footer>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header"><h3><i class="fas fa-shopping-cart"></i> Your Cart</h3><button class="cart-close" onclick="toggleCart()"><i class="fas fa-times"></i></button></div>
+        <div class="cart-items" id="cartItems"><div class="cart-empty"><i class="fas fa-shopping-bag"></i><p>Your cart is empty</p><p style="font-size:13px;">Add some beautiful items!</p></div></div>
+        <div class="cart-footer" id="cartFooter" style="display:none;"><div class="cart-total"><span>Total:</span><span id="cartTotal">₹0</span></div><button class="btn-checkout" onclick="checkout()"><i class="fas fa-credit-card"></i> Checkout</button></div>
+    </div>
+
+    <!-- Chat Widget -->
+    <div class="chat-widget">
+        <div class="chat-box" id="chatBox">
+            <div class="chat-header"><div><h4>Sumathi Support</h4><div class="chat-status">Online</div></div><button class="chat-close" onclick="toggleChat()"><i class="fas fa-times"></i></button></div>
+            <div class="chat-messages" id="chatMessages"><div class="chat-msg bot">Hello! Welcome to Sumathi's Style. How can I help you today? 😊</div></div>
+            <div class="chat-input"><input type="text" id="chatInput" placeholder="Type a message..." onkeypress="if(event.key==='Enter')sendChat()"><button class="chat-send" onclick="sendChat()"><i class="fas fa-paper-plane"></i></button></div>
+        </div>
+        <button class="chat-btn" onclick="toggleChat()"><i class="fas fa-comments"></i></button>
+    </div>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()"><span class="lightbox-close">&times;</span><img id="lightboxImg" src="" alt=""></div>
+
+    <!-- Login Modal -->
+    <div class="modal-overlay" id="loginModal">
+        <div class="modal">
+            <button class="modal-close" onclick="closeModal('login')"><i class="fas fa-times"></i></button>
+            <h2><i class="fas fa-user-circle"></i> Login</h2>
+            <div id="loginStep1"><p style="text-align:center; color:var(--text-light); margin-bottom:20px;">Enter phone number to receive OTP</p><div class="form-group"><label>Phone Number</label><input type="tel" id="loginPhone" placeholder="Enter 10-digit number" maxlength="10"></div><button class="btn-enroll" onclick="sendOTP()"><i class="fas fa-paper-plane"></i> Send OTP</button><p style="text-align:center; margin-top:20px; font-size:13px; color:var(--text-light);">Don't have an account? <a href="#" style="color:var(--primary); font-weight:600;" onclick="showModal('register')">Register</a></p></div>
+            <div id="loginStep2" style="display:none;"><p style="text-align:center; color:var(--text-light); margin-bottom:10px;">Enter OTP sent to <span id="otpPhone" style="color:var(--primary); font-weight:600;"></span></p><div class="otp-inputs"><input type="text" maxlength="1" oninput="moveOTP(this, 0)" id="otp1"><input type="text" maxlength="1" oninput="moveOTP(this, 1)" id="otp2"><input type="text" maxlength="1" oninput="moveOTP(this, 2)" id="otp3"><input type="text" maxlength="1" oninput="moveOTP(this, 3)" id="otp4"><input type="text" maxlength="1" oninput="moveOTP(this, 4)" id="otp5"><input type="text" maxlength="1" oninput="moveOTP(this, 5)" id="otp6"></div><button class="btn-enroll" onclick="verifyOTP()"><i class="fas fa-check-circle"></i> Verify OTP</button><p style="text-align:center; margin-top:15px; font-size:13px; color:var(--text-light);">Didn't receive? <a href="#" style="color:var(--primary); font-weight:600;" onclick="sendOTP()">Resend</a></p></div>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div class="modal-overlay" id="registerModal">
+        <div class="modal">
+            <button class="modal-close" onclick="closeModal('register')"><i class="fas fa-times"></i></button>
+            <h2><i class="fas fa-user-plus"></i> Register</h2>
+            <div id="registerStep1"><div class="form-group"><label>Full Name *</label><input type="text" id="regName" placeholder="Enter your full name" required></div><div class="form-group"><label>Phone Number *</label><input type="tel" id="regPhone" placeholder="Enter 10-digit number" maxlength="10" required></div><div class="form-group"><label>Email</label><input type="email" id="regEmail" placeholder="Enter email address"></div><button class="btn-enroll" onclick="registerSendOTP()"><i class="fas fa-paper-plane"></i> Send OTP</button><p style="text-align:center; margin-top:20px; font-size:13px; color:var(--text-light);">Already have an account? <a href="#" style="color:var(--primary); font-weight:600;" onclick="closeModal('register'); showModal('login')">Login</a></p></div>
+            <div id="registerStep2" style="display:none;"><p style="text-align:center; color:var(--text-light); margin-bottom:10px;">Enter OTP sent to <span id="regOtpPhone" style="color:var(--primary); font-weight:600;"></span></p><div class="otp-inputs"><input type="text" maxlength="1" oninput="moveOTP(this, 0, 'reg')" id="regOtp1"><input type="text" maxlength="1" oninput="moveOTP(this, 1, 'reg')" id="regOtp2"><input type="text" maxlength="1" oninput="moveOTP(this, 2, 'reg')" id="regOtp3"><input type="text" maxlength="1" oninput="moveOTP(this, 3, 'reg')" id="regOtp4"><input type="text" maxlength="1" oninput="moveOTP(this, 4, 'reg')" id="regOtp5"><input type="text" maxlength="1" oninput="moveOTP(this, 5, 'reg')" id="regOtp6"></div><button class="btn-enroll" onclick="verifyRegisterOTP()"><i class="fas fa-check-circle"></i> Verify & Register</button></div>
+        </div>
+    </div>
+
+    <!-- Buy Now Modal -->
+    <div class="modal-overlay" id="buyNowModal">
+        <div class="modal" style="max-width:600px;">
+            <button class="modal-close" onclick="closeModal('buyNow')"><i class="fas fa-times"></i></button>
+            <h2><i class="fas fa-shopping-bag"></i> Complete Your Order</h2>
+            <div class="buy-now-summary" id="buyNowSummary"></div>
+            <div class="form-group"><label>Full Name *</label><input type="text" id="buyName" placeholder="Enter your name" required></div>
+            <div class="form-group"><label>Phone Number *</label><input type="tel" id="buyPhone" placeholder="Enter phone number" required></div>
+            <div class="form-group"><label>Delivery Address *</label><textarea id="buyAddress" rows="3" placeholder="Enter full address" required></textarea></div>
+            <div class="form-group"><label>City / Pincode</label><div class="form-row"><input type="text" id="buyCity" placeholder="City"><input type="text" id="buyPincode" placeholder="Pincode"></div></div>
+            <div class="form-group"><label>Payment Method</label><div class="payment-options"><div class="payment-option selected" onclick="selectPayment(this)"><i class="fas fa-money-bill-wave"></i><p>Cash on Delivery</p></div><div class="payment-option" onclick="selectPayment(this)"><i class="fas fa-mobile-alt"></i><p>UPI / GPay</p></div><div class="payment-option" onclick="selectPayment(this)"><i class="fas fa-credit-card"></i><p>Card</p></div></div></div>
+            <button class="btn-enroll" onclick="placeOrder()"><i class="fas fa-check-circle"></i> Place Order</button>
+        </div>
+    </div>
+
+    <!-- Review Modal -->
+    <div class="modal-overlay" id="reviewModal">
+        <div class="modal">
+            <button class="modal-close" onclick="closeModal('review')"><i class="fas fa-times"></i></button>
+            <h2><i class="fas fa-star"></i> Write a Review</h2>
+            <form id="reviewForm" onsubmit="submitReview(event)">
+                <div class="form-group"><label>Your Name</label><input type="text" id="reviewName" placeholder="Enter your name" required></div>
+                <div class="form-group"><label>Rating</label><div style="font-size:28px; color:#ddd; cursor:pointer;" id="starRating"><i class="fas fa-star" onclick="setRating(1)" onmouseover="hoverRating(1)"></i><i class="fas fa-star" onclick="setRating(2)" onmouseover="hoverRating(2)"></i><i class="fas fa-star" onclick="setRating(3)" onmouseover="hoverRating(3)"></i><i class="fas fa-star" onclick="setRating(4)" onmouseover="hoverRating(4)"></i><i class="fas fa-star" onclick="setRating(5)" onmouseover="hoverRating(5)"></i></div></div>
+                <div class="form-group"><label>Your Review</label><textarea id="reviewText" rows="4" placeholder="Share your experience..." required></textarea></div>
+                <button type="submit" class="btn-enroll"><i class="fas fa-paper-plane"></i> Submit Review</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+    <script>
+    let products = [];
+    let pendingOrder = { product: '', amount: 0, notes: '' };
+    let selectedPayment = 'Cash on Delivery';
+    let mediaRecorder = null, audioChunks = [], recordedVoiceBase64 = '';
+
+    function normalizeCategorySlug(value) {
+        const text = (value || '').toLowerCase().trim();
+        if (!text) return 'other';
+        if (text === 'all') return 'all';
+        if (text.includes('saree')) return 'saree';
+        if (text.includes('kids') || text.includes('kid')) return 'kids';
+        if (text.includes('uniform')) return 'uniform';
+        if (text.includes('modern') || text.includes('western')) return 'modern';
+        if (text.includes('salwar')) return 'salwar';
+        if (text.includes('blouse')) return 'blouse';
+        if (text.includes('aari') || text.includes('embroidery')) return 'aari';
+        if (text.includes('frock')) return 'frock';
+        if (text.includes('lehenga')) return 'lehenga';
+        if (text.includes('kurthi') || text.includes('kurti')) return 'kurthi';
+        return 'other';
+    }
+
+  function categoryMatches(product, category) {
+    if (category === 'All' || category === 'all') return true;
+    const productSlug = normalizeCategorySlug(product.categoryLabel || product.category || '');
+    const filterSlug = normalizeCategorySlug(category);
+    return productSlug === filterSlug;
+}
+
+    // ══ FIX: loadProducts now re-applies the CURRENT filter (currentCategory) to shopProducts
+    // instead of always rendering the full unfiltered list. This was the root cause of the bug:
+    // filterProducts() rendered the correct filtered list synchronously, but showSection('shop')
+    // (called inside filterProducts) triggers loadProducts() -> an ASYNC fetch that completed
+    // AFTER the filtered render and overwrote it with the full unfiltered product list.
+    async function loadProducts() {
+        try {
+            const res = await fetch('get_products.php?ts=' + Date.now());
+            const data = await res.json();
+            products = (data.products || []).map(p => ({
+                id: Number(p.id),
+                name: p.name || '',
+                price: Number(p.price || 0),
+                category: normalizeCategorySlug(p.category || p.cat || ''),
+                categoryLabel: p.category || p.cat || 'Other',
+                image: (Array.isArray(p.photos) && p.photos[0]) ? p.photos[0] : (p.photo || 'https://images.unsplash.com/photo-1512436991641-6745cdb1723f?w=600'),
+                desc: p.description || 'Custom stitched product',
+                badge: '',
+                sizes: [],
+                highlights: Array.isArray(p.highlights) ? p.highlights : [],
+                rating: 4.7,
+                 ratingCount: 'New Listing'
+            }));
+            renderProducts('featuredProducts', products.slice(0, 8));
+
+            const filteredForShop = (currentCategory === 'All' || currentCategory === 'all')
+                ? products
+                : products.filter(p => categoryMatches(p, currentCategory));
+            renderProducts('shopProducts', filteredForShop);
+
+            renderWishlistPage();
+        } catch (e) {
+            products = [];
+        }
+    }
+
+    const defaultReviews = [
+        { name:"Priya S.", rating:5, text:"Sumathi ma'am stitched my bridal blouse perfectly! The fitting was amazing and the aari work was beautiful. 30 years of experience really shows!", avatar:"P" },
+        { name:"Lakshmi R.", rating:5, text:"Best tailoring service in Chennai. I have been coming here for 5 years now. Always satisfied with the quality and timely delivery.", avatar:"L" },
+        { name:"Anitha K.", rating:4, text:"The salwar suits are beautifully stitched. Great attention to detail. The custom order process was smooth and they understood exactly what I wanted.", avatar:"A" },
+        { name:"Meena T.", rating:5, text:"My daughter's school uniform was stitched perfectly. Very professional service. The kids wear collection is also very cute and affordable!", avatar:"M" },
+        { name:"Kavitha P.", rating:5, text:"The catering service for my daughter's wedding was outstanding! The food was delicious and everyone praised it. 30 years of experience in catering too!", avatar:"K" },
+        { name:"Saroja D.", rating:4, text:"I enrolled in the tailoring class and learned so much. Sumathi ma'am teaches with great patience. Highly recommended for beginners!", avatar:"S" }
+    ];
+    let reviews = [];
+
+    let cart = [], wishlist = [], currentRating = 0, isRecording = false, currentUser = null, currentCategory = 'all';
+    let pdCurrentProduct = null, pdSelectedSize = null, pdQty = 1;
+
+    function openPDModal(productId) {
+        const p = products.find(x => x.id === productId);
+        if (!p) return;
+        pdCurrentProduct = p;
+        pdSelectedSize = null;
+        pdQty = 1;
+
+        // Badge
+        const badge = document.getElementById('pdBadge');
+        if (p.badge) { badge.textContent = p.badge; badge.style.display = 'block'; }
+        else { badge.style.display = 'none'; }
+
+        // Wishlist heart
+        const isWished = wishlist.includes(p.id);
+        document.getElementById('pdWishIcon').className = isWished ? 'fas fa-heart' : 'far fa-heart';
+        document.getElementById('pdWishBtn').className = 'pd-wishlist-btn' + (isWished ? ' wishlisted' : '');
+
+        // Main image
+        document.getElementById('pdMainImg').src = p.image;
+        document.getElementById('pdMainImg').alt = p.name;
+
+        // Thumbnails
+        // Thumbnails removed — single image only
+document.getElementById('pdThumbs').innerHTML = '';
+
+        // Details
+        document.getElementById('pdBrand').textContent = "SUMATHI'S STYLE";
+        document.getElementById('pdTitle').textContent = p.name;
+        document.getElementById('pdRatingNum').textContent = p.rating;
+        document.getElementById('pdRatingCount').textContent = p.ratingCount + ' & Reviews';
+
+        // SINGLE PRICE ONLY
+        document.getElementById('pdPrice').textContent = '₹' + p.price.toLocaleString();
+        document.getElementById('pdOfferTag').textContent = 'Free delivery above ₹500';
+
+        document.getElementById('pdQty').textContent = '1';
+        document.getElementById('pdDeliveryInfo').style.display = 'none';
+        document.getElementById('pdPincodeInput').value = '';
+        pdUpdateDeliveryInfo();
+
+
+
+        // Sizes only (no colors)
+        const sizesEl = document.getElementById('pdSizes');
+        if (p.sizes && p.sizes.length) {
+            document.getElementById('pdSizesSection').style.display = 'block';
+            document.getElementById('pdSelectedSize').textContent = 'Select size';
+            sizesEl.innerHTML = p.sizes.map(s =>
+                `<button class="pd-size-btn" onclick="pdSelectSize(this,'${s}')">${s}</button>`
+            ).join('');
+        } else {
+            document.getElementById('pdSizesSection').style.display = 'none';
+        }
+
+       
+        // Description
+        document.getElementById('pdDescText').textContent = p.desc || 'No description available';
+
+        // Highlights
+        const hiEl = document.getElementById('pdHighlights');
+
+        hiEl.innerHTML = '<div class="pd-highlights-title">Product Highlights</div>' +
+            (p.highlights || []).map(h => `<div class="pd-highlight-item"><i class="fas fa-check-circle"></i><span>${h}</span></div>`).join('');
+
+        document.getElementById('pdOverlay').classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closePDModal() {
+        document.getElementById('pdOverlay').classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    function pdSetMainImg(thumb, src) {
+        document.getElementById('pdMainImg').src = src;
+        document.querySelectorAll('.pd-thumb').forEach(t => t.classList.remove('active'));
+        thumb.classList.add('active');
+    }
+
+    function pdSelectSize(el, size) {
+        document.querySelectorAll('.pd-size-btn').forEach(b => b.classList.remove('active'));
+        el.classList.add('active');
+        pdSelectedSize = size;
+        document.getElementById('pdSelectedSize').textContent = size;
+    }
+
+    function pdChangeQty(delta) {
+        pdQty = Math.max(1, Math.min(10, pdQty + delta));
+        document.getElementById('pdQty').textContent = pdQty;
+    }
+
+    function pdToggleWish() {
+        if (!pdCurrentProduct) return;
+        const id = pdCurrentProduct.id;
+        const idx = wishlist.indexOf(id);
+        if (idx === -1) {
+            wishlist.push(id);
+            showToast('Added to Wishlist ❤️', 'success');
+            document.getElementById('pdWishIcon').className = 'fas fa-heart';
+            document.getElementById('pdWishBtn').classList.add('wishlisted');
+        } else {
+            wishlist.splice(idx, 1);
+            showToast('Removed from Wishlist', '');
+            document.getElementById('pdWishIcon').className = 'far fa-heart';
+            document.getElementById('pdWishBtn').classList.remove('wishlisted');
+        }
+        document.getElementById('wishlistCount').textContent = wishlist.length;
+        renderWishlistPage();
+    }
+
+    function pdAddToCart() {
+        if (!pdCurrentProduct) return;
+        const p = pdCurrentProduct;
+        const existing = cart.find(item => item.id === p.id);
+        if (existing) existing.qty += pdQty;
+        else cart.push({ ...p, qty: pdQty });
+        updateCartUI();
+        showToast(`${p.name} added to cart! 🛒`, 'success');
+        closePDModal();
+        setTimeout(() => toggleCart(), 400);
+    }
+
+    function pdBuyNow() {
+        if (!pdCurrentProduct) return;
+        const p = pdCurrentProduct;
+        const total = p.price * pdQty;
+        pendingOrder = { product: `${p.name} × ${pdQty}`, amount: total, notes: 'Buy now (product popup)' };
+        document.getElementById('buyNowSummary').innerHTML =
+            `<h4>Order Summary</h4>
+            <div class="item"><span>${p.name} × ${pdQty}</span><span>₹${total.toLocaleString()}</span></div>
+            <div class="item"><span>Delivery</span><span style="color:#388e3c;">FREE</span></div>
+            <div class="total"><span>Total</span><span>₹${total.toLocaleString()}</span></div>`;
+        closePDModal();
+        setTimeout(() => showModal('buyNow'), 300);
+    }
+
+     
+    let pdCountdownInterval = null;
+    function pdUpdateDeliveryInfo() {
+        const dateEl = document.getElementById('pdDeliveryDate');
+        const countdownEl = document.getElementById('pdDeliveryCountdown');
+        if (!dateEl || !countdownEl) return;
+
+        const deliveryDate = new Date();
+        deliveryDate.setDate(deliveryDate.getDate() + 3);
+        const options = { day: 'numeric', month: 'short', weekday: 'short' };
+        const formatted = deliveryDate.toLocaleDateString('en-IN', options).replace(/,/, '');
+        const parts = formatted.split(' ');
+        dateEl.textContent = `Delivery by ${parts[0]} ${parts[1]}, ${parts[2]}`;
+
+        if (pdCountdownInterval) clearInterval(pdCountdownInterval);
+        const deadline = new Date();
+        deadline.setHours(23, 59, 59, 999);
+
+        function tick() {
+            const now = new Date();
+            let diff = deadline - now;
+            if (diff <= 0) { countdownEl.textContent = 'Order now for fastest delivery'; return; }
+            const h = Math.floor(diff / 3600000);
+            const m = Math.floor((diff % 3600000) / 60000);
+            const s = Math.floor((diff % 60000) / 1000);
+            countdownEl.textContent = `Order in ${String(h).padStart(2,'0')}h ${String(m).padStart(2,'0')}m ${String(s).padStart(2,'0')}s`;
+        }
+        tick();
+        pdCountdownInterval = setInterval(tick, 1000);
+    }
+
+   
+    
+
+    function pdCheckDelivery() {
+        const pin = document.getElementById('pdPincodeInput').value.trim();
+        const infoEl = document.getElementById('pdDeliveryInfo');
+        if (pin.length !== 6 || isNaN(pin)) { showToast('Enter valid 6-digit pincode!', 'error'); return; }
+        infoEl.style.display = 'block';
+        const chennaiPins = ['600001','600002','600015','600041','600042','600043','600044','600045','600046','600100','600115','600117','600119','600120'];
+        if (chennaiPins.includes(pin)) {
+            infoEl.style.color = '#388e3c';
+            infoEl.innerHTML = '<i class="fas fa-check-circle"></i> Delivery available! Estimated: 3-5 days';
+        } else {
+            infoEl.style.color = '#e65100';
+            infoEl.innerHTML = '<i class="fas fa-info-circle"></i> Delivery available in 5-10 days';
+        }
+    }
+
+
+
+    /* Product Card — single price, no discount badge */
+    function createProductCard(p) {
+        const isWishlisted = wishlist.includes(p.id);
+        return `<div class="product-card fade-in">
+            <div style="position:relative;" onclick="openPDModal(${p.id})" style="cursor:pointer;">
+                <img src="${p.image}" class="product-img" alt="${p.name}" loading="lazy" style="cursor:pointer;">
+                ${p.badge ? `<span class="product-badge ${p.badge==='Hot'?'hot':p.badge==='New'?'new':''}">${p.badge}</span>` : ''}
+                <button onclick="event.stopPropagation();toggleWishlist(${p.id})" id="wishBtn${p.id}" style="position:absolute;top:10px;right:10px;background:white;border:none;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,0.15);font-size:16px;color:${isWishlisted?'#dc3545':'#bbb'};transition:all 0.2s;">
+                    <i class="${isWishlisted?'fas':'far'} fa-heart"></i>
+                </button>
+            </div>
+            <div class="product-info" onclick="openPDModal(${p.id})" style="cursor:pointer;">
+                <h3>${p.name}</h3>
+                <p>${p.desc}</p>
+                <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+                    <div style="display:inline-flex;align-items:center;gap:3px;background:#388e3c;color:#fff;font-size:12px;font-weight:700;padding:2px 8px;border-radius:4px;">
+                        ${p.rating} <i class="fas fa-star" style="font-size:10px;"></i>
+                    </div>
+                    <span style="font-size:12px;color:#878787;">(${p.ratingCount || '500+'})</span>
+                </div>
+                <div style="margin-bottom:12px;">
+                    <span style="font-size:20px;font-weight:700;color:#212121;">₹${p.price}</span>
+                </div>
+            </div>
+            <div class="product-actions" style="padding:0 20px 16px;">
+                <button class="btn-add-cart" onclick="event.stopPropagation();addToCart(${p.id})"><i class="fas fa-cart-plus"></i> Add to Cart</button>
+                <button class="btn-buy" onclick="event.stopPropagation();buyNow(${p.id})"><i class="fas fa-bolt"></i> Buy Now</button>
+            </div>
+        </div>`;
+    }
+
+    function renderProducts(containerId, productList) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+        container.innerHTML = productList.map(p => createProductCard(p)).join('');
+    }
+
+    // ══ FIX: filterProducts now also finds and highlights the matching shop-filter-btn
+    // via its data-cat attribute when clickedBtn isn't passed (e.g. Home page category
+    // cards & footer links call filterProducts('Kids') WITHOUT the button reference).
+    function filterProducts(category, clickedBtn) {
+        currentCategory = category;
+        showSection('shop');
+
+        const filtered = (category === 'All' || category === 'all')
+            ? products
+            : products.filter(p => categoryMatches(p, category));
+
+        renderProducts('shopProducts', filtered);
+
+        document.querySelectorAll('.shop-filter-btn').forEach(btn => {
+            btn.classList.remove('btn-primary');
+            btn.classList.add('btn-outline');
+            btn.style.color = 'var(--primary)';
+            btn.style.borderColor = 'var(--primary)';
+            btn.style.background = 'transparent';
+        });
+
+        let targetBtn = clickedBtn;
+        if (!targetBtn) {
+            const slug = normalizeCategorySlug(category);
+            targetBtn = document.querySelector('.shop-filter-btn[data-cat="' + slug + '"]');
+        }
+
+        if (targetBtn) {
+            targetBtn.classList.remove('btn-outline');
+            targetBtn.classList.add('btn-primary');
+            targetBtn.style.color = '';
+            targetBtn.style.background = '';
+            targetBtn.style.borderColor = '';
+        }
+    }
+    function addToCart(productId) {
+        const product = products.find(p => p.id === productId);
+        const existing = cart.find(item => item.id === productId);
+        if (existing) existing.qty++;
+        else cart.push({ ...product, qty: 1 });
+        updateCartUI();
+        showToast(`${product.name} added to cart!`, 'success');
+    }
+
+    function removeFromCart(productId) { cart = cart.filter(item => item.id !== productId); updateCartUI(); }
+
+    function updateQty(productId, change) {
+        const item = cart.find(i => i.id === productId);
+        if (item) { item.qty += change; if (item.qty <= 0) removeFromCart(productId); else updateCartUI(); }
+    }
+
+    function updateCartUI() {
+        const count = cart.reduce((sum, item) => sum + item.qty, 0);
+        document.getElementById('cartCount').textContent = count;
+        const cartItems = document.getElementById('cartItems');
+        const cartFooter = document.getElementById('cartFooter');
+        if (cart.length === 0) {
+            cartItems.innerHTML = `<div class="cart-empty"><i class="fas fa-shopping-bag"></i><p>Your cart is empty</p><p style="font-size:13px;">Add some beautiful items!</p></div>`;
+            cartFooter.style.display = 'none';
+        } else {
+            cartItems.innerHTML = cart.map(item => `<div class="cart-item"><img src="${item.image}" alt="${item.name}"><div class="cart-item-info"><h4>${item.name}</h4><p>₹${item.price * item.qty}</p><div class="cart-item-actions"><button class="qty-btn" onclick="updateQty(${item.id}, -1)">-</button><span>${item.qty}</span><button class="qty-btn" onclick="updateQty(${item.id}, 1)">+</button><button class="remove-btn" onclick="removeFromCart(${item.id})"><i class="fas fa-trash"></i></button></div></div></div>`).join('');
+            document.getElementById('cartTotal').textContent = '₹' + cart.reduce((sum, item) => sum + (item.price * item.qty), 0).toLocaleString();
+            cartFooter.style.display = 'block';
+        }
+    }
+
+    function toggleCart() { document.getElementById('cartSidebar').classList.toggle('active'); }
+
+    function buyNow(productId) {
+        const product = products.find(p => p.id === productId);
+        if (!product) return;
+        pendingOrder = { product: product.name, amount: Number(product.price || 0), notes: 'Single item purchase' };
+        document.getElementById('buyNowSummary').innerHTML = `<h4>Order Summary</h4><div class="item"><span>${product.name}</span><span>₹${product.price}</span></div><div class="item"><span>Delivery</span><span style="color:#388e3c;">FREE</span></div><div class="total"><span>Total</span><span>₹${product.price}</span></div>`;
+        showModal('buyNow');
+    }
+
+    function checkout() {
+        if (cart.length === 0) { showToast('Your cart is empty!', 'error'); return; }
+        const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+        pendingOrder = { product: cart.map(item => `${item.name} x${item.qty}`).join(', '), amount: total, notes: 'Cart checkout' };
+        document.getElementById('buyNowSummary').innerHTML = `<h4>Order Summary</h4>${cart.map(item => `<div class="item"><span>${item.name} x${item.qty}</span><span>₹${item.price * item.qty}</span></div>`).join('')}<div class="item"><span>Delivery</span><span style="color:#388e3c;">FREE</span></div><div class="total"><span>Total</span><span>₹${total.toLocaleString()}</span></div>`;
+        showModal('buyNow');
+    }
+
+    async function placeOrder() {
+        const name = document.getElementById('buyName').value.trim();
+        const phone = document.getElementById('buyPhone').value.trim();
+        const address = document.getElementById('buyAddress').value.trim();
+        const city = document.getElementById('buyCity').value.trim();
+        const pincode = document.getElementById('buyPincode').value.trim();
+        if (!name || !phone || !address) { showToast('Please fill all required fields!', 'error'); return; }
+
+        const payload = {
+            type: 'order',
+            name,
+            mobile: phone,
+            product: pendingOrder.product || 'Order from website',
+            amount: Number(pendingOrder.amount || 0),
+            notes: `Address: ${address}${city ? ', ' + city : ''}${pincode ? ', ' + pincode : ''}; Payment: ${selectedPayment}`,
+            source: 'website'
+        };
+        try {
+            const res = await fetch('submit_forms.php', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+            const data = await res.json();
+            if (data.status !== 'success') { showToast(data.message || 'Unable to save order', 'error'); return; }
+
+            closeModal('buyNow');
+            cart = [];
+            updateCartUI();
+
+            if (selectedPayment === 'UPI / GPay') {
+                const upiId = 'divyadivyashankar011-1@okhdfcbank'; // ⚠️ Replace with your real UPI ID
+                const amount = Number(pendingOrder.amount || 0);
+                const upiUrl = `upi://pay?pa=${upiId}&pn=Sumathi%27s%20Style&am=${amount}&cu=INR&tn=${encodeURIComponent('Order: ' + (pendingOrder.product || ''))}`;
+                showToast('Order saved! Opening GPay for payment... 💳', 'success');
+                setTimeout(() => { window.location.href = upiUrl; }, 800);
+            } else {
+                showToast('Order placed successfully! We will contact you soon. 🎉', 'success');
+            }
+        } catch (e) {
+            showToast('Unable to save order right now', 'error');
+        }
+    }
+
+    function selectPayment(el) { document.querySelectorAll('.payment-option').forEach(o => o.classList.remove('selected')); el.classList.add('selected'); selectedPayment = el.querySelector('p')?.textContent || 'Cash on Delivery'; }
+
+     function showSection(sectionId, clickedLink) {
+        document.querySelectorAll('.page-section').forEach(s => s.style.display = 'none');
+        const section = document.getElementById(sectionId);
+        if (section) { section.style.display = 'block'; window.scrollTo({ top: 0, behavior: 'smooth' }); }
+        document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+        if (clickedLink) {
+            clickedLink.classList.add('active');
+        } else {
+            const matchingLink = document.querySelector(`.nav-links a[onclick*="showSection('${sectionId}'"]`);
+            if (matchingLink) matchingLink.classList.add('active');
+        }
+        if (sectionId === 'wishlist') renderWishlistPage();
+        if (sectionId === 'shop' || sectionId === 'home') {
+            loadProducts();
+        }
+        const footer = document.querySelector('.footer');
+        if (footer) {
+            const showFooterSections = ['home','shop','classes','custom','contact','reviews','wishlist','settings'];
+            footer.style.display = showFooterSections.includes(sectionId) ? 'block' : 'none';
+        }
+    }
+
+    function showModal(type) { document.getElementById(type + 'Modal').classList.add('active'); }
+    function closeModal(type) { document.getElementById(type + 'Modal').classList.remove('active'); }
+
+    function toggleMobileMenu() {
+        document.getElementById('mobileNav').classList.toggle('active');
+        document.getElementById('mobileOverlay').classList.toggle('active');
+    }
+
+    function sendOTP() {
+        const phone = document.getElementById('loginPhone').value;
+        if (phone.length !== 10) { showToast('Please enter valid 10-digit number!', 'error'); return; }
+        document.getElementById('otpPhone').textContent = phone;
+        document.getElementById('loginStep1').style.display = 'none';
+        document.getElementById('loginStep2').style.display = 'block';
+        showToast('OTP sent! (Demo: 123456)', 'success');
+    }
+
+    function moveOTP(input, index, type = 'login') {
+        if (input.value.length === 1) { const prefix = type === 'reg' ? 'regOtp' : 'otp'; const next = document.getElementById(prefix + (index + 2)); if (next) next.focus(); }
+    }
+
+    function verifyOTP() {
+        const otp = ['otp1','otp2','otp3','otp4','otp5','otp6'].map(id => document.getElementById(id).value).join('');
+        if (otp === '123456') {
+            const phone = document.getElementById('loginPhone').value;
+            currentUser = { name: 'User', phone };
+            showToast('Login successful! 🎉', 'success');
+            closeModal('login');
+            document.getElementById('loginBtn').textContent = 'Hi, User';
+            document.getElementById('loginBtn').onclick = () => showSection('settings');
+            document.getElementById('profileName').textContent = 'User';
+            document.getElementById('profilePhone').textContent = '+91' + phone;
+            document.getElementById('viewMobile').textContent = '+91' + phone;
+        } else showToast('Invalid OTP! Try 123456.', 'error');
+    }
+
+    function registerSendOTP() {
+        const name = document.getElementById('regName').value;
+        const phone = document.getElementById('regPhone').value;
+        if (!name || phone.length !== 10) { showToast('Please fill all required fields!', 'error'); return; }
+        document.getElementById('regOtpPhone').textContent = phone;
+        document.getElementById('registerStep1').style.display = 'none';
+        document.getElementById('registerStep2').style.display = 'block';
+        showToast('OTP sent! (Demo: 123456)', 'success');
+    }
+
+    function verifyRegisterOTP() {
+        const otp = ['regOtp1','regOtp2','regOtp3','regOtp4','regOtp5','regOtp6'].map(id => document.getElementById(id).value).join('');
+        if (otp === '123456') {
+            const name = document.getElementById('regName').value;
+            const phone = document.getElementById('regPhone').value;
+            const email = document.getElementById('regEmail').value;
+            currentUser = { name, phone, email };
+            showToast('Registration successful! 🎉', 'success');
+            closeModal('register');
+            document.getElementById('loginBtn').textContent = 'Hi, ' + name.split(' ')[0];
+            document.getElementById('loginBtn').onclick = () => showSection('settings');
+            document.getElementById('profileName').textContent = name;
+            document.getElementById('profilePhone').textContent = '+91' + phone;
+            document.getElementById('viewMobile').textContent = '+91' + phone;
+            document.getElementById('viewFirstName').textContent = name.split(' ')[0];
+            document.getElementById('viewLastName').textContent = name.split(' ').slice(1).join(' ') || '—';
+            if (email) document.getElementById('profileEmail').textContent = email;
+        } else showToast('Invalid OTP! Try 123456.', 'error');
+    }
+
+    function logout() {
+        currentUser = null;
+        document.getElementById('loginBtn').textContent = 'Login';
+        document.getElementById('loginBtn').onclick = () => showModal('login');
+        document.getElementById('profileName').textContent = 'Guest User';
+        document.getElementById('profilePhone').textContent = 'Not logged in';
+        showToast('Logged out!', 'success');
+        showSection('home');
+    }
+
+    function toggleWishlist(id) {
+        const idx = wishlist.indexOf(id);
+        if (idx === -1) { wishlist.push(id); showToast('Added to Wishlist! ❤️', 'success'); }
+        else { wishlist.splice(idx, 1); showToast('Removed from Wishlist', ''); }
+        document.getElementById('wishlistCount').textContent = wishlist.length;
+        renderProducts('shopProducts', (currentCategory === 'All' || currentCategory === 'all') ? products : products.filter(p => categoryMatches(p, currentCategory)));
+        renderProducts('featuredProducts', products.slice(0, 8));
+        renderWishlistPage();
+    }
+
+    function renderWishlistPage() {
+        const grid = document.getElementById('wishlistGrid');
+        const empty = document.getElementById('wishlistEmpty');
+        if (!grid) return;
+        const items = products.filter(p => wishlist.includes(p.id));
+        if (items.length === 0) { grid.innerHTML = ''; empty.style.display = 'block'; }
+        else { empty.style.display = 'none'; grid.innerHTML = items.map(p => createProductCard(p)).join(''); }
+    }
+
+    function showAccountTab(tabId, clickedEl) {
+        ['profileTab','ordersTab','notifTab','privacyTab'].forEach(id => { const el = document.getElementById(id); if (el) el.style.display = 'none'; });
+        const tab = document.getElementById(tabId);
+        if (tab) tab.style.display = (tabId === 'profileTab' || tabId === 'privacyTab') ? 'flex' : 'block';
+        if (tabId === 'profileTab') document.getElementById('profileTab').style.flexDirection = 'column';
+        if (tabId === 'privacyTab') document.getElementById('privacyTab').style.flexDirection = 'column';
+        document.querySelectorAll('.acc-menu-item').forEach(m => { m.style.background = 'none'; m.style.borderLeft = 'none'; m.style.color = 'var(--text)'; m.style.fontWeight = '400'; });
+        if (clickedEl) { clickedEl.style.background = 'rgba(0,128,128,0.08)'; clickedEl.style.borderLeft = '3px solid var(--primary)'; clickedEl.style.color = 'var(--primary)'; clickedEl.style.fontWeight = '600'; }
+        if (tabId === 'ordersTab') loadMyOrders();
+    }
+
+   let allMyOrders = [];
+
+async function loadMyOrders() {
+        const phone = currentUser ? currentUser.phone : null;
+        if (!phone) {
+            document.getElementById('ordersListContainer').innerHTML = `<div class="orders-empty"><i class="fas fa-box-open"></i><h4>Login required</h4><p>Login to see your orders</p></div>`;
+            return;
+        }
+        try {
+            const res = await fetch('get_submissions.php?type=orders');
+            const data = await res.json();
+            allMyOrders = (Array.isArray(data) ? data : []).filter(o => (o.mobile || '').trim() === phone.trim());
+            filterOrders('all');
+        } catch (e) {
+            document.getElementById('ordersListContainer').innerHTML = `<div class="orders-empty"><i class="fas fa-exclamation-circle"></i><p>Unable to load orders</p></div>`;
+        }
+    }
+
+    function filterOrders(type, btnEl) {
+        document.querySelectorAll('.order-filter-btn').forEach(b => {
+            b.classList.remove('active-filter');
+            b.style.background = 'none';
+            b.style.color = b.style.borderColor;
+        });
+        const targetBtn = btnEl || document.querySelector(`.order-filter-btn[data-type="${type}"]`);
+        if (targetBtn) {
+            targetBtn.classList.add('active-filter');
+            targetBtn.style.background = targetBtn.style.borderColor;
+            targetBtn.style.color = 'white';
+        }
+        const filtered = (type === 'all') ? allMyOrders : allMyOrders.filter(o => (o.status || 'Ordered') === type);
+        renderMyOrders(filtered);
+    }
+
+    function renderMyOrders(orders) {
+        const container = document.getElementById('ordersListContainer');
+        if (!orders.length) {
+            container.innerHTML = `<div class="orders-empty"><i class="fas fa-box-open"></i><h4>No orders yet</h4><p>Start shopping to see your orders here!</p><button class="btn-primary" onclick="showSection('shop')">Shop Now</button></div>`;
+            return;
+        }
+        container.innerHTML = orders.map(o => {
+            const status = o.status || 'Ordered';
+            let statusClass = 'status-submitted';
+            if (status === 'Cancelled') statusClass = 'status-cancelled';
+            else if (status === 'Delivered') statusClass = 'status-delivered';
+            else if (status === 'Ordered') statusClass = 'status-placed';
+            const canCancel = status !== 'Cancelled' && status !== 'Delivered';
+
+            return `<div class="order-card">
+                <div class="order-card-header">
+                    <span class="order-id">Order ID: <span>#${o.id}</span></span>
+                    <span class="order-status-badge ${statusClass}">${status}</span>
+                </div>
+                <div class="order-card-body">
+                    <div class="order-product-info">
+                        <h4>${o.product}</h4>
+                        <p>${o.notes ? o.notes.substring(0, 60) + '...' : ''}</p>
+                        <div class="order-price">₹${o.amount}</div>
+                    </div>
+                </div>
+                ${buildTrackerHTML(status)}
+                <div class="order-card-footer">
+                    ${canCancel ? `<button class="btn-cancel-order" onclick="cancelMyOrder('${o.id}')">Cancel Order</button>` : ''}
+                </div>
+            </div>`;
+        }).join('');
+    }
+
+    // ✅ NEW — Flipkart style tracker with line + dots
+    function buildTrackerHTML(status) {
+        if (status === 'Cancelled') {
+            return `<div class="order-tracker">
+                <div class="tracker-steps">
+                    <div class="tracker-line-fill" style="width:100%;background:var(--danger);"></div>
+                    <div class="tracker-step"><div class="tracker-dot cancelled-dot"><i class="fas fa-times"></i></div><div class="tracker-label" style="color:var(--danger);font-weight:600;">Cancelled</div></div>
+                </div>
+            </div>`;
+        }
+
+        const steps = ['Ordered', 'Processing', 'Delivered'];
+        const currentIdx = steps.indexOf(status);
+        const activeIdx = currentIdx === -1 ? 0 : currentIdx;
+        const fillPercent = activeIdx === 0 ? 0 : activeIdx === 1 ? 50 : 100;
+
+        const icons = { Ordered: 'fa-check', Processing: 'fa-cog', Delivered: 'fa-box-open' };
+
+        const stepsHTML = steps.map((step, i) => {
+            let dotClass = '', labelClass = '';
+            if (i < activeIdx) { dotClass = 'done'; labelClass = 'done-label'; }
+            else if (i === activeIdx) { dotClass = 'active'; labelClass = 'active-label'; }
+            const icon = i < activeIdx ? 'fa-check' : icons[step];
+            return `<div class="tracker-step">
+                <div class="tracker-dot ${dotClass}"><i class="fas ${icon}"></i></div>
+                <div class="tracker-label ${labelClass}">${step}</div>
+            </div>`;
+        }).join('');
+
+        return `<div class="order-tracker">
+            <div class="tracker-steps">
+                <div class="tracker-line-fill" style="width:${fillPercent}%;"></div>
+                ${stepsHTML}
+            </div>
+        </div>`;
+    }
+         
+    
+
+    async function cancelMyOrder(orderId) {
+        if (!confirm('Are you sure you want to cancel this order?')) return;
+        try {
+            const res = await fetch('update_order_status.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ id: orderId, status: 'Cancelled' })
+            });
+            const data = await res.json();
+            if (data.status === 'success') {
+                showToast('Order cancelled successfully', 'success');
+                loadMyOrders();
+            } else {
+                showToast(data.message || 'Unable to cancel order', 'error');
+            }
+        } catch (e) {
+            showToast('Unable to cancel order right now', 'error');
+        }
+    }
+
+    function toggleEditSection(sectionId, btn, cancel = false) {
+        const editDiv = document.getElementById(sectionId);
+        const isHidden = editDiv.style.display === 'none';
+        editDiv.style.display = cancel ? 'none' : (isHidden ? 'block' : 'none');
+        const viewMap = { personalEdit: 'personalView', emailEdit: 'emailView', mobileEdit: 'mobileView' };
+        const viewDiv = document.getElementById(viewMap[sectionId]);
+        if (viewDiv) viewDiv.style.display = (editDiv.style.display === 'block') ? 'none' : 'block';
+    }
+
+    function savePersonalInfo() {
+        const first = document.getElementById('editFirstName').value.trim();
+        const last = document.getElementById('editLastName').value.trim();
+        const fullName = [first, last].filter(Boolean).join(' ') || 'Guest User';
+        document.getElementById('viewFirstName').textContent = first || '—';
+        document.getElementById('viewLastName').textContent = last || '—';
+        document.getElementById('profileName').textContent = fullName;
+        if (currentUser) currentUser.name = fullName;
+        document.getElementById('loginBtn').textContent = currentUser ? 'Hi, ' + first : 'Login';
+        toggleEditSection('personalEdit', null, true);
+        showToast('Personal info updated!', 'success');
+    }
+
+    function saveEmail() {
+        const email = document.getElementById('editEmail').value.trim();
+        document.getElementById('profileEmail').textContent = email || 'Not provided';
+        if (currentUser) currentUser.email = email;
+        toggleEditSection('emailEdit', null, true);
+        showToast('Email updated!', 'success');
+    }
+
+    function saveMobile() {
+        const mobile = document.getElementById('editMobile').value.trim();
+        if (mobile && mobile.length !== 10) { showToast('Enter valid 10-digit number!', 'error'); return; }
+        document.getElementById('viewMobile').textContent = mobile ? '+91' + mobile : 'Not provided';
+        document.getElementById('profilePhone').textContent = mobile ? '+91' + mobile : 'Not logged in';
+        if (currentUser) currentUser.phone = mobile;
+        toggleEditSection('mobileEdit', null, true);
+        showToast('Mobile number updated!', 'success');
+    }
+
+    async function loadReviews() {
+        try {
+            const res = await fetch('get_submissions.php?type=reviews');
+            const data = await res.json();
+            if (Array.isArray(data) && data.length) {
+                reviews = data.map(r => ({
+                    name: r.name || 'Anonymous',
+                    rating: Number(r.rating || 5),
+                    text: r.review_text || r.text || '',
+                    avatar: (r.name || 'A').trim().charAt(0).toUpperCase()
+                }));
+            } else {
+                reviews = [...defaultReviews];
+            }
+        } catch (e) {
+            reviews = [...defaultReviews];
+        }
+        renderReviews();
+    }
+
+    function renderReviews() {
+        const container = document.getElementById('reviewsGrid');
+        if (!container) return;
+        container.innerHTML = reviews.map(r => `<div class="review-card"><div class="review-header"><div class="review-avatar">${r.avatar}</div><div class="review-meta"><h4>${r.name}</h4><div class="stars">${'★'.repeat(r.rating)}${'☆'.repeat(5-r.rating)}</div></div></div><p>${r.text}</p></div>`).join('');
+    }
+
+    function setRating(rating) { currentRating = rating; const stars = document.getElementById('starRating').children; for (let i = 0; i < 5; i++) stars[i].style.color = i < rating ? '#B87333' : '#ddd'; }
+    function hoverRating(rating) { const stars = document.getElementById('starRating').children; for (let i = 0; i < 5; i++) stars[i].style.color = i < rating ? '#B87333' : '#ddd'; }
+
+    async function submitReview(e) {
+        e.preventDefault();
+        if (currentRating === 0) { showToast('Please select a rating!', 'error'); return; }
+        const name = document.getElementById('reviewName').value.trim();
+        const text = document.getElementById('reviewText').value.trim();
+        if (!name || !text) { showToast('Please fill in your name and review.', 'error'); return; }
+        try {
+            const res = await fetch('submit_forms.php', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ type: 'review', name, rating: currentRating, review_text: text, source: 'website' }) });
+            const data = await res.json();
+            if (data.status === 'success') {
+                reviews.unshift({ name, rating: currentRating, text, avatar: name.charAt(0).toUpperCase() });
+                renderReviews();
+                closeModal('review');
+                showToast('Review submitted! Thank you! 🌟', 'success');
+                currentRating = 0;
+                document.getElementById('reviewForm').reset();
+            } else {
+                showToast(data.message || 'Unable to save review', 'error');
+            }
+        } catch (e) {
+            showToast('Unable to save review right now', 'error');
+        }
+    }
+
+    function toggleChat() { document.getElementById('chatBox').classList.toggle('active'); }
+    function sendChat() {
+        const input = document.getElementById('chatInput');
+        const msg = input.value.trim();
+        if (!msg) return;
+        const container = document.getElementById('chatMessages');
+        container.innerHTML += `<div class="chat-msg user">${msg}</div>`;
+        input.value = ''; container.scrollTop = container.scrollHeight;
+        setTimeout(() => {
+            const responses = ["Thank you for reaching out! How can I help you today?","We offer custom tailoring, classes, and catering. What are you looking for?","You can place a custom order or shop from our collection. Interested?","Our boutique is in Injambakkam, Chennai. Call us at 861 070 3658!","We have 30 years of experience. Your satisfaction is our priority!"];
+            container.innerHTML += `<div class="chat-msg bot">${responses[Math.floor(Math.random() * responses.length)]}</div>`;
+            container.scrollTop = container.scrollHeight;
+        }, 1000);
+    }
+
+    async function recordVoice() {
+        const el = document.getElementById('voiceRecord');
+        const icon = document.getElementById('voiceIcon');
+        const text = document.getElementById('voiceText');
+
+        if (!isRecording) {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                mediaRecorder = new MediaRecorder(stream);
+                audioChunks = [];
+                mediaRecorder.ondataavailable = e => audioChunks.push(e.data);
+                mediaRecorder.onstop = () => {
+                    const blob = new Blob(audioChunks, { type: 'audio/webm' });
+                    const reader = new FileReader();
+                    reader.onloadend = () => {
+                        recordedVoiceBase64 = reader.result;
+                        text.textContent = 'Voice recorded! Tap to re-record';
+                        icon.className = 'fas fa-check';
+                    };
+                    reader.readAsDataURL(blob);
+                    stream.getTracks().forEach(t => t.stop());
+                };
+                mediaRecorder.start();
+                isRecording = true;
+                el.classList.add('recording');
+                text.textContent = 'Recording... Click to stop';
+            } catch (err) {
+                showToast('Microphone access denied!', 'error');
+            }
+        } else {
+            if (mediaRecorder) mediaRecorder.stop();
+            isRecording = false;
+            el.classList.remove('recording');
+        }
+    }
+
+   async function submitCustomOrder(e) {
+    e.preventDefault();
+    const measurements = `Bust: ${document.getElementById('customBust').value.trim()} | Waist: ${document.getElementById('customWaist').value.trim()} | Hip: ${document.getElementById('customHip').value.trim()} | Length: ${document.getElementById('customLength').value.trim()}`;
+    const userNotes = document.getElementById('customNotes').value.trim();
+
+    const payload = {
+        type: 'order',
+        name: document.getElementById('customName').value.trim(),
+        mobile: document.getElementById('customPhone').value.trim(),
+        product: document.getElementById('customType').value || 'Custom order',
+        amount: 0,
+        notes: userNotes || 'None',
+        measurement: measurements,
+        voice_note: recordedVoiceBase64 || '',
+        source: 'custom-order'
+    };
+        
+    try {
+            const res = await fetch('submit_forms.php', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+            const data = await res.json();
+            if (data.status === 'success') {
+                showToast('Custom order submitted! We will contact you soon. 📞', 'success');
+                document.getElementById('customOrderForm').reset();
+                document.getElementById('voiceText').textContent = 'Click to record voice message';
+                document.getElementById('voiceIcon').className = 'fas fa-microphone';
+                recordedVoiceBase64 = '';
+            } else {
+                showToast(data.message || 'Unable to save custom order', 'error');
+            }
+        } catch (e) {
+            showToast('Unable to save custom order right now', 'error');
+        }
+    }
+
+    async function submitContact(e) {
+        e.preventDefault();
+        const payload = {
+            type: 'contact',
+            name: document.getElementById('contactName').value.trim(),
+            phone: document.getElementById('contactPhone').value.trim(),
+            email: document.getElementById('contactEmail').value.trim(),
+            service: '',
+            message: document.getElementById('contactMessage').value.trim(),
+            source: 'website'
+        };
+        try {
+            const res = await fetch('submit_forms.php', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+            const data = await res.json();
+            if (data.status === 'success') {
+                showToast('Message sent! We will reply soon. 📩', 'success');
+                e.target.reset();
+            } else {
+                showToast(data.message || 'Unable to send message', 'error');
+            }
+        } catch (e) {
+            showToast('Unable to send message right now', 'error');
+        }
+    }
+    function enrollClass(className) { window.open(`https://wa.me/918610703658?text=${encodeURIComponent('Hi Sumathi, I am interested in enrolling for ' + className + '. Please provide more details.')}`, '_blank'); }
+    function openLightbox(src) { document.getElementById('lightboxImg').src = src; document.getElementById('lightbox').classList.add('active'); }
+    function closeLightbox() { document.getElementById('lightbox').classList.remove('active'); }
+    function toggleSwitch(el) { el.classList.toggle('active'); }
+
+    function showToast(message, type = '') {
+        const toast = document.getElementById('toast');
+        toast.textContent = message;
+        toast.className = 'toast ' + type;
+        setTimeout(() => toast.classList.add('show'), 10);
+        setTimeout(() => toast.classList.remove('show'), 3000);
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        loadProducts();
+        loadReviews();
+        updateCartUI();
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) navbar.classList.add('scrolled');
+            else navbar.classList.remove('scrolled');
+        });
+    });
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            document.querySelectorAll('.modal-overlay').forEach(m => m.classList.remove('active'));
+            document.getElementById('cartSidebar').classList.remove('active');
+            document.getElementById('lightbox').classList.remove('active');
+            closePDModal();
+        }
+    });
+    </script>
+</body>
+</html>

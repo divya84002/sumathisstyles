@@ -1,0 +1,1304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sumathi's Styles – Admin Dashboard</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<style>
+:root {
+  --teal:#00897B;--teal-dark:#00695C;--teal-light:#E0F2F1;
+  --copper:#B87333;--copper-light:#FFF8E1;
+  --bg:#F5F7FA;--sidebar:#004D40;--sidebar-hover:#00695C;
+  --text:#212121;--muted:#757575;--white:#fff;
+  --danger:#E53935;--success:#43A047;--warning:#FB8C00;
+  --card:#fff;--border:#E0E0E0;--radius:10px;
+}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
+body{background:var(--bg);color:var(--text);min-height:100vh;}
+
+/* LOGIN */
+#login-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--sidebar) 0%,var(--teal) 60%,var(--copper) 100%);}
+.login-card{background:#fff;border-radius:16px;padding:48px 40px;width:380px;box-shadow:0 20px 60px rgba(0,0,0,.25);text-align:center;}
+.login-logo{font-size:40px;margin-bottom:6px;}
+.login-title{font-size:22px;font-weight:700;color:var(--teal-dark);margin-bottom:4px;}
+.login-sub{font-size:13px;color:var(--muted);margin-bottom:28px;}
+.login-card label{display:block;text-align:left;font-size:13px;font-weight:600;color:var(--muted);margin-bottom:5px;}
+.login-card input{width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:8px;font-size:14px;margin-bottom:16px;outline:none;transition:border .2s;}
+.login-card input:focus{border-color:var(--teal);}
+.btn-login{width:100%;padding:12px;background:var(--teal);color:#fff;border:none;border-radius:8px;font-size:15px;font-weight:600;cursor:pointer;transition:background .2s;}
+.btn-login:hover{background:var(--teal-dark);}
+.login-err{color:var(--danger);font-size:13px;margin-top:10px;display:none;}
+
+/* LAYOUT */
+#app{display:none;flex-direction:row;min-height:100vh;}
+
+/* SIDEBAR */
+.sidebar{width:240px;min-height:100vh;background:var(--sidebar);display:flex;flex-direction:column;position:fixed;top:0;left:0;z-index:100;}
+.sidebar-brand{padding:22px 20px 18px;border-bottom:1px solid rgba(255,255,255,.1);}
+.brand-name{color:#fff;font-size:17px;font-weight:700;}
+.brand-tag{color:rgba(255,255,255,.55);font-size:11px;margin-top:2px;}
+.sidebar-nav{flex:1;padding:14px 0;}
+.nav-item{display:flex;align-items:center;gap:12px;padding:12px 20px;color:rgba(255,255,255,.75);cursor:pointer;font-size:14px;font-weight:500;transition:.18s;border-left:3px solid transparent;}
+.nav-item:hover{background:var(--sidebar-hover);color:#fff;}
+.nav-item.active{background:var(--sidebar-hover);color:#fff;border-left-color:var(--copper);}
+.nav-item .icon{font-size:18px;width:22px;text-align:center;}
+.nav-section{padding:16px 20px 6px;color:rgba(255,255,255,.35);font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;}
+.sidebar-logout{padding:16px 20px;border-top:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.65);cursor:pointer;font-size:14px;display:flex;align-items:center;gap:12px;transition:color .2s;}
+.sidebar-logout:hover{color:#FF8A80;}
+
+/* MAIN */
+.main{margin-left:240px;flex:1;display:flex;flex-direction:column;min-height:100vh;}
+.topbar{background:#fff;padding:14px 28px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 8px rgba(0,0,0,.06);position:sticky;top:0;z-index:50;}
+.topbar-title{font-size:18px;font-weight:700;color:var(--teal-dark);}
+.topbar-info{font-size:13px;color:var(--muted);}
+.content{padding:28px;flex:1;}
+
+/* STATS */
+.stats-row{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin-bottom:24px;}
+.stat-card{background:#fff;border-radius:var(--radius);padding:18px 20px;box-shadow:0 2px 10px rgba(0,0,0,.06);border-left:4px solid var(--teal);}
+.stat-card.copper{border-left-color:var(--copper);}
+.stat-card.danger{border-left-color:var(--danger);}
+.stat-card.success{border-left-color:var(--success);}
+.stat-card.warning{border-left-color:var(--warning);}
+.stat-label{font-size:11px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.5px;}
+.stat-value{font-size:26px;font-weight:700;color:var(--text);margin-top:5px;}
+
+/* SECTION CARD */
+.section-card{background:#fff;border-radius:var(--radius);padding:22px 24px;box-shadow:0 2px 10px rgba(0,0,0,.06);margin-bottom:22px;}
+.section-card h2{font-size:15px;font-weight:700;color:var(--teal-dark);margin-bottom:16px;display:flex;align-items:center;gap:8px;}
+
+/* GRID 2COL */
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:22px;}
+
+/* FORM */
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.form-group{display:flex;flex-direction:column;gap:5px;}
+.form-group.full{grid-column:1/-1;}
+.form-group label{font-size:12px;font-weight:600;color:var(--muted);}
+.form-group input,.form-group select,.form-group textarea{padding:9px 12px;border:1.5px solid var(--border);border-radius:8px;font-size:14px;outline:none;transition:border .2s;resize:vertical;background:#fff;color:var(--text);}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--teal);}
+
+/* PHOTO */
+.photo-dropzone{border:2px dashed var(--teal);border-radius:10px;padding:28px;text-align:center;cursor:pointer;color:var(--teal);transition:background .2s;background:var(--teal-light);}
+.photo-dropzone:hover{background:#B2DFDB;}
+.photo-dropzone .drop-icon{font-size:32px;margin-bottom:6px;}
+.photo-dropzone p{font-size:14px;font-weight:600;}
+.photo-dropzone span{font-size:12px;color:var(--muted);}
+#photo-preview{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px;}
+.preview-thumb{position:relative;width:80px;height:80px;border-radius:8px;overflow:hidden;border:2px solid var(--border);}
+.preview-thumb img{width:100%;height:100%;object-fit:cover;}
+.preview-thumb .rm{position:absolute;top:2px;right:2px;background:rgba(0,0,0,.5);color:#fff;border:none;border-radius:50%;width:18px;height:18px;font-size:11px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+
+/* HIGHLIGHTS */
+.highlight-row{display:flex;gap:8px;margin-bottom:8px;align-items:center;}
+.highlight-row input{flex:1;padding:9px 12px;border:1.5px solid var(--border);border-radius:8px;font-size:14px;outline:none;background:#fff;}
+.highlight-row input:focus{border-color:var(--teal);}
+.btn-icon{background:none;border:none;cursor:pointer;font-size:16px;color:var(--danger);}
+.btn-add-hl{background:none;border:1.5px dashed var(--teal);color:var(--teal);padding:7px 14px;border-radius:8px;font-size:13px;cursor:pointer;margin-top:4px;font-weight:600;}
+.btn-add-hl:hover{background:var(--teal-light);}
+
+/* PRICE TAGS */
+.price-tag-row{display:flex;gap:10px;margin-bottom:8px;}
+.price-tag-row input{flex:1;padding:9px 12px;border:1.5px solid var(--border);border-radius:8px;font-size:14px;outline:none;background:#fff;}
+.price-tag-row input:focus{border-color:var(--copper);}
+
+/* BUTTONS */
+.btn{padding:9px 20px;border-radius:8px;border:none;font-size:13px;font-weight:600;cursor:pointer;transition:.2s;}
+.btn-teal{background:var(--teal);color:#fff;}
+.btn-teal:hover{background:var(--teal-dark);}
+.btn-copper{background:var(--copper);color:#fff;}
+.btn-copper:hover{background:#9C6024;}
+.btn-danger{background:var(--danger);color:#fff;}
+.btn-outline{background:#fff;border:1.5px solid var(--border);color:var(--text);}
+.btn-wa{background:#25D366;color:#fff;}
+.btn-wa:hover{background:#1ebe5d;}
+
+/* PRODUCTS GRID */
+.products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:14px;}
+.product-card{background:#fff;border-radius:var(--radius);overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.07);border:1px solid var(--border);}
+.product-card img{width:100%;height:150px;object-fit:cover;}
+.product-card .pc-body{padding:10px;}
+.pc-name{font-size:13px;font-weight:700;margin-bottom:3px;}
+.pc-price{color:var(--teal-dark);font-size:14px;font-weight:700;}
+.pc-cat{font-size:11px;color:var(--muted);background:var(--teal-light);border-radius:20px;padding:2px 8px;display:inline-block;margin-bottom:5px;}
+.pc-actions{display:flex;gap:6px;margin-top:8px;}
+.pc-actions button{flex:1;padding:5px;border-radius:6px;border:none;font-size:11px;font-weight:600;cursor:pointer;}
+.btn-del{background:#FFEBEE;color:var(--danger);}
+.btn-vis{background:var(--teal-light);color:var(--teal-dark);}
+
+/* TABLE */
+.table-wrap{overflow-x:auto;}
+table{width:100%;border-collapse:collapse;font-size:13px;}
+thead tr{background:var(--teal-light);}
+th{padding:11px 13px;text-align:left;font-size:11px;font-weight:700;color:var(--teal-dark);text-transform:uppercase;letter-spacing:.4px;}
+td{padding:11px 13px;border-bottom:1px solid var(--border);vertical-align:middle;}
+tr:hover td{background:#F9FAFB;}
+
+/* SEARCH BAR */
+.search-bar{display:flex;gap:10px;margin-bottom:16px;align-items:center;flex-wrap:wrap;}
+.search-bar input,.search-bar select{padding:8px 12px;border:1.5px solid var(--border);border-radius:8px;font-size:13px;outline:none;background:#fff;}
+.search-bar input:focus,.search-bar select:focus{border-color:var(--teal);}
+.search-bar input{flex:1;min-width:200px;}
+
+/* BADGES */
+.badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;}
+.badge-pending{background:#FFF3E0;color:#E65100;}
+.badge-ordered{background:#E3F2FD;color:#1565C0;}
+.badge-cancelled{background:#FFEBEE;color:var(--danger);}
+.badge-delivered{background:#E8F5E9;color:#2E7D32;}
+.badge-processing{background:#EDE7F6;color:#4527A0;}
+
+select.status-select{padding:5px 8px;border-radius:6px;border:1.5px solid var(--border);font-size:12px;font-weight:600;cursor:pointer;outline:none;background:#fff;}
+
+/* TOAST */
+#toast{position:fixed;bottom:28px;right:28px;z-index:9999;background:var(--teal-dark);color:#fff;padding:12px 20px;border-radius:10px;font-size:13px;font-weight:600;box-shadow:0 8px 24px rgba(0,0,0,.2);transform:translateY(80px);opacity:0;transition:.3s;pointer-events:none;max-width:320px;}
+#toast.show{transform:translateY(0);opacity:1;}
+
+/* PAGE */
+.page{display:none;}
+.page.active{display:block;}
+
+/* AVATAR */
+.cust-avatar{width:32px;height:32px;border-radius:50%;background:var(--teal);display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:13px;font-weight:700;margin-right:8px;}
+
+/* EMPTY */
+.empty{text-align:center;padding:40px 20px;color:var(--muted);}
+.empty .e-icon{font-size:44px;margin-bottom:10px;}
+.empty p{font-size:14px;}
+
+/* REVENUE */
+.revenue-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:20px;}
+.rev-card{background:linear-gradient(135deg,var(--teal-dark),var(--teal));border-radius:12px;padding:18px 20px;color:#fff;}
+.rev-card.copper-grad{background:linear-gradient(135deg,#9C6024,var(--copper));}
+.rev-card.green-grad{background:linear-gradient(135deg,#2E7D32,var(--success));}
+.rev-label{font-size:11px;opacity:.8;font-weight:600;text-transform:uppercase;letter-spacing:.5px;}
+.rev-value{font-size:28px;font-weight:700;margin-top:6px;}
+.rev-sub{font-size:12px;opacity:.75;margin-top:3px;}
+
+/* NOTIFICATION DOT */
+.notif-dot{width:8px;height:8px;background:var(--danger);border-radius:50%;display:inline-block;margin-left:auto;}
+
+/* PENDING BADGE */
+#pending-badge{margin-left:auto;background:#E53935;color:#fff;font-size:10px;padding:2px 6px;border-radius:10px;display:none;}
+
+/* CHART container */
+.chart-box{position:relative;height:260px;}
+
+/* MODAL */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:500;align-items:center;justify-content:center;}
+.modal-overlay.show{display:flex;}
+.modal{background:#fff;border-radius:16px;padding:32px;width:460px;max-width:95vw;box-shadow:0 20px 60px rgba(0,0,0,.3);}
+.modal h3{font-size:16px;font-weight:700;color:var(--teal-dark);margin-bottom:18px;}
+.modal-actions{display:flex;gap:10px;margin-top:20px;justify-content:flex-end;}
+
+@media(max-width:1100px){.stats-row{grid-template-columns:repeat(3,1fr);}}
+@media(max-width:900px){.stats-row{grid-template-columns:1fr 1fr;}.form-grid{grid-template-columns:1fr;}.grid-2{grid-template-columns:1fr;}.revenue-cards{grid-template-columns:1fr;}}
+</style>
+<base target="_blank">
+<base target="_blank">
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login-screen">
+  <div class="login-card">
+    <div class="login-logo">👗</div>
+    <div class="login-title">Sumathi's Styles</div>
+    <div class="login-sub">Admin Panel – Injambakkam, Chennai</div>
+    <label>Email Address</label>
+    <input type="email" id="login-email" placeholder="admin@sumathisstyles.com"/>
+    <label>Password</label>
+    <input type="password" id="login-pass" placeholder="Enter password"/>
+    <button class="btn-login" onclick="doLogin()">Login to Dashboard</button>
+    <div class="login-err" id="login-err">❌ Wrong email or password</div>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app">
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <div class="sidebar-brand">
+      <div style="font-size:26px;margin-bottom:4px">👗</div>
+      <div class="brand-name">Sumathi's Styles</div>
+      <div class="brand-tag">Admin Dashboard</div>
+    </div>
+    <div class="sidebar-nav">
+      <div class="nav-section">Overview</div>
+      <div class="nav-item active" onclick="showPage('dashboard')"><span class="icon">📊</span> Dashboard</div>
+      <div class="nav-section">Catalogue</div>
+      <div class="nav-item" onclick="showPage('upload')"><span class="icon">📦</span> Product Upload</div>
+      <div class="nav-item" onclick="showPage('products')"><span class="icon">👗</span> All Products</div>
+      <div class="nav-section">Sales</div>
+      <div class="nav-item" onclick="showPage('ordersmgmt')">
+        <span class="icon">🧾</span> Orders
+        <span id="pending-badge"></span>
+      </div>
+      <div class="nav-item" onclick="showPage('customorder')"><span class="icon">✂️</span> Customized Order</div>
+      <div class="nav-item" onclick="showPage('contactform')"><span class="icon">📨</span> Boutique Contact Form</div>
+      <div class="nav-item" onclick="showPage('contactform2')"><span class="icon">🍽️</span> Catering Contact Form</div>
+      <div class="nav-section">Finance</div>
+      <div class="nav-item" onclick="showPage('revenue')"><span class="icon">💰</span> Revenue</div>
+    </div>
+    <div class="sidebar-logout" onclick="doLogout()"><span class="icon">🚪</span> Logout</div>
+  </div>
+
+  <!-- MAIN -->
+  <div class="main">
+    <div class="topbar">
+      <div class="topbar-title" id="topbar-title">Dashboard</div>
+      <div style="display:flex;align-items:center;gap:14px;">
+        <div class="topbar-info" id="topbar-date"></div>
+        <button class="btn btn-wa" onclick="showPage('ordersmgmt')" style="font-size:12px;padding:6px 14px;">🧾 Go to Orders</button>
+      </div>
+    </div>
+    <div class="content">
+
+      <!-- DASHBOARD -->
+      <div class="page active" id="page-dashboard">
+        <div style="display:flex;justify-content:flex-end;margin-bottom:14px;">
+          <button class="btn btn-danger" onclick="clearData('all_demo_data','⚠️ Idhu ALL Orders + Boutique + Catering contact submissions ah delete pannidum (Products touch aagadhu). Continue pannalama?')">🗑️ Clear All Demo Data</button>
+        </div>
+        <div class="stats-row">
+          <div class="stat-card"><div class="stat-label">Total Products</div><div class="stat-value" id="stat-products">0</div></div>
+          <div class="stat-card copper"><div class="stat-label">Total Orders</div><div class="stat-value" id="stat-orders">0</div></div>
+          <div class="stat-card success"><div class="stat-label">Delivered</div><div class="stat-value" id="stat-delivered">0</div></div>
+          <div class="stat-card danger"><div class="stat-label">Pending</div><div class="stat-value" id="stat-pending">0</div></div>
+          <div class="stat-card warning"><div class="stat-label">Total Revenue</div><div class="stat-value" id="stat-revenue">₹0</div></div>
+        </div>
+
+        <div class="grid-2">
+          <div class="section-card">
+            <h2>📈 Monthly Orders Chart</h2>
+            <div class="chart-box"><canvas id="monthlyChart"></canvas></div>
+          </div>
+          <div class="section-card">
+            <h2>🍩 Order Status</h2>
+            <div class="chart-box"><canvas id="statusChart"></canvas></div>
+          </div>
+        </div>
+
+        <div class="section-card">
+          <h2>📋 Recent Orders</h2>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Order ID</th><th>Customer</th><th>Mobile</th><th>Product</th><th>Amount</th><th>Status</th><th>Date</th><th>WhatsApp</th></tr></thead>
+              <tbody id="recent-orders-tbody"><tr><td colspan="8"><div class="empty"><div class="e-icon">📭</div><p>No orders yet</p></div></td></tr></tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- PRODUCT UPLOAD -->
+      <div class="page" id="page-upload">
+        <div class="section-card">
+          <h2>📤 Upload New Product</h2>
+          <div style="margin-bottom:18px;">
+            <label style="font-size:12px;font-weight:700;color:var(--muted);display:block;margin-bottom:8px;">PRODUCT PHOTOS</label>
+            <div class="photo-dropzone" onclick="document.getElementById('photo-input').click()">
+              <div class="drop-icon">🖼️</div>
+              <p>Click to Upload Photos</p>
+              <span>JPG, PNG, WEBP – Multiple files allowed</span>
+            </div>
+            <input type="file" id="photo-input" multiple accept="image/*" style="display:none" onchange="handlePhotos(this)">
+            <div id="photo-preview"></div>
+          </div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Product Name *</label>
+              <input type="text" id="p-name" placeholder="e.g. Bridal Blouse Stitching"/>
+            </div>
+            <div class="form-group">
+              <label>Category *</label>
+              <select id="p-cat">
+                <option value="">-- Select --</option>
+                <option>All</option>
+                <option>Kids</option>
+                <option>Uniform</option>
+                <option>Modern</option>
+                <option>Salwar</option>
+                <option>Blouse</option>
+                <option>Aari</option>
+                <option>Saree</option>
+                <option>Frock</option>
+                <option>Lehenga</option>
+                <option>Kurthi</option>
+              </select>
+            </div>
+            <div class="form-group full">
+              <label>Price (₹) *</label>
+              <input type="number" id="p-price" placeholder="e.g. 1500"/>
+            </div>
+            <div class="form-group full">
+              <label>Description</label>
+              <textarea id="p-desc" rows="3" placeholder="Short product description..."></textarea>
+            </div>
+          </div>
+          <div style="margin:18px 0 0;">
+            <label style="font-size:12px;font-weight:700;color:var(--muted);display:block;margin-bottom:8px;">✨ PRODUCT HIGHLIGHTS</label>
+            <div id="highlights-list">
+              <div class="highlight-row"><input type="text" placeholder="e.g. Premium quality fabric"/><button class="btn-icon" onclick="removeHL(this)">🗑️</button></div>
+            </div>
+            <button class="btn-add-hl" onclick="addHL()">+ Add Highlight</button>
+          </div>
+          <div style="margin:18px 0 0;">
+            <label style="font-size:12px;font-weight:700;color:var(--muted);display:block;margin-bottom:8px;">🏷️ PRICE TAGS (size/type variations)</label>
+            <div id="price-tags-list">
+              <div class="price-tag-row">
+                <input type="text" placeholder="Tag (e.g. Simple)" style="max-width:170px"/>
+                <input type="number" placeholder="Price ₹" style="max-width:110px"/>
+                <button class="btn-icon" onclick="removePT(this)">🗑️</button>
+              </div>
+            </div>
+            <button class="btn-add-hl" onclick="addPT()">+ Add Price Tag</button>
+          </div>
+          <div class="form-grid" style="margin-top:18px;">
+            <div class="form-group">
+              <label>Stock Status</label>
+              <select id="p-stock"><option>Available</option><option>Limited</option><option>Out of Stock</option></select>
+            </div>
+            <div class="form-group">
+              <label>Visible on Website</label>
+              <select id="p-visible"><option value="yes">Yes – Show on Website</option><option value="no">No – Hide</option></select>
+            </div>
+          </div>
+          <div style="margin-top:22px;display:flex;gap:12px;">
+            <button class="btn btn-teal" onclick="uploadProduct()">✅ Upload Product</button>
+            <button class="btn btn-outline" onclick="resetUploadForm()">🔄 Reset</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ALL PRODUCTS -->
+      <div class="page" id="page-products">
+        <div class="section-card">
+          <h2>👗 All Products</h2>
+          <div class="search-bar">
+            <input type="text" id="prod-search" placeholder="🔍 Search products..." oninput="renderProducts()"/>
+            <select id="prod-cat-filter" onchange="renderProducts()">
+              <option value="">All Categories</option>
+              <option>All</option>
+              <option>Kids</option>
+              <option>Uniform</option>
+              <option>Modern</option>
+              <option>Salwar</option>
+              <option>Blouse</option>
+              <option>Aari</option>
+              <option>Saree</option>
+              <option>Frock</option>
+              <option>Lehenga</option>
+              <option>Kurthi</option>
+            </select>
+            <select id="prod-stock-filter" onchange="renderProducts()">
+              <option value="">All Stock</option>
+              <option>Available</option><option>Limited</option><option>Out of Stock</option>
+            </select>
+          </div>
+          <div id="products-grid" class="products-grid">
+            <div class="empty"><div class="e-icon">📦</div><p>No products yet</p></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ORDERS (Real Order Management) -->
+      <div class="page" id="page-ordersmgmt">
+        <div class="section-card">
+          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:16px;">
+            <h2 style="margin-bottom:0;">🧾 Orders Management</h2>
+            <button class="btn btn-danger" onclick="clearData('orders_all','⚠️ ALL Orders ah delete pannidum (Customized Orders um poyidum, ivanga same table than). Continue pannalama?')">🗑️ Clear All Orders</button>
+          </div>
+          <!-- Add Order -->
+          <div style="margin-bottom:16px;padding:14px;background:var(--teal-light);border-radius:8px;">
+            <div style="font-size:13px;font-weight:700;color:var(--teal-dark);margin-bottom:10px;">➕ Add New Order</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr auto;gap:10px;align-items:end;">
+              <div class="form-group"><label>Customer Name</label><input type="text" id="o-name" placeholder="Priya Rajan"/></div>
+              <div class="form-group"><label>Mobile</label><input type="text" id="o-mobile" placeholder="9876543210" maxlength="10"/></div>
+              <div class="form-group"><label>Product</label><input type="text" id="o-product" placeholder="Blouse Stitching"/></div>
+              <div class="form-group"><label>Amount (₹)</label><input type="number" id="o-amount" placeholder="800"/></div>
+              <button class="btn btn-copper" onclick="addOrder()">Add Order</button>
+            </div>
+          </div>
+          <!-- Search -->
+          <div class="search-bar">
+            <input type="text" id="order-search" placeholder="🔍 Search by name / mobile / product..." oninput="renderOrders()"/>
+            <select id="order-status-filter" onchange="renderOrders()">
+              <option value="">All Status</option>
+              <option>Ordered</option><option>Processing</option>
+              <option>Delivered</option><option>Cancelled</option><option>Pending</option>
+            </select>
+            <button class="btn btn-outline" style="font-size:12px;" onclick="printOrders()">🖨️ Print</button>
+            <button class="btn btn-outline" style="font-size:12px;" onclick="exportOrdersCSV()">📥 Export CSV</button>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Order ID</th><th>Customer</th><th>Mobile</th><th>Product</th><th>Amount</th><th>Measurement</th><th>Message</th><th>Voice Note</th><th>Status</th><th>Date</th><th>Update</th><th>WhatsApp</th></tr></thead>
+              <tbody id="orders-tbody"><tr><td colspan="12"><div class="empty"><div class="e-icon">📭</div><p>No orders yet</p></div></td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- CUSTOMIZED ORDER -->
+      <div class="page" id="page-customorder">
+        <div class="section-card">
+          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:16px;">
+            <h2 style="margin-bottom:0;">✂️ Customized Order Requests</h2>
+            <button class="btn btn-danger" onclick="clearData('orders_custom','⚠️ ALL Customized Orders ah delete pannidum. Continue pannalama?')">🗑️ Clear Custom Orders</button>
+          </div>
+          <div class="search-bar">
+            <input type="text" id="customorder-search" placeholder="🔍 Search by name / mobile..." oninput="renderCustomOrders()"/>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Customer</th><th>Mobile</th><th>Order Type</th><th>Measurements</th><th>Notes</th><th>Voice Note</th><th>Date</th><th>WhatsApp</th></tr></thead>
+              <tbody id="customorder-tbody"><tr><td colspan="8"><div class="empty"><div class="e-icon">✂️</div><p>No customized orders yet</p></div></td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- BOUTIQUE CONTACT FORM -->
+      <div class="page" id="page-contactform">
+        <div class="section-card">
+          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:16px;">
+            <h2 style="margin-bottom:0;">📨 Boutique Contact Form Submissions</h2>
+            <button class="btn btn-danger" onclick="clearData('contacts_boutique','⚠️ ALL Boutique contact submissions ah delete pannidum. Continue pannalama?')">🗑️ Clear Boutique Contacts</button>
+          </div>
+          <div class="search-bar">
+            <input type="text" id="contactform-search" placeholder="🔍 Search by name / phone / email..." oninput="renderContactForms()"/>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Name</th><th>Phone</th><th>Email</th><th>Service</th><th>Message</th><th>Date</th></tr></thead>
+              <tbody id="contactform-tbody"><tr><td colspan="6"><div class="empty"><div class="e-icon">📨</div><p>No contact form submissions yet</p></div></td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- CATERING CONTACT FORM -->
+      <div class="page" id="page-contactform2">
+        <div class="section-card">
+          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:16px;">
+            <h2 style="margin-bottom:0;">🍽️ Catering Contact Form Submissions</h2>
+            <button class="btn btn-danger" onclick="clearData('contacts_catering','⚠️ ALL Catering contact submissions ah delete pannidum. Continue pannalama?')">🗑️ Clear Catering Contacts</button>
+          </div>
+          <div class="search-bar">
+            <input type="text" id="contactform2-search" placeholder="🔍 Search by name / phone / email..." oninput="renderContactForms2()"/>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Name</th><th>Phone</th><th>Email</th><th>Service</th><th>Message</th><th>Date</th></tr></thead>
+              <tbody id="contactform2-tbody"><tr><td colspan="6"><div class="empty"><div class="e-icon">🍽️</div><p>No catering contact form submissions yet</p></div></td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- REVENUE -->
+      <div class="page" id="page-revenue">
+        <div style="display:flex;justify-content:flex-end;margin-bottom:14px;">
+          <button class="btn btn-danger" onclick="clearData('orders_all','⚠️ ALL Orders ah delete pannidum, adhula Revenue eppo ₹0-kum reset aagum. Continue pannalama?')">🗑️ Clear Orders (resets Revenue)</button>
+        </div>
+        <div class="revenue-cards">
+          <div class="rev-card">
+            <div class="rev-label">Total Revenue</div>
+            <div class="rev-value" id="rev-total">₹0</div>
+            <div class="rev-sub">All delivered orders</div>
+          </div>
+          <div class="rev-card copper-grad">
+            <div class="rev-label">This Month</div>
+            <div class="rev-value" id="rev-month">₹0</div>
+            <div class="rev-sub" id="rev-month-label">Current month</div>
+          </div>
+          <div class="rev-card green-grad">
+            <div class="rev-label">Avg Order Value</div>
+            <div class="rev-value" id="rev-avg">₹0</div>
+            <div class="rev-sub">Per delivered order</div>
+          </div>
+        </div>
+        <div class="grid-2">
+          <div class="section-card">
+            <h2>📊 Monthly Revenue Chart</h2>
+            <div class="chart-box"><canvas id="revenueChart"></canvas></div>
+          </div>
+          <div class="section-card">
+            <h2>🏆 Top Products by Revenue</h2>
+            <div id="top-products-list"></div>
+          </div>
+        </div>
+        <div class="section-card">
+          <h2>📋 Delivered Orders</h2>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Order ID</th><th>Customer</th><th>Product</th><th>Amount</th><th>Date</th></tr></thead>
+              <tbody id="delivered-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<!-- BUY NOW MODAL (Customer side — same file) -->
+<div class="modal-overlay" id="buy-modal">
+  <div class="modal">
+    <h3>🛒 Place Your Order</h3>
+    <div class="form-grid">
+      <div class="form-group full">
+        <label>Product</label>
+        <input type="text" id="buy-product" readonly style="background:#f5f5f5;"/>
+      </div>
+      <div class="form-group full">
+        <label>Your Name *</label>
+        <input type="text" id="buy-name" placeholder="Enter your name"/>
+      </div>
+      <div class="form-group full">
+        <label>Mobile Number *</label>
+        <input type="text" id="buy-mobile" placeholder="10-digit mobile" maxlength="10"/>
+      </div>
+      <div class="form-group full">
+        <label>Amount (₹)</label>
+        <input type="number" id="buy-amount" placeholder="Amount"/>
+      </div>
+      <div class="form-group full">
+        <label>Notes (optional)</label>
+        <textarea id="buy-notes" rows="2" placeholder="Any special requirements..."></textarea>
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-outline" onclick="closeBuyModal()">Cancel</button>
+      <button class="btn btn-teal" onclick="submitBuyOrder()">✅ Confirm Order</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ══ CONFIG ══
+const ADMIN_EMAIL = "admin@sumathisstyles.com";
+const ADMIN_PASS  = "sumathi@2025";
+const WA_NUMBER   = "919876543210"; // Change to Sumathi's WhatsApp number
+
+// ══ AUTH ══
+function doLogin() {
+  const e = document.getElementById('login-email').value.trim();
+  const p = document.getElementById('login-pass').value.trim();
+  if (e===ADMIN_EMAIL && p===ADMIN_PASS) {
+    document.getElementById('login-screen').style.display='none';
+    document.getElementById('app').style.display='flex';
+    localStorage.setItem('ss_admin_logged','1');
+    initDashboard();
+  } else {
+    document.getElementById('login-err').style.display='block';
+  }
+}
+function doLogout() {
+  localStorage.removeItem('ss_admin_logged');
+  document.getElementById('app').style.display='none';
+  document.getElementById('login-screen').style.display='flex';
+  document.getElementById('login-email').value='';
+  document.getElementById('login-pass').value='';
+}
+window.onload = () => {
+  if (localStorage.getItem('ss_admin_logged')) {
+    document.getElementById('login-screen').style.display='none';
+    document.getElementById('app').style.display='flex';
+    initDashboard();
+  }
+  document.getElementById('login-email').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin();});
+  document.getElementById('login-pass').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin();});
+};
+
+// ══ NAVIGATION ══
+const pages=['dashboard','upload','products','ordersmgmt','customorder','contactform','contactform2','revenue'];
+const titles={dashboard:'Dashboard',upload:'Product Upload',products:'All Products',ordersmgmt:'Orders',customorder:'Customized Order',contactform:'Boutique Contact Form',contactform2:'Catering Contact Form',revenue:'Revenue'};
+function showPage(id) {
+  pages.forEach(p=>{document.getElementById('page-'+p).classList.remove('active');});
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(n=>{
+    if(n.textContent.trim().toLowerCase().includes(titles[id].split(' ')[0].toLowerCase())) n.classList.add('active');
+  });
+  document.getElementById('topbar-title').textContent=titles[id];
+  if(id==='dashboard') refreshDashboard();
+  if(id==='products') renderProducts();
+  if(id==='ordersmgmt') renderOrders();
+  if(id==='customorder') renderCustomOrders();
+  if(id==='contactform') renderContactForms();
+  if(id==='contactform2') renderContactForms2();
+  if(id==='revenue') renderRevenue();
+}
+
+// ══ STORAGE ══
+let productsCache=[];
+function getProducts(){return productsCache;}
+function saveProducts(a){productsCache=a||[];}
+function getOrders(){return JSON.parse(localStorage.getItem('ss_orders')||'[]');}
+function saveOrders(a){localStorage.setItem('ss_orders',JSON.stringify(a));}
+
+async function loadOrdersFromServer(){
+  try{
+    const res=await fetch('get_submissions.php?type=orders');
+    const data=await res.json();
+    if(Array.isArray(data)){
+      const mapped=data.map(o=>({
+        id:o.id ? `#${o.id}` : '',
+        name:o.name||'',
+        mobile:o.mobile||'',
+        product:o.product||'',
+        amount:Number(o.amount||0),
+        status:o.status||'Ordered',
+        date:o.created_at ? new Date(o.created_at).toLocaleDateString('en-IN') : '',
+        source:o.source||'website',
+        measurement:o.measurement||'',
+        voiceNote:o.voice_note||'',
+        notes:o.notes||''
+      }));
+      localStorage.setItem('ss_orders', JSON.stringify(mapped));
+      return mapped;
+    }
+  } catch(e){}
+  return getOrders();
+}
+
+async function loadProductsFromServer(){
+  try{
+    const res=await fetch('get_products.php?admin=1');
+    const data=await res.json();
+    if(data&&Array.isArray(data.products)){
+      productsCache=data.products.map(p=>({
+        id:Number(p.id),
+        name:p.name||'',
+        cat:p.category||p.cat||'Other',
+        category:p.category||p.cat||'Other',
+        price:Number(p.price||0),
+        desc:p.description||'',
+        description:p.description||'',
+        stock:p.stock||p.stock_status||'Available',
+        visible:(p.visible==='yes'||p.visible===1||p.visible===true)?'yes':'no',
+        photos:Array.isArray(p.photos)?p.photos:(p.photo?[p.photo]:[]),
+        photo:p.photo||'',
+        highlights:Array.isArray(p.highlights)?p.highlights:[],
+        priceTags:Array.isArray(p.price_tags)?p.price_tags:[]
+      }));
+    } else {
+      productsCache=[];
+    }
+  } catch(e){
+    productsCache=[];
+  }
+  return productsCache;
+}
+
+async function loadContactsFromServer(){
+  try{
+    const res=await fetch('get_submissions.php?type=contacts');
+    const data=await res.json();
+    return Array.isArray(data) ? data : [];
+  } catch(e){
+    return [];
+  }
+}
+
+// Split contacts into Boutique vs Catering based on the "service" field.
+// Any submission whose service text mentions "catering" is treated as a Catering enquiry;
+// everything else stays under Boutique.
+function isCateringContact(c){
+  return String(c.service||'').toLowerCase().includes('catering');
+}
+function splitContacts(contacts){
+  return {
+    boutique: contacts.filter(c=>!isCateringContact(c)),
+    catering: contacts.filter(c=>isCateringContact(c))
+  };
+}
+
+// ══ INIT ══
+let monthlyChart=null, statusChart=null, revenueChart=null;
+function initDashboard(){
+  const d=new Date();
+  document.getElementById('topbar-date').textContent=d.toLocaleDateString('en-IN',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+  refreshDashboard();
+}
+
+function refreshDashboard(){
+  Promise.all([loadProductsFromServer(), loadOrdersFromServer()]).then(([_, orders])=>{
+    const products=getProducts();
+    document.getElementById('stat-products').textContent=products.length;
+    document.getElementById('stat-orders').textContent=orders.length;
+    document.getElementById('stat-delivered').textContent=orders.filter(o=>o.status==='Delivered').length;
+    const pending=orders.filter(o=>o.status==='Pending'||o.status==='Ordered').length;
+    document.getElementById('stat-pending').textContent=pending;
+    const revenue=orders.filter(o=>o.status==='Delivered').reduce((s,o)=>s+Number(o.amount),0);
+    document.getElementById('stat-revenue').textContent='₹'+revenue.toLocaleString('en-IN');
+    const pb=document.getElementById('pending-badge');
+    if(pending>0){pb.style.display='inline';pb.textContent=pending;}else pb.style.display='none';
+
+    // Recent orders
+    const recent=[...orders].reverse().slice(0,8);
+    const tb=document.getElementById('recent-orders-tbody');
+    if(!recent.length){
+      tb.innerHTML='<tr><td colspan="8"><div class="empty"><div class="e-icon">📭</div><p>No orders yet</p></div></td></tr>';
+    } else {
+      tb.innerHTML=recent.map(o=>`
+        <tr>
+          <td><b>#${o.id}</b></td><td>${o.name}</td>
+          <td style="white-space:nowrap;">📞 ${o.mobile}</td><td>${o.product}</td>
+          <td><b>₹${o.amount}</b></td>
+          <td>${badgeHTML(o.status)}</td><td>${o.date}</td>
+          <td><button class="btn btn-wa" style="font-size:11px;padding:4px 10px;" onclick="waNotify('${o.mobile}','${o.name}','${o.product}','${o.status}')">💬</button></td>
+        </tr>`).join('');
+    }
+
+    // Monthly chart
+    const monthData=getMonthlyData(orders);
+    if(monthlyChart) monthlyChart.destroy();
+    const mc=document.getElementById('monthlyChart');
+    if(mc){
+      monthlyChart=new Chart(mc,{
+        type:'bar',
+        data:{labels:monthData.labels,datasets:[{label:'Orders',data:monthData.counts,backgroundColor:'rgba(0,137,123,0.7)',borderRadius:6}]},
+        options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,ticks:{stepSize:1}}}}
+      });
+    }
+
+    // Status donut
+    const statusCounts={Ordered:0,Processing:0,Delivered:0,Cancelled:0,Pending:0};
+    orders.forEach(o=>{ if(statusCounts[o.status]!==undefined) statusCounts[o.status]++; });
+    if(statusChart) statusChart.destroy();
+    const sc=document.getElementById('statusChart');
+    if(sc){
+      statusChart=new Chart(sc,{
+        type:'doughnut',
+        data:{
+          labels:Object.keys(statusCounts),
+          datasets:[{data:Object.values(statusCounts),backgroundColor:['#1565C0','#4527A0','#2E7D32','#E53935','#E65100'],borderWidth:2}]
+        },
+        options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{font:{size:11}}}}}
+      });
+    }
+  });
+}
+
+function getMonthlyData(orders){
+  const months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const counts=Array(12).fill(0);
+  orders.forEach(o=>{
+    const parts=o.date.split('/');
+    if(parts.length>=2){ const m=parseInt(parts[1])-1; if(m>=0&&m<12) counts[m]++; }
+  });
+  return {labels:months,counts};
+}
+
+// ══ PHOTOS ══
+let uploadedPhotos=[];
+function handlePhotos(input){
+  Array.from(input.files).forEach(f=>{
+    const reader=new FileReader();
+    reader.onload=e=>{
+      const img=new Image();
+      img.onload=()=>{
+        const canvas=document.createElement('canvas');
+        const MAX=600; let w=img.width,h=img.height;
+        if(w>MAX){h=h*MAX/w;w=MAX;} if(h>MAX){w=w*MAX/h;h=MAX;}
+        canvas.width=w;canvas.height=h;
+        canvas.getContext('2d').drawImage(img,0,0,w,h);
+        uploadedPhotos.push(canvas.toDataURL('image/jpeg',0.6));
+        renderPreview();
+      };
+      img.src=e.target.result;
+    };
+    reader.readAsDataURL(f);
+  });
+  input.value='';
+}
+function renderPreview(){
+  document.getElementById('photo-preview').innerHTML=uploadedPhotos.map((src,i)=>`
+    <div class="preview-thumb"><img src="${src}"/><button class="rm" onclick="removePhoto(${i})">✕</button></div>`).join('');
+}
+function removePhoto(i){uploadedPhotos.splice(i,1);renderPreview();}
+
+// ══ HIGHLIGHTS ══
+function addHL(){
+  const d=document.createElement('div');d.className='highlight-row';
+  d.innerHTML=`<input type="text" placeholder="e.g. Hand embroidery included"/><button class="btn-icon" onclick="removeHL(this)">🗑️</button>`;
+  document.getElementById('highlights-list').appendChild(d);
+}
+function removeHL(btn){if(document.querySelectorAll('#highlights-list .highlight-row').length>1)btn.closest('.highlight-row').remove();}
+
+// ══ PRICE TAGS ══
+function addPT(){
+  const d=document.createElement('div');d.className='price-tag-row';
+  d.innerHTML=`<input type="text" placeholder="Tag" style="max-width:170px"/><input type="number" placeholder="Price ₹" style="max-width:110px"/><button class="btn-icon" onclick="removePT(this)">🗑️</button>`;
+  document.getElementById('price-tags-list').appendChild(d);
+}
+function removePT(btn){if(document.querySelectorAll('#price-tags-list .price-tag-row').length>1)btn.closest('.price-tag-row').remove();}
+
+// ══ UPLOAD PRODUCT ══
+async function uploadProduct(){
+  const name=document.getElementById('p-name').value.trim();
+  const cat=document.getElementById('p-cat').value;
+  const price=document.getElementById('p-price').value.trim();
+  const desc=document.getElementById('p-desc').value.trim();
+  const stock=document.getElementById('p-stock').value;
+  const vis=document.getElementById('p-visible').value;
+  if(!name||!cat||!price){toast('⚠️ Name, Category & Price are required!');return;}
+  const highlights=Array.from(document.querySelectorAll('#highlights-list input')).map(i=>i.value.trim()).filter(Boolean);
+  const priceTags=Array.from(document.querySelectorAll('#price-tags-list .price-tag-row')).map(row=>{
+    const inp=row.querySelectorAll('input');
+    return{label:inp[0].value.trim(),price:inp[1].value.trim()};
+  }).filter(pt=>pt.label&&pt.price);
+  const formData=new FormData();
+  formData.append('name',name);
+  formData.append('cat',cat);
+  formData.append('price',price);
+  formData.append('description',desc);
+  formData.append('stock',stock);
+  formData.append('visible',vis);
+  formData.append('highlights',JSON.stringify(highlights));
+  formData.append('price_tags',JSON.stringify(priceTags));
+  if(uploadedPhotos.length) formData.append('photo',uploadedPhotos[0]);
+  toast('⏳ Uploading...');
+  try{
+    const res=await fetch('save_product.php',{method:'POST',body:formData});
+    const data=await res.json();
+    if(data.status==='success'){
+      await loadProductsFromServer();
+      renderProducts();
+      refreshDashboard();
+      resetUploadForm();
+      toast('✅ Product uploaded successfully!');
+    } else {
+      toast('❌ ' + (data.message||'Upload failed'));
+    }
+  } catch(e){
+    toast('❌ Server error while uploading');
+  }
+}
+function resetUploadForm(){
+  ['p-name','p-cat','p-price','p-desc'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('p-stock').value='Available';
+  document.getElementById('p-visible').value='yes';
+  uploadedPhotos=[];
+  document.getElementById('photo-preview').innerHTML='';
+  document.getElementById('highlights-list').innerHTML=`<div class="highlight-row"><input type="text" placeholder="e.g. Premium quality fabric"/><button class="btn-icon" onclick="removeHL(this)">🗑️</button></div>`;
+  document.getElementById('price-tags-list').innerHTML=`<div class="price-tag-row"><input type="text" placeholder="Tag (e.g. Simple)" style="max-width:170px"/><input type="number" placeholder="Price ₹" style="max-width:110px"/><button class="btn-icon" onclick="removePT(this)">🗑️</button></div>`;
+}
+
+// ══ RENDER PRODUCTS ══
+function renderProducts(){
+  const search=(document.getElementById('prod-search')||{}).value||'';
+  const catF=(document.getElementById('prod-cat-filter')||{}).value||'';
+  const stockF=(document.getElementById('prod-stock-filter')||{}).value||'';
+  let products=getProducts();
+  if(search) products=products.filter(p=>p.name.toLowerCase().includes(search.toLowerCase())||p.cat.toLowerCase().includes(search.toLowerCase()));
+  if(catF) products=products.filter(p=>p.cat===catF);
+  if(stockF) products=products.filter(p=>p.stock===stockF);
+  const grid=document.getElementById('products-grid');
+  if(!products.length){grid.innerHTML='<div class="empty"><div class="e-icon">📦</div><p>No products found</p></div>';return;}
+  grid.innerHTML=products.map(p=>{
+    const photos=Array.isArray(p.photos)?p.photos:[];
+    const image=photos[0]||p.photo||'';
+    const highlights=Array.isArray(p.highlights)?p.highlights:[];
+    const priceTags=Array.isArray(p.priceTags)&&p.priceTags.length?p.priceTags:(Array.isArray(p.price_tags)?p.price_tags:[]);
+    return `<div class="product-card" id="pc-${p.id}">
+      ${image?`<img src="${image}"/>`:`<div style="height:150px;background:var(--teal-light);display:flex;align-items:center;justify-content:center;font-size:36px">👗</div>`}
+      <div class="pc-body">
+        <div class="pc-cat">${p.cat}</div>
+        <div class="pc-name">${p.name}</div>
+        <div class="pc-price">₹${p.price}</div>
+        ${highlights.length?`<ul style="margin-top:5px;padding-left:14px;font-size:11px;color:var(--muted)">${highlights.map(h=>`<li>${h}</li>`).join('')}</ul>`:''}
+        ${priceTags.length?`<div style="margin-top:6px;display:flex;flex-wrap:wrap;gap:3px">${priceTags.map(t=>`<span style="background:var(--copper-light);color:var(--copper);border-radius:4px;padding:2px 6px;font-size:10px;font-weight:700">${t.label||t.tag}:₹${t.price||t.amount}</span>`).join('')}</div>`:''}
+        <div style="margin-top:5px;font-size:11px;font-weight:600;color:${p.stock==='Available'?'var(--success)':p.stock==='Limited'?'var(--warning)':'var(--danger)'}">${p.stock}</div>
+        <div style="margin-top:3px;font-size:11px;color:var(--muted)">Website: ${p.visible==='yes'?'✅ Visible':'❌ Hidden'}</div>
+        <div class="pc-actions">
+          <button class="btn-vis" onclick="toggleVis(${p.id},'${p.visible==='yes'?'no':'yes'}')">${p.visible==='yes'?'🙈 Hide':'👁 Show'}</button>
+          <button class="btn-del" onclick="deleteProduct(${p.id})">🗑️ Delete</button>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+async function toggleVis(id,newVisible){
+  const formData=new FormData();
+  formData.append('id',id);
+  formData.append('visible',newVisible);
+  try{
+    const res=await fetch('toggle_visible.php',{method:'POST',body:formData});
+    const data=await res.json();
+    if(data.status==='success'){
+      await loadProductsFromServer();
+      renderProducts();
+      refreshDashboard();
+      toast('✅ Visibility updated');
+    } else {
+      toast('❌ ' + (data.message||'Failed'));
+    }
+  } catch(e){toast('❌ Server error');}
+}
+async function deleteProduct(id){
+  if(!confirm('Delete this product?'))return;
+  const formData=new FormData();
+  formData.append('id',id);
+  try{
+    const res=await fetch('delete_product.php',{method:'POST',body:formData});
+    const data=await res.json();
+    if(data.status==='success'){
+      await loadProductsFromServer();
+      renderProducts();
+      refreshDashboard();
+      toast('🗑️ Product deleted');
+    } else {
+      toast('❌ ' + (data.message||'Failed'));
+    }
+  } catch(e){toast('❌ Server error');}
+}
+
+// ══ ORDERS ══
+function addOrder(){
+  const name=document.getElementById('o-name').value.trim();
+  const mobile=document.getElementById('o-mobile').value.trim();
+  const product=document.getElementById('o-product').value.trim();
+  const amount=document.getElementById('o-amount').value.trim();
+  if(!name||!mobile||!product||!amount){toast('⚠️ Fill all order details');return;}
+  const orders=getOrders();
+  orders.push({id:'SS'+String(orders.length+1).padStart(4,'0'),name,mobile,product,amount,status:'Ordered',date:new Date().toLocaleDateString('en-IN')});
+  saveOrders(orders);
+  ['o-name','o-mobile','o-product','o-amount'].forEach(id=>document.getElementById(id).value='');
+  renderOrders();refreshDashboard();toast('✅ Order added');
+}
+
+async function renderOrders(){
+  const search=(document.getElementById('order-search')||{}).value||'';
+  const statusF=(document.getElementById('order-status-filter')||{}).value||'';
+  let orders=await loadOrdersFromServer();
+  if(search) orders=orders.filter(o=>o.name.toLowerCase().includes(search.toLowerCase())||o.mobile.includes(search)||o.product.toLowerCase().includes(search.toLowerCase()));
+  if(statusF) orders=orders.filter(o=>o.status===statusF);
+  const tb=document.getElementById('orders-tbody');
+  if(!orders.length){tb.innerHTML='<tr><td colspan="12"><div class="empty"><div class="e-icon">📭</div><p>No orders found</p></div></td></tr>';return;}
+  tb.innerHTML=[...orders].reverse().map(o=>{
+    const measurementHTML = (o.measurement && o.measurement.trim() !== '')
+      ? `<div style="font-size:11px;color:var(--teal-dark);max-width:180px;white-space:normal;line-height:1.5;">${o.measurement}</div>`
+      : '<span style="color:var(--muted);font-size:11px;">—</span>';
+    const notesHTML = (o.notes && o.notes.trim() !== '')
+      ? `<div style="font-size:11px;color:var(--text);max-width:150px;white-space:normal;">${o.notes}</div>`
+      : '<span style="color:var(--muted);font-size:11px;">—</span>';
+    const voiceHTML = (o.voiceNote && o.voiceNote.trim() !== '')
+      ? `<audio controls style="height:28px;max-width:160px;"><source src="${o.voiceNote}" type="audio/webm"></audio>`
+      : '<span style="color:var(--muted);font-size:11px;">—</span>';
+    return `
+    <tr>
+      <td><b>#${o.id}</b></td><td>${o.name}</td>
+      <td> ${o.mobile}</td><td>${o.product}</td>
+      <td><b>₹${o.amount}</b></td>
+      <td style="max-width:150px;">${measurementHTML}</td>
+      <td style="max-width:150px;">${notesHTML}</td>
+      <td>${voiceHTML}</td>
+      <td>${badgeHTML(o.status)}</td><td>${o.date}</td>
+      <td>
+        <select class="status-select" onchange="updateStatus('${o.id}',this.value)">
+          <option ${o.status==='Ordered'?'selected':''}>Ordered</option>
+          <option ${o.status==='Processing'?'selected':''}>Processing</option>
+          <option ${o.status==='Delivered'?'selected':''}>Delivered</option>
+          <option ${o.status==='Cancelled'?'selected':''}>Cancelled</option>
+          <option ${o.status==='Pending'?'selected':''}>Pending</option>
+        </select>
+      </td>
+      <td><button class="btn btn-wa" style="font-size:11px;padding:4px 10px;" onclick="waNotify('${o.mobile}','${o.name}','${o.product}','${o.status}')">💬</button></td>
+    </tr>`;}).join('');
+}
+
+async function updateStatus(orderId, newStatus){
+  const numericId = String(orderId).replace('#', '').trim();
+  const formData = new FormData();
+  formData.append('id', numericId);
+  formData.append('status', newStatus);
+
+  toast('⏳ Updating status...');
+  try{
+    const res = await fetch('update_order_status.php', { method: 'POST', body: formData });
+    const data = await res.json();
+    if(data.status === 'success'){
+      await loadOrdersFromServer();
+      renderOrders();
+      refreshDashboard();
+      toast('✅ Status → ' + newStatus);
+    } else {
+      toast('❌ ' + (data.message || 'Update failed'));
+      renderOrders();
+    }
+  } catch(e){
+    toast('❌ Server error while updating status');
+    renderOrders();
+  }
+}
+
+// ══ EXPORT ══
+function exportOrdersCSV(){
+  const orders=getOrders();
+  if(!orders.length){toast('⚠️ No orders to export');return;}
+  const rows=[['Order ID','Customer','Mobile','Product','Amount','Status','Date'],...orders.map(o=>[o.id,o.name,o.mobile,o.product,o.amount,o.status,o.date])];
+  const csv=rows.map(r=>r.join(',')).join('\n');
+  const a=document.createElement('a');
+  a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(csv);
+  a.download='sumathis_orders_'+new Date().toLocaleDateString('en-IN').replace(/\//g,'-')+'.csv';
+  a.click();toast('📥 CSV exported!');
+}
+function printOrders(){window.print();}
+
+// ══ CUSTOMIZED ORDER ══
+async function renderCustomOrders(){
+  const search=(document.getElementById('customorder-search')||{}).value||'';
+  const orders=await loadOrdersFromServer();
+  let customOrders=orders.filter(o=>String(o.source||'').toLowerCase()==='custom-order');
+  if(search){
+    const s=search.toLowerCase();
+    customOrders=customOrders.filter(o=>o.name.toLowerCase().includes(s)||o.mobile.includes(search));
+  }
+  const tb=document.getElementById('customorder-tbody');
+  if(!customOrders.length){
+    tb.innerHTML='<tr><td colspan="8"><div class="empty"><div class="e-icon">✂️</div><p>No customized orders yet</p></div></td></tr>';
+    return;
+  }
+  tb.innerHTML=[...customOrders].reverse().map(o=>{
+    const measurementHTML=(o.measurement&&o.measurement.trim()!=='')?`<div style="font-size:11px;color:var(--teal-dark);max-width:180px;white-space:normal;line-height:1.5;">${o.measurement}</div>`:'<span style="color:var(--muted);font-size:11px;">—</span>';
+    const notesHTML=(o.notes&&o.notes.trim()!=='')?`<div style="font-size:11px;color:var(--text);max-width:150px;white-space:normal;">${o.notes}</div>`:'<span style="color:var(--muted);font-size:11px;">—</span>';
+    const voiceHTML=(o.voiceNote&&o.voiceNote.trim()!=='')?`<audio controls style="height:28px;max-width:160px;"><source src="${o.voiceNote}" type="audio/webm"></audio>`:'<span style="color:var(--muted);font-size:11px;">—</span>';
+    return `<tr>
+      <td><span class="cust-avatar">${(o.name[0]||'?').toUpperCase()}</span>${o.name}</td>
+      <td>📞 ${o.mobile}</td>
+      <td>${o.product}</td>
+      <td style="max-width:150px;">${measurementHTML}</td>
+      <td style="max-width:150px;">${notesHTML}</td>
+      <td>${voiceHTML}</td>
+      <td>${o.date}</td>
+      <td><button class="btn btn-wa" style="font-size:11px;padding:4px 10px;" onclick="waCustomer('${o.mobile}','${o.name}')">💬</button></td>
+    </tr>`;
+  }).join('');
+}
+
+// ══ BOUTIQUE CONTACT FORM ══
+async function renderContactForms(){
+  const search=(document.getElementById('contactform-search')||{}).value||'';
+  let contacts=await loadContactsFromServer();
+  contacts=splitContacts(contacts).boutique;
+  if(search){
+    const s=search.toLowerCase();
+    contacts=contacts.filter(c=>(c.name||'').toLowerCase().includes(s)||(c.phone||'').includes(search)||(c.email||'').toLowerCase().includes(s));
+  }
+  const tb=document.getElementById('contactform-tbody');
+  if(!contacts.length){
+    tb.innerHTML='<tr><td colspan="6"><div class="empty"><div class="e-icon">📨</div><p>No contact form submissions yet</p></div></td></tr>';
+    return;
+  }
+  tb.innerHTML=[...contacts].reverse().map(c=>{
+    const date=c.created_at?new Date(c.created_at).toLocaleDateString('en-IN'):'';
+    return `<tr>
+      <td><b>${c.name||''}</b></td>
+      <td>${c.phone?'📞 '+c.phone:'—'}</td>
+      <td>${c.email||'—'}</td>
+      <td>${c.service||'—'}</td>
+      <td style="max-width:220px;white-space:normal;">${c.message||''}</td>
+      <td>${date}</td>
+    </tr>`;
+  }).join('');
+}
+
+// ══ CATERING CONTACT FORM ══
+async function renderContactForms2(){
+  const search=(document.getElementById('contactform2-search')||{}).value||'';
+  let contacts=await loadContactsFromServer();
+  contacts=splitContacts(contacts).catering;
+  if(search){
+    const s=search.toLowerCase();
+    contacts=contacts.filter(c=>(c.name||'').toLowerCase().includes(s)||(c.phone||'').includes(search)||(c.email||'').toLowerCase().includes(s));
+  }
+  const tb=document.getElementById('contactform2-tbody');
+  if(!contacts.length){
+    tb.innerHTML='<tr><td colspan="6"><div class="empty"><div class="e-icon">🍽️</div><p>No catering contact form submissions yet</p></div></td></tr>';
+    return;
+  }
+  tb.innerHTML=[...contacts].reverse().map(c=>{
+    const date=c.created_at?new Date(c.created_at).toLocaleDateString('en-IN'):'';
+    return `<tr>
+      <td><b>${c.name||''}</b></td>
+      <td>${c.phone?'📞 '+c.phone:'—'}</td>
+      <td>${c.email||'—'}</td>
+      <td>${c.service||'—'}</td>
+      <td style="max-width:220px;white-space:normal;">${c.message||''}</td>
+      <td>${date}</td>
+    </tr>`;
+  }).join('');
+}
+
+// ══ REVENUE ══
+async function renderRevenue(){
+  const orders=await loadOrdersFromServer();
+  const delivered=orders.filter(o=>o.status==='Delivered');
+  const total=delivered.reduce((s,o)=>s+Number(o.amount),0);
+  const now=new Date();
+  const thisMonth=delivered.filter(o=>{
+    const p=o.date.split('/');return p.length>=2&&parseInt(p[1])===now.getMonth()+1&&parseInt(p[2])===now.getFullYear();
+  });
+  const monthTotal=thisMonth.reduce((s,o)=>s+Number(o.amount),0);
+  const avg=delivered.length?Math.round(total/delivered.length):0;
+  document.getElementById('rev-total').textContent='₹'+total.toLocaleString('en-IN');
+  document.getElementById('rev-month').textContent='₹'+monthTotal.toLocaleString('en-IN');
+  document.getElementById('rev-avg').textContent='₹'+avg.toLocaleString('en-IN');
+  document.getElementById('rev-month-label').textContent=now.toLocaleDateString('en-IN',{month:'long',year:'numeric'});
+
+  // Revenue chart
+  const monthData=getMonthlyData(delivered);
+  const monthRevenue=Array(12).fill(0);
+  delivered.forEach(o=>{
+    const p=o.date.split('/');if(p.length>=2){const m=parseInt(p[1])-1;if(m>=0&&m<12)monthRevenue[m]+=Number(o.amount);}
+  });
+  if(revenueChart) revenueChart.destroy();
+  const rc=document.getElementById('revenueChart');
+  if(rc){
+    revenueChart=new Chart(rc,{
+      type:'line',
+      data:{labels:monthData.labels,datasets:[{label:'Revenue (₹)',data:monthRevenue,borderColor:'#00897B',backgroundColor:'rgba(0,137,123,0.1)',tension:0.4,fill:true,pointBackgroundColor:'#00897B',pointRadius:5}]},
+      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true}}}
+    });
+  }
+
+  // Top products
+  const prodRev={};
+  delivered.forEach(o=>{prodRev[o.product]=(prodRev[o.product]||0)+Number(o.amount);});
+  const sorted=Object.entries(prodRev).sort((a,b)=>b[1]-a[1]).slice(0,5);
+  const maxRev=sorted[0]?sorted[0][1]:1;
+  document.getElementById('top-products-list').innerHTML=sorted.length?sorted.map(([name,rev],i)=>`
+    <div style="margin-bottom:14px;">
+      <div style="display:flex;justify-content:space-between;font-size:13px;font-weight:600;margin-bottom:4px;">
+        <span>${i+1}. ${name}</span><span>₹${rev.toLocaleString('en-IN')}</span>
+      </div>
+      <div style="background:#E0E0E0;border-radius:6px;height:8px;">
+        <div style="background:var(--teal);height:8px;border-radius:6px;width:${Math.round(rev/maxRev*100)}%;"></div>
+      </div>
+    </div>`).join(''):'<div class="empty"><div class="e-icon">📊</div><p>No delivered orders yet</p></div>';
+
+  // Delivered table
+  const dtb=document.getElementById('delivered-tbody');
+  dtb.innerHTML=delivered.length?[...delivered].reverse().map(o=>`
+    <tr><td><b>#${o.id}</b></td><td>${o.name}</td><td>${o.product}</td><td><b>₹${o.amount}</b></td><td>${o.date}</td></tr>`).join('')
+  :'<tr><td colspan="5"><div class="empty"><div class="e-icon">📭</div><p>No delivered orders</p></div></td></tr>';
+}
+
+// ══ WHATSAPP ══
+function waNotify(mobile,name,product,status){
+  const msgs={
+    'Ordered':`Hi ${name}! 👗 Your order for *${product}* has been received at Sumathi's Styles. We will start processing soon! 🙏`,
+    'Processing':`Hi ${name}! ✂️ Your order *${product}* is currently being processed at Sumathi's Styles. We'll notify you when it's ready!`,
+    'Delivered':`Hi ${name}! 🎉 Your order *${product}* is ready! Please visit Sumathi's Styles, Injambakkam to collect it. Thank you! 💚`,
+    'Cancelled':`Hi ${name}, your order *${product}* has been cancelled. Please contact us for more details. – Sumathi's Styles`,
+    'Pending':`Hi ${name}! ⏳ Your order *${product}* is pending. We'll update you soon! – Sumathi's Styles`
+  };
+  const msg=msgs[status]||`Hi ${name}! Update regarding your order *${product}* – Sumathi's Styles`;
+  const num=mobile.replace(/\D/g,'');
+  const url=`https://wa.me/91${num}?text=${encodeURIComponent(msg)}`;
+  window.open(url,'_blank');
+}
+function waCustomer(mobile,name){
+  const msg=`Hi ${name}! 👗 Thank you for choosing Sumathi's Styles, Injambakkam. How can we help you today?`;
+  window.open(`https://wa.me/91${mobile.replace(/\D/g,'')}?text=${encodeURIComponent(msg)}`,'_blank');
+}
+
+// ══ BUY NOW (Customer side — called from customer website) ══
+let buyProductName='', buyProductPrice='';
+function openBuyNow(productName, price){
+  buyProductName=productName;
+  buyProductPrice=price;
+  document.getElementById('buy-product').value=productName+' – ₹'+price;
+  document.getElementById('buy-amount').value=price;
+  document.getElementById('buy-name').value='';
+  document.getElementById('buy-mobile').value='';
+  document.getElementById('buy-notes').value='';
+  document.getElementById('buy-modal').classList.add('show');
+}
+function closeBuyModal(){
+  document.getElementById('buy-modal').classList.remove('show');
+}
+
+async function submitBuyOrder(){
+  const name=document.getElementById('buy-name').value.trim();
+  const mobile=document.getElementById('buy-mobile').value.trim();
+  const amount=document.getElementById('buy-amount').value.trim();
+  const notes=document.getElementById('buy-notes').value.trim();
+  if(!name||!mobile){toast('⚠️ Name & Mobile required!');return;}
+  if(mobile.length!==10){toast('⚠️ Enter valid 10-digit mobile!');return;}
+
+  const payload = {
+    type: 'order',
+    name, mobile,
+    product: buyProductName || 'Order',
+    amount: Number(amount || 0),
+    notes: notes || '',
+    source: 'website'
+  };
+
+  try{
+    const res = await fetch('submit_forms.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    const data = await res.json();
+    if(data.status === 'success'){
+      closeBuyModal();
+      toast('✅ Order placed! We will contact you soon 🎉');
+      await loadOrdersFromServer();
+      refreshDashboard();
+    } else {
+      toast('❌ ' + (data.message || 'Failed to place order'));
+    }
+  } catch(e){
+    toast('❌ Server error while placing order');
+  }
+}
+
+// ══ CLEAR DATA (deletes real rows from MySQL via clear_data.php) ══
+async function clearData(target, confirmMsg){
+  if(!confirm(confirmMsg)) return;
+  toast('⏳ Clearing...');
+  try{
+    const formData = new FormData();
+    formData.append('target', target);
+    const res = await fetch('clear_data.php', { method: 'POST', body: formData });
+    const data = await res.json();
+    if(data.status === 'success'){
+      toast('🗑️ Cleared successfully');
+      await loadOrdersFromServer();
+      renderOrders();
+      renderCustomOrders();
+      renderContactForms();
+      renderContactForms2();
+      renderRevenue();
+      refreshDashboard();
+    } else {
+      toast('❌ ' + (data.message || 'Clear failed'));
+    }
+  } catch(e){
+    toast('❌ Server error while clearing data');
+  }
+}
+
+// ══ HELPERS ══
+function badgeHTML(status){
+  const cls={Ordered:'badge-ordered',Processing:'badge-processing',Delivered:'badge-delivered',Cancelled:'badge-cancelled',Pending:'badge-pending'};
+  return`<span class="badge ${cls[status]||'badge-pending'}">${status}</span>`;
+}
+function toast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),3000);
+}
+</script>
+</body>
+</html>
