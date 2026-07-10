@@ -1,10 +1,11 @@
 <?php
 mysqli_report(MYSQLI_REPORT_OFF);
 
-define('DB_HOST', 'localhost');
-define('DB_USER', 'root');
-define('DB_PASS', '');
-define('DB_NAME', 'product_db');
+define('DB_HOST', getenv('MYSQLHOST') ?: 'localhost');
+define('DB_USER', getenv('MYSQLUSER') ?: 'root');
+define('DB_PASS', getenv('MYSQLPASSWORD') ?: '');
+define('DB_NAME', getenv('MYSQLDATABASE') ?: 'product_db');
+define('DB_PORT', getenv('MYSQLPORT') ?: 3306);
 
 function getConnection() {
     static $conn = null;
@@ -13,7 +14,7 @@ function getConnection() {
         return $conn;
     }
 
-    $conn = @new mysqli(DB_HOST, DB_USER, DB_PASS);
+    $conn = @new mysqli(DB_HOST, DB_USER, DB_PASS, '', (int)DB_PORT);
 
     if ($conn->connect_error) {
         http_response_code(500);
