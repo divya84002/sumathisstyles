@@ -1270,7 +1270,7 @@ async function clearData(target, confirmMsg){
   try{
     const formData = new FormData();
     formData.append('target', target);
-    const res = await fetch('clear_data.php', { method: 'POST', body: formData });
+    const res = await fetch('Clear_data.php', { method: 'POST', body: formData });
     const data = await res.json();
     if(data.status === 'success'){
       toast('🗑️ Cleared successfully');
