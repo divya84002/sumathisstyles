@@ -1,16 +1,23 @@
 <?php
 header('Content-Type: application/json');
 
-// ⚠️ IMPORTANT: idha unga get_submissions.php / save_product.php file la irukura
-// $host / $user / $pass / $dbname values oda EXACT-a match pannunga.
-// Neenga "product_db" vs "sumathis_styles" nu rendu db name try pannirundhinga,
-// so ippo edhu ACTIVE-a use aaguthu nu confirm pannitu keela set pannunga.
-$host   = 'localhost';
-$user   = 'root';
-$pass   = '';
-$dbname = 'product_db'; // <-- unga actual active database
+// ✅ FIX: Railway la 'localhost' MySQL kedaiyathu. Railway automatically
+// inject pannura environment variables use pannanum — unga baakki PHP files
+// (get_products.php / submit_forms.php) la enna variable names use panningalo,
+// adha ithuvum match pannanum. Common Railway MySQL env var names keela kudukaren.
 
-$conn = new mysqli($host, $user, $pass, $dbname);
+$host   = getenv('MYSQLHOST')     ?: getenv('DB_HOST');
+$user   = getenv('MYSQLUSER')     ?: getenv('DB_USER');
+$pass   = getenv('MYSQLPASSWORD') ?: getenv('DB_PASSWORD');
+$dbname = getenv('MYSQLDATABASE') ?: getenv('DB_NAME');
+$port   = getenv('MYSQLPORT')     ?: getenv('DB_PORT') ?: 3306;
+
+if (!$host || !$user || !$dbname) {
+    echo json_encode(['status' => 'error', 'message' => 'DB env vars missing. Check Railway variable names.']);
+    exit;
+}
+
+$conn = new mysqli($host, $user, $pass, $dbname, $port);
 if ($conn->connect_error) {
     echo json_encode(['status' => 'error', 'message' => 'DB connection failed: ' . $conn->connect_error]);
     exit;
