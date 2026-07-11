@@ -1282,7 +1282,7 @@ async function clearData(target, confirmMsg){
       renderRevenue();
       refreshDashboard();
     } else {
-      toast('❌ ' + (data.message || 'Clear failed'));
+      toast('❌ ' + (data.message || 'clear failed'));
     }
   } catch(e){
     toast('❌ Server error while clearing data');
