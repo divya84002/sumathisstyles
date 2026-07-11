@@ -1335,7 +1335,7 @@ document.getElementById('pdThumbs').innerHTML = '';
         if (!dateEl || !countdownEl) return;
 
         const deliveryDate = new Date();
-        deliveryDate.setDate(deliveryDate.getDate() + 3);
+        deliveryDate.setDate(deliveryDate.getDate() + 12);
         const options = { day: 'numeric', month: 'short', weekday: 'short' };
         const formatted = deliveryDate.toLocaleDateString('en-IN', options).replace(/,/, '');
         const parts = formatted.split(' ');
@@ -1729,7 +1729,16 @@ async function loadMyOrders() {
                         <div class="order-price">₹${o.amount}</div>
                     </div>
                 </div>
-                ${buildTrackerHTML(status)}
+              ${buildTrackerHTML(status, o)}
+                ${status !== 'Cancelled' ? `
+                <div style="padding:0 20px 10px;">
+                    <span onclick="toggleOrderUpdates('${o.id}')" style="font-size:13px;color:var(--primary);font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:5px;">
+                        See All Updates <i class="fas fa-chevron-down" id="chev-${o.id}"></i>
+                    </span>
+                </div>
+                <div id="updates-${o.id}" style="display:none;padding:0 20px 16px;border-top:1px solid #f0f0f0;">
+                    ${buildDetailedTimeline(o)}
+                </div>` : ''}
                 <div class="order-card-footer">
                     ${canCancel ? `<button class="btn-cancel-order" onclick="cancelMyOrder('${o.id}')">Cancel Order</button>` : ''}
                 </div>
@@ -1738,12 +1747,15 @@ async function loadMyOrders() {
     }
 
     // ✅ NEW — Flipkart style tracker with line + dots
-    function buildTrackerHTML(status) {
+    function buildTrackerHTML(status, o) {
         if (status === 'Cancelled') {
-            return `<div class="order-tracker">
-                <div class="tracker-steps">
-                    <div class="tracker-line-fill" style="width:100%;background:var(--danger);"></div>
-                    <div class="tracker-step"><div class="tracker-dot cancelled-dot"><i class="fas fa-times"></i></div><div class="tracker-label" style="color:var(--danger);font-weight:600;">Cancelled</div></div>
+            const dateStr = o && o.cancelled_at ? new Date(o.cancelled_at).toLocaleDateString('en-IN', {day:'numeric',month:'short'}) : '';
+            const reasonText = o && o.cancel_reason ? o.cancel_reason : 'Your order was cancelled as per your request';
+            return `<div style="display:flex;align-items:center;gap:10px;padding:14px 20px;">
+                <span style="width:10px;height:10px;border-radius:50%;background:var(--danger);flex-shrink:0;"></span>
+                <div>
+                    <div style="font-weight:700;font-size:14px;color:var(--text);">Cancelled${dateStr ? ' on '+dateStr : ''}</div>
+                    <div style="font-size:12px;color:var(--text-light);">${reasonText}</div>
                 </div>
             </div>`;
         }
@@ -1773,8 +1785,36 @@ async function loadMyOrders() {
             </div>
         </div>`;
     }
-         
-    
+
+    // ✅ NEW — Flipkart-style detailed timeline shown under "See All Updates"
+    function buildDetailedTimeline(o) {
+        const steps = [
+            { label: 'Order Confirmed', time: o.created_at, done: true, sub: 'Your order has been placed.' },
+            { label: 'Processing', time: o.processing_at, done: !!o.processing_at, sub: 'Seller is processing your order.' },
+            { label: 'Delivered', time: o.delivered_at, done: !!o.delivered_at, sub: 'Your item has been delivered.' }
+        ];
+        return `<div style="padding-top:14px;">` + steps.map(s => `
+            <div style="display:flex;gap:12px;margin-bottom:16px;">
+                <div style="width:12px;height:12px;border-radius:50%;background:${s.done ? 'var(--primary)' : '#ddd'};margin-top:3px;flex-shrink:0;"></div>
+                <div>
+                    <div style="font-weight:700;font-size:13px;color:var(--text);">${s.label} <span style="font-weight:400;color:var(--text-light);font-size:12px;">${s.time ? new Date(s.time).toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'}) : ''}</span></div>
+                    ${s.done ? `<div style="font-size:12px;color:var(--text-light);margin-top:2px;">${s.sub}</div><div style="font-size:11px;color:var(--text-light);">${s.time ? new Date(s.time).toLocaleString('en-IN',{hour:'2-digit',minute:'2-digit'}) : ''}</div>` : `<div style="font-size:12px;color:var(--text-light);margin-top:2px;">Pending</div>`}
+                </div>
+            </div>`).join('') + `</div>`;
+    }
+
+    function toggleOrderUpdates(orderId) {
+        const el = document.getElementById('updates-' + orderId);
+        const chev = document.getElementById('chev-' + orderId);
+        if (!el) return;
+        if (el.style.display === 'none') {
+            el.style.display = 'block';
+            if (chev) chev.className = 'fas fa-chevron-up';
+        } else {
+            el.style.display = 'none';
+            if (chev) chev.className = 'fas fa-chevron-down';
+        }
+    }
 
     async function cancelMyOrder(orderId) {
         if (!confirm('Are you sure you want to cancel this order?')) return;
