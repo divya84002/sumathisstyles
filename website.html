@@ -102,11 +102,12 @@
         .section-header .line { width: 80px; height: 4px; background: linear-gradient(90deg, var(--primary), var(--secondary)); margin: 15px auto 0; border-radius: 3px; }
 
         .categories-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px; }
-        .category-card { background: var(--white); border-radius: 20px; padding: 30px 15px; text-align: center; cursor: pointer; transition: all 0.3s; box-shadow: var(--shadow); border: 2px solid transparent; position: relative; overflow: hidden; }
+        .category-card { background: var(--white); border-radius: 16px; padding: 18px 10px; text-align: center; cursor: pointer; transition: all 0.3s; box-shadow: var(--shadow); border: 2px solid transparent; position: relative; overflow: hidden; }
+        .category-icon { width: 90px; height: 110px; border-radius: 10px; overflow: hidden; margin: 0 auto 12px; background: #fff; box-shadow: 0 4px 15px rgba(0,128,128,0.15); }
+        .category-icon img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; transform: scale(1.15); }
         .category-card:hover { transform: translateY(-8px); border-color: var(--secondary); box-shadow: var(--shadow-hover); }
-        .category-card::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: linear-gradient(90deg, var(--primary), var(--secondary)); opacity: 0; transition: opacity 0.3s; }
+        .category-card::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, var(--primary), var(--secondary)); opacity: 0; transition: opacity 0.3s; }
         .category-card:hover::after { opacity: 1; }
-        .category-icon { width: 70px; height: 70px; background: linear-gradient(135deg, var(--primary), var(--primary-light)); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; color: var(--white); font-size: 28px; box-shadow: 0 4px 15px rgba(0,128,128,0.3); }
         .category-card h3 { font-size: 15px; color: var(--text); margin-bottom: 6px; }
         .category-card p { font-size: 12px; color: var(--text-light); }
 
@@ -492,23 +493,37 @@
             .contact-grid { grid-template-columns: 1fr; }
         }
 
-       @media (max-width: 768px) {
-    /* ...existing rules... */
-
+      
+@media (max-width: 768px) {
     .categories-grid { 
         grid-template-columns: repeat(5, 1fr); 
         gap: 8px; 
     }
+  
     .category-card { 
-        padding: 12px 4px; 
+        padding: 10px 4px; 
         border-radius: 12px; 
     }
-    .category-icon { 
-        width: 38px; 
-        height: 38px; 
-        font-size: 14px; 
-        margin-bottom: 6px; 
+
+    
+  .category-icon { 
+        width: 66px; 
+        height: 82px; 
+        border-radius: 8px;
+        margin: 0 auto 6px;
+        overflow: hidden;
+        background: #f8f8f8;
+        flex-shrink: 0;
     }
+    .category-icon img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: top center;
+        display: block;
+    }
+
+
     .category-card h3 { 
         font-size: 10px; 
         margin-bottom: 2px; 
@@ -519,9 +534,43 @@
     }
 }
 
-  .footer { 
-        padding-bottom: 90px; 
-    }
+.footer { 
+    padding-bottom: 90px; 
+}
+
+.checkout-modal { max-width:920px; width:95%; padding:0; }
+.checkout-steps { display:flex; align-items:flex-start; justify-content:center; padding:26px 20px 20px; border-bottom:1px solid #eee; }
+.checkout-step-item { display:flex; flex-direction:column; align-items:center; gap:6px; min-width:90px; }
+.checkout-step-circle { width:34px; height:34px; border-radius:50%; background:#e0e0e0; color:#888; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:14px; transition:all .3s; }
+.checkout-step-circle.active { background:var(--primary); color:#fff; }
+.checkout-step-circle.done { background:var(--success); color:#fff; }
+.checkout-step-item span { font-size:12px; font-weight:600; color:#888; }
+.checkout-step-line { width:60px; height:2px; background:#e0e0e0; margin:16px 4px 0; }
+.checkout-step-line.done { background:var(--success); }
+.checkout-body { padding:26px 30px; max-height:70vh; overflow-y:auto; }
+.checkout-panel h4 { color:var(--primary); font-family:'Playfair Display',serif; margin-bottom:16px; }
+.co-deliver-to { background:#f5f5f5; border-radius:12px; padding:16px 18px; margin-bottom:20px; position:relative; }
+.co-tag { background:#fff; border:1px solid #ddd; font-size:10px; padding:2px 8px; border-radius:4px; margin-left:8px; font-weight:700; color:var(--primary); }
+.co-change-btn { position:absolute; top:16px; right:18px; background:none; border:none; color:var(--primary); font-weight:700; font-size:13px; cursor:pointer; }
+.co-item-card { display:flex; gap:14px; padding:14px; border:1px solid #eee; border-radius:12px; margin-bottom:14px; align-items:center; }
+.co-price-box { background:#fafafa; border-radius:12px; padding:18px; margin-bottom:20px; }
+.co-price-row { display:flex; justify-content:space-between; font-size:14px; color:#555; padding:6px 0; }
+.co-price-row.total { font-weight:700; font-size:17px; color:var(--primary); border-top:1px dashed #ddd; margin-top:8px; padding-top:10px; }
+.co-payment-grid { display:grid; grid-template-columns:220px 1fr; gap:20px; }
+.co-pay-option { padding:14px; border:1.5px solid #e0e0e0; border-radius:10px; margin-bottom:10px; cursor:pointer; font-size:14px; font-weight:600; transition:all .2s; }
+.co-pay-option i { color:var(--primary); margin-right:8px; }
+.co-pay-option small { display:block; font-size:11px; color:#999; font-weight:400; margin-top:3px; margin-left:26px; }
+.co-pay-option.selected { border-color:var(--primary); background:rgba(0,128,128,0.06); }
+.co-pay-option.disabled { opacity:0.55; cursor:not-allowed; }
+.co-payment-detail { border:1px solid #eee; border-radius:12px; padding:24px; min-height:280px; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; }
+.co-qr-box { background:#fff; border:1px solid #eee; border-radius:10px; padding:18px; }
+.co-qr-box img { width:180px; height:180px; display:block; }
+.co-place-order-btn { margin-top:20px; }
+@media (max-width:700px) {
+  .co-payment-grid { grid-template-columns:1fr; }
+  .checkout-step-line { width:30px; }
+  .checkout-body { padding:20px; }
+}
 
     </style>
 </head>
@@ -613,7 +662,7 @@
         <div class="nav-container">
             <div class="logo" onclick="showSection('home')">
                 <div class="logo-icon">
-                    <img src="general-profile-picture.png" alt="Sumathi's Style" class="logo-img">
+                    <img src="logo.jpeg" alt="Sumathi's Style" class="logo-img">
                 </div>
                 <div>
                     <h2>Sumathi's Style</h2>
@@ -734,7 +783,6 @@
                         <i class="fas fa-truck"></i>
                         <div>
                             <div class="pd-delivery-date-text" id="pdDeliveryDate">Delivery by --</div>
-                            <div class="pd-delivery-countdown" id="pdDeliveryCountdown">Order in --</div>
                         </div>
                     </div>
                     <div class="pd-delivery-row">
@@ -800,19 +848,19 @@
                     <p>Explore our exclusive women's wear collections</p>
                     <div class="line"></div>
                 </div>
-                <div class="categories-grid">
-                    <div class="category-card" onclick="filterProducts('Kids')"><div class="category-icon"><i class="fas fa-child"></i></div><h3>Kids Wear</h3><p>Adorable outfits</p></div>
-                    <div class="category-card" onclick="filterProducts('Uniform')"><div class="category-icon"><i class="fas fa-user-tie"></i></div><h3>Uniform</h3><p>School & work</p></div>
-                    <div class="category-card" onclick="filterProducts('Modern')"><div class="category-icon"><i class="fas fa-tshirt"></i></div><h3>Modern Wear</h3><p>Western styles</p></div>
-                    <div class="category-card" onclick="filterProducts('Salwar')"><div class="category-icon"><i class="fas fa-female"></i></div><h3>Salwar</h3><p>Designer suits</p></div>
-                    <div class="category-card" onclick="filterProducts('Blouse')"><div class="category-icon"><i class="fas fa-cut"></i></div><h3>Blouse</h3><p>From ₹400</p></div>
+                <div class="categories-grid" style="margin-top:1.5rem;">
+                    <div class="category-card" onclick="filterProducts('Kids')"><div class="category-icon"><img src="Screenshot 2026-07-12 204545.png" alt="Kids Wear"></div><h3>Kids Wear</h3><p>Adorable outfits</p></div>
+                    <div class="category-card" onclick="filterProducts('Uniform')"><div class="category-icon"><img src="unifrom.png" alt="Uniform"></div><h3>Uniform</h3><p>School & work</p></div>
+                    <div class="category-card" onclick="filterProducts('Modern')"><div class="category-icon"><img src="Modernwear.png" alt="Modern Wear"></div><h3>Modern Wear</h3><p>Western styles</p></div>
+                    <div class="category-card" onclick="filterProducts('Salwar')"><div class="category-icon"><img src="salwar.png" alt="Salwar"></div><h3>Salwar</h3><p>Designer suits</p></div>
+                    <div class="category-card" onclick="filterProducts('Blouse')"><div class="category-icon"><img src="Blouse.png" alt="Blouse"></div><h3>Blouse</h3><p>From ₹400</p></div>
                 </div>
                 <div class="categories-grid" style="margin-top:1.5rem;">
-                    <div class="category-card" onclick="filterProducts('Aari')"><div class="category-icon"><i class="fas fa-pencil-ruler"></i></div><h3>Aari Work</h3><p>Hand embroidery</p></div>
-                    <div class="category-card" onclick="filterProducts('Saree')"><div class="category-icon"><i class="fas fa-ribbon"></i></div><h3>Saree</h3><p>Pre-pleating</p></div>
-                    <div class="category-card" onclick="filterProducts('Frock')"><div class="category-icon"><i class="fas fa-female"></i></div><h3>Frocks</h3><p>Party & daily</p></div>
-                    <div class="category-card" onclick="filterProducts('Lehenga')"><div class="category-icon"><i class="fas fa-female"></i></div><h3>Lehenga</h3><p>Bridal & party</p></div>
-                    <div class="category-card" onclick="filterProducts('Kurthi')"><div class="category-icon"><i class="fas fa-tshirt"></i></div><h3>Kurthi</h3><p>Ethnic wear</p></div>
+                    <div class="category-card" onclick="filterProducts('Aari')"><div class="category-icon"><img src="Aari wrk.png" alt="Aari Work"></div><h3>Aari Work</h3><p>Hand embroidery</p></div>
+                    <div class="category-card" onclick="filterProducts('Saree')"><div class="category-icon"><img src="SareePrepleting.png" alt="Saree"></div><h3>Saree</h3><p>Pre-pleating</p></div>
+                    <div class="category-card" onclick="filterProducts('Frock')"><div class="category-icon"><img src="Frocks.png" alt="Frock"></div><h3>Frocks</h3><p>Party & daily</p></div>
+                    <div class="category-card" onclick="filterProducts('Lehenga')"><div class="category-icon"><img src="lenghagha.png" alt="Lehenga"></div><h3>Lehenga</h3><p>Bridal & party</p></div>
+                    <div class="category-card" onclick="filterProducts('Kurthi')"><div class="category-icon"><img src="kurthi.png" alt="Kurthi"></div><h3>Kurthi</h3><p>Ethnic wear</p></div>
                 </div>
             </section>
 
@@ -1081,18 +1129,87 @@
         </div>
     </div>
 
-    <!-- Buy Now Modal -->
+    <!-- Checkout Modal (Flipkart-style: Address -> Order Summary -> Payment) -->
     <div class="modal-overlay" id="buyNowModal">
-        <div class="modal" style="max-width:600px;">
+        <div class="modal checkout-modal">
             <button class="modal-close" onclick="closeModal('buyNow')"><i class="fas fa-times"></i></button>
-            <h2><i class="fas fa-shopping-bag"></i> Complete Your Order</h2>
-            <div class="buy-now-summary" id="buyNowSummary"></div>
-            <div class="form-group"><label>Full Name *</label><input type="text" id="buyName" placeholder="Enter your name" required></div>
-            <div class="form-group"><label>Phone Number *</label><input type="tel" id="buyPhone" placeholder="Enter phone number" required></div>
-            <div class="form-group"><label>Delivery Address *</label><textarea id="buyAddress" rows="3" placeholder="Enter full address" required></textarea></div>
-            <div class="form-group"><label>City / Pincode</label><div class="form-row"><input type="text" id="buyCity" placeholder="City"><input type="text" id="buyPincode" placeholder="Pincode"></div></div>
-            <div class="form-group"><label>Payment Method</label><div class="payment-options"><div class="payment-option selected" onclick="selectPayment(this)"><i class="fas fa-money-bill-wave"></i><p>Cash on Delivery</p></div><div class="payment-option" onclick="selectPayment(this)"><i class="fas fa-mobile-alt"></i><p>UPI / GPay</p></div><div class="payment-option" onclick="selectPayment(this)"><i class="fas fa-credit-card"></i><p>Card</p></div></div></div>
-            <button class="btn-enroll" onclick="placeOrder()"><i class="fas fa-check-circle"></i> Place Order</button>
+
+            <div class="checkout-steps">
+                <div class="checkout-step-item">
+                    <div class="checkout-step-circle" id="stepCircle1">1</div>
+                    <span>Address</span>
+                </div>
+                <div class="checkout-step-line" id="stepLine1"></div>
+                <div class="checkout-step-item">
+                    <div class="checkout-step-circle" id="stepCircle2">2</div>
+                    <span>Order Summary</span>
+                </div>
+                <div class="checkout-step-line" id="stepLine2"></div>
+                <div class="checkout-step-item">
+                    <div class="checkout-step-circle" id="stepCircle3">3</div>
+                    <span>Payment</span>
+                </div>
+            </div>
+
+            <div class="checkout-body">
+
+                <!-- STEP 1: ADDRESS -->
+                <div id="checkoutStepAddress" class="checkout-panel">
+                    <h4><i class="fas fa-map-marker-alt"></i> Delivery Address</h4>
+                    <div class="form-group"><label>Full Name *</label><input type="text" id="buyName" placeholder="Enter your name" required></div>
+                    <div class="form-group"><label>Phone Number *</label><input type="tel" id="buyPhone" placeholder="Enter phone number" required></div>
+                    <div class="form-group"><label>Delivery Address *</label><textarea id="buyAddress" rows="3" placeholder="Enter full address" required></textarea></div>
+                    <div class="form-group"><label>City / Pincode</label><div class="form-row"><input type="text" id="buyCity" placeholder="City"><input type="text" id="buyPincode" placeholder="Pincode"></div></div>
+                    <button class="btn-enroll" onclick="goToOrderSummary()"><i class="fas fa-arrow-right"></i> Deliver Here</button>
+                </div>
+
+                <!-- STEP 2: ORDER SUMMARY -->
+                <div id="checkoutStepSummary" class="checkout-panel" style="display:none;">
+                    <div class="co-deliver-to">
+                        <button class="co-change-btn" onclick="goToAddressStep()">Change</button>
+                        <div style="font-weight:700;font-size:14px;">Deliver to: <span id="coName"></span><span class="co-tag">HOME</span></div>
+                        <p id="coAddress" style="font-size:13px;color:var(--text-light);margin-top:6px;"></p>
+                    </div>
+                    <div id="coItemsList"></div>
+                    <div class="co-price-box">
+                        <h4 style="margin-bottom:12px;font-size:15px;">Price Details</h4>
+                        <div class="co-price-row"><span>Item Total</span><span id="coItemTotal"></span></div>
+                        <div class="co-price-row"><span>Delivery Fee</span><span style="color:#28a745;font-weight:600;">FREE</span></div>
+                        <div class="co-price-row total"><span>Total Amount</span><span id="coGrandTotal"></span></div>
+                    </div>
+                    <button class="btn-enroll" onclick="goToPaymentStep()"><i class="fas fa-arrow-right"></i> Continue to Payment</button>
+                </div>
+
+                <!-- STEP 3: PAYMENT -->
+                <div id="checkoutStepPayment" class="checkout-panel" style="display:none;">
+                    <h4><i class="fas fa-wallet"></i> Choose Payment Method</h4>
+                    <div class="co-payment-grid">
+                        <div>
+                            <div class="co-pay-option" onclick="selectPayMethod('upi', this)">
+                                <i class="fas fa-mobile-alt"></i>UPI
+                                <small>Pay by any UPI app</small>
+                            </div>
+                            <div class="co-pay-option" onclick="selectPayMethod('cod', this)">
+                                <i class="fas fa-money-bill-wave"></i>Cash on Delivery
+                                <small>Pay when delivered</small>
+                            </div>
+                            <div class="co-pay-option disabled" onclick="selectPayMethod('card', this)">
+                                <i class="fas fa-credit-card"></i>Credit / Debit Card
+                                <small>Coming soon</small>
+                            </div>
+                            <div class="co-pay-option disabled">
+                                <i class="fas fa-calendar-alt"></i>EMI
+                                <small>Unavailable</small>
+                            </div>
+                        </div>
+                        <div class="co-payment-detail" id="coPaymentDetail">
+                            <i class="fas fa-hand-pointer" style="font-size:34px;color:#ccc;margin-bottom:10px;"></i>
+                            <p style="color:#999;font-size:14px;">Select a payment method to continue</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
     </div>
 
@@ -1301,64 +1418,62 @@ document.getElementById('pdThumbs').innerHTML = '';
         renderWishlistPage();
     }
 
-    function pdAddToCart() {
-        if (!pdCurrentProduct) return;
-        const p = pdCurrentProduct;
-        const existing = cart.find(item => item.id === p.id);
-        if (existing) existing.qty += pdQty;
-        else cart.push({ ...p, qty: pdQty });
-        updateCartUI();
-        showToast(`${p.name} added to cart! 🛒`, 'success');
-        closePDModal();
-        setTimeout(() => toggleCart(), 400);
+
+    function refreshProductCards() {
+    const shopGrid = document.getElementById('shopProducts');
+    if (shopGrid) {
+        const filtered = (currentCategory === 'All' || currentCategory === 'all')
+            ? products
+            : products.filter(p => categoryMatches(p, currentCategory));
+        renderProducts('shopProducts', filtered);
     }
+    renderProducts('featuredProducts', products.slice(0, 8));
+    renderWishlistPage();
+}
 
-    function pdBuyNow() {
-        if (!pdCurrentProduct) return;
-        const p = pdCurrentProduct;
-        const total = p.price * pdQty;
-        pendingOrder = { product: `${p.name} × ${pdQty}`, amount: total, notes: 'Buy now (product popup)' };
-        document.getElementById('buyNowSummary').innerHTML =
-            `<h4>Order Summary</h4>
-            <div class="item"><span>${p.name} × ${pdQty}</span><span>₹${total.toLocaleString()}</span></div>
-            <div class="item"><span>Delivery</span><span style="color:#388e3c;">FREE</span></div>
-            <div class="total"><span>Total</span><span>₹${total.toLocaleString()}</span></div>`;
-        closePDModal();
-        setTimeout(() => showModal('buyNow'), 300);
-    }
+  function pdAddToCart() {
+    if (!pdCurrentProduct) return;
+    const p = pdCurrentProduct;
+    const existing = cart.find(item => item.id === p.id);
+    if (existing) existing.qty += pdQty;
+    else cart.push({ ...p, qty: pdQty });
+    updateCartUI();
+    refreshProductCards();
+    showToast(`${p.name} added to cart! 🛒`, 'success');
+    closePDModal();
+    setTimeout(() => toggleCart(), 400);
+}
 
-     
-    let pdCountdownInterval = null;
-    function pdUpdateDeliveryInfo() {
-        const dateEl = document.getElementById('pdDeliveryDate');
-        const countdownEl = document.getElementById('pdDeliveryCountdown');
-        if (!dateEl || !countdownEl) return;
+  function pdBuyNow() {
+    if (!pdCurrentProduct) return;
+    const p = pdCurrentProduct;
+    const total = p.price * pdQty;
+    pendingOrder = {
+        product: p.name,
+        amount: total,
+        notes: 'Buy now (product popup)',
+        items: [{ name: p.name, image: p.image, qty: pdQty, price: p.price }]
+    };
+    closePDModal();
+    setTimeout(() => openCheckoutFlow(), 300);
+}
 
-        const deliveryDate = new Date();
-        deliveryDate.setDate(deliveryDate.getDate() + 12);
-        const options = { day: 'numeric', month: 'short', weekday: 'short' };
-        const formatted = deliveryDate.toLocaleDateString('en-IN', options).replace(/,/, '');
-        const parts = formatted.split(' ');
-        dateEl.textContent = `Delivery by ${parts[0]} ${parts[1]}, ${parts[2]}`;
+  let pdCountdownInterval = null;
+function pdUpdateDeliveryInfo() {
+    const dateEl = document.getElementById('pdDeliveryDate');
+    if (!dateEl) return;
 
-        if (pdCountdownInterval) clearInterval(pdCountdownInterval);
-        const deadline = new Date();
-        deadline.setHours(23, 59, 59, 999);
+    const minDays = 2, maxDays = 12;
+    const minDate = new Date(); minDate.setDate(minDate.getDate() + minDays);
+    const maxDate = new Date(); maxDate.setDate(maxDate.getDate() + maxDays);
+    const opts = { day: 'numeric', month: 'short' };
+    const minStr = minDate.toLocaleDateString('en-IN', opts);
+    const maxStr = maxDate.toLocaleDateString('en-IN', opts);
 
-        function tick() {
-            const now = new Date();
-            let diff = deadline - now;
-            if (diff <= 0) { countdownEl.textContent = 'Order now for fastest delivery'; return; }
-            const h = Math.floor(diff / 3600000);
-            const m = Math.floor((diff % 3600000) / 60000);
-            const s = Math.floor((diff % 60000) / 1000);
-            countdownEl.textContent = `Order in ${String(h).padStart(2,'0')}h ${String(m).padStart(2,'0')}m ${String(s).padStart(2,'0')}s`;
-        }
-        tick();
-        pdCountdownInterval = setInterval(tick, 1000);
-    }
+    dateEl.textContent = `Delivery by ${minStr} - ${maxStr}`;
 
-   
+    if (pdCountdownInterval) { clearInterval(pdCountdownInterval); pdCountdownInterval = null; }
+}
     
 
     function pdCheckDelivery() {
@@ -1379,35 +1494,39 @@ document.getElementById('pdThumbs').innerHTML = '';
 
 
     /* Product Card — single price, no discount badge */
-    function createProductCard(p) {
-        const isWishlisted = wishlist.includes(p.id);
-        return `<div class="product-card fade-in">
-            <div style="position:relative;" onclick="openPDModal(${p.id})" style="cursor:pointer;">
-                <img src="${p.image}" class="product-img" alt="${p.name}" loading="lazy" style="cursor:pointer;">
-                ${p.badge ? `<span class="product-badge ${p.badge==='Hot'?'hot':p.badge==='New'?'new':''}">${p.badge}</span>` : ''}
-                <button onclick="event.stopPropagation();toggleWishlist(${p.id})" id="wishBtn${p.id}" style="position:absolute;top:10px;right:10px;background:white;border:none;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,0.15);font-size:16px;color:${isWishlisted?'#dc3545':'#bbb'};transition:all 0.2s;">
-                    <i class="${isWishlisted?'fas':'far'} fa-heart"></i>
-                </button>
-            </div>
-            <div class="product-info" onclick="openPDModal(${p.id})" style="cursor:pointer;">
-                <h3>${p.name}</h3>
-                <p>${p.desc}</p>
-                <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
-                    <div style="display:inline-flex;align-items:center;gap:3px;background:#388e3c;color:#fff;font-size:12px;font-weight:700;padding:2px 8px;border-radius:4px;">
-                        ${p.rating} <i class="fas fa-star" style="font-size:10px;"></i>
-                    </div>
-                    <span style="font-size:12px;color:#878787;">(${p.ratingCount || '500+'})</span>
+      function createProductCard(p) {
+    const isWishlisted = wishlist.includes(p.id);
+    const inCart = cart.some(item => item.id === p.id);
+    return `<div class="product-card fade-in">
+        <div style="position:relative;" onclick="openPDModal(${p.id})" style="cursor:pointer;">
+            <img src="${p.image}" class="product-img" alt="${p.name}" loading="lazy" style="cursor:pointer;">
+            ${p.badge ? `<span class="product-badge ${p.badge==='Hot'?'hot':p.badge==='New'?'new':''}">${p.badge}</span>` : ''}
+            <button onclick="event.stopPropagation();toggleWishlist(${p.id})" id="wishBtn${p.id}" style="position:absolute;top:10px;right:10px;background:white;border:none;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,0.15);font-size:16px;color:${isWishlisted?'#dc3545':'#bbb'};transition:all 0.2s;">
+                <i class="${isWishlisted?'fas':'far'} fa-heart"></i>
+            </button>
+        </div>
+        <div class="product-info" onclick="openPDModal(${p.id})" style="cursor:pointer;">
+            <h3>${p.name}</h3>
+            <p>${p.desc}</p>
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+                <div style="display:inline-flex;align-items:center;gap:3px;background:#388e3c;color:#fff;font-size:12px;font-weight:700;padding:2px 8px;border-radius:4px;">
+                    ${p.rating} <i class="fas fa-star" style="font-size:10px;"></i>
                 </div>
-                <div style="margin-bottom:12px;">
-                    <span style="font-size:20px;font-weight:700;color:#212121;">₹${p.price}</span>
-                </div>
+                <span style="font-size:12px;color:#878787;">(${p.ratingCount || '500+'})</span>
             </div>
-            <div class="product-actions" style="padding:0 20px 16px;">
-                <button class="btn-add-cart" onclick="event.stopPropagation();addToCart(${p.id})"><i class="fas fa-cart-plus"></i> Add to Cart</button>
-                <button class="btn-buy" onclick="event.stopPropagation();buyNow(${p.id})"><i class="fas fa-bolt"></i> Buy Now</button>
+            <div style="margin-bottom:12px;">
+                <span style="font-size:20px;font-weight:700;color:#212121;">₹${p.price}</span>
             </div>
-        </div>`;
-    }
+        </div>
+        <div class="product-actions" style="padding:0 20px 16px;">
+            ${inCart
+                ? `<button class="btn-add-cart" style="background:linear-gradient(135deg,var(--secondary),var(--secondary-light));" onclick="event.stopPropagation();toggleCart()"><i class="fas fa-shopping-cart"></i> View Cart</button>`
+                : `<button class="btn-add-cart" onclick="event.stopPropagation();addToCart(${p.id})"><i class="fas fa-cart-plus"></i> Add to Cart</button>`
+            }
+            <button class="btn-buy" onclick="event.stopPropagation();buyNow(${p.id})"><i class="fas fa-bolt"></i> Buy Now</button>
+        </div>
+    </div>`;
+}
 
     function renderProducts(containerId, productList) {
         const container = document.getElementById(containerId);
@@ -1450,21 +1569,32 @@ document.getElementById('pdThumbs').innerHTML = '';
             targetBtn.style.borderColor = '';
         }
     }
-    function addToCart(productId) {
-        const product = products.find(p => p.id === productId);
-        const existing = cart.find(item => item.id === productId);
-        if (existing) existing.qty++;
-        else cart.push({ ...product, qty: 1 });
-        updateCartUI();
-        showToast(`${product.name} added to cart!`, 'success');
-    }
+   
+     function addToCart(productId) {
+    const product = products.find(p => p.id === productId);
+    const existing = cart.find(item => item.id === productId);
+    if (existing) existing.qty++;
+    else cart.push({ ...product, qty: 1 });
+    updateCartUI();
+    refreshProductCards();
+    showToast(`${product.name} added to cart! 🛒`, 'success');
+    setTimeout(() => toggleCart(), 400);
+}
 
-    function removeFromCart(productId) { cart = cart.filter(item => item.id !== productId); updateCartUI(); }
+function removeFromCart(productId) {
+    cart = cart.filter(item => item.id !== productId);
+    updateCartUI();
+    refreshProductCards();
+}
 
-    function updateQty(productId, change) {
-        const item = cart.find(i => i.id === productId);
-        if (item) { item.qty += change; if (item.qty <= 0) removeFromCart(productId); else updateCartUI(); }
+  function updateQty(productId, change) {
+    const item = cart.find(i => i.id === productId);
+    if (item) {
+        item.qty += change;
+        if (item.qty <= 0) removeFromCart(productId);
+        else updateCartUI();
     }
+}
 
     function updateCartUI() {
         const count = cart.reduce((sum, item) => sum + item.qty, 0);
@@ -1483,29 +1613,154 @@ document.getElementById('pdThumbs').innerHTML = '';
 
     function toggleCart() { document.getElementById('cartSidebar').classList.toggle('active'); }
 
-    function buyNow(productId) {
-        const product = products.find(p => p.id === productId);
-        if (!product) return;
-        pendingOrder = { product: product.name, amount: Number(product.price || 0), notes: 'Single item purchase' };
-        document.getElementById('buyNowSummary').innerHTML = `<h4>Order Summary</h4><div class="item"><span>${product.name}</span><span>₹${product.price}</span></div><div class="item"><span>Delivery</span><span style="color:#388e3c;">FREE</span></div><div class="total"><span>Total</span><span>₹${product.price}</span></div>`;
+    
+       let checkoutStep = 1;
+    let selectedCoPayMethod = null;
+
+    function openCheckoutFlow() {
+        checkoutStep = 1;
+        selectedCoPayMethod = null;
+        selectedPayment = 'Cash on Delivery';
+        if (currentUser) {
+            if (currentUser.name && currentUser.name !== 'User') document.getElementById('buyName').value = currentUser.name;
+            if (currentUser.phone) document.getElementById('buyPhone').value = currentUser.phone;
+        }
+        updateCheckoutStepUI();
         showModal('buyNow');
     }
 
-    function checkout() {
-        if (cart.length === 0) { showToast('Your cart is empty!', 'error'); return; }
-        const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
-        pendingOrder = { product: cart.map(item => `${item.name} x${item.qty}`).join(', '), amount: total, notes: 'Cart checkout' };
-        document.getElementById('buyNowSummary').innerHTML = `<h4>Order Summary</h4>${cart.map(item => `<div class="item"><span>${item.name} x${item.qty}</span><span>₹${item.price * item.qty}</span></div>`).join('')}<div class="item"><span>Delivery</span><span style="color:#388e3c;">FREE</span></div><div class="total"><span>Total</span><span>₹${total.toLocaleString()}</span></div>`;
-        showModal('buyNow');
+    function updateCheckoutStepUI() {
+        document.getElementById('checkoutStepAddress').style.display = checkoutStep === 1 ? 'block' : 'none';
+        document.getElementById('checkoutStepSummary').style.display = checkoutStep === 2 ? 'block' : 'none';
+        document.getElementById('checkoutStepPayment').style.display = checkoutStep === 3 ? 'block' : 'none';
+
+        for (let i = 1; i <= 3; i++) {
+            const circle = document.getElementById('stepCircle' + i);
+            circle.classList.remove('active', 'done');
+            circle.innerHTML = i;
+            if (i < checkoutStep) { circle.classList.add('done'); circle.innerHTML = '<i class="fas fa-check"></i>'; }
+            else if (i === checkoutStep) circle.classList.add('active');
+        }
+        for (let i = 1; i <= 2; i++) {
+            document.getElementById('stepLine' + i).classList.toggle('done', checkoutStep > i);
+        }
     }
 
-    async function placeOrder() {
+    function goToOrderSummary() {
+        const name = document.getElementById('buyName').value.trim();
+        const phone = document.getElementById('buyPhone').value.trim();
+        const address = document.getElementById('buyAddress').value.trim();
+        if (!name || !phone || !address) { showToast('Please fill all required fields!', 'error'); return; }
+        checkoutStep = 2;
+        updateCheckoutStepUI();
+        renderOrderSummaryPanel();
+    }
+
+    function goToAddressStep() { checkoutStep = 1; updateCheckoutStepUI(); }
+
+     function renderOrderSummaryPanel() {
+    const name = document.getElementById('buyName').value.trim();
+    const phone = document.getElementById('buyPhone').value.trim();
+    const address = document.getElementById('buyAddress').value.trim();
+    const city = document.getElementById('buyCity').value.trim();
+    const pincode = document.getElementById('buyPincode').value.trim();
+
+    document.getElementById('coName').textContent = name;
+    document.getElementById('coAddress').textContent = address + (city ? ', ' + city : '') + (pincode ? ' - ' + pincode : '') + ' | ' + phone;
+
+    const amount = Number(pendingOrder.amount || 0);
+    const items = pendingOrder.items && pendingOrder.items.length ? pendingOrder.items : [{ name: pendingOrder.product, image: pendingOrder.image, qty: pendingOrder.qty || 1, price: amount }];
+
+       const deliveryStr = 'This is Customized Stiching — delivered within 10-15 days';
+
+    document.getElementById('coItemsList').innerHTML = items.map(it => {
+        const itemImage = it.image
+            ? `<img src="${it.image}" alt="${it.name}" style="width:80px;height:80px;border-radius:8px;object-fit:cover;flex-shrink:0;border:1px solid #eee;">`
+            : `<div style="width:80px;height:80px;border-radius:8px;background:var(--gray);display:flex;align-items:center;justify-content:center;color:var(--primary);font-size:28px;flex-shrink:0;"><i class="fas fa-tshirt"></i></div>`;
+        const itemTotal = (it.price || 0) * (it.qty || 1);
+        return `
+        <div class="co-item-card" style="align-items:flex-start;">
+            ${itemImage}
+            <div style="flex:1;">
+                <div style="font-weight:600;font-size:15px;margin-bottom:6px;">${it.name}</div>
+                <div style="display:inline-flex;align-items:center;gap:6px;border:1px solid #ddd;border-radius:6px;padding:5px 12px;font-size:13px;color:#333;margin-bottom:8px;">
+                    Qty: ${it.qty || 1}
+                </div>
+                <div style="font-size:12px;color:#388e3c;font-weight:600;">Delivery by ${deliveryStr}</div>
+            </div>
+            <div style="font-weight:700;color:var(--primary);font-size:15px;">₹${itemTotal.toLocaleString()}</div>
+        </div>`;
+    }).join('');
+
+    document.getElementById('coItemTotal').textContent = '₹' + amount.toLocaleString();
+    document.getElementById('coGrandTotal').textContent = '₹' + amount.toLocaleString();
+}
+
+    function goToPaymentStep() {
+        checkoutStep = 3;
+        updateCheckoutStepUI();
+        document.getElementById('coPaymentDetail').innerHTML = `<i class="fas fa-hand-pointer" style="font-size:34px;color:#ccc;margin-bottom:10px;"></i><p style="color:#999;font-size:14px;">Select a payment method to continue</p>`;
+        document.querySelectorAll('.co-pay-option').forEach(o => o.classList.remove('selected'));
+    }
+
+    function selectPayMethod(type, el) {
+        if (el.classList.contains('disabled')) { showToast('This payment method will be available soon!', 'error'); return; }
+        document.querySelectorAll('.co-pay-option').forEach(o => o.classList.remove('selected'));
+        el.classList.add('selected');
+        selectedCoPayMethod = type;
+        const amount = Number(pendingOrder.amount || 0);
+        const detail = document.getElementById('coPaymentDetail');
+
+        if (type === 'upi') {
+            selectedPayment = 'UPI / GPay';
+            const upiId = 'shanusumi221525@okhdfcbank';
+            const upiUrl = `upi://pay?pa=${upiId}&pn=Sumathi%27s%20Style&am=${amount}&cu=INR&tn=${encodeURIComponent('Order: ' + (pendingOrder.product || ''))}`;
+            const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+            if (isMobile) {
+                detail.innerHTML = `
+                    <div style="width:100%;text-align:left;">
+                        <div style="display:flex;align-items:center;gap:12px;padding:14px;border:1.5px solid var(--primary);border-radius:10px;background:rgba(0,128,128,0.04);">
+                            <i class="fas fa-mobile-alt" style="font-size:20px;color:var(--primary);"></i>
+                            <div style="flex:1;">
+                                <div style="font-weight:700;font-size:14px;color:var(--text);">Pay using UPI App</div>
+                                <div style="font-size:12px;color:#888;">Google Pay, PhonePe, Paytm & more</div>
+                            </div>
+                        </div>
+                        <button class="btn-enroll co-place-order-btn" style="margin-top:16px;" onclick="placeOrderFromCheckout('upi')">
+                            <i class="fas fa-bolt"></i> Pay ₹${amount.toLocaleString()}
+                        </button>
+                        <p style="font-size:11px;color:#999;margin-top:10px;text-align:center;">Tapping Pay will open your UPI app to complete payment</p>
+                    </div>
+                `;
+            } else {
+                const qrImg = 'https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=' + encodeURIComponent(upiUrl);
+                detail.innerHTML = `
+                    <h4 style="margin-bottom:14px;color:var(--text);font-size:15px;">Scan QR and Pay</h4>
+                    <div class="co-qr-box"><img src="${qrImg}" alt="UPI QR"></div>
+                    <p style="font-size:15px;font-weight:700;margin-top:14px;">₹${amount.toLocaleString()}</p>
+                    <p style="font-size:12px;color:#888;margin-top:4px;">Scan using GPay, PhonePe, Paytm or any UPI app</p>
+                    <button class="btn-enroll co-place-order-btn" onclick="placeOrderFromCheckout('upi')"><i class="fas fa-bolt"></i> Pay & Place Order</button>
+                `;
+            }
+        } else if (type === 'cod') {
+            selectedPayment = 'Cash on Delivery';
+            detail.innerHTML = `
+                <i class="fas fa-money-bill-wave" style="font-size:40px;color:var(--secondary);margin-bottom:12px;"></i>
+                <h4 style="color:var(--text);margin-bottom:8px;font-size:15px;">Cash on Delivery</h4>
+                <p style="font-size:13px;color:#888;max-width:280px;">Pay ₹${amount.toLocaleString()} in cash when your order is delivered to your doorstep.</p>
+                <button class="btn-enroll co-place-order-btn" onclick="placeOrderFromCheckout('cod')"><i class="fas fa-check-circle"></i> Place Order</button>
+            `;
+        }
+    }
+
+    async function placeOrderFromCheckout(method) {
         const name = document.getElementById('buyName').value.trim();
         const phone = document.getElementById('buyPhone').value.trim();
         const address = document.getElementById('buyAddress').value.trim();
         const city = document.getElementById('buyCity').value.trim();
         const pincode = document.getElementById('buyPincode').value.trim();
-        if (!name || !phone || !address) { showToast('Please fill all required fields!', 'error'); return; }
+        if (!name || !phone || !address) { showToast('Please fill all required fields!', 'error'); goToAddressStep(); return; }
 
         const payload = {
             type: 'order',
@@ -1525,11 +1780,11 @@ document.getElementById('pdThumbs').innerHTML = '';
             cart = [];
             updateCartUI();
 
-            if (selectedPayment === 'UPI / GPay') {
-                const upiId = 'divyadivyashankar011-1@okhdfcbank'; // ⚠️ Replace with your real UPI ID
+            if (method === 'upi') {
+                const upiId = 'shanusumi221525@okhdfcbank';
                 const amount = Number(pendingOrder.amount || 0);
                 const upiUrl = `upi://pay?pa=${upiId}&pn=Sumathi%27s%20Style&am=${amount}&cu=INR&tn=${encodeURIComponent('Order: ' + (pendingOrder.product || ''))}`;
-                showToast('Order saved! Opening GPay for payment... 💳', 'success');
+                showToast('Order saved! Opening UPI app for payment... 💳', 'success');
                 setTimeout(() => { window.location.href = upiUrl; }, 800);
             } else {
                 showToast('Order placed successfully! We will contact you soon. 🎉', 'success');
@@ -1539,7 +1794,29 @@ document.getElementById('pdThumbs').innerHTML = '';
         }
     }
 
-    function selectPayment(el) { document.querySelectorAll('.payment-option').forEach(o => o.classList.remove('selected')); el.classList.add('selected'); selectedPayment = el.querySelector('p')?.textContent || 'Cash on Delivery'; }
+   function buyNow(productId) {
+    const product = products.find(p => p.id === productId);
+    if (!product) return;
+    pendingOrder = {
+        product: product.name,
+        amount: Number(product.price || 0),
+        notes: 'Single item purchase',
+        items: [{ name: product.name, image: product.image, qty: 1, price: product.price }]
+    };
+    openCheckoutFlow();
+}
+
+    function checkout() {
+    if (cart.length === 0) { showToast('Your cart is empty!', 'error'); return; }
+    const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+    pendingOrder = {
+        product: cart.map(item => item.name).join(', '),
+        amount: total,
+        notes: 'Cart checkout',
+        items: cart.map(item => ({ name: item.name, image: item.image, qty: item.qty, price: item.price }))
+    };
+    openCheckoutFlow();
+}
 
      function showSection(sectionId, clickedLink) {
         document.querySelectorAll('.page-section').forEach(s => s.style.display = 'none');

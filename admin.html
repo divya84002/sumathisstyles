@@ -258,7 +258,7 @@ select.status-select{padding:5px 8px;border-radius:6px;border:1.5px solid var(--
       <!-- DASHBOARD -->
       <div class="page active" id="page-dashboard">
         <div style="display:flex;justify-content:flex-end;margin-bottom:14px;">
-          <button class="btn btn-danger" onclick="clearData('all_demo_data','⚠️ Idhu ALL Orders + Boutique + Catering contact submissions ah delete pannidum (Products touch aagadhu). Continue pannalama?')">🗑️ Clear All Demo Data</button>
+         <button class="btn btn-danger" onclick="clearData('all_demo_data','⚠️ This will delete ALL Orders + Boutique + Catering contact submissions (Products will not be touched). Do you want to continue?')">🗑️ Clear All Demo Data</button>
         </div>
         <div class="stats-row">
           <div class="stat-card"><div class="stat-label">Total Products</div><div class="stat-value" id="stat-products">0</div></div>
@@ -407,7 +407,7 @@ select.status-select{padding:5px 8px;border-radius:6px;border:1.5px solid var(--
         <div class="section-card">
           <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:16px;">
             <h2 style="margin-bottom:0;">🧾 Orders Management</h2>
-            <button class="btn btn-danger" onclick="clearData('orders_all','⚠️ ALL Orders ah delete pannidum (Customized Orders um poyidum, ivanga same table than). Continue pannalama?')">🗑️ Clear All Orders</button>
+           <button class="btn btn-danger" onclick="clearData('orders_all','⚠️ This will delete ALL Orders (Customized Orders will also be deleted, since they are in the same table). Do you want to continue?')">🗑️ Clear All Orders</button>
           </div>
           <!-- Add Order -->
           <div style="margin-bottom:16px;padding:14px;background:var(--teal-light);border-radius:8px;">
@@ -445,7 +445,7 @@ select.status-select{padding:5px 8px;border-radius:6px;border:1.5px solid var(--
         <div class="section-card">
           <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:16px;">
             <h2 style="margin-bottom:0;">✂️ Customized Order Requests</h2>
-            <button class="btn btn-danger" onclick="clearData('orders_custom','⚠️ ALL Customized Orders ah delete pannidum. Continue pannalama?')">🗑️ Clear Custom Orders</button>
+            <button class="btn btn-danger" onclick="clearData('orders_custom','⚠️This will delete ALL Customized Orders. Do you want to continue?')">🗑️ Clear Custom Orders</button>
           </div>
           <div class="search-bar">
             <input type="text" id="customorder-search" placeholder="🔍 Search by name / mobile..." oninput="renderCustomOrders()"/>
@@ -464,7 +464,7 @@ select.status-select{padding:5px 8px;border-radius:6px;border:1.5px solid var(--
         <div class="section-card">
           <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:16px;">
             <h2 style="margin-bottom:0;">📨 Boutique Contact Form Submissions</h2>
-            <button class="btn btn-danger" onclick="clearData('contacts_boutique','⚠️ ALL Boutique contact submissions ah delete pannidum. Continue pannalama?')">🗑️ Clear Boutique Contacts</button>
+            <button class="btn btn-danger" onclick="clearData('contacts_boutique','⚠️This will delete ALL Boutique contact submissions. Do you want to continue? ')">🗑️ Clear Boutique Contacts</button>
           </div>
           <div class="search-bar">
             <input type="text" id="contactform-search" placeholder="🔍 Search by name / phone / email..." oninput="renderContactForms()"/>
@@ -483,7 +483,7 @@ select.status-select{padding:5px 8px;border-radius:6px;border:1.5px solid var(--
         <div class="section-card">
           <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:16px;">
             <h2 style="margin-bottom:0;">🍽️ Catering Contact Form Submissions</h2>
-            <button class="btn btn-danger" onclick="clearData('contacts_catering','⚠️ ALL Catering contact submissions ah delete pannidum. Continue pannalama?')">🗑️ Clear Catering Contacts</button>
+            <button class="btn btn-danger" onclick="clearData('contacts_catering','⚠️ This will delete ALL Catering contact submissions. Do you want to continue?')">🗑️ Clear Catering Contacts</button>
           </div>
           <div class="search-bar">
             <input type="text" id="contactform2-search" placeholder="🔍 Search by name / phone / email..." oninput="renderContactForms2()"/>
@@ -500,7 +500,7 @@ select.status-select{padding:5px 8px;border-radius:6px;border:1.5px solid var(--
       <!-- REVENUE -->
       <div class="page" id="page-revenue">
         <div style="display:flex;justify-content:flex-end;margin-bottom:14px;">
-          <button class="btn btn-danger" onclick="clearData('orders_all','⚠️ ALL Orders ah delete pannidum, adhula Revenue eppo ₹0-kum reset aagum. Continue pannalama?')">🗑️ Clear Orders (resets Revenue)</button>
+          <button class="btn btn-danger" onclick="clearData('orders_all','⚠️ This will delete ALL Orders, and Revenue will reset to ₹0. Do you want to continue?')">🗑️ Clear Orders (resets Revenue)</button>
         </div>
         <div class="revenue-cards">
           <div class="rev-card">
