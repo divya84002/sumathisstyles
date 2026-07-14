@@ -706,6 +706,21 @@
     .hero h2 { font-size: 26px; }
 }
 
+/* ---- Flipkart-style bottom sheet for location panel ---- */
+#locPanel { align-items: flex-end !important; justify-content: center !important; }
+#locPanel > div {
+    width: 100% !important;
+    max-width: 480px !important;
+    height: auto !important;
+    max-height: 85vh !important;
+    border-radius: 20px 20px 0 0 !important;
+    animation: locSlideUp 0.3s ease;
+}
+@keyframes locSlideUp {
+    from { transform: translateY(100%); }
+    to { transform: translateY(0); }
+}
+
     </style>
 </head>
 <body>
@@ -730,23 +745,34 @@
                 </div>
                 <div id="locPanel" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:99999;align-items:flex-start;justify-content:flex-end;" onclick="if(event.target===this)this.style.display='none';">
                           <div style="background:#fff;width:min(360px,100%);height:100dvh;overflow-y:auto;box-shadow:-4px 0 24px rgba(0,0,0,0.18);display:flex;flex-direction:column;"></div>
-                    <div style="background:linear-gradient(135deg,#0F6E56,#1D9E75);padding:18px 20px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;">
-                      <h3 style="font-size:16px;font-weight:700;color:#fff;font-family:'Poppins',sans-serif;margin:0;">📍 Select delivery address</h3>
-                      <button onclick="document.getElementById('locPanel').style.display='none';" style="background:rgba(255,255,255,0.2);border:none;color:#fff;width:30px;height:30px;border-radius:50%;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;">✕</button>
+                    <div style="padding:8px 0 0;flex-shrink:0;">
+                      <div style="width:40px;height:4px;background:#e0e0e0;border-radius:2px;margin:0 auto 10px;"></div>
                     </div>
-                    <div style="padding:14px 16px;border-bottom:1px solid #f0f0f0;flex-shrink:0;">
-                      <div style="display:flex;align-items:center;gap:10px;border:1.5px solid #1D9E75;border-radius:8px;padding:9px 13px;background:#fff;">
+                    <div style="padding:2px 20px 14px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #f0f0f0;flex-shrink:0;">
+                      <h3 style="font-size:17px;font-weight:700;color:#212121;font-family:'Poppins',sans-serif;margin:0;">Select delivery address</h3>
+                      <button onclick="document.getElementById('locPanel').style.display='none';" style="background:none;border:none;color:#333;width:28px;height:28px;cursor:pointer;font-size:20px;display:flex;align-items:center;justify-content:center;">✕</button>
+                    </div>
+                    <div style="padding:14px 16px 0;flex-shrink:0;">
+                      <div style="display:flex;align-items:center;gap:10px;border:1px solid #ddd;border-radius:8px;padding:10px 13px;background:#fff;">
                         <i class="fas fa-search" style="color:#878787;font-size:13px;"></i>
                         <input id="locSearchBox" type="text" placeholder="Search by area, street name, pin code" oninput="locSearch(this.value)" style="border:none;outline:none;font-size:13px;color:#212121;width:100%;font-family:'Poppins',sans-serif;background:transparent;">
                       </div>
                     </div>
-                    <div onclick="locUseGPS()" style="display:flex;align-items:center;gap:12px;padding:14px 16px;cursor:pointer;border-bottom:1px solid #f0f0f0;flex-shrink:0;" onmouseover="this.style.background='#f0f9f6'" onmouseout="this.style.background='transparent'">
-                      <div style="width:36px;height:36px;border-radius:50%;background:#e8f5f0;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="fas fa-location-arrow" style="color:#0F6E56;font-size:15px;"></i></div>
-                      <span style="color:#0F6E56;font-size:13px;font-weight:600;font-family:'Poppins',sans-serif;">Use my current location</span>
+                    <div onclick="locUseGPS()" style="margin:14px 16px 10px;display:flex;align-items:center;gap:12px;padding:14px 16px;cursor:pointer;border-radius:10px;background:#e8f2fd;flex-shrink:0;">
+                      <i class="fas fa-map-marker-alt" style="color:#1a73e8;font-size:16px;flex-shrink:0;"></i>
+                      <div style="flex:1;">
+                        <div style="color:#1a73e8;font-size:14px;font-weight:700;font-family:'Poppins',sans-serif;">Use my current location</div>
+                        <div style="color:#5f6368;font-size:12px;font-family:'Poppins',sans-serif;">Allow access to location</div>
+                      </div>
+                      <i class="fas fa-chevron-right" style="color:#1a73e8;font-size:12px;flex-shrink:0;"></i>
                     </div>
-                    <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 16px 8px;flex-shrink:0;">
+                    <div onclick="locAddNew()" style="margin:0 16px 14px;display:flex;align-items:center;gap:12px;padding:14px 16px;cursor:pointer;border-radius:10px;background:#e8f2fd;flex-shrink:0;">
+                      <i class="fas fa-plus" style="color:#1a73e8;font-size:15px;flex-shrink:0;"></i>
+                      <div style="flex:1;color:#1a73e8;font-size:14px;font-weight:700;font-family:'Poppins',sans-serif;">Add New Address</div>
+                      <i class="fas fa-chevron-right" style="color:#1a73e8;font-size:12px;flex-shrink:0;"></i>
+                    </div>
+                    <div style="padding:4px 16px 8px;flex-shrink:0;">
                       <span style="font-size:13px;font-weight:700;color:#212121;font-family:'Poppins',sans-serif;">Saved addresses</span>
-                      <button onclick="locAddNew()" style="background:none;border:none;color:#D4A574;font-size:13px;font-weight:600;cursor:pointer;font-family:'Poppins',sans-serif;display:flex;align-items:center;gap:4px;"><i class="fas fa-plus"></i> Add New</button>
                     </div>
                     <div id="locAddrList" style="flex:1;"></div>
                         <div style="padding:16px;flex-shrink:0;border-top:1px solid #f0f0f0;position:sticky;bottom:0;background:#fff;z-index:20;">
@@ -770,8 +796,7 @@
                 <script>
                 var locAddresses=[{name:'Office',detail:'Medavakkam Main Road, Kovilambakkam, Chennai - 600117',icon:'fa-briefcase'}];
                 var locEditIndex=-1,locSelectedIndex=-1,locOpenDropdown=-1;
-                function locRender(list){var src=list||locAddresses;var el=document.getElementById('locAddrList');if(!src||src.length===0){el.innerHTML='<div style="padding:20px;text-align:center;color:#878787;font-size:13px;font-family:Poppins,sans-serif;">No addresses found</div>';return;}el.innerHTML=src.map(function(a,i){var realIdx=list?locAddresses.indexOf(a):i;var selected=(realIdx===locSelectedIndex);return'<div style="display:flex;align-items:flex-start;justify-content:space-between;padding:13px 16px;cursor:pointer;border-bottom:1px solid #f5f5f5;position:relative;'+(selected?'background:#f0f9f6;border-left:3px solid #1D9E75;':'')+'" onclick="locSelectAddr('+realIdx+',event)" onmouseover="if('+realIdx+'!=='+locSelectedIndex+')this.style.background=\'#f9f9f9\'" onmouseout="if('+realIdx+'!=='+locSelectedIndex+')this.style.background=\'transparent\'">'+'<div style="display:flex;align-items:flex-start;gap:10px;flex:1;">'+'<div style="width:32px;height:32px;border-radius:50%;background:'+(selected?'#1D9E75':'#e8f5f0')+';display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;">'+(selected?'<i class="fas fa-check" style="color:#fff;font-size:12px;"></i>':'<i class="fas '+a.icon+'" style="color:#0F6E56;font-size:12px;"></i>')+'</div>'+'<div><div style="font-size:13px;font-weight:600;color:#212121;font-family:Poppins,sans-serif;margin-bottom:3px;">'+a.name+'</div>'+'<div style="font-size:11px;color:#878787;line-height:1.5;font-family:Poppins,sans-serif;">'+a.detail+'</div></div></div>'+'<button onclick="event.stopPropagation();locToggleDD('+realIdx+')" style="background:none;border:none;cursor:pointer;color:#666;font-size:18px;font-weight:700;padding:2px 6px;border-radius:4px;line-height:1;flex-shrink:0;" title="Options">⋯</button>'+(locOpenDropdown===realIdx?'<div style="position:absolute;right:12px;top:36px;background:#fff;border:1px solid #e0e0e0;border-radius:10px;box-shadow:0 4px 16px rgba(0,0,0,0.13);z-index:10;min-width:130px;overflow:hidden;"><div onclick="event.stopPropagation();locOpenEdit('+realIdx+')" style="display:flex;align-items:center;gap:10px;padding:11px 16px;cursor:pointer;font-size:13px;color:#212121;font-family:Poppins,sans-serif;" onmouseover="this.style.background=\'#f5f5f5\'" onmouseout="this.style.background=\'#fff\'"><i class="fas fa-edit" style="color:#0F6E56;font-size:13px;"></i> Edit</div><div onclick="event.stopPropagation();locDeleteAddr('+realIdx+')" style="display:flex;align-items:center;gap:10px;padding:11px 16px;cursor:pointer;font-size:13px;color:#dc3545;font-family:Poppins,sans-serif;" onmouseover="this.style.background=\'#f5f5f5\'" onmouseout="this.style.background=\'#fff\'"><i class="fas fa-trash" style="color:#dc3545;font-size:13px;"></i> Delete</div></div>':'')+'</div>';}).join('');}
-                function locToggleDD(i){locOpenDropdown=(locOpenDropdown===i)?-1:i;locRender();}
+                function locRender(list){var src=list||locAddresses;var el=document.getElementById('locAddrList');if(!src||src.length===0){el.innerHTML='<div style="padding:20px;text-align:center;color:#878787;font-size:13px;font-family:Poppins,sans-serif;">No addresses found</div>';return;}el.innerHTML=src.map(function(a,i){var realIdx=list?locAddresses.indexOf(a):i;var selected=(realIdx===locSelectedIndex);return'<div style="display:flex;align-items:flex-start;justify-content:space-between;padding:14px 16px;cursor:pointer;border-bottom:1px solid #f5f5f5;position:relative;'+(selected?'background:#f5f9ff;':'background:#fff;')+'" onclick="locSelectAddr('+realIdx+',event)">'+'<div style="display:flex;align-items:flex-start;gap:12px;flex:1;">'+'<div style="width:38px;height:38px;border-radius:8px;border:1px solid #e0e0e0;background:'+(selected?'#e8f2fd':'#fff')+';display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;">'+'<i class="fas '+a.icon+'" style="color:'+(selected?'#1a73e8':'#555')+';font-size:14px;"></i>'+'</div>'+'<div><div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;"><span style="font-size:14px;font-weight:700;color:#212121;font-family:Poppins,sans-serif;">'+a.name+'</span>'+(selected?'<span style="background:#e8f2fd;color:#1a73e8;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px;">Selected</span>':'')+'</div>'+'<div style="font-size:12px;color:#878787;line-height:1.5;font-family:Poppins,sans-serif;max-width:220px;">'+a.detail+'</div></div></div>'+'<button onclick="event.stopPropagation();locToggleDD('+realIdx+')" style="background:none;border:none;cursor:pointer;color:#666;font-size:18px;font-weight:700;padding:2px 6px;border-radius:4px;line-height:1;flex-shrink:0;" title="Options">⋯</button>'+(locOpenDropdown===realIdx?'<div style="position:absolute;right:12px;top:36px;background:#fff;border:1px solid #e0e0e0;border-radius:10px;box-shadow:0 4px 16px rgba(0,0,0,0.13);z-index:10;min-width:130px;overflow:hidden;"><div onclick="event.stopPropagation();locOpenEdit('+realIdx+')" style="display:flex;align-items:center;gap:10px;padding:11px 16px;cursor:pointer;font-size:13px;color:#212121;font-family:Poppins,sans-serif;"><i class="fas fa-edit" style="color:#1a73e8;font-size:13px;"></i> Edit</div><div onclick="event.stopPropagation();locDeleteAddr('+realIdx+')" style="display:flex;align-items:center;gap:10px;padding:11px 16px;cursor:pointer;font-size:13px;color:#dc3545;font-family:Poppins,sans-serif;"><i class="fas fa-trash" style="color:#dc3545;font-size:13px;"></i> Delete</div></div>':'')+'</div>';}).join('');}
                 function locSelectAddr(i,e){locOpenDropdown=-1;locSelectedIndex=i;locRender();}
                 function locConfirm(){if(locSelectedIndex<0){locToastMsg('⚠️ Please select an address first');return;}var a=locAddresses[locSelectedIndex];document.getElementById('locLabel').textContent='Deliver to '+a.name+' –';document.getElementById('locLink').textContent=a.detail.substring(0,28)+'...';document.getElementById('locPanel').style.display='none';locToastMsg('📍 Delivering to '+a.name+'!');}
                 function locOpenEdit(i){locEditIndex=i;locOpenDropdown=-1;var a=locAddresses[i];document.getElementById('locModalTitle').textContent='Edit Address';document.getElementById('locNewName').value=a.name;document.getElementById('locNewAddr').value=a.detail;document.getElementById('locNewPin').value='';document.getElementById('locPanel').style.display='none';document.getElementById('locAddModal').style.display='flex';}
