@@ -572,6 +572,13 @@
   .checkout-body { padding:20px; }
 }
 
+      .price-cat-block { margin-bottom: 22px; }
+      .price-cat-title { font-family:'Playfair Display',serif; font-size:17px; color:var(--primary); font-weight:700; margin-bottom:10px; padding-bottom:6px; border-bottom:2px solid var(--secondary-light); display:flex; align-items:center; gap:8px; }
+      .price-item-row { display:flex; justify-content:space-between; align-items:center; padding:10px 12px; border-radius:10px; margin-bottom:6px; background:var(--gray); transition:all 0.2s; }
+      .price-item-row:hover { background:rgba(0,128,128,0.08); }
+      .price-item-name { font-size:14px; color:var(--text); font-weight:500; }
+      .price-item-value { font-size:14px; color:var(--primary); font-weight:700; white-space:nowrap; margin-left:10px; }
+
     </style>
 </head>
 <body>
@@ -821,13 +828,13 @@
         <div id="home" class="page-section">
             <section class="hero">
                 <div class="hero-content">
-                    <div class="hero-badge">✨ WOMEN'S EXCLUSIVE ✨</div>
+                    <div class="hero-badge" onclick="showModal('priceList')" style="cursor:pointer;">✨ WOMEN'S EXCLUSIVE ✨ <i class="fas fa-tag" style="margin-left:5px;"></i></div>
                     <h2>Traditional Elegance,<br><span>Modern Style</span></h2>
                     <p>Custom tailoring, designer blouses, aari work & more — crafted with love by Sumathi</p>
                     <div class="hero-exp"><i class="fas fa-award"></i> 30+ Years of Trusted Experience in Tailoring & Catering</div>
                     <div class="hero-btns">
                         <a href="#" class="btn-primary" onclick="showSection('shop')"><i class="fas fa-shopping-bag"></i> Shop Now</a>
-                        <a href="#" class="btn-primary" onclick="showSection('custom')"><i class="fas fa-ruler-combined"></i> Custom Order</a>
+                        <a href="poster.html" class="btn-primary" target="_blank"><i class="fas fa-ruler-combined"></i> Bridal Package</a>
                         <a href="tel:8610703658" class="btn-call"><i class="fas fa-phone"></i> Call Now</a>
                     </div>
                 </div>
@@ -1213,6 +1220,17 @@
         </div>
     </div>
 
+    <!-- PRICE LIST MODAL -->
+<div class="modal-overlay" id="priceListModal">
+    <div class="modal" style="max-width:600px;">
+        <button class="modal-close" onclick="closeModal('priceList')"><i class="fas fa-times"></i></button>
+        <h2><i class="fas fa-tags"></i> Price List</h2>
+        <p style="text-align:center;color:var(--text-light);font-size:13px;margin-top:-15px;margin-bottom:20px;">Customized Stitching & Services — 30 Years Experience</p>
+        <div id="priceListContent" style="max-height:60vh;overflow-y:auto;padding-right:5px;"></div>
+        <button class="btn-enroll" style="margin-top:20px;" onclick="closeModal('priceList');showSection('custom');"><i class="fas fa-ruler-combined"></i> Place Custom Order</button>
+    </div>
+</div>
+
     <!-- Review Modal -->
     <div class="modal-overlay" id="reviewModal">
         <div class="modal">
@@ -1230,6 +1248,57 @@
     <div class="toast" id="toast"></div>
 
     <script>
+
+        
+       const priceListData = [
+    { category: "✂️ Customized Stitching", items: [
+        { name: "Blouse (Basic)", price: "₹150" },
+        { name: "Blouse (Lining)", price: "₹400" },
+        { name: "Salwar Suit", price: "₹800" },
+        { name: "Frock (Kids/Party)", price: "₹1500" },
+        { name: "Lehenga (Bridal/Party)", price: "₹5000" },
+        { name: "Kurthi", price: "₹600" },
+        { name: "Modern Wear", price: "₹800" }
+    ]},
+    { category: "🪡 Alteration", items: [
+        { name: "Blouse Alteration", price: "₹100" },
+        { name: "Salwar Alteration", price: "₹70" },
+        { name: "Lehenga Alteration", price: "₹350" },
+        { name: "General Fitting Fix", price: "₹50" }
+    ]},
+    { category: "🎓 Uniform", items: [
+        { name: "School Uniform (Shirt)", price: "₹350" },
+        { name: "School Uniform (Pant/Skirt)", price: "₹350" },
+        { name: "College Uniform Set", price: "₹700" }
+    ]},
+    { category: "🥻 Saree Services", items: [
+        { name: "Saree Pre-Pleating", price: "₹300" },
+        { name: "Saree Falls Stitching", price: "₹240" },
+        { name: "Saree Edging (Pico)", price: "₹40" },
+        { name: "Saree Blouse Combo", price: "₹1000" }
+    ]},
+    { category: "🧵 Aari Work (Starting Prices)", items:  [
+        { name: "Simple Aari (Blouse)", price: "₹800" },
+        { name: "Heavy Bridal Aari", price: "₹1500" },
+        { name: "Bead & Zardosi Work", price: "₹2000" }
+    ]}
+];
+
+
+function renderPriceList() {
+    const container = document.getElementById('priceListContent');
+    container.innerHTML = priceListData.map(cat => `
+        <div class="price-cat-block">
+            <div class="price-cat-title">${cat.category}</div>
+            ${cat.items.map(it => `
+                <div class="price-item-row">
+                    <span class="price-item-name">${it.name}</span>
+                    <span class="price-item-value">${it.price}</span>
+                </div>
+            `).join('')}
+        </div>
+    `).join('') + `<p style="text-align:center;font-size:11px;color:var(--text-light);margin-top:10px;">*Prices may vary based on design & fabric complexity</p>`;
+}
     let products = [];
     let pendingOrder = { product: '', amount: 0, notes: '' };
     let selectedPayment = 'Cash on Delivery';
@@ -1840,7 +1909,10 @@ function removeFromCart(productId) {
         }
     }
 
-    function showModal(type) { document.getElementById(type + 'Modal').classList.add('active'); }
+    function showModal(type) { 
+    document.getElementById(type + 'Modal').classList.add('active'); 
+    if (type === 'priceList') renderPriceList();
+}
     function closeModal(type) { document.getElementById(type + 'Modal').classList.remove('active'); }
 
     function toggleMobileMenu() {
