@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>My Account - Sumathi's Style</title>
+<title>My Account - Sumathi's Style | 30 Years of Experience</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
@@ -60,8 +60,9 @@ body { font-family:'Poppins',sans-serif; background:var(--light); color:var(--te
 .settings-card h4 { font-size:16px; color:var(--primary); margin-bottom:16px; display:flex; align-items:center; gap:8px; }
 .form-group { margin-bottom:16px; }
 .form-group label { display:block; font-size:13px; font-weight:600; margin-bottom:6px; color:var(--text); }
-.form-group input { width:100%; padding:11px 14px; border:1.5px solid #e0e0e0; border-radius:10px; font-size:14px; font-family:'Poppins',sans-serif; outline:none; }
-.form-group input:focus { border-color:var(--primary); }
+.form-group input, .form-group textarea { width:100%; padding:11px 14px; border:1.5px solid #e0e0e0; border-radius:10px; font-size:14px; font-family:'Poppins',sans-serif; outline:none; }
+.form-group input:focus, .form-group textarea:focus { border-color:var(--primary); }
+.form-group textarea { min-height:100px; resize:vertical; }
 .form-row2 { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
 .btn-save { background:linear-gradient(135deg,var(--primary),var(--primary-light)); color:#fff; border:none; padding:10px 26px; border-radius:20px; font-weight:600; font-size:13.5px; cursor:pointer; }
 .btn-cancel { background:none; border:1.5px solid #ccc; color:var(--text); padding:10px 20px; border-radius:20px; font-size:13.5px; cursor:pointer; margin-left:10px; }
@@ -73,6 +74,21 @@ body { font-family:'Poppins',sans-serif; background:var(--light); color:var(--te
 .toggle-switch.active { background:var(--primary); }
 .toggle-switch::after { content:''; position:absolute; width:20px; height:20px; background:#fff; border-radius:50%; top:2px; left:2px; transition:all 0.3s; }
 .toggle-switch.active::after { left:24px; }
+
+/* Mini OTP boxes */
+.mini-otp-inputs { display:flex; gap:8px; margin-bottom:16px; flex-wrap:wrap; }
+.mini-otp-inputs input { width:42px; height:42px; text-align:center; font-size:17px; font-weight:600; border:1.5px solid #e0e0e0; border-radius:8px; outline:none; transition:all 0.2s; font-family:'Poppins',sans-serif; }
+.mini-otp-inputs input:focus { border-color:var(--primary); transform:scale(1.06); }
+.verified-pill { display:inline-flex; align-items:center; gap:6px; background:#e8f5e9; color:#2e7d32; font-size:11.5px; font-weight:700; padding:4px 12px; border-radius:20px; margin-left:8px; }
+
+/* Editable field with pencil edit button */
+.field-with-edit { display:flex; align-items:center; gap:8px; }
+.field-with-edit input { flex:1; }
+.field-with-edit input[readonly] { background:#f7f9f8; color:var(--text-light); cursor:not-allowed; }
+.field-edit-btn { flex-shrink:0; width:40px; height:40px; border-radius:10px; border:1.5px solid var(--primary); background:#fff; color:var(--primary); font-size:14px; cursor:pointer; transition:all 0.2s; }
+.field-edit-btn:hover { background:var(--primary); color:#fff; }
+.field-edit-btn.editing { border-color:var(--danger); color:var(--danger); }
+.field-edit-btn.editing:hover { background:var(--danger); color:#fff; }
 
 /* Orders */
 .order-filter-bar { display:flex; gap:8px; overflow-x:auto; padding-bottom:12px; margin-bottom:14px; }
@@ -151,6 +167,30 @@ body { font-family:'Poppins',sans-serif; background:var(--light); color:var(--te
 .faq-item.open .faq-chev { transform:rotate(180deg); }
 .faq-chev { transition:transform 0.2s; color:var(--primary); }
 
+/* Privacy Policy Content */
+.privacy-content h5 { font-size:14px; color:var(--text); margin:16px 0 8px; font-weight:600; }
+.privacy-content p, .privacy-content li { font-size:13px; color:var(--text-light); line-height:1.8; margin-bottom:8px; }
+.privacy-content ul { padding-left:20px; margin-bottom:12px; }
+.privacy-content li { margin-bottom:4px; }
+
+/* Grievance */
+.grievance-officer { background:linear-gradient(135deg,var(--gray),#fff); border-radius:12px; padding:16px; margin-bottom:16px; border:1px solid #e8e8e8; }
+.grievance-officer h5 { font-size:14px; color:var(--primary); margin-bottom:8px; }
+.grievance-officer p { font-size:13px; color:var(--text-light); line-height:1.8; }
+
+/* Data Request Status */
+.data-status-box { background:#e8f5e9; border-radius:12px; padding:16px; text-align:center; margin-top:16px; display:none; }
+.data-status-box.show { display:block; }
+.data-status-box i { font-size:32px; color:var(--success); margin-bottom:8px; }
+.data-status-box h5 { color:var(--success); font-size:14px; margin-bottom:4px; }
+
+/* Danger Zone */
+.danger-zone { border:2px solid #ffe3e3; border-radius:12px; padding:20px; margin-top:16px; background:#fff5f5; }
+.danger-zone h5 { color:var(--danger); font-size:14px; margin-bottom:8px; display:flex; align-items:center; gap:8px; }
+.danger-zone p { font-size:12.5px; color:var(--text-light); line-height:1.6; margin-bottom:12px; }
+.btn-danger { background:linear-gradient(135deg,var(--danger),#ff6b81); color:#fff; border:none; padding:10px 26px; border-radius:20px; font-weight:600; font-size:13.5px; cursor:pointer; }
+.btn-danger-outline { background:none; border:1.5px solid var(--danger); color:var(--danger); padding:10px 20px; border-radius:20px; font-size:13.5px; cursor:pointer; margin-left:10px; }
+
 .toast { position:fixed; bottom:24px; left:50%; transform:translateX(-50%) translateY(100px); background:var(--dark); color:#fff; padding:13px 26px; border-radius:12px; font-size:13.5px; z-index:3000; opacity:0; transition:all 0.4s; box-shadow:var(--shadow-hover); }
 .toast.show { transform:translateX(-50%) translateY(0); opacity:1; }
 .toast.success { background:linear-gradient(135deg,var(--success),#2ed573); }
@@ -161,7 +201,7 @@ body { font-family:'Poppins',sans-serif; background:var(--light); color:var(--te
 
 <div class="acc-wrap">
 
-    <!-- ==== HOME PANEL (Flipkart style dashboard) ==== -->
+    <!-- ==== HOME PANEL ==== -->
     <div id="panelHome" class="acc-panel active">
         <div class="acc-profile-card">
             <div class="acc-avatar"><i class="fas fa-user"></i></div>
@@ -203,23 +243,79 @@ body { font-family:'Poppins',sans-serif; background:var(--light); color:var(--te
     <!-- ==== PROFILE PANEL ==== -->
     <div id="panelProfile" class="acc-panel">
         <div class="acc-panel-header"><button class="acc-back-btn" onclick="openPanel('panelHome')"><i class="fas fa-arrow-left"></i></button><h3><i class="fas fa-user-edit"></i> Profile Information</h3></div>
+
         <div class="settings-card">
-            <h4><i class="fas fa-id-card"></i> Personal Information</h4>
+            <h4 style="justify-content:space-between;">
+                <span><i class="fas fa-id-card"></i> Personal Information</span>
+                <button type="button" class="field-edit-btn" style="width:32px;height:32px;font-size:12px;" id="nameEditBtn" onclick="toggleNameEdit()" title="Edit name">
+                    <i class="fas fa-pen" id="nameEditIcon"></i>
+                </button>
+            </h4>
             <div class="form-row2">
-                <div class="form-group"><label>First Name</label><input type="text" id="editFirstName" placeholder="First name"></div>
-                <div class="form-group"><label>Last Name</label><input type="text" id="editLastName" placeholder="Last name"></div>
+                <div class="form-group"><label>First Name</label><input type="text" id="editFirstName" placeholder="First name" readonly></div>
+                <div class="form-group"><label>Last Name</label><input type="text" id="editLastName" placeholder="Last name" readonly></div>
             </div>
-            <button class="btn-save" onclick="savePersonalInfo()">Save</button>
+            <button class="btn-save" id="nameSaveBtn" onclick="savePersonalInfo()" disabled style="opacity:0.5;cursor:not-allowed;">Save</button>
         </div>
+
         <div class="settings-card">
             <h4><i class="fas fa-envelope"></i> Email Address</h4>
-            <div class="form-group"><input type="email" id="editEmail" placeholder="Enter email address"></div>
-            <button class="btn-save" onclick="saveEmail()">Save</button>
+            <div id="emailViewMode">
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <div class="field-with-edit">
+                        <input type="email" id="editEmail" placeholder="Enter email address" readonly>
+                        <button type="button" class="field-edit-btn" id="emailEditBtn" onclick="toggleEmailEdit()" title="Edit email">
+                            <i class="fas fa-pen" id="emailEditIcon"></i>
+                        </button>
+                    </div>
+                </div>
+                <button class="btn-save" id="emailSendOtpBtn" onclick="sendEmailOTP()" disabled style="opacity:0.5;cursor:not-allowed;"><i class="fas fa-paper-plane"></i> Send OTP</button>
+            </div>
+            <div id="emailOtpMode" style="display:none;">
+                <p style="font-size:12.5px;color:var(--text-light);margin-bottom:10px;">Enter the OTP sent to <span id="emailOtpTarget" style="color:var(--primary);font-weight:600;"></span></p>
+                <div class="mini-otp-inputs">
+                    <input type="text" maxlength="1" inputmode="numeric" oninput="moveMiniOTP(this,0,'email')" id="emailOtp1">
+                    <input type="text" maxlength="1" inputmode="numeric" oninput="moveMiniOTP(this,1,'email')" id="emailOtp2">
+                    <input type="text" maxlength="1" inputmode="numeric" oninput="moveMiniOTP(this,2,'email')" id="emailOtp3">
+                    <input type="text" maxlength="1" inputmode="numeric" oninput="moveMiniOTP(this,3,'email')" id="emailOtp4">
+                    <input type="text" maxlength="1" inputmode="numeric" oninput="moveMiniOTP(this,4,'email')" id="emailOtp5">
+                    <input type="text" maxlength="1" inputmode="numeric" oninput="moveMiniOTP(this,5,'email')" id="emailOtp6">
+                </div>
+                <button class="btn-save" onclick="verifyEmailOTP()"><i class="fas fa-check-circle"></i> Verify & Save</button>
+                <button class="btn-cancel" onclick="cancelEmailOTP()">Cancel</button>
+                <p style="font-size:11.5px;color:var(--text-light);margin-top:12px;">Didn't receive? <a href="#" onclick="sendEmailOTP();return false;" style="color:var(--primary);font-weight:600;text-decoration:none;">Resend OTP</a></p>
+            </div>
         </div>
+
         <div class="settings-card">
             <h4><i class="fas fa-mobile-alt"></i> Mobile Number</h4>
-            <div class="form-group"><input type="tel" id="editMobile" placeholder="10-digit number" maxlength="10"></div>
-            <button class="btn-save" onclick="saveMobile()">Save</button>
+            <div id="mobileViewMode">
+                <div class="form-group">
+                    <label>Mobile Number</label>
+                    <div class="field-with-edit">
+                        <input type="tel" id="editMobile" placeholder="10-digit number" maxlength="10" readonly>
+                        <button type="button" class="field-edit-btn" id="mobileEditBtn" onclick="toggleMobileEdit()" title="Edit mobile number">
+                            <i class="fas fa-pen" id="mobileEditIcon"></i>
+                        </button>
+                    </div>
+                </div>
+                <button class="btn-save" id="mobileSendOtpBtn" onclick="sendMobileOTP()" disabled style="opacity:0.5;cursor:not-allowed;"><i class="fas fa-paper-plane"></i> Send OTP</button>
+            </div>
+            <div id="mobileOtpMode" style="display:none;">
+                <p style="font-size:12.5px;color:var(--text-light);margin-bottom:10px;">Enter the OTP sent to <span id="mobileOtpTarget" style="color:var(--primary);font-weight:600;"></span></p>
+                <div class="mini-otp-inputs">
+                    <input type="text" maxlength="1" inputmode="numeric" oninput="moveMiniOTP(this,0,'mobile')" id="mobileOtp1">
+                    <input type="text" maxlength="1" inputmode="numeric" oninput="moveMiniOTP(this,1,'mobile')" id="mobileOtp2">
+                    <input type="text" maxlength="1" inputmode="numeric" oninput="moveMiniOTP(this,2,'mobile')" id="mobileOtp3">
+                    <input type="text" maxlength="1" inputmode="numeric" oninput="moveMiniOTP(this,3,'mobile')" id="mobileOtp4">
+                    <input type="text" maxlength="1" inputmode="numeric" oninput="moveMiniOTP(this,4,'mobile')" id="mobileOtp5">
+                    <input type="text" maxlength="1" inputmode="numeric" oninput="moveMiniOTP(this,5,'mobile')" id="mobileOtp6">
+                </div>
+                <button class="btn-save" onclick="verifyMobileOTP()"><i class="fas fa-check-circle"></i> Verify & Save</button>
+                <button class="btn-cancel" onclick="cancelMobileOTP()">Cancel</button>
+                <p style="font-size:11.5px;color:var(--text-light);margin-top:12px;">Didn't receive? <a href="#" onclick="sendMobileOTP();return false;" style="color:var(--primary);font-weight:600;text-decoration:none;">Resend OTP</a></p>
+            </div>
             <p style="font-size:11.5px;color:var(--text-light);margin-top:10px;">Note: changing mobile number here won't move your past orders — those stay linked to the number you logged in with.</p>
         </div>
     </div>
@@ -267,8 +363,14 @@ body { font-family:'Poppins',sans-serif; background:var(--light); color:var(--te
         <div id="addrFormCard" class="settings-card" style="display:none;margin-top:16px;">
             <h4 id="addrFormTitle"><i class="fas fa-map-marker-alt"></i> Add New Address</h4>
             <div class="form-group"><label>Address Name (e.g. Home, Office)</label><input type="text" id="addrName" placeholder="Home"></div>
-            <div class="form-group"><label>Full Address</label><input type="text" id="addrDetail" placeholder="Area, Street, City"></div>
-            <div class="form-group"><label>Pincode (optional)</label><input type="text" id="addrPin" placeholder="Pincode" maxlength="6"></div>
+            <div class="form-row2">
+                <div class="form-group"><label>Door No</label><input type="text" id="addrDoor" placeholder="Door No"></div>
+                <div class="form-group"><label>Street Name</label><input type="text" id="addrStreet" placeholder="Street Name"></div>
+            </div>
+            <div class="form-row2">
+                <div class="form-group"><label>City</label><input type="text" id="addrCity" placeholder="City"></div>
+                <div class="form-group"><label>Pincode</label><input type="text" id="addrPin" placeholder="Pincode" maxlength="6"></div>
+            </div>
             <button class="btn-save" onclick="saveAddress()">Save Address</button>
             <button class="btn-cancel" onclick="closeAddressForm()">Cancel</button>
         </div>
@@ -307,12 +409,310 @@ body { font-family:'Poppins',sans-serif; background:var(--light); color:var(--te
         </div>
     </div>
 
-    <!-- ==== PRIVACY PANEL ==== -->
+    <!-- ==================== PRIVACY CENTER (FLIPKART STYLE) ==================== -->
     <div id="panelPrivacy" class="acc-panel">
-        <div class="acc-panel-header"><button class="acc-back-btn" onclick="openPanel('panelHome')"><i class="fas fa-arrow-left"></i></button><h3><i class="fas fa-shield-alt"></i> Privacy Center</h3></div>
+        <div class="acc-panel-header">
+            <button class="acc-back-btn" onclick="openPanel('panelHome')"><i class="fas fa-arrow-left"></i></button>
+            <h3><i class="fas fa-shield-alt"></i> Privacy Center</h3>
+        </div>
+        
+        <div class="acc-menu-card">
+            <div class="acc-menu-row" onclick="openPanel('panelPrivacyPolicy')">
+                <i class="fas fa-file-contract acc-ico"></i>
+                <span class="acc-label">Privacy Policy</span>
+                <i class="fas fa-chevron-right acc-chev"></i>
+            </div>
+            <div class="acc-menu-row" onclick="openPanel('panelRequestData')">
+                <i class="fas fa-download acc-ico"></i>
+                <span class="acc-label">Request My Data</span>
+                <i class="fas fa-chevron-right acc-chev"></i>
+            </div>
+            <div class="acc-menu-row" onclick="openPanel('panelConsent')">
+                <i class="fas fa-handshake acc-ico"></i>
+                <span class="acc-label">Consent Management</span>
+                <i class="fas fa-chevron-right acc-chev"></i>
+            </div>
+            <div class="acc-menu-row" onclick="openPanel('panelGrievance')">
+                <i class="fas fa-gavel acc-ico"></i>
+                <span class="acc-label">Grievance Redressal</span>
+                <i class="fas fa-chevron-right acc-chev"></i>
+            </div>
+            <div class="acc-menu-row" onclick="openPanel('panelDeactivate')">
+                <i class="fas fa-user-slash acc-ico" style="color:var(--secondary);"></i>
+                <span class="acc-label">De-activate my Account</span>
+                <i class="fas fa-chevron-right acc-chev"></i>
+            </div>
+            <div class="acc-menu-row acc-logout-row" onclick="openPanel('panelDeleteAccount')">
+                <i class="fas fa-trash-alt acc-ico"></i>
+                <span class="acc-label">Delete my Account</span>
+                <i class="fas fa-chevron-right acc-chev"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==== PRIVACY POLICY FULL CONTENT ==== -->
+    <div id="panelPrivacyPolicy" class="acc-panel">
+        <div class="acc-panel-header">
+            <button class="acc-back-btn" onclick="openPanel('panelPrivacy')"><i class="fas fa-arrow-left"></i></button>
+            <h3><i class="fas fa-file-contract"></i> Privacy Policy</h3>
+        </div>
+        <div class="settings-card privacy-content">
+            <h5>1. Introduction</h5>
+            <p>Welcome to <strong>Sumathi's Style</strong> — Tailoring Boutique with <strong>30 Years of Experience</strong>. We respect your privacy and are committed to protecting your personal data. This Privacy Policy explains how we collect, use, store, and safeguard your information when you use our website and services.</p>
+            
+            <h5>2. Information We Collect</h5>
+            <ul>
+                <li><strong>Personal Information:</strong> Name, phone number, email address, and delivery address.</li>
+                <li><strong>Order Details:</strong> Measurements, design preferences, fabric choices, and order history.</li>
+                <li><strong>Payment Information:</strong> Transaction details (we do not store card details).</li>
+                <li><strong>Device Information:</strong> IP address, browser type, and device identifiers for security.</li>
+            </ul>
+            
+            <h5>3. How We Use Your Data</h5>
+            <ul>
+                <li>To process and deliver your custom stitching orders.</li>
+                <li>To communicate order updates, delivery status, and promotional offers (with consent).</li>
+                <li>To improve our services and customer experience.</li>
+                <li>To comply with legal obligations and prevent fraud.</li>
+            </ul>
+            
+            <h5>4. Data Sharing & Disclosure</h5>
+            <p>We <strong>never sell</strong> your personal data. We only share data with:</p>
+            <ul>
+                <li>Trusted delivery partners for order fulfillment.</li>
+                <li>Payment gateways for secure transaction processing.</li>
+                <li>Legal authorities when required by law.</li>
+            </ul>
+            
+            <h5>5. Data Security</h5>
+            <p>We implement industry-standard security measures including SSL encryption, secure servers, and regular security audits to protect your data from unauthorized access, alteration, or destruction.</p>
+            
+            <h5>6. Your Rights</h5>
+            <ul>
+                <li><strong>Access:</strong> Request a copy of your personal data.</li>
+                <li><strong>Correction:</strong> Update inaccurate or incomplete information.</li>
+                <li><strong>Deletion:</strong> Request deletion of your account and data.</li>
+                <li><strong>Withdraw Consent:</strong> Opt-out of marketing communications anytime.</li>
+            </ul>
+            
+            <h5>7. Data Retention</h5>
+            <p>We retain your data for as long as necessary to fulfill the purposes outlined in this policy, or as required by law. Order records are kept for 7 years for tax and legal compliance.</p>
+            
+            <h5>8. Contact Us</h5>
+            <p>For any privacy-related questions, contact our Grievance Officer at <strong>sumathisstyle@gmail.com</strong> or WhatsApp <strong>+91 86107 03658</strong>.</p>
+            
+            <p style="margin-top:20px;font-size:12px;color:var(--text-light);"><i class="fas fa-calendar-alt"></i> Last updated: July 2026</p>
+        </div>
+    </div>
+
+    <!-- ==== REQUEST MY DATA FULL CONTENT ==== -->
+    <div id="panelRequestData" class="acc-panel">
+        <div class="acc-panel-header">
+            <button class="acc-back-btn" onclick="openPanel('panelPrivacy')"><i class="fas fa-arrow-left"></i></button>
+            <h3><i class="fas fa-download"></i> Request My Data</h3>
+        </div>
         <div class="settings-card">
-            <div class="settings-item"><div><h5>Show Profile</h5><p>Make profile visible to others</p></div><div class="toggle-switch" onclick="toggleSwitch(this,'privShow')"></div></div>
-            <div class="settings-item"><div><h5>Location Access</h5><p>Allow site to access your location</p></div><div class="toggle-switch" onclick="toggleSwitch(this,'privLoc')"></div></div>
+            <h4><i class="fas fa-database"></i> Download Your Personal Data</h4>
+            <p style="font-size:13px;color:var(--text-light);line-height:1.7;margin-bottom:16px;">
+                As a user of <strong>Sumathi's Style</strong>, you have the right to access all personal data we have stored about you. This includes:
+            </p>
+            <div style="background:var(--gray);border-radius:12px;padding:16px;margin-bottom:16px;">
+                <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;"><i class="fas fa-user" style="color:var(--primary);"></i><span style="font-size:13px;color:var(--text);">Profile Information (Name, Phone, Email)</span></div>
+                <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;"><i class="fas fa-box" style="color:var(--primary);"></i><span style="font-size:13px;color:var(--text);">Order History & Details</span></div>
+                <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;"><i class="fas fa-map-marker-alt" style="color:var(--primary);"></i><span style="font-size:13px;color:var(--text);">Saved Addresses</span></div>
+                <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;"><i class="fas fa-heart" style="color:var(--danger);"></i><span style="font-size:13px;color:var(--text);">Wishlist Items</span></div>
+                <div style="display:flex;align-items:center;gap:10px;"><i class="fas fa-coins" style="color:var(--secondary);"></i><span style="font-size:13px;color:var(--text);">Super Coins Balance & History</span></div>
+            </div>
+            <p style="font-size:13px;color:var(--text-light);line-height:1.7;margin-bottom:16px;">
+                Your data will be compiled into a secure file and sent to your registered email address within <strong>24-48 hours</strong>.
+            </p>
+            <button class="btn-save" onclick="requestDataDownload()"><i class="fas fa-download"></i> Request Data Export</button>
+            
+            <div class="data-status-box" id="dataStatusBox">
+                <i class="fas fa-check-circle"></i>
+                <h5>Request Submitted!</h5>
+                <p style="font-size:12.5px;color:var(--text-light);">Your data export has been queued. You'll receive an email at <span id="dataEmailTarget" style="color:var(--primary);font-weight:600;"></span> shortly.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==== CONSENT MANAGEMENT FULL CONTENT ==== -->
+    <div id="panelConsent" class="acc-panel">
+        <div class="acc-panel-header">
+            <button class="acc-back-btn" onclick="openPanel('panelPrivacy')"><i class="fas fa-arrow-left"></i></button>
+            <h3><i class="fas fa-handshake"></i> Consent Management</h3>
+        </div>
+        <div class="settings-card">
+            <h4><i class="fas fa-sliders-h"></i> Manage Your Consents</h4>
+            <p style="font-size:13px;color:var(--text-light);line-height:1.7;margin-bottom:16px;">Control how <strong>Sumathi's Style</strong> uses your data. You can update these preferences anytime.</p>
+            
+            <div class="settings-item">
+                <div>
+                    <h5>Marketing Communications</h5>
+                    <p>Receive offers, discounts & new collection updates via SMS/Email</p>
+                </div>
+                <div class="toggle-switch active" onclick="toggleSwitch(this,'consentMarketing')"></div>
+            </div>
+            <div class="settings-item">
+                <div>
+                    <h5>Order Notifications</h5>
+                    <p>Get SMS/Email alerts for order status, shipping & delivery</p>
+                </div>
+                <div class="toggle-switch active" onclick="toggleSwitch(this,'consentOrderNotif')"></div>
+            </div>
+            <div class="settings-item">
+                <div>
+                    <h5>Location Services</h5>
+                    <p>Allow site to access your location for delivery estimates</p>
+                </div>
+                <div class="toggle-switch" onclick="toggleSwitch(this,'consentLocation')"></div>
+            </div>
+            <div class="settings-item">
+                <div>
+                    <h5>Analytics & Improvements</h5>
+                    <p>Help us improve by sharing anonymous usage data</p>
+                </div>
+                <div class="toggle-switch active" onclick="toggleSwitch(this,'consentAnalytics')"></div>
+            </div>
+            <div class="settings-item">
+                <div>
+                    <h5>WhatsApp Updates</h5>
+                    <p>Receive order updates and offers via WhatsApp</p>
+                </div>
+                <div class="toggle-switch active" onclick="toggleSwitch(this,'consentWhatsApp')"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==== GRIEVANCE REDRESSAL FULL CONTENT ==== -->
+    <div id="panelGrievance" class="acc-panel">
+        <div class="acc-panel-header">
+            <button class="acc-back-btn" onclick="openPanel('panelPrivacy')"><i class="fas fa-arrow-left"></i></button>
+            <h3><i class="fas fa-gavel"></i> Grievance Redressal</h3>
+        </div>
+        
+        <div class="settings-card">
+            <div class="grievance-officer">
+                <h5><i class="fas fa-user-tie"></i> Grievance Officer</h5>
+                <p>
+                    <strong>Name:</strong> Sumathi<br>
+                    <strong>Designation:</strong> Proprietor, Sumathi's Style<br>
+                    <strong>Email:</strong> sumathisstyle@gmail.com<br>
+                    <strong>Phone:</strong> +91 86107 03658<br>
+                    <strong>Address:</strong> Sumathi's Style, Tailoring Boutique<br>
+                    <strong>Experience:</strong> 30 Years in Custom Tailoring
+                </p>
+            </div>
+            
+            <h4><i class="fas fa-edit"></i> Submit a Complaint</h4>
+            <p style="font-size:13px;color:var(--text-light);line-height:1.7;margin-bottom:16px;">
+                We take every complaint seriously. Fill out the form below and we'll respond within <strong>48 hours</strong>. You can also reach us directly on WhatsApp.
+            </p>
+            
+            <div class="form-group">
+                <label>Complaint Subject</label>
+                <input type="text" id="grievanceSubject" placeholder="e.g., Delayed order, Quality issue, Wrong measurement">
+            </div>
+            <div class="form-group">
+                <label>Order ID (if applicable)</label>
+                <input type="text" id="grievanceOrderId" placeholder="e.g., #SS12345">
+            </div>
+            <div class="form-group">
+                <label>Detailed Description</label>
+                <textarea id="grievanceDesc" placeholder="Please describe your issue in detail..."></textarea>
+            </div>
+            
+            <button class="btn-save" onclick="submitGrievance()"><i class="fas fa-paper-plane"></i> Submit Complaint</button>
+            <button class="btn-cancel" onclick="openHelp()"><i class="fab fa-whatsapp"></i> Contact on WhatsApp</button>
+            
+            <p style="font-size:12px;color:var(--text-light);margin-top:16px;">
+                <i class="fas fa-clock"></i> Response Time: Within 48 hours<br>
+                <i class="fas fa-shield-alt"></i> Your complaint details are kept strictly confidential.
+            </p>
+        </div>
+    </div>
+
+    <!-- ==== DE-ACTIVATE ACCOUNT FULL CONTENT ==== -->
+    <div id="panelDeactivate" class="acc-panel">
+        <div class="acc-panel-header">
+            <button class="acc-back-btn" onclick="openPanel('panelPrivacy')"><i class="fas fa-arrow-left"></i></button>
+            <h3><i class="fas fa-user-slash"></i> De-activate my Account</h3>
+        </div>
+        <div class="settings-card">
+            <div style="text-align:center;padding:20px 0;">
+                <i class="fas fa-user-slash" style="font-size:48px;color:var(--secondary);margin-bottom:16px;display:block;"></i>
+                <h4 style="color:var(--text);margin-bottom:8px;">Temporarily De-activate Account</h4>
+                <p style="font-size:13px;color:var(--text-light);line-height:1.7;max-width:400px;margin:0 auto 20px;">
+                    De-activating your account will temporarily disable access. Your data, orders, and preferences will be preserved. You can re-activate anytime by simply logging back in.
+                </p>
+            </div>
+            
+            <div style="background:#fff8e1;border-radius:12px;padding:16px;margin-bottom:20px;border-left:4px solid var(--secondary);">
+                <h5 style="color:#f57f17;font-size:13px;margin-bottom:6px;"><i class="fas fa-info-circle"></i> What happens when you de-activate?</h5>
+                <ul style="font-size:12.5px;color:var(--text-light);line-height:1.8;padding-left:18px;">
+                    <li>You won't be able to place new orders</li>
+                    <li>Your wishlist and saved addresses remain saved</li>
+                    <li>Your Super Coins balance is preserved</li>
+                    <li>You won't receive marketing communications</li>
+                    <li>Re-activate anytime by logging in</li>
+                </ul>
+            </div>
+            
+            <div class="form-group">
+                <label>Reason for de-activation (optional)</label>
+                <input type="text" id="deactivateReason" placeholder="e.g., Taking a break, switching accounts...">
+            </div>
+            
+            <button class="btn-save" onclick="deactivateAccount()" style="background:linear-gradient(135deg,var(--secondary),var(--secondary-dark));">
+                <i class="fas fa-user-slash"></i> De-activate Account
+            </button>
+            <button class="btn-cancel" onclick="openPanel('panelPrivacy')">Cancel</button>
+        </div>
+    </div>
+
+    <!-- ==== DELETE ACCOUNT FULL CONTENT ==== -->
+    <div id="panelDeleteAccount" class="acc-panel">
+        <div class="acc-panel-header">
+            <button class="acc-back-btn" onclick="openPanel('panelPrivacy')"><i class="fas fa-arrow-left"></i></button>
+            <h3><i class="fas fa-trash-alt" style="color:var(--danger);"></i> Delete my Account</h3>
+        </div>
+        <div class="settings-card">
+            <div style="text-align:center;padding:20px 0;">
+                <i class="fas fa-exclamation-triangle" style="font-size:48px;color:var(--danger);margin-bottom:16px;display:block;"></i>
+                <h4 style="color:var(--danger);margin-bottom:8px;">⚠️ Permanent Account Deletion</h4>
+                <p style="font-size:13px;color:var(--text-light);line-height:1.7;max-width:400px;margin:0 auto 20px;">
+                    This action is <strong>irreversible</strong>. All your data including orders, addresses, wishlist, and Super Coins will be permanently deleted from <strong>Sumathi's Style</strong>.
+                </p>
+            </div>
+            
+            <div class="danger-zone">
+                <h5><i class="fas fa-exclamation-circle"></i> You will lose:</h5>
+                <ul style="font-size:12.5px;color:var(--text-light);line-height:1.8;padding-left:18px;margin-bottom:12px;">
+                    <li>All order history and tracking information</li>
+                    <li>Saved addresses and measurement profiles</li>
+                    <li>Wishlist items and preferences</li>
+                    <li>All earned Super Coins (cannot be recovered)</li>
+                    <li>Account access and login credentials</li>
+                </ul>
+            </div>
+            
+            <div style="background:var(--gray);border-radius:12px;padding:16px;margin:16px 0;">
+                <p style="font-size:12.5px;color:var(--text-light);line-height:1.7;margin-bottom:10px;">
+                    To confirm deletion, please type <strong style="color:var(--danger);">DELETE</strong> in the box below:
+                </p>
+                <div class="form-group" style="margin-bottom:0;">
+                    <input type="text" id="deleteConfirmText" placeholder="Type DELETE to confirm" style="border-color:var(--danger);">
+                </div>
+            </div>
+            
+            <button class="btn-danger" onclick="deleteAccount()">
+                <i class="fas fa-trash-alt"></i> Permanently Delete Account
+            </button>
+            <button class="btn-danger-outline" onclick="openPanel('panelPrivacy')">Cancel</button>
+            
+            <p style="font-size:11.5px;color:var(--text-light);margin-top:16px;text-align:center;">
+                Need help? <a href="#" onclick="openHelp();return false;" style="color:var(--primary);font-weight:600;text-decoration:none;">Contact us on WhatsApp</a>
+            </p>
         </div>
     </div>
 
@@ -323,14 +723,18 @@ body { font-family:'Poppins',sans-serif; background:var(--light); color:var(--te
 <script>
 /* ============================================================
    SHARED USER SESSION (via localStorage key 'sumathiUser')
-   website.html login/register OTP verify must save the user here:
-   localStorage.setItem('sumathiUser', JSON.stringify({name, phone, email}));
-   and logout() must do: localStorage.removeItem('sumathiUser');
    ============================================================ */
 function getUser() {
     try { return JSON.parse(localStorage.getItem('sumathiUser') || 'null'); } catch(e) { return null; }
 }
 function setUser(u) { localStorage.setItem('sumathiUser', JSON.stringify(u)); }
+
+const DEMO_OTP = '123456';
+let pendingEmailValue = '';
+let pendingMobileValue = '';
+let emailEditing = false;
+let mobileEditing = false;
+let nameEditing = false;
 
 function refreshProfileHeader() {
     const u = getUser();
@@ -348,6 +752,11 @@ function refreshProfileHeader() {
         document.getElementById('hpPhone').textContent = 'Not logged in';
         document.getElementById('hpLoginBtn').style.display = 'inline-block';
     }
+    cancelEmailOTP();
+    cancelMobileOTP();
+    resetEmailEditState();
+    resetMobileEditState();
+    resetNameEditState();
 }
 
 function goLoginOnMainSite() {
@@ -372,6 +781,7 @@ function openPanel(id) {
     if (id === 'panelCoins') loadCoins();
     if (id === 'panelAddresses') loadAddresses();
     if (id === 'panelFAQ') loadFAQ();
+    if (id === 'panelProfile') { cancelEmailOTP(); cancelMobileOTP(); resetEmailEditState(); resetMobileEditState(); resetNameEditState(); }
 }
 
 function openHelp() { window.open('https://wa.me/918610703658?text=' + encodeURIComponent('Hi Sumathi, I need help with my order.'), '_blank'); }
@@ -398,34 +808,267 @@ function showToast(message, type) {
     setTimeout(() => toast.classList.remove('show'), 2500);
 }
 
-/* ---------- PROFILE SAVE ---------- */
+/* ---------- NAME EDIT ---------- */
+function resetNameEditState() {
+    nameEditing = false;
+    const first = document.getElementById('editFirstName');
+    const last = document.getElementById('editLastName');
+    const btn = document.getElementById('nameEditBtn');
+    const icon = document.getElementById('nameEditIcon');
+    const saveBtn = document.getElementById('nameSaveBtn');
+    if (!first || !last || !btn || !icon || !saveBtn) return;
+    first.readOnly = true;
+    last.readOnly = true;
+    btn.classList.remove('editing');
+    icon.className = 'fas fa-pen';
+    saveBtn.disabled = true;
+    saveBtn.style.opacity = '0.5';
+    saveBtn.style.cursor = 'not-allowed';
+}
+function toggleNameEdit() {
+    const first = document.getElementById('editFirstName');
+    const last = document.getElementById('editLastName');
+    const btn = document.getElementById('nameEditBtn');
+    const icon = document.getElementById('nameEditIcon');
+    const saveBtn = document.getElementById('nameSaveBtn');
+    nameEditing = !nameEditing;
+    if (nameEditing) {
+        first.readOnly = false;
+        last.readOnly = false;
+        first.focus();
+        btn.classList.add('editing');
+        icon.className = 'fas fa-times';
+        saveBtn.disabled = false;
+        saveBtn.style.opacity = '1';
+        saveBtn.style.cursor = 'pointer';
+    } else {
+        resetNameEditState();
+    }
+}
 function savePersonalInfo() {
     const first = document.getElementById('editFirstName').value.trim();
     const last = document.getElementById('editLastName').value.trim();
+    if (!first) { showToast('Please enter your first name!', 'error'); return; }
     const u = getUser() || {};
     u.name = [first, last].filter(Boolean).join(' ') || 'User';
     setUser(u);
     window.parent.postMessage({ sumathiUserUpdated: u }, '*');
-    refreshProfileHeader();
-    showToast('Personal info updated!', 'success');
+    refreshProfileHeaderNameOnly(u);
+    resetNameEditState();
+    showToast('Name updated!', 'success');
 }
-function saveEmail() {
+function refreshProfileHeaderNameOnly(u) {
+    document.getElementById('hpName').textContent = u.name || 'User';
+}
+
+/* ---------- EMAIL OTP ---------- */
+function resetEmailEditState() {
+    emailEditing = false;
+    const input = document.getElementById('editEmail');
+    const btn = document.getElementById('emailEditBtn');
+    const icon = document.getElementById('emailEditIcon');
+    const sendBtn = document.getElementById('emailSendOtpBtn');
+    if (!input) return;
+    input.readOnly = true;
+    btn.classList.remove('editing');
+    icon.className = 'fas fa-pen';
+    sendBtn.disabled = true;
+    sendBtn.style.opacity = '0.5';
+    sendBtn.style.cursor = 'not-allowed';
+    const u = getUser();
+    input.value = (u && u.email) ? u.email : '';
+}
+function toggleEmailEdit() {
+    const input = document.getElementById('editEmail');
+    const btn = document.getElementById('emailEditBtn');
+    const icon = document.getElementById('emailEditIcon');
+    const sendBtn = document.getElementById('emailSendOtpBtn');
+    emailEditing = !emailEditing;
+    if (emailEditing) {
+        input.readOnly = false;
+        input.focus();
+        btn.classList.add('editing');
+        icon.className = 'fas fa-times';
+        sendBtn.disabled = false;
+        sendBtn.style.opacity = '1';
+        sendBtn.style.cursor = 'pointer';
+    } else {
+        resetEmailEditState();
+    }
+}
+function sendEmailOTP() {
     const email = document.getElementById('editEmail').value.trim();
-    const u = getUser() || {};
-    u.email = email;
-    setUser(u);
-    window.parent.postMessage({ sumathiUserUpdated: u }, '*');
-    showToast('Email updated!', 'success');
+    if (!email || !email.includes('@') || !email.includes('.')) { showToast('Enter a valid email address!', 'error'); return; }
+    pendingEmailValue = email;
+    document.getElementById('emailOtpTarget').textContent = email;
+    document.getElementById('emailViewMode').style.display = 'none';
+    document.getElementById('emailOtpMode').style.display = 'block';
+    ['emailOtp1','emailOtp2','emailOtp3','emailOtp4','emailOtp5','emailOtp6'].forEach(id => document.getElementById(id).value = '');
+    document.getElementById('emailOtp1').focus();
+    showToast('OTP sent to your email! (Demo: 123456)', 'success');
 }
-function saveMobile() {
-    const mobile = document.getElementById('editMobile').value.trim();
-    if (mobile && mobile.length !== 10) { showToast('Enter valid 10-digit number!', 'error'); return; }
+function cancelEmailOTP() {
+    const otpMode = document.getElementById('emailOtpMode');
+    const viewMode = document.getElementById('emailViewMode');
+    if (!otpMode || !viewMode) return;
+    otpMode.style.display = 'none';
+    viewMode.style.display = 'block';
+    pendingEmailValue = '';
+}
+function verifyEmailOTP() {
+    const otp = ['emailOtp1','emailOtp2','emailOtp3','emailOtp4','emailOtp5','emailOtp6'].map(id => document.getElementById(id).value).join('');
+    if (otp.length < 6) { showToast('Please enter the full 6-digit OTP!', 'error'); return; }
+    if (otp !== DEMO_OTP) { showToast('Invalid OTP! (Demo OTP is 123456)', 'error'); return; }
     const u = getUser() || {};
-    u.phone = mobile;
+    u.email = pendingEmailValue;
     setUser(u);
     window.parent.postMessage({ sumathiUserUpdated: u }, '*');
+    cancelEmailOTP();
+    resetEmailEditState();
+    showToast('Email verified & updated! ✅', 'success');
+}
+
+
+/* ---------- EMAIL: Edit button -> Send OTP -> Verify -> Save ---------- */
+function resetEmailEditState() {
+    emailEditing = false;
+    const input = document.getElementById('editEmail');
+    const btn = document.getElementById('emailEditBtn');
+    const icon = document.getElementById('emailEditIcon');
+    const sendBtn = document.getElementById('emailSendOtpBtn');
+    if (!input) return;
+    input.readOnly = true;
+    btn.classList.remove('editing');
+    icon.className = 'fas fa-pen';
+    sendBtn.disabled = true;
+    sendBtn.style.opacity = '0.5';
+    sendBtn.style.cursor = 'not-allowed';
+    const u = getUser();
+    input.value = (u && u.email) ? u.email : '';
+}
+function toggleEmailEdit() {
+    const input = document.getElementById('editEmail');
+    const btn = document.getElementById('emailEditBtn');
+    const icon = document.getElementById('emailEditIcon');
+    const sendBtn = document.getElementById('emailSendOtpBtn');
+    emailEditing = !emailEditing;
+    if (emailEditing) {
+        input.readOnly = false;
+        input.focus();
+        btn.classList.add('editing');
+        icon.className = 'fas fa-times';
+        sendBtn.disabled = false;
+        sendBtn.style.opacity = '1';
+        sendBtn.style.cursor = 'pointer';
+    } else {
+        resetEmailEditState();
+    }
+}
+function sendEmailOTP() {
+    const email = document.getElementById('editEmail').value.trim();
+    if (!email || !email.includes('@') || !email.includes('.')) { showToast('Enter a valid email address!', 'error'); return; }
+    pendingEmailValue = email;
+    document.getElementById('emailOtpTarget').textContent = email;
+    document.getElementById('emailViewMode').style.display = 'none';
+    document.getElementById('emailOtpMode').style.display = 'block';
+    ['emailOtp1','emailOtp2','emailOtp3','emailOtp4','emailOtp5','emailOtp6'].forEach(id => document.getElementById(id).value = '');
+    document.getElementById('emailOtp1').focus();
+    showToast('OTP sent to your email! (Demo: 123456)', 'success');
+}
+function cancelEmailOTP() {
+    const otpMode = document.getElementById('emailOtpMode');
+    const viewMode = document.getElementById('emailViewMode');
+    if (!otpMode || !viewMode) return;
+    otpMode.style.display = 'none';
+    viewMode.style.display = 'block';
+    pendingEmailValue = '';
+}
+function verifyEmailOTP() {
+    const otp = ['emailOtp1','emailOtp2','emailOtp3','emailOtp4','emailOtp5','emailOtp6'].map(id => document.getElementById(id).value).join('');
+    if (otp.length < 6) { showToast('Please enter the full 6-digit OTP!', 'error'); return; }
+    if (otp !== DEMO_OTP) { showToast('Invalid OTP! (Demo OTP is 123456)', 'error'); return; }
+    const u = getUser() || {};
+    u.email = pendingEmailValue;
+    setUser(u);
+    window.parent.postMessage({ sumathiUserUpdated: u }, '*');
+    cancelEmailOTP();
+    resetEmailEditState();
+    showToast('Email verified & updated! ✅', 'success');
+}
+
+/* ---------- MOBILE: Edit button -> Send OTP -> Verify -> Save ---------- */
+function resetMobileEditState() {
+    mobileEditing = false;
+    const input = document.getElementById('editMobile');
+    const btn = document.getElementById('mobileEditBtn');
+    const icon = document.getElementById('mobileEditIcon');
+    const sendBtn = document.getElementById('mobileSendOtpBtn');
+    if (!input) return;
+    input.readOnly = true;
+    btn.classList.remove('editing');
+    icon.className = 'fas fa-pen';
+    sendBtn.disabled = true;
+    sendBtn.style.opacity = '0.5';
+    sendBtn.style.cursor = 'not-allowed';
+    const u = getUser();
+    input.value = (u && u.phone) ? u.phone : '';
+}
+function toggleMobileEdit() {
+    const input = document.getElementById('editMobile');
+    const btn = document.getElementById('mobileEditBtn');
+    const icon = document.getElementById('mobileEditIcon');
+    const sendBtn = document.getElementById('mobileSendOtpBtn');
+    mobileEditing = !mobileEditing;
+    if (mobileEditing) {
+        input.readOnly = false;
+        input.focus();
+        btn.classList.add('editing');
+        icon.className = 'fas fa-times';
+        sendBtn.disabled = false;
+        sendBtn.style.opacity = '1';
+        sendBtn.style.cursor = 'pointer';
+    } else {
+        resetMobileEditState();
+    }
+}
+function sendMobileOTP() {
+    const mobile = document.getElementById('editMobile').value.trim();
+    if (mobile.length !== 10 || isNaN(mobile)) { showToast('Enter a valid 10-digit number!', 'error'); return; }
+    pendingMobileValue = mobile;
+    document.getElementById('mobileOtpTarget').textContent = '+91' + mobile;
+    document.getElementById('mobileViewMode').style.display = 'none';
+    document.getElementById('mobileOtpMode').style.display = 'block';
+    ['mobileOtp1','mobileOtp2','mobileOtp3','mobileOtp4','mobileOtp5','mobileOtp6'].forEach(id => document.getElementById(id).value = '');
+    document.getElementById('mobileOtp1').focus();
+    showToast('OTP sent via SMS! (Demo: 123456)', 'success');
+}
+function cancelMobileOTP() {
+    const otpMode = document.getElementById('mobileOtpMode');
+    const viewMode = document.getElementById('mobileViewMode');
+    if (!otpMode || !viewMode) return;
+    otpMode.style.display = 'none';
+    viewMode.style.display = 'block';
+    pendingMobileValue = '';
+}
+function verifyMobileOTP() {
+    const otp = ['mobileOtp1','mobileOtp2','mobileOtp3','mobileOtp4','mobileOtp5','mobileOtp6'].map(id => document.getElementById(id).value).join('');
+    if (otp.length < 6) { showToast('Please enter the full 6-digit OTP!', 'error'); return; }
+    if (otp !== DEMO_OTP) { showToast('Invalid OTP! (Demo OTP is 123456)', 'error'); return; }
+    const u = getUser() || {};
+    u.phone = pendingMobileValue;
+    setUser(u);
+    window.parent.postMessage({ sumathiUserUpdated: u }, '*');
+    cancelMobileOTP();
+    resetMobileEditState();
     refreshProfileHeader();
-    showToast('Mobile number updated!', 'success');
+    showToast('Mobile number verified & updated! ✅', 'success');
+}
+
+function moveMiniOTP(input, index, prefix) {
+    if (input.value.length === 1) {
+        const next = document.getElementById(prefix + 'Otp' + (index + 2));
+        if (next) next.focus();
+    }
 }
 
 /* ---------- ORDERS ---------- */
@@ -611,13 +1254,17 @@ function openAddressForm(index) {
     if (index >= 0) {
         const a = getAddresses()[index];
         title.innerHTML = '<i class="fas fa-map-marker-alt"></i> Edit Address';
-        document.getElementById('addrName').value = a.name;
-        document.getElementById('addrDetail').value = a.detail;
+        document.getElementById('addrName').value = a.name || '';
+        document.getElementById('addrDoor').value = a.door || '';
+        document.getElementById('addrStreet').value = a.street || '';
+        document.getElementById('addrCity').value = a.city || '';
         document.getElementById('addrPin').value = a.pin || '';
     } else {
         title.innerHTML = '<i class="fas fa-map-marker-alt"></i> Add New Address';
         document.getElementById('addrName').value = '';
-        document.getElementById('addrDetail').value = '';
+        document.getElementById('addrDoor').value = '';
+        document.getElementById('addrStreet').value = '';
+        document.getElementById('addrCity').value = '';
         document.getElementById('addrPin').value = '';
     }
     card.style.display = 'block';
@@ -629,11 +1276,14 @@ function closeAddressForm() {
 }
 function saveAddress() {
     const name = document.getElementById('addrName').value.trim();
-    const detail = document.getElementById('addrDetail').value.trim();
+    const door = document.getElementById('addrDoor').value.trim();
+    const street = document.getElementById('addrStreet').value.trim();
+    const city = document.getElementById('addrCity').value.trim();
     const pin = document.getElementById('addrPin').value.trim();
-    if (!name || !detail) { showToast('Please enter name and address!', 'error'); return; }
+    if (!name || !door || !street || !city) { showToast('Please fill Address Name, Door No, Street Name and City!', 'error'); return; }
+    const detail = [door, street, city].filter(Boolean).join(', ');
     const list = getAddresses();
-    const entry = { name, detail, pin, icon: name.toLowerCase().includes('office') ? 'fa-briefcase' : 'fa-home' };
+    const entry = { name, door, street, city, pin, detail, icon: name.toLowerCase().includes('office') ? 'fa-briefcase' : 'fa-home' };
     if (addrEditIndex >= 0) list[addrEditIndex] = entry;
     else list.push(entry);
     setAddresses(list);

@@ -454,10 +454,7 @@
         .pd-highlight-item i { color: #008080; margin-top: 2px; flex-shrink: 0; }
         .pd-delivery { border: 1px solid #e0e0e0; border-radius: 8px; padding: 16px; margin-bottom: 14px; }
         .pd-delivery-title { font-size: 16px; font-weight: 700; color: #212121; margin-bottom: 12px; }
-        .pd-delivery-loc-pill {
-            display: flex; align-items: center; gap: 10px; background: #e8f2fd;
-            padding: 12px 14px; border-radius: 8px; margin-bottom: 10px; cursor: pointer;
-        }
+        .pd-delivery-loc-pill { display: flex; align-items: center; gap: 10px; background: #e8f2fd; padding: 12px 14px; border-radius: 8px; margin-bottom: 10px; cursor: pointer; }
         .pd-delivery-loc-pill i.fa-map-marker-alt { color: #212121; font-size: 15px; }
         .pd-delivery-loc-text { font-size: 14px; font-weight: 700; color: #212121; }
         .pd-delivery-loc-link { font-size: 14px; font-weight: 600; color: #1a73e8; margin-left: 4px; }
@@ -467,15 +464,9 @@
         .pd-delivery-date-text { font-size: 14px; font-weight: 700; color: #212121; margin-bottom: 3px; }
         .pd-delivery-countdown { font-size: 13px; font-weight: 600; color: #e65100; }
         .pd-delivery-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; margin-top: 12px; }
-        .pd-delivery-input {
-            flex: 1; padding: 8px 12px; border: 1.5px solid #e0e0e0; border-radius: 6px;
-            font-size: 13px; font-family: 'Poppins',sans-serif; outline: none;
-        }
+        .pd-delivery-input { flex: 1; padding: 8px 12px; border: 1.5px solid #e0e0e0; border-radius: 6px; font-size: 13px; font-family: 'Poppins',sans-serif; outline: none; }
         .pd-delivery-input:focus { border-color: #008080; }
-        .pd-delivery-check {
-            padding: 8px 18px; background: #008080; color: #fff; border: none;
-            border-radius: 6px; font-size: 13px; font-weight: 600; cursor: pointer;
-        }
+        .pd-delivery-check { padding: 8px 18px; background: #008080; color: #fff; border: none; border-radius: 6px; font-size: 13px; font-weight: 600; cursor: pointer; }
         .pd-delivery-info { font-size: 12px; color: #388e3c; font-weight: 600; }
         .pd-returns { display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 7px; }
         .pd-return-item { display: flex; align-items: center; gap: 6px; font-size: 11.5px; color: #555; }
@@ -815,17 +806,35 @@
                 </div>
                 <div id="locToast" style="display:none;position:fixed;bottom:30px;left:50%;transform:translateX(-50%);background:#212121;color:#fff;padding:12px 24px;border-radius:8px;font-size:13px;z-index:999999;font-family:'Poppins',sans-serif;white-space:nowrap;"></div>
                 <script>
-                var locAddresses=[{name:'Office',detail:'Medavakkam Main Road, Kovilambakkam, Chennai - 600117',icon:'fa-briefcase'}];
+                /* ===== FIX: addresses now persist in localStorage =====
+                   Before, locAddresses was a plain JS array that reset to just
+                   "Office" every time the page reloaded — so anything added via
+                   "Add New Address" (or shown elsewhere as "Home") disappeared,
+                   which is why the list kept showing "No addresses found".
+                   Now we load/save the list from localStorage under 'sumathiAddresses',
+                   and default to a Home + Office entry so it's never empty. */
+                var locAddresses = (function () {
+                    try {
+                        var saved = JSON.parse(localStorage.getItem('sumathiAddresses') || 'null');
+                        if (Array.isArray(saved) && saved.length) return saved;
+                    } catch (e) {}
+                    return [
+                        { name: 'Office', detail: 'Medavakkam Main Road, Kovilambakkam, Chennai - 600117', icon: 'fa-briefcase' }
+                    ];
+                })();
+                function locPersist() {
+                    try { localStorage.setItem('sumathiAddresses', JSON.stringify(locAddresses)); } catch (e) {}
+                }
                 var locEditIndex=-1,locSelectedIndex=-1,locOpenDropdown=-1;
                 function locRender(list){var src=list||locAddresses;var el=document.getElementById('locAddrList');if(!src||src.length===0){el.innerHTML='<div style="padding:20px;text-align:center;color:#878787;font-size:13px;font-family:Poppins,sans-serif;">No addresses found</div>';return;}el.innerHTML=src.map(function(a,i){var realIdx=list?locAddresses.indexOf(a):i;var selected=(realIdx===locSelectedIndex);return'<div style="display:flex;align-items:flex-start;justify-content:space-between;padding:14px 16px;cursor:pointer;border-bottom:1px solid #f5f5f5;position:relative;'+(selected?'background:#f5f9ff;':'background:#fff;')+'" onclick="locSelectAddr('+realIdx+',event)">'+'<div style="display:flex;align-items:flex-start;gap:12px;flex:1;">'+'<div style="width:38px;height:38px;border-radius:8px;border:1px solid #e0e0e0;background:'+(selected?'#e8f2fd':'#fff')+';display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;">'+'<i class="fas '+a.icon+'" style="color:'+(selected?'#1a73e8':'#555')+';font-size:14px;"></i>'+'</div>'+'<div><div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;"><span style="font-size:14px;font-weight:700;color:#212121;font-family:Poppins,sans-serif;">'+a.name+'</span>'+(selected?'<span style="background:#e8f2fd;color:#1a73e8;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px;">Selected</span>':'')+'</div>'+'<div style="font-size:12px;color:#878787;line-height:1.5;font-family:Poppins,sans-serif;max-width:220px;">'+a.detail+'</div></div></div>'+'<button onclick="event.stopPropagation();locToggleDD('+realIdx+')" style="background:none;border:none;cursor:pointer;color:#666;font-size:18px;font-weight:700;padding:2px 6px;border-radius:4px;line-height:1;flex-shrink:0;" title="Options">⋯</button>'+(locOpenDropdown===realIdx?'<div style="position:absolute;right:12px;top:36px;background:#fff;border:1px solid #e0e0e0;border-radius:10px;box-shadow:0 4px 16px rgba(0,0,0,0.13);z-index:10;min-width:130px;overflow:hidden;"><div onclick="event.stopPropagation();locOpenEdit('+realIdx+')" style="display:flex;align-items:center;gap:10px;padding:11px 16px;cursor:pointer;font-size:13px;color:#212121;font-family:Poppins,sans-serif;"><i class="fas fa-edit" style="color:#1a73e8;font-size:13px;"></i> Edit</div><div onclick="event.stopPropagation();locDeleteAddr('+realIdx+')" style="display:flex;align-items:center;gap:10px;padding:11px 16px;cursor:pointer;font-size:13px;color:#dc3545;font-family:Poppins,sans-serif;"><i class="fas fa-trash" style="color:#dc3545;font-size:13px;"></i> Delete</div></div>':'')+'</div>';}).join('');}
                 function locToggleDD(i){locOpenDropdown=(locOpenDropdown===i)?-1:i;locRender();}
                 function locSelectAddr(i,e){locOpenDropdown=-1;locSelectedIndex=i;locRender();}
                 function locConfirm(){if(locSelectedIndex<0){locToastMsg('⚠️ Please select an address first');return;}var a=locAddresses[locSelectedIndex];document.getElementById('locLabel').textContent='Deliver to '+a.name+' –';document.getElementById('locLink').textContent=a.detail.substring(0,28)+'...';document.getElementById('locPanel').style.display='none';locToastMsg('📍 Delivering to '+a.name+'!');}
                 function locOpenEdit(i){locEditIndex=i;locOpenDropdown=-1;var a=locAddresses[i];document.getElementById('locModalTitle').textContent='Edit Address';document.getElementById('locNewName').value=a.name;document.getElementById('locNewAddr').value=a.detail;document.getElementById('locNewPin').value='';document.getElementById('locPanel').style.display='none';document.getElementById('locAddModal').style.display='flex';}
-                function locDeleteAddr(i){if(confirm('Delete "'+locAddresses[i].name+'" address?')){locAddresses.splice(i,1);if(locSelectedIndex===i)locSelectedIndex=-1;locOpenDropdown=-1;locRender();locToastMsg('🗑️ Address deleted');}}
+                function locDeleteAddr(i){if(confirm('Delete "'+locAddresses[i].name+'" address?')){locAddresses.splice(i,1);if(locSelectedIndex===i)locSelectedIndex=-1;locOpenDropdown=-1;locPersist();locRender();locToastMsg('🗑️ Address deleted');}}
                 function locAddNew(){locEditIndex=-1;document.getElementById('locModalTitle').textContent='Add New Address';document.getElementById('locNewName').value='';document.getElementById('locNewAddr').value='';document.getElementById('locNewPin').value='';document.getElementById('locPanel').style.display='none';document.getElementById('locAddModal').style.display='flex';}
                 function locCancelModal(){document.getElementById('locAddModal').style.display='none';document.getElementById('locPanel').style.display='flex';}
-                function locSaveAddress(){var n=document.getElementById('locNewName').value.trim();var a=document.getElementById('locNewAddr').value.trim();var p=document.getElementById('locNewPin').value.trim();if(!n||!a){locToastMsg('⚠️ Please enter name and address');return;}var full=a+(p?', '+p:'');if(locEditIndex>=0){locAddresses[locEditIndex]={name:n,detail:full,icon:locAddresses[locEditIndex].icon};locToastMsg('✅ Address updated!');locEditIndex=-1;}else{locAddresses.push({name:n,detail:full,icon:'fa-map-marker-alt'});locToastMsg('✅ Address saved!');}document.getElementById('locAddModal').style.display='none';document.getElementById('locPanel').style.display='flex';locRender();}
+                function locSaveAddress(){var n=document.getElementById('locNewName').value.trim();var a=document.getElementById('locNewAddr').value.trim();var p=document.getElementById('locNewPin').value.trim();if(!n||!a){locToastMsg('⚠️ Please enter name and address');return;}var full=a+(p?', '+p:'');if(locEditIndex>=0){locAddresses[locEditIndex]={name:n,detail:full,icon:locAddresses[locEditIndex].icon};locToastMsg('✅ Address updated!');locEditIndex=-1;}else{locAddresses.push({name:n,detail:full,icon:'fa-map-marker-alt'});locSelectedIndex=locAddresses.length-1;locToastMsg('✅ Address saved!');}locPersist();document.getElementById('locAddModal').style.display='none';document.getElementById('locPanel').style.display='flex';locRender();}
                 function locSearch(q){if(!q){locRender();return;}var filtered=locAddresses.filter(function(a){return a.name.toLowerCase().includes(q.toLowerCase())||a.detail.toLowerCase().includes(q.toLowerCase());});locRender(filtered);}
                 function locUseGPS(){if(navigator.geolocation){navigator.geolocation.getCurrentPosition(function(){document.getElementById('locLabel').textContent='Delivering to –';document.getElementById('locLink').textContent='Current Location';document.getElementById('locPanel').style.display='none';locToastMsg('📍 Location detected!');},function(){locToastMsg('⚠️ Location access denied');});}else{locToastMsg('⚠️ GPS not supported');}}
                 function locToastMsg(msg){var t=document.getElementById('locToast');t.textContent=msg;t.style.display='block';setTimeout(function(){t.style.display='none';},2500);}
@@ -868,6 +877,11 @@
                     <i class="fas fa-heart"></i>
                     <span class="cart-count" id="wishlistCount" style="background:var(--danger);">0</span>
                 </button>
+
+                <button class="nav-btn" onclick="toggleNotifPanel()" title="Notifications" id="notifBellBtn">
+    <i class="fas fa-bell"></i>
+    <span class="cart-count" id="notifBadge" style="display:none;">0</span>
+</button>
                 <button class="nav-btn" onclick="showSection('settings')" title="Settings">
                     <i class="fas fa-user-cog"></i>
                 </button>
@@ -2387,6 +2401,109 @@ document.addEventListener('DOMContentLoaded', function() {
             closePDModal();
         }
     });
+
+    
+
+let allNotifications = [];
+let lastSeenNotifId = Number(localStorage.getItem('sumathiLastSeenNotifId') || 0);
+
+// Simple notification "ding" sound (no external file needed)
+function playNotifSound() {
+    try {
+        const ctx = new (window.AudioContext || window.webkitAudioContext)();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.frequency.value = 880;
+        gain.gain.setValueAtTime(0.15, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.4);
+        osc.start();
+        osc.stop(ctx.currentTime + 0.4);
+    } catch (e) {}
+}
+
+async function fetchNotifications() {
+    try {
+        const res = await fetch('get_notifications.php?ts=' + Date.now());
+        const data = await res.json();
+        if (!Array.isArray(data)) return;
+
+        const newest = data.length ? Math.max(...data.map(n => Number(n.id))) : 0;
+
+        if (newest > lastSeenNotifId && allNotifications.length > 0) {
+            playNotifSound();
+        }
+
+        allNotifications = data;
+        updateNotifBadge();
+    } catch (e) {
+        console.error('Failed to load notifications', e);
+    }
+}
+
+function updateNotifBadge() {
+    const unread = allNotifications.filter(n => Number(n.id) > lastSeenNotifId).length;
+    const badge = document.getElementById('notifBadge');
+    if (!badge) return;
+    if (unread > 0) {
+        badge.textContent = unread;
+        badge.style.display = 'flex';
+    } else {
+        badge.style.display = 'none';
+    }
+}
+
+function toggleNotifPanel() {
+    let panel = document.getElementById('notifDropdownPanel');
+    if (!panel) {
+        panel = document.createElement('div');
+        panel.id = 'notifDropdownPanel';
+        panel.style.cssText = "position:fixed; top:104px; right:20px; width:340px; max-height:70vh; overflow-y:auto; background:#fff; border-radius:14px; box-shadow:0 10px 40px rgba(0,0,0,0.2); z-index:5000; padding:10px 0;";
+        document.body.appendChild(panel);
+    }
+
+    const isOpen = panel.style.display === 'block';
+    if (isOpen) {
+        panel.style.display = 'none';
+        return;
+    }
+
+    if (allNotifications.length) {
+        lastSeenNotifId = Math.max(...allNotifications.map(n => Number(n.id)));
+        localStorage.setItem('sumathiLastSeenNotifId', lastSeenNotifId);
+    }
+    updateNotifBadge();
+
+    if (!allNotifications.length) {
+        panel.innerHTML = '<div style="padding:30px 20px;text-align:center;color:#888;"><i class="fas fa-bell-slash" style="font-size:30px;color:#ddd;margin-bottom:10px;display:block;"></i>No notifications yet</div>';
+    } else {
+        panel.innerHTML = [...allNotifications].reverse().map(function(n) {
+            const dateStr = n.created_at ? new Date(n.created_at).toLocaleString('en-IN') : '';
+            return '<div style="padding:12px 18px;border-bottom:1px solid #f0f0f0;">' +
+                '<div style="font-weight:700;font-size:14px;color:#212121;margin-bottom:3px;">' + n.title + '</div>' +
+                '<div style="font-size:13px;color:#666;line-height:1.4;">' + n.message + '</div>' +
+                '<div style="font-size:11px;color:#aaa;margin-top:5px;">' + dateStr + '</div>' +
+                '</div>';
+        }).join('');
+    }
+
+    panel.style.display = 'block';
+}
+
+// Close panel when clicking outside
+document.addEventListener('click', function(e) {
+    const panel = document.getElementById('notifDropdownPanel');
+    const bellBtn = document.getElementById('notifBellBtn');
+    if (panel && panel.style.display === 'block' && !panel.contains(e.target) && !bellBtn.contains(e.target)) {
+        panel.style.display = 'none';
+    }
+});
+
+// Initial fetch + poll every 15 seconds for new notifications
+fetchNotifications();
+setInterval(fetchNotifications, 15000);
+        </script>
     </script>
 </body>
 </html>

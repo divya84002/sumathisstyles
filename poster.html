@@ -227,10 +227,28 @@
   }
   .wa-pill-btn svg{ width:18px; height:18px; fill:#fff; }
 
+  /* ===== FIX: mobile background split issue =====
+     Original body background was a left/right 50-50 gradient
+     matching the DESKTOP 2-column layout. On mobile the columns
+     stack into 1, but the gradient stayed viewport-split, causing
+     a diagonal teal/dark seam behind the stacked text.
+     Fix: force a solid background + explicit section backgrounds
+     below the breakpoint so colors match the stacked layout. */
   @media (max-width: 900px) {
+    html, body {
+      background: #008080; /* solid teal, no more split gradient */
+    }
     .bp-section { grid-template-columns: 1fr; }
-    .bp-left { padding: 40px 24px; order: 2; }
-    .bp-right { padding: 30px 20px; order: 1; }
+    .bp-left {
+      padding: 40px 24px;
+      order: 2;
+      background: #008080; /* explicit, matches solid body bg */
+    }
+    .bp-right {
+      padding: 30px 20px;
+      order: 1;
+      background: #F0FFF4; /* explicit mint bg for poster section */
+    }
     .bp-left h2 { font-size: 28px; }
     .page-back-btn { top: 14px; left: 14px; width: 40px; height: 40px; }
     .bp-close-btn { top: 14px; right: 14px; }
