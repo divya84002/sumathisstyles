@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Account - Sumathi's Style</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+:root {
+    --primary: #008080; --primary-light: #20B2AA; --primary-dark: #006666;
+    --secondary: #B87333; --secondary-light: #D4A574; --secondary-dark: #8B5A2B;
+    --dark: #1a2a3a; --light: #F0FFF4; --white: #ffffff; --gray: #f0f4f0;
+    --text: #2d3748; --text-light: #718096; --success: #28a745; --danger: #dc3545;
+    --shadow: 0 4px 20px rgba(0,128,128,0.12); --shadow-hover: 0 8px 30px rgba(0,128,128,0.2);
+    --copper-glow: 0 4px 15px rgba(184,115,51,0.3);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Poppins',sans-serif; background:var(--light); color:var(--text); min-height:100vh; }
+::-webkit-scrollbar { width:8px; } ::-webkit-scrollbar-thumb { background:var(--primary); border-radius:4px; }
+
+.acc-wrap { max-width:1100px; margin:0 auto; padding:20px 16px 60px; }
+
+/* Profile Header Card */
+.acc-profile-card { background:linear-gradient(135deg,var(--primary) 0%,var(--primary-dark) 100%); border-radius:20px; padding:28px 24px; color:#fff; display:flex; align-items:center; gap:18px; box-shadow:var(--shadow); margin-bottom:18px; position:relative; overflow:hidden; }
+.acc-profile-card::after { content:''; position:absolute; top:-40%; right:-10%; width:180px; height:180px; background:rgba(255,255,255,0.06); border-radius:50%; }
+.acc-avatar { width:64px; height:64px; border-radius:50%; background:rgba(255,255,255,0.18); display:flex; align-items:center; justify-content:center; font-size:28px; flex-shrink:0; }
+.acc-profile-info h2 { font-family:'Playfair Display',serif; font-size:20px; margin-bottom:4px; }
+.acc-profile-info p { font-size:13px; opacity:0.85; }
+.acc-login-btn { margin-left:auto; background:linear-gradient(135deg,var(--secondary),var(--secondary-light)); color:var(--dark); border:none; padding:10px 22px; border-radius:22px; font-weight:700; font-size:13px; cursor:pointer; box-shadow:var(--copper-glow); flex-shrink:0; }
+
+/* Quick Action Grid - Flipkart style */
+.acc-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-bottom:20px; }
+.acc-grid-item { background:var(--white); border-radius:16px; padding:18px 10px; text-align:center; cursor:pointer; box-shadow:var(--shadow); transition:all 0.25s; border:2px solid transparent; }
+.acc-grid-item:hover { transform:translateY(-4px); border-color:var(--secondary-light); box-shadow:var(--shadow-hover); }
+.acc-grid-item i { font-size:22px; color:var(--primary); margin-bottom:8px; display:block; }
+.acc-grid-item span { font-size:12.5px; font-weight:600; color:var(--text); }
+@media (max-width:640px){ .acc-grid { grid-template-columns:repeat(4,1fr); gap:8px; } .acc-grid-item { padding:14px 4px; } .acc-grid-item i{ font-size:18px; } .acc-grid-item span{ font-size:10.5px; } }
+
+/* List Menu */
+.acc-menu-card { background:var(--white); border-radius:16px; box-shadow:var(--shadow); overflow:hidden; margin-bottom:20px; }
+.acc-menu-section-title { font-size:12px; font-weight:700; color:var(--text-light); letter-spacing:0.5px; text-transform:uppercase; padding:14px 20px 6px; }
+.acc-menu-row { display:flex; align-items:center; gap:14px; padding:15px 20px; cursor:pointer; border-bottom:1px solid #f2f2f2; transition:background 0.2s; }
+.acc-menu-row:last-child { border-bottom:none; }
+.acc-menu-row:hover { background:var(--gray); }
+.acc-menu-row i.acc-ico { width:22px; text-align:center; color:var(--primary); font-size:16px; }
+.acc-menu-row span.acc-label { flex:1; font-size:14.5px; font-weight:500; color:var(--text); }
+.acc-menu-row i.acc-chev { color:#bbb; font-size:13px; }
+.acc-logout-row { color:var(--danger); font-weight:700; }
+.acc-logout-row i.acc-ico { color:var(--danger); }
+
+/* Panels */
+.acc-panel { display:none; }
+.acc-panel.active { display:block; }
+.acc-panel-header { display:flex; align-items:center; gap:12px; margin-bottom:18px; }
+.acc-back-btn { background:var(--white); border:none; width:38px; height:38px; border-radius:50%; box-shadow:var(--shadow); cursor:pointer; color:var(--primary); font-size:15px; flex-shrink:0; }
+.acc-panel-header h3 { font-family:'Playfair Display',serif; color:var(--primary); font-size:20px; }
+
+.settings-card { background:var(--white); border-radius:16px; padding:26px; box-shadow:var(--shadow); margin-bottom:16px; }
+.settings-card h4 { font-size:16px; color:var(--primary); margin-bottom:16px; display:flex; align-items:center; gap:8px; }
+.form-group { margin-bottom:16px; }
+.form-group label { display:block; font-size:13px; font-weight:600; margin-bottom:6px; color:var(--text); }
+.form-group input { width:100%; padding:11px 14px; border:1.5px solid #e0e0e0; border-radius:10px; font-size:14px; font-family:'Poppins',sans-serif; outline:none; }
+.form-group input:focus { border-color:var(--primary); }
+.form-row2 { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+.btn-save { background:linear-gradient(135deg,var(--primary),var(--primary-light)); color:#fff; border:none; padding:10px 26px; border-radius:20px; font-weight:600; font-size:13.5px; cursor:pointer; }
+.btn-cancel { background:none; border:1.5px solid #ccc; color:var(--text); padding:10px 20px; border-radius:20px; font-size:13.5px; cursor:pointer; margin-left:10px; }
+.settings-item { display:flex; justify-content:space-between; align-items:center; padding:14px 0; border-bottom:1px solid #eee; }
+.settings-item:last-child { border-bottom:none; }
+.settings-item h5 { font-size:14.5px; color:var(--text); margin-bottom:3px; }
+.settings-item p { font-size:12.5px; color:var(--text-light); }
+.toggle-switch { width:46px; height:24px; background:#ddd; border-radius:13px; position:relative; cursor:pointer; transition:all 0.3s; flex-shrink:0; }
+.toggle-switch.active { background:var(--primary); }
+.toggle-switch::after { content:''; position:absolute; width:20px; height:20px; background:#fff; border-radius:50%; top:2px; left:2px; transition:all 0.3s; }
+.toggle-switch.active::after { left:24px; }
+
+/* Orders */
+.order-filter-bar { display:flex; gap:8px; overflow-x:auto; padding-bottom:12px; margin-bottom:14px; }
+.order-filter-btn { flex:0 0 auto; padding:7px 16px; border-radius:18px; font-size:12.5px; font-weight:600; cursor:pointer; border:1.5px solid var(--primary); background:none; color:var(--primary); white-space:nowrap; }
+.order-filter-btn.active-filter { background:var(--primary); color:#fff; }
+.order-card { background:var(--white); border:1px solid #e8e8e8; border-radius:14px; margin-bottom:14px; overflow:hidden; }
+.order-card-header { background:#f9f9f9; padding:12px 18px; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #eee; flex-wrap:wrap; gap:6px; }
+.order-id { font-size:12.5px; color:var(--text-light); } .order-id span { color:var(--text); font-weight:600; }
+.order-status-badge { padding:4px 13px; border-radius:18px; font-size:11.5px; font-weight:700; }
+.status-Ordered { background:#fff3e0; color:#c9820a; }
+.status-Processing { background:#fff8e1; color:#f57f17; }
+.status-Cancelled { background:#ffe3e3; color:#c02c15; }
+.status-Delivered { background:#e3f2fd; color:#1565c0; }
+.order-card-body { padding:14px 18px; }
+.order-card-body h5 { font-size:14.5px; color:var(--text); margin-bottom:4px; }
+.order-card-body p { font-size:12.5px; color:var(--text-light); margin-bottom:5px; }
+.order-price { font-size:15px; font-weight:700; color:var(--primary); }
+.tracker-steps { display:flex; align-items:center; justify-content:space-between; position:relative; margin:10px 0 4px; padding:0 18px; }
+.tracker-steps::before { content:''; position:absolute; top:13px; left:18px; right:18px; height:2px; background:#e0e0e0; z-index:0; }
+.tracker-line-fill { position:absolute; top:13px; left:18px; height:2px; background:linear-gradient(90deg,var(--primary),var(--primary-light)); z-index:0; transition:width 0.5s; }
+.tracker-step { display:flex; flex-direction:column; align-items:center; gap:5px; z-index:1; }
+.tracker-dot { width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:11px; border:2px solid #e0e0e0; background:#fff; }
+.tracker-dot.done { background:var(--primary); border-color:var(--primary); color:#fff; }
+.tracker-dot.active { background:var(--secondary); border-color:var(--secondary); color:#fff; }
+.tracker-label { font-size:9.5px; color:var(--text-light); text-align:center; }
+.tracker-label.done-label,.tracker-label.active-label { color:var(--primary); font-weight:600; }
+.order-card-footer { padding:10px 18px; border-top:1px solid #f0f0f0; display:flex; justify-content:flex-end; }
+.btn-cancel-order { background:none; border:1.5px solid var(--danger); color:var(--danger); padding:7px 18px; border-radius:18px; font-size:12.5px; font-weight:600; cursor:pointer; }
+.orders-empty,.wish-empty { text-align:center; padding:60px 20px; }
+.orders-empty i,.wish-empty i { font-size:56px; color:#ddd; margin-bottom:14px; display:block; }
+.orders-empty h4,.wish-empty h4 { color:var(--text-light); margin-bottom:6px; }
+.orders-empty p,.wish-empty p { color:var(--text-light); font-size:13.5px; margin-bottom:18px; }
+.btn-primary-sm { background:linear-gradient(135deg,var(--primary),var(--primary-light)); color:#fff; border:none; padding:11px 26px; border-radius:22px; font-size:13.5px; font-weight:700; cursor:pointer; }
+
+/* Wishlist */
+.wish-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:16px; }
+.wish-card { background:var(--white); border-radius:14px; overflow:hidden; box-shadow:var(--shadow); position:relative; }
+.wish-card img { width:100%; height:180px; object-fit:cover; display:block; }
+.wish-remove { position:absolute; top:10px; right:10px; background:#fff; border:none; width:32px; height:32px; border-radius:50%; color:var(--danger); cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,0.15); font-size:14px; }
+.wish-info { padding:14px; }
+.wish-info h5 { font-size:13.5px; margin-bottom:6px; color:var(--text); }
+.wish-info .wp { font-weight:700; color:var(--primary); font-size:15px; margin-bottom:10px; }
+.btn-view-shop { width:100%; background:linear-gradient(135deg,var(--primary),var(--primary-light)); color:#fff; border:none; padding:9px; border-radius:8px; font-size:12.5px; font-weight:600; cursor:pointer; }
+
+/* Super Coins */
+.coins-hero { background:linear-gradient(135deg,var(--secondary) 0%,var(--secondary-dark) 100%); border-radius:18px; padding:28px 24px; color:#fff; text-align:center; box-shadow:var(--copper-glow); margin-bottom:18px; }
+.coins-hero i.coin-ico { font-size:38px; margin-bottom:10px; display:block; }
+.coins-hero .coin-count { font-size:36px; font-weight:700; font-family:'Playfair Display',serif; }
+.coins-hero .coin-label { font-size:13px; opacity:0.9; margin-top:4px; }
+.coins-info-row { display:flex; align-items:flex-start; gap:12px; padding:14px 0; border-bottom:1px solid #f0f0f0; }
+.coins-info-row:last-child { border-bottom:none; }
+.coins-info-row i { color:var(--secondary); font-size:16px; margin-top:2px; }
+.coins-info-row h5 { font-size:14px; color:var(--text); margin-bottom:3px; }
+.coins-info-row p { font-size:12.5px; color:var(--text-light); }
+
+/* Addresses */
+.addr-card { display:flex; align-items:flex-start; justify-content:space-between; padding:16px; border:1px solid #eee; border-radius:12px; margin-bottom:12px; background:var(--white); }
+.addr-card-left { display:flex; gap:12px; }
+.addr-icon-box { width:38px; height:38px; border-radius:8px; background:var(--gray); display:flex; align-items:center; justify-content:center; color:var(--primary); flex-shrink:0; }
+.addr-name-row { display:flex; align-items:center; gap:8px; margin-bottom:4px; }
+.addr-name-row span.nm { font-size:14.5px; font-weight:700; color:var(--text); }
+.addr-tag { background:var(--gray); color:var(--primary); font-size:10px; font-weight:700; padding:2px 8px; border-radius:4px; }
+.addr-detail { font-size:12.5px; color:var(--text-light); max-width:320px; line-height:1.5; }
+.addr-actions { display:flex; gap:14px; flex-shrink:0; }
+.addr-actions i { color:var(--text-light); cursor:pointer; font-size:14px; }
+.addr-actions i:hover { color:var(--primary); }
+.addr-actions i.del:hover { color:var(--danger); }
+.btn-add-addr { width:100%; border:2px dashed var(--primary-light); background:none; color:var(--primary); padding:14px; border-radius:12px; font-weight:600; font-size:13.5px; cursor:pointer; margin-top:6px; }
+
+/* Terms / FAQ */
+.faq-item { border-bottom:1px solid #f0f0f0; padding:14px 0; cursor:pointer; }
+.faq-item:last-child { border-bottom:none; }
+.faq-q { display:flex; justify-content:space-between; align-items:center; font-size:14px; font-weight:600; color:var(--text); }
+.faq-a { font-size:13px; color:var(--text-light); margin-top:8px; line-height:1.6; display:none; }
+.faq-item.open .faq-a { display:block; }
+.faq-item.open .faq-chev { transform:rotate(180deg); }
+.faq-chev { transition:transform 0.2s; color:var(--primary); }
+
+.toast { position:fixed; bottom:24px; left:50%; transform:translateX(-50%) translateY(100px); background:var(--dark); color:#fff; padding:13px 26px; border-radius:12px; font-size:13.5px; z-index:3000; opacity:0; transition:all 0.4s; box-shadow:var(--shadow-hover); }
+.toast.show { transform:translateX(-50%) translateY(0); opacity:1; }
+.toast.success { background:linear-gradient(135deg,var(--success),#2ed573); }
+.toast.error { background:linear-gradient(135deg,var(--danger),#ff6b81); }
+</style>
+</head>
+<body>
+
+<div class="acc-wrap">
+
+    <!-- ==== HOME PANEL (Flipkart style dashboard) ==== -->
+    <div id="panelHome" class="acc-panel active">
+        <div class="acc-profile-card">
+            <div class="acc-avatar"><i class="fas fa-user"></i></div>
+            <div class="acc-profile-info">
+                <h2 id="hpName">Guest User</h2>
+                <p id="hpPhone">Not logged in</p>
+            </div>
+            <button class="acc-login-btn" id="hpLoginBtn" onclick="goLoginOnMainSite()">Login</button>
+        </div>
+
+        <div class="acc-grid">
+            <div class="acc-grid-item" onclick="openPanel('panelOrders')"><i class="fas fa-box"></i><span>Orders</span></div>
+            <div class="acc-grid-item" onclick="openPanel('panelWishlist')"><i class="fas fa-heart"></i><span>Wishlist</span></div>
+            <div class="acc-grid-item" onclick="openPanel('panelCoins')"><i class="fas fa-coins" style="color:var(--secondary);"></i><span>Super Coins</span></div>
+            <div class="acc-grid-item" onclick="openHelp()"><i class="fas fa-headset"></i><span>Help Center</span></div>
+        </div>
+
+        <div class="acc-menu-card">
+            <div class="acc-menu-section-title">Account Settings</div>
+            <div class="acc-menu-row" onclick="openPanel('panelProfile')"><i class="fas fa-user-edit acc-ico"></i><span class="acc-label">Edit Profile</span><i class="fas fa-chevron-right acc-chev"></i></div>
+            <div class="acc-menu-row" onclick="openPanel('panelOrders')"><i class="fas fa-box acc-ico"></i><span class="acc-label">My Orders</span><i class="fas fa-chevron-right acc-chev"></i></div>
+            <div class="acc-menu-row" onclick="openPanel('panelWishlist')"><i class="fas fa-heart acc-ico" style="color:var(--danger);"></i><span class="acc-label">My Wishlist</span><i class="fas fa-chevron-right acc-chev"></i></div>
+            <div class="acc-menu-row" onclick="openPanel('panelAddresses')"><i class="fas fa-map-marker-alt acc-ico"></i><span class="acc-label">Saved Addresses</span><i class="fas fa-chevron-right acc-chev"></i></div>
+            <div class="acc-menu-row" onclick="openPanel('panelNotif')"><i class="fas fa-bell acc-ico" style="color:var(--secondary);"></i><span class="acc-label">Notification Settings</span><i class="fas fa-chevron-right acc-chev"></i></div>
+            <div class="acc-menu-row" onclick="openPanel('panelPrivacy')"><i class="fas fa-shield-alt acc-ico" style="color:var(--success);"></i><span class="acc-label">Privacy Center</span><i class="fas fa-chevron-right acc-chev"></i></div>
+        </div>
+
+        <div class="acc-menu-card">
+            <div class="acc-menu-section-title">Feedback & Information</div>
+            <div class="acc-menu-row" onclick="openPanel('panelTerms')"><i class="fas fa-file-alt acc-ico"></i><span class="acc-label">Terms, Policies and Licenses</span><i class="fas fa-chevron-right acc-chev"></i></div>
+            <div class="acc-menu-row" onclick="openPanel('panelFAQ')"><i class="fas fa-question-circle acc-ico"></i><span class="acc-label">Browse FAQs</span><i class="fas fa-chevron-right acc-chev"></i></div>
+        </div>
+
+        <div class="acc-menu-card">
+            <div class="acc-menu-row acc-logout-row" onclick="doLogout()"><i class="fas fa-sign-out-alt acc-ico"></i><span class="acc-label">Log Out</span></div>
+        </div>
+    </div>
+
+    <!-- ==== PROFILE PANEL ==== -->
+    <div id="panelProfile" class="acc-panel">
+        <div class="acc-panel-header"><button class="acc-back-btn" onclick="openPanel('panelHome')"><i class="fas fa-arrow-left"></i></button><h3><i class="fas fa-user-edit"></i> Profile Information</h3></div>
+        <div class="settings-card">
+            <h4><i class="fas fa-id-card"></i> Personal Information</h4>
+            <div class="form-row2">
+                <div class="form-group"><label>First Name</label><input type="text" id="editFirstName" placeholder="First name"></div>
+                <div class="form-group"><label>Last Name</label><input type="text" id="editLastName" placeholder="Last name"></div>
+            </div>
+            <button class="btn-save" onclick="savePersonalInfo()">Save</button>
+        </div>
+        <div class="settings-card">
+            <h4><i class="fas fa-envelope"></i> Email Address</h4>
+            <div class="form-group"><input type="email" id="editEmail" placeholder="Enter email address"></div>
+            <button class="btn-save" onclick="saveEmail()">Save</button>
+        </div>
+        <div class="settings-card">
+            <h4><i class="fas fa-mobile-alt"></i> Mobile Number</h4>
+            <div class="form-group"><input type="tel" id="editMobile" placeholder="10-digit number" maxlength="10"></div>
+            <button class="btn-save" onclick="saveMobile()">Save</button>
+            <p style="font-size:11.5px;color:var(--text-light);margin-top:10px;">Note: changing mobile number here won't move your past orders — those stay linked to the number you logged in with.</p>
+        </div>
+    </div>
+
+    <!-- ==== ORDERS PANEL ==== -->
+    <div id="panelOrders" class="acc-panel">
+        <div class="acc-panel-header"><button class="acc-back-btn" onclick="openPanel('panelHome')"><i class="fas fa-arrow-left"></i></button><h3><i class="fas fa-box"></i> My Orders</h3></div>
+        <div class="order-filter-bar">
+            <button class="order-filter-btn active-filter" data-type="all" onclick="filterOrders('all',this)">All</button>
+            <button class="order-filter-btn" data-type="Ordered" onclick="filterOrders('Ordered',this)">Ordered</button>
+            <button class="order-filter-btn" data-type="Processing" onclick="filterOrders('Processing',this)">Processing</button>
+            <button class="order-filter-btn" data-type="Delivered" onclick="filterOrders('Delivered',this)">Delivered</button>
+            <button class="order-filter-btn" data-type="Cancelled" onclick="filterOrders('Cancelled',this)">Cancelled</button>
+        </div>
+        <div id="ordersListContainer"></div>
+    </div>
+
+    <!-- ==== WISHLIST PANEL ==== -->
+    <div id="panelWishlist" class="acc-panel">
+        <div class="acc-panel-header"><button class="acc-back-btn" onclick="openPanel('panelHome')"><i class="fas fa-arrow-left"></i></button><h3><i class="fas fa-heart" style="color:var(--danger);"></i> My Wishlist</h3></div>
+        <div id="wishlistContainer"></div>
+    </div>
+
+    <!-- ==== SUPER COINS PANEL ==== -->
+    <div id="panelCoins" class="acc-panel">
+        <div class="acc-panel-header"><button class="acc-back-btn" onclick="openPanel('panelHome')"><i class="fas fa-arrow-left"></i></button><h3><i class="fas fa-coins" style="color:var(--secondary);"></i> Super Coins</h3></div>
+        <div class="coins-hero">
+            <i class="fas fa-coins coin-ico"></i>
+            <div class="coin-count" id="coinBalance">0</div>
+            <div class="coin-label">Sumathi Coins Available</div>
+        </div>
+        <div class="settings-card">
+            <div class="coins-info-row"><i class="fas fa-shopping-bag"></i><div><h5>Earn on every order</h5><p>Get 10 coins for every ₹500 you spend on stitching, sarees, aari work & more.</p></div></div>
+            <div class="coins-info-row"><i class="fas fa-gift"></i><div><h5>Redeem for discounts</h5><p>Use your coins to get discounts on your next custom order. Coming soon!</p></div></div>
+            <div class="coins-info-row"><i class="fas fa-history"></i><div><h5>Coins History</h5><p id="coinsHistoryText">No coins earned yet — place an order to start earning!</p></div></div>
+        </div>
+    </div>
+
+    <!-- ==== SAVED ADDRESSES PANEL ==== -->
+    <div id="panelAddresses" class="acc-panel">
+        <div class="acc-panel-header"><button class="acc-back-btn" onclick="openPanel('panelHome')"><i class="fas fa-arrow-left"></i></button><h3><i class="fas fa-map-marker-alt"></i> Saved Addresses</h3></div>
+        <div id="addressListContainer"></div>
+        <button class="btn-add-addr" onclick="openAddressForm(-1)"><i class="fas fa-plus"></i> Add New Address</button>
+
+        <div id="addrFormCard" class="settings-card" style="display:none;margin-top:16px;">
+            <h4 id="addrFormTitle"><i class="fas fa-map-marker-alt"></i> Add New Address</h4>
+            <div class="form-group"><label>Address Name (e.g. Home, Office)</label><input type="text" id="addrName" placeholder="Home"></div>
+            <div class="form-group"><label>Full Address</label><input type="text" id="addrDetail" placeholder="Area, Street, City"></div>
+            <div class="form-group"><label>Pincode (optional)</label><input type="text" id="addrPin" placeholder="Pincode" maxlength="6"></div>
+            <button class="btn-save" onclick="saveAddress()">Save Address</button>
+            <button class="btn-cancel" onclick="closeAddressForm()">Cancel</button>
+        </div>
+    </div>
+
+    <!-- ==== TERMS PANEL ==== -->
+    <div id="panelTerms" class="acc-panel">
+        <div class="acc-panel-header"><button class="acc-back-btn" onclick="openPanel('panelHome')"><i class="fas fa-arrow-left"></i></button><h3><i class="fas fa-file-alt"></i> Terms, Policies & Licenses</h3></div>
+        <div class="settings-card">
+            <h4><i class="fas fa-file-contract"></i> Terms of Service</h4>
+            <p style="font-size:13px;color:var(--text-light);line-height:1.7;">By placing an order with Sumathi's Style, you agree to our custom-order process: measurements and design details you provide are used solely to prepare your garment. Orders once confirmed cannot always be modified once stitching has begun.</p>
+        </div>
+        <div class="settings-card">
+            <h4><i class="fas fa-undo"></i> Cancellation Policy</h4>
+            <p style="font-size:13px;color:var(--text-light);line-height:1.7;">Orders can be cancelled before stitching work has started. Custom-stitched items, once work has begun, generally cannot be cancelled or refunded — please contact us on WhatsApp for any concerns.</p>
+        </div>
+        <div class="settings-card">
+            <h4><i class="fas fa-shield-alt"></i> Privacy Policy</h4>
+            <p style="font-size:13px;color:var(--text-light);line-height:1.7;">Your name, phone number, measurements and order details are stored only to process and deliver your order, and are never shared with third parties.</p>
+        </div>
+    </div>
+
+    <!-- ==== FAQ PANEL ==== -->
+    <div id="panelFAQ" class="acc-panel">
+        <div class="acc-panel-header"><button class="acc-back-btn" onclick="openPanel('panelHome')"><i class="fas fa-arrow-left"></i></button><h3><i class="fas fa-question-circle"></i> Browse FAQs</h3></div>
+        <div class="settings-card" id="faqListContainer"></div>
+    </div>
+
+    <!-- ==== NOTIFICATIONS PANEL ==== -->
+    <div id="panelNotif" class="acc-panel">
+        <div class="acc-panel-header"><button class="acc-back-btn" onclick="openPanel('panelHome')"><i class="fas fa-arrow-left"></i></button><h3><i class="fas fa-bell"></i> Notification Settings</h3></div>
+        <div class="settings-card">
+            <div class="settings-item"><div><h5>Order Updates</h5><p>Get notified about order status</p></div><div class="toggle-switch active" onclick="toggleSwitch(this,'notifOrder')"></div></div>
+            <div class="settings-item"><div><h5>Promotions</h5><p>Receive offers and discounts</p></div><div class="toggle-switch active" onclick="toggleSwitch(this,'notifPromo')"></div></div>
+            <div class="settings-item"><div><h5>Class Reminders</h5><p>Reminders for enrolled classes</p></div><div class="toggle-switch" onclick="toggleSwitch(this,'notifClass')"></div></div>
+        </div>
+    </div>
+
+    <!-- ==== PRIVACY PANEL ==== -->
+    <div id="panelPrivacy" class="acc-panel">
+        <div class="acc-panel-header"><button class="acc-back-btn" onclick="openPanel('panelHome')"><i class="fas fa-arrow-left"></i></button><h3><i class="fas fa-shield-alt"></i> Privacy Center</h3></div>
+        <div class="settings-card">
+            <div class="settings-item"><div><h5>Show Profile</h5><p>Make profile visible to others</p></div><div class="toggle-switch" onclick="toggleSwitch(this,'privShow')"></div></div>
+            <div class="settings-item"><div><h5>Location Access</h5><p>Allow site to access your location</p></div><div class="toggle-switch" onclick="toggleSwitch(this,'privLoc')"></div></div>
+        </div>
+    </div>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ============================================================
+   SHARED USER SESSION (via localStorage key 'sumathiUser')
+   website.html login/register OTP verify must save the user here:
+   localStorage.setItem('sumathiUser', JSON.stringify({name, phone, email}));
+   and logout() must do: localStorage.removeItem('sumathiUser');
+   ============================================================ */
+function getUser() {
+    try { return JSON.parse(localStorage.getItem('sumathiUser') || 'null'); } catch(e) { return null; }
+}
+function setUser(u) { localStorage.setItem('sumathiUser', JSON.stringify(u)); }
+
+function refreshProfileHeader() {
+    const u = getUser();
+    if (u && u.phone) {
+        document.getElementById('hpName').textContent = u.name || 'User';
+        document.getElementById('hpPhone').textContent = '+91' + u.phone;
+        document.getElementById('hpLoginBtn').style.display = 'none';
+        const [first, ...rest] = (u.name || '').split(' ');
+        document.getElementById('editFirstName').value = first || '';
+        document.getElementById('editLastName').value = rest.join(' ') || '';
+        document.getElementById('editEmail').value = u.email || '';
+        document.getElementById('editMobile').value = u.phone || '';
+    } else {
+        document.getElementById('hpName').textContent = 'Guest User';
+        document.getElementById('hpPhone').textContent = 'Not logged in';
+        document.getElementById('hpLoginBtn').style.display = 'inline-block';
+    }
+}
+
+function goLoginOnMainSite() {
+    window.parent.postMessage({ sumathiOpenLogin: true }, '*');
+}
+
+function doLogout() {
+    if (!confirm('Log out of your account?')) return;
+    localStorage.removeItem('sumathiUser');
+    window.parent.postMessage({ sumathiLogout: true }, '*');
+    refreshProfileHeader();
+    showToast('Logged out!', 'success');
+    openPanel('panelHome');
+}
+
+function openPanel(id) {
+    document.querySelectorAll('.acc-panel').forEach(p => p.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (id === 'panelOrders') loadMyOrders();
+    if (id === 'panelWishlist') loadWishlist();
+    if (id === 'panelCoins') loadCoins();
+    if (id === 'panelAddresses') loadAddresses();
+    if (id === 'panelFAQ') loadFAQ();
+}
+
+function openHelp() { window.open('https://wa.me/918610703658?text=' + encodeURIComponent('Hi Sumathi, I need help with my order.'), '_blank'); }
+
+function toggleSwitch(el, key) {
+    el.classList.toggle('active');
+    localStorage.setItem('sumathi_' + key, el.classList.contains('active') ? '1' : '0');
+}
+function restoreToggles() {
+    document.querySelectorAll('.toggle-switch[onclick]').forEach(el => {
+        const m = el.getAttribute('onclick').match(/'([^']+)'\)$/);
+        if (!m) return;
+        const key = 'sumathi_' + m[1];
+        const val = localStorage.getItem(key);
+        if (val !== null) el.classList.toggle('active', val === '1');
+    });
+}
+
+function showToast(message, type) {
+    const toast = document.getElementById('toast');
+    toast.textContent = message;
+    toast.className = 'toast ' + (type || '');
+    setTimeout(() => toast.classList.add('show'), 10);
+    setTimeout(() => toast.classList.remove('show'), 2500);
+}
+
+/* ---------- PROFILE SAVE ---------- */
+function savePersonalInfo() {
+    const first = document.getElementById('editFirstName').value.trim();
+    const last = document.getElementById('editLastName').value.trim();
+    const u = getUser() || {};
+    u.name = [first, last].filter(Boolean).join(' ') || 'User';
+    setUser(u);
+    window.parent.postMessage({ sumathiUserUpdated: u }, '*');
+    refreshProfileHeader();
+    showToast('Personal info updated!', 'success');
+}
+function saveEmail() {
+    const email = document.getElementById('editEmail').value.trim();
+    const u = getUser() || {};
+    u.email = email;
+    setUser(u);
+    window.parent.postMessage({ sumathiUserUpdated: u }, '*');
+    showToast('Email updated!', 'success');
+}
+function saveMobile() {
+    const mobile = document.getElementById('editMobile').value.trim();
+    if (mobile && mobile.length !== 10) { showToast('Enter valid 10-digit number!', 'error'); return; }
+    const u = getUser() || {};
+    u.phone = mobile;
+    setUser(u);
+    window.parent.postMessage({ sumathiUserUpdated: u }, '*');
+    refreshProfileHeader();
+    showToast('Mobile number updated!', 'success');
+}
+
+/* ---------- ORDERS ---------- */
+let allMyOrders = [];
+async function loadMyOrders() {
+    const u = getUser();
+    if (!u || !u.phone) {
+        document.getElementById('ordersListContainer').innerHTML = `<div class="orders-empty"><i class="fas fa-box-open"></i><h4>Login required</h4><p>Login to see your orders</p><button class="btn-primary-sm" onclick="goLoginOnMainSite()">Login</button></div>`;
+        return;
+    }
+    document.getElementById('ordersListContainer').innerHTML = `<p style="text-align:center;color:var(--text-light);padding:30px;">Loading your orders...</p>`;
+    try {
+        const res = await fetch('get_submissions.php?type=orders');
+        const data = await res.json();
+        allMyOrders = (Array.isArray(data) ? data : []).filter(o => (o.mobile || '').trim() === u.phone.trim());
+        filterOrders('all');
+    } catch (e) {
+        document.getElementById('ordersListContainer').innerHTML = `<div class="orders-empty"><i class="fas fa-exclamation-circle"></i><p>Unable to load orders</p></div>`;
+    }
+}
+function filterOrders(type, btnEl) {
+    document.querySelectorAll('.order-filter-btn').forEach(b => b.classList.remove('active-filter'));
+    const targetBtn = btnEl || document.querySelector(`.order-filter-btn[data-type="${type}"]`);
+    if (targetBtn) targetBtn.classList.add('active-filter');
+    const filtered = (type === 'all') ? allMyOrders : allMyOrders.filter(o => (o.status || 'Ordered') === type);
+    renderMyOrders(filtered);
+}
+function renderMyOrders(orders) {
+    const container = document.getElementById('ordersListContainer');
+    if (!orders.length) {
+        container.innerHTML = `<div class="orders-empty"><i class="fas fa-box-open"></i><h4>No orders yet</h4><p>Start shopping to see your orders here!</p><button class="btn-primary-sm" onclick="window.parent.postMessage({sumathiNav:'shop'},'*')">Shop Now</button></div>`;
+        return;
+    }
+    container.innerHTML = orders.map(o => {
+        const status = o.status || 'Ordered';
+        const canCancel = status !== 'Cancelled' && status !== 'Delivered';
+        return `<div class="order-card">
+            <div class="order-card-header">
+                <span class="order-id">Order ID: <span>#${o.id}</span></span>
+                <span class="order-status-badge status-${status}">${status}</span>
+            </div>
+            <div class="order-card-body">
+                <h5>${o.product}</h5>
+                <p>${o.notes ? o.notes.substring(0,60)+'...' : ''}</p>
+                <div class="order-price">₹${o.amount}</div>
+            </div>
+            ${buildTrackerHTML(status)}
+            <div class="order-card-footer">
+                ${canCancel ? `<button class="btn-cancel-order" onclick="cancelMyOrder('${o.id}')">Cancel Order</button>` : ''}
+            </div>
+        </div>`;
+    }).join('');
+}
+function buildTrackerHTML(status) {
+    if (status === 'Cancelled') {
+        return `<div style="display:flex;align-items:center;gap:10px;padding:12px 18px;"><span style="width:9px;height:9px;border-radius:50%;background:var(--danger);"></span><span style="font-size:13px;color:var(--text);font-weight:600;">Order Cancelled</span></div>`;
+    }
+    const steps = ['Ordered','Processing','Delivered'];
+    const activeIdx = Math.max(0, steps.indexOf(status));
+    const fillPercent = activeIdx === 0 ? 0 : activeIdx === 1 ? 50 : 100;
+    const icons = { Ordered:'fa-check', Processing:'fa-cog', Delivered:'fa-box-open' };
+    const stepsHTML = steps.map((step,i) => {
+        let dotClass='', labelClass='';
+        if (i < activeIdx) { dotClass='done'; labelClass='done-label'; }
+        else if (i === activeIdx) { dotClass='active'; labelClass='active-label'; }
+        const icon = i < activeIdx ? 'fa-check' : icons[step];
+        return `<div class="tracker-step"><div class="tracker-dot ${dotClass}"><i class="fas ${icon}"></i></div><div class="tracker-label ${labelClass}">${step}</div></div>`;
+    }).join('');
+    return `<div style="padding:14px 0;"><div class="tracker-steps"><div class="tracker-line-fill" style="width:${fillPercent}%;"></div>${stepsHTML}</div></div>`;
+}
+async function cancelMyOrder(orderId) {
+    if (!confirm('Are you sure you want to cancel this order?')) return;
+    try {
+        const res = await fetch('update_order_status.php', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({ id: orderId, status:'Cancelled' }) });
+        const data = await res.json();
+        if (data.status === 'success') { showToast('Order cancelled successfully','success'); loadMyOrders(); }
+        else showToast(data.message || 'Unable to cancel order','error');
+    } catch(e) { showToast('Unable to cancel order right now','error'); }
+}
+
+/* ---------- WISHLIST (client-side, localStorage key 'sumathiWishlist') ---------- */
+function getWishlistIds() {
+    try { return JSON.parse(localStorage.getItem('sumathiWishlist') || '[]'); } catch(e) { return []; }
+}
+function setWishlistIds(arr) { localStorage.setItem('sumathiWishlist', JSON.stringify(arr)); }
+function removeFromWishlist(id) {
+    const ids = getWishlistIds().filter(x => x !== id);
+    setWishlistIds(ids);
+    window.parent.postMessage({ sumathiWishlistUpdated: ids }, '*');
+    loadWishlist();
+}
+async function loadWishlist() {
+    const ids = getWishlistIds();
+    const container = document.getElementById('wishlistContainer');
+    if (!ids.length) {
+        container.innerHTML = `<div class="wish-empty"><i class="fas fa-heart-broken"></i><h4>Your wishlist is empty</h4><p>Save your favourite products here!</p><button class="btn-primary-sm" onclick="window.parent.postMessage({sumathiNav:'shop'},'*')">Explore Shop</button></div>`;
+        return;
+    }
+    container.innerHTML = `<p style="text-align:center;color:var(--text-light);padding:30px;">Loading wishlist...</p>`;
+    try {
+        const res = await fetch('get_products.php?ts=' + Date.now());
+        const data = await res.json();
+        const all = data.products || [];
+        const items = all.filter(p => ids.includes(Number(p.id)));
+        if (!items.length) {
+            container.innerHTML = `<div class="wish-empty"><i class="fas fa-heart-broken"></i><h4>Your wishlist is empty</h4><p>Save your favourite products here!</p><button class="btn-primary-sm" onclick="window.parent.postMessage({sumathiNav:'shop'},'*')">Explore Shop</button></div>`;
+            return;
+        }
+        container.innerHTML = `<div class="wish-grid">` + items.map(p => {
+            const img = (Array.isArray(p.photos) && p.photos[0]) ? p.photos[0] : (p.photo || 'https://images.unsplash.com/photo-1512436991641-6745cdb1723f?w=600');
+            return `<div class="wish-card">
+                <button class="wish-remove" onclick="removeFromWishlist(${Number(p.id)})"><i class="fas fa-times"></i></button>
+                <img src="${img}" alt="${p.name}">
+                <div class="wish-info">
+                    <h5>${p.name}</h5>
+                    <div class="wp">₹${p.price}</div>
+                    <button class="btn-view-shop" onclick="window.parent.postMessage({sumathiNav:'shop'},'*')"><i class="fas fa-shopping-bag"></i> View in Shop</button>
+                </div>
+            </div>`;
+        }).join('') + `</div>`;
+    } catch(e) {
+        container.innerHTML = `<div class="wish-empty"><i class="fas fa-exclamation-circle"></i><p>Unable to load wishlist</p></div>`;
+    }
+}
+
+/* ---------- SUPER COINS ---------- */
+/* Coins = 10 per ₹500 spent across this user's non-cancelled orders (from get_submissions.php) */
+async function loadCoins() {
+    const u = getUser();
+    document.getElementById('coinBalance').textContent = '0';
+    document.getElementById('coinsHistoryText').textContent = u && u.phone ? 'Loading...' : 'Login to start earning coins on your orders.';
+    if (!u || !u.phone) return;
+    try {
+        const res = await fetch('get_submissions.php?type=orders');
+        const data = await res.json();
+        const myOrders = (Array.isArray(data) ? data : []).filter(o => (o.mobile || '').trim() === u.phone.trim() && o.status !== 'Cancelled');
+        const totalSpent = myOrders.reduce((sum, o) => sum + Number(o.amount || 0), 0);
+        const coins = Math.floor(totalSpent / 500) * 10;
+        document.getElementById('coinBalance').textContent = coins;
+        document.getElementById('coinsHistoryText').textContent = coins > 0
+            ? `You've earned ${coins} coins from ${myOrders.length} order(s) so far!`
+            : 'No coins earned yet — place an order to start earning!';
+    } catch (e) {
+        document.getElementById('coinsHistoryText').textContent = 'Unable to load coins right now.';
+    }
+}
+
+/* ---------- SAVED ADDRESSES (localStorage key 'sumathiAddresses') ---------- */
+let addrEditIndex = -1;
+function getAddresses() {
+    try { return JSON.parse(localStorage.getItem('sumathiAddresses') || '[]'); } catch(e) { return []; }
+}
+function setAddresses(arr) { localStorage.setItem('sumathiAddresses', JSON.stringify(arr)); }
+
+function loadAddresses() {
+    const list = getAddresses();
+    const container = document.getElementById('addressListContainer');
+    closeAddressForm();
+    if (!list.length) {
+        container.innerHTML = `<div class="wish-empty" style="padding:40px 20px;"><i class="fas fa-map-marker-alt"></i><h4>No saved addresses</h4><p>Add an address for faster checkout</p></div>`;
+        return;
+    }
+    container.innerHTML = list.map((a, i) => `
+        <div class="addr-card">
+            <div class="addr-card-left">
+                <div class="addr-icon-box"><i class="fas ${a.icon || 'fa-map-marker-alt'}"></i></div>
+                <div>
+                    <div class="addr-name-row"><span class="nm">${a.name}</span><span class="addr-tag">${(a.name||'').toUpperCase().includes('OFFICE') ? 'OFFICE' : 'HOME'}</span></div>
+                    <div class="addr-detail">${a.detail}${a.pin ? ', ' + a.pin : ''}</div>
+                </div>
+            </div>
+            <div class="addr-actions">
+                <i class="fas fa-edit" title="Edit" onclick="openAddressForm(${i})"></i>
+                <i class="fas fa-trash del" title="Delete" onclick="deleteAddress(${i})"></i>
+            </div>
+        </div>
+    `).join('');
+}
+function openAddressForm(index) {
+    addrEditIndex = index;
+    const card = document.getElementById('addrFormCard');
+    const title = document.getElementById('addrFormTitle');
+    if (index >= 0) {
+        const a = getAddresses()[index];
+        title.innerHTML = '<i class="fas fa-map-marker-alt"></i> Edit Address';
+        document.getElementById('addrName').value = a.name;
+        document.getElementById('addrDetail').value = a.detail;
+        document.getElementById('addrPin').value = a.pin || '';
+    } else {
+        title.innerHTML = '<i class="fas fa-map-marker-alt"></i> Add New Address';
+        document.getElementById('addrName').value = '';
+        document.getElementById('addrDetail').value = '';
+        document.getElementById('addrPin').value = '';
+    }
+    card.style.display = 'block';
+    card.scrollIntoView({ behavior:'smooth', block:'center' });
+}
+function closeAddressForm() {
+    document.getElementById('addrFormCard').style.display = 'none';
+    addrEditIndex = -1;
+}
+function saveAddress() {
+    const name = document.getElementById('addrName').value.trim();
+    const detail = document.getElementById('addrDetail').value.trim();
+    const pin = document.getElementById('addrPin').value.trim();
+    if (!name || !detail) { showToast('Please enter name and address!', 'error'); return; }
+    const list = getAddresses();
+    const entry = { name, detail, pin, icon: name.toLowerCase().includes('office') ? 'fa-briefcase' : 'fa-home' };
+    if (addrEditIndex >= 0) list[addrEditIndex] = entry;
+    else list.push(entry);
+    setAddresses(list);
+    showToast(addrEditIndex >= 0 ? 'Address updated!' : 'Address saved!', 'success');
+    loadAddresses();
+}
+function deleteAddress(index) {
+    if (!confirm('Delete this address?')) return;
+    const list = getAddresses();
+    list.splice(index, 1);
+    setAddresses(list);
+    showToast('Address deleted', 'success');
+    loadAddresses();
+}
+
+/* ---------- FAQ ---------- */
+const faqData = [
+    { q:"How long does a custom order take?", a:"Most custom stitching orders are ready in 10-15 days depending on the design and workload. Bridal and heavy aari work may take a little longer — we'll always confirm a timeline with you." },
+    { q:"Can I cancel my order?", a:"Yes, orders can be cancelled before stitching work has begun. Once cutting/stitching has started, cancellation may not be possible — please reach out on WhatsApp." },
+    { q:"How do I track my order?", a:"Go to My Orders in your account. Each order shows a live status tracker — Ordered, Processing, and Delivered." },
+    { q:"What payment methods are accepted?", a:"We currently accept UPI (GPay, PhonePe, Paytm) and Cash on Delivery. Card payments and EMI are coming soon." },
+    { q:"Do you take measurements at home?", a:"For bridal and bulk orders, home visits can be arranged. Please contact us on WhatsApp to schedule one." },
+    { q:"How do Super Coins work?", a:"You earn 10 Sumathi Coins for every ₹500 you spend on completed orders. Coin redemption for discounts is coming soon!" }
+];
+function loadFAQ() {
+    const container = document.getElementById('faqListContainer');
+    container.innerHTML = faqData.map((f, i) => `
+        <div class="faq-item" id="faqItem${i}" onclick="toggleFAQ(${i})">
+            <div class="faq-q">${f.q} <i class="fas fa-chevron-down faq-chev"></i></div>
+            <div class="faq-a">${f.a}</div>
+        </div>
+    `).join('');
+}
+function toggleFAQ(i) { document.getElementById('faqItem' + i).classList.toggle('open'); }
+
+/* ---------- INIT ---------- */
+document.addEventListener('DOMContentLoaded', function() {
+    refreshProfileHeader();
+    restoreToggles();
+});
+window.addEventListener('storage', function(e) {
+    if (e.key === 'sumathiUser') refreshProfileHeader();
+});
+</script>
+</body>
+</html>

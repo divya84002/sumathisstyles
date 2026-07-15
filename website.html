@@ -1178,58 +1178,10 @@
 
         <!-- SETTINGS -->
         <div id="settings" class="page-section" style="display:none; margin-top:104px;">
-            <section class="section">
-                <div class="section-header"><h2><i class="fas fa-user-cog"></i> My Account</h2><p>Manage your profile and preferences</p><div class="line"></div></div>
-                <div style="display:grid; grid-template-columns:280px 1fr; gap:30px; align-items:start;">
-                    <div class="settings-card" style="padding:0; overflow:hidden; position:sticky; top:120px;">
-                        <div style="background:linear-gradient(135deg,var(--primary),var(--primary-dark)); padding:25px; text-align:center; color:white;">
-                            <div style="width:70px;height:70px;background:rgba(255,255,255,0.2);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;font-size:32px;"><i class="fas fa-user"></i></div>
-                            <h4 id="profileName" style="font-size:18px;margin-bottom:4px;">Guest User</h4>
-                            <p id="profilePhone" style="font-size:13px;opacity:0.85;">Not logged in</p>
-                        </div>
-                        <div style="padding:10px 0;" id="accountSidebarMenu">
-                            <div onclick="showAccountTab('profileTab', this)" class="acc-menu-item active-tab-item" style="padding:14px 20px;cursor:pointer;display:flex;align-items:center;gap:12px;font-size:14px;font-weight:500;color:var(--primary);background:rgba(0,128,128,0.08);border-left:3px solid var(--primary);"><i class="fas fa-user-edit"></i> Profile Information</div>
-                            <div onclick="showAccountTab('ordersTab', this)" class="acc-menu-item" style="padding:14px 20px;cursor:pointer;display:flex;align-items:center;gap:12px;font-size:14px;color:var(--text);transition:all 0.2s;" onmouseover="this.style.background='#f5f5f5'" onmouseout="this.style.background='none'"><i class="fas fa-box" style="color:var(--primary);"></i> My Orders</div>
-                            <div onclick="showSection('wishlist')" style="padding:14px 20px;cursor:pointer;display:flex;align-items:center;gap:12px;font-size:14px;color:var(--text);transition:all 0.2s;" onmouseover="this.style.background='#f5f5f5'" onmouseout="this.style.background='none'"><i class="fas fa-heart" style="color:var(--danger);"></i> My Wishlist</div>
-                            <div onclick="showAccountTab('notifTab', this)" class="acc-menu-item" style="padding:14px 20px;cursor:pointer;display:flex;align-items:center;gap:12px;font-size:14px;color:var(--text);transition:all 0.2s;" onmouseover="this.style.background='#f5f5f5'" onmouseout="this.style.background='none'"><i class="fas fa-bell" style="color:var(--secondary);"></i> Notifications</div>
-                            <div onclick="showAccountTab('privacyTab', this)" class="acc-menu-item" style="padding:14px 20px;cursor:pointer;display:flex;align-items:center;gap:12px;font-size:14px;color:var(--text);transition:all 0.2s;" onmouseover="this.style.background='#f5f5f5'" onmouseout="this.style.background='none'"><i class="fas fa-shield-alt" style="color:var(--success);"></i> Privacy</div>
-                            <div style="border-top:1px solid #eee;margin:8px 0;"></div>
-                            <div onclick="logout()" style="padding:14px 20px;cursor:pointer;display:flex;align-items:center;gap:12px;font-size:14px;color:var(--danger);font-weight:600;transition:all 0.2s;" onmouseover="this.style.background='#fff5f5'" onmouseout="this.style.background='none'"><i class="fas fa-sign-out-alt"></i> Logout</div>
-                        </div>
-                    </div>
-                    <div>
-                        <div id="profileTab" style="display:flex;flex-direction:column;gap:20px;">
-                            <div class="settings-card" id="personalInfo">
-                                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;"><h3 style="color:var(--primary);font-size:18px;"><i class="fas fa-user"></i> Personal Information</h3><button onclick="toggleEditSection('personalEdit', this)" style="background:none;border:1.5px solid var(--primary);color:var(--primary);font-size:14px;font-weight:600;cursor:pointer;padding:6px 16px;border-radius:20px;"><i class="fas fa-pen"></i> Edit</button></div>
-                                <div id="personalView"><div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;"><div><p style="font-size:12px;color:var(--text-light);margin-bottom:4px;">First Name</p><p id="viewFirstName" style="font-size:15px;font-weight:500;color:var(--text);">—</p></div><div><p style="font-size:12px;color:var(--text-light);margin-bottom:4px;">Last Name</p><p id="viewLastName" style="font-size:15px;font-weight:500;color:var(--text);">—</p></div></div><div style="margin-top:20px;"><p style="font-size:12px;color:var(--text-light);margin-bottom:8px;">Your Gender</p><div style="display:flex;gap:20px;"><label style="display:flex;align-items:center;gap:8px;font-size:14px;"><input type="radio" name="viewGender" value="male" disabled> Male</label><label style="display:flex;align-items:center;gap:8px;font-size:14px;"><input type="radio" name="viewGender" value="female" disabled checked> Female</label></div></div></div>
-                                <div id="personalEdit" style="display:none;"><div style="display:grid;grid-template-columns:1fr 1fr;gap:15px;margin-bottom:15px;"><div class="form-group" style="margin:0;"><label>First Name</label><input type="text" id="editFirstName" placeholder="First name"></div><div class="form-group" style="margin:0;"><label>Last Name</label><input type="text" id="editLastName" placeholder="Last name"></div></div><div style="margin-bottom:15px;"><p style="font-size:13px;font-weight:500;margin-bottom:8px;">Your Gender</p><div style="display:flex;gap:20px;"><label style="display:flex;align-items:center;gap:8px;font-size:14px;cursor:pointer;"><input type="radio" name="editGender" value="male"> Male</label><label style="display:flex;align-items:center;gap:8px;font-size:14px;cursor:pointer;"><input type="radio" name="editGender" value="female" checked> Female</label></div></div><button onclick="savePersonalInfo()" style="background:linear-gradient(135deg,var(--primary),var(--primary-light));color:white;border:none;padding:10px 28px;border-radius:20px;font-size:14px;font-weight:600;cursor:pointer;">Save</button><button onclick="toggleEditSection('personalEdit', null, true)" style="background:none;border:1.5px solid #ccc;color:var(--text);padding:10px 20px;border-radius:20px;font-size:14px;cursor:pointer;margin-left:10px;">Cancel</button></div>
-                            </div>
-                            <div class="settings-card">
-                                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;"><h3 style="color:var(--primary);font-size:18px;"><i class="fas fa-envelope"></i> Email Address</h3><button onclick="toggleEditSection('emailEdit', this)" style="background:none;border:1.5px solid var(--primary);color:var(--primary);font-size:14px;font-weight:600;cursor:pointer;padding:6px 16px;border-radius:20px;"><i class="fas fa-pen"></i> Edit</button></div>
-                                <div id="emailView"><p style="font-size:12px;color:var(--text-light);margin-bottom:4px;">Email</p><p id="profileEmail" style="font-size:15px;font-weight:500;color:var(--text);">Not provided</p></div>
-                                <div id="emailEdit" style="display:none;"><div class="form-group" style="margin-bottom:15px;"><label>Email Address</label><input type="email" id="editEmail" placeholder="Enter email address"></div><button onclick="saveEmail()" style="background:linear-gradient(135deg,var(--primary),var(--primary-light));color:white;border:none;padding:10px 28px;border-radius:20px;font-size:14px;font-weight:600;cursor:pointer;">Save</button><button onclick="toggleEditSection('emailEdit', null, true)" style="background:none;border:1.5px solid #ccc;color:var(--text);padding:10px 20px;border-radius:20px;font-size:14px;cursor:pointer;margin-left:10px;">Cancel</button></div>
-                            </div>
-                            <div class="settings-card">
-                                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;"><h3 style="color:var(--primary);font-size:18px;"><i class="fas fa-mobile-alt"></i> Mobile Number</h3><button onclick="toggleEditSection('mobileEdit', this)" style="background:none;border:1.5px solid var(--primary);color:var(--primary);font-size:14px;font-weight:600;cursor:pointer;padding:6px 16px;border-radius:20px;"><i class="fas fa-pen"></i> Edit</button></div>
-                                <div id="mobileView"><p style="font-size:12px;color:var(--text-light);margin-bottom:4px;">Mobile</p><p id="viewMobile" style="font-size:15px;font-weight:500;color:var(--text);">Not provided</p></div>
-                                <div id="mobileEdit" style="display:none;"><div class="form-group" style="margin-bottom:15px;"><label>Mobile Number</label><input type="tel" id="editMobile" placeholder="Enter 10-digit number" maxlength="10"></div><button onclick="saveMobile()" style="background:linear-gradient(135deg,var(--primary),var(--primary-light));color:white;border:none;padding:10px 28px;border-radius:20px;font-size:14px;font-weight:600;cursor:pointer;">Save</button><button onclick="toggleEditSection('mobileEdit', null, true)" style="background:none;border:1.5px solid #ccc;color:var(--text);padding:10px 20px;border-radius:20px;font-size:14px;cursor:pointer;margin-left:10px;">Cancel</button></div>
-                            </div>
-                        </div>
-                        <div id="ordersTab" style="display:none;">
-                            
-                                <button onclick="filterOrders('all', this)" data-type="all" class="order-filter-btn active-filter" style="padding:6px 16px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;border:1.5px solid var(--primary);background:var(--primary);color:white;">All</button><button onclick="filterOrders('Ordered', this)" data-type="Ordered" class="order-filter-btn" style="padding:6px 16px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;border:1.5px solid var(--primary);background:none;color:var(--primary);">Ordered</button><button onclick="filterOrders('Processing', this)" data-type="Processing" class="order-filter-btn" style="padding:6px 16px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;border:1.5px solid var(--secondary);background:none;color:var(--secondary);">Processing</button><button onclick="filterOrders('Delivered', this)" data-type="Delivered" class="order-filter-btn" style="padding:6px 16px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;border:1.5px solid #1565c0;background:none;color:#1565c0;">Delivered</button><button onclick="filterOrders('Cancelled', this)" data-type="Cancelled" class="order-filter-btn" style="padding:6px 16px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;border:1.5px solid var(--danger);background:none;color:var(--danger);">Cancelled</button>
-                                <div id="ordersListContainer"></div>
-                            </div>
-                        </div>
-                        <div id="notifTab" style="display:none;">
-                            <div class="settings-card"><h3 style="color:var(--primary);font-size:18px;margin-bottom:20px;"><i class="fas fa-bell"></i> Notifications</h3><div class="settings-item"><div class="settings-item-info"><h4>Order Updates</h4><p>Get notified about order status</p></div><div class="toggle-switch active" onclick="toggleSwitch(this)"></div></div><div class="settings-item"><div class="settings-item-info"><h4>Promotions</h4><p>Receive offers and discounts</p></div><div class="toggle-switch active" onclick="toggleSwitch(this)"></div></div><div class="settings-item"><div class="settings-item-info"><h4>Class Reminders</h4><p>Reminders for enrolled classes</p></div><div class="toggle-switch" onclick="toggleSwitch(this)"></div></div></div>
-                        </div>
-                        <div id="privacyTab" style="display:none;flex-direction:column;gap:20px;">
-                            <div class="settings-card"><h3 style="color:var(--primary);font-size:18px;margin-bottom:20px;"><i class="fas fa-shield-alt"></i> Privacy</h3><div class="settings-item"><div class="settings-item-info"><h4>Show Profile</h4><p>Make profile visible to others</p></div><div class="toggle-switch" onclick="toggleSwitch(this)"></div></div><div class="settings-item"><div class="settings-item-info"><h4>Location Access</h4><p>Allow app to access location</p></div><div class="toggle-switch" onclick="toggleSwitch(this)"></div></div></div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+            <iframe id="settingsFrame" src="settings.html" style="width:100%; height:calc(100vh - 104px); border:none; display:block;" title="Sumathi Settings"></iframe>
+            <script>
+             document.getElementById('settingsFrame').src = 'settings.html?v=' + new Date().getTime();
+            </script>
         </div>
 
         <!-- WISHLIST -->
@@ -2098,6 +2050,7 @@ function removeFromCart(productId) {
         if (otp === '123456') {
             const phone = document.getElementById('loginPhone').value;
             currentUser = { name: 'User', phone };
+            localStorage.setItem('sumathiUser', JSON.stringify({name:'User', phone}));
             showToast('Login successful! 🎉', 'success');
             closeModal('login');
             document.getElementById('loginBtn').textContent = 'Hi, User';
@@ -2125,6 +2078,7 @@ function removeFromCart(productId) {
             const phone = document.getElementById('regPhone').value;
             const email = document.getElementById('regEmail').value;
             currentUser = { name, phone, email };
+            localStorage.setItem('sumathiUser', JSON.stringify({name, phone, email}));
             showToast('Registration successful! 🎉', 'success');
             closeModal('register');
             document.getElementById('loginBtn').textContent = 'Hi, ' + name.split(' ')[0];
@@ -2140,6 +2094,7 @@ function removeFromCart(productId) {
 
     function logout() {
         currentUser = null;
+        localStorage.removeItem('sumathiUser');
         document.getElementById('loginBtn').textContent = 'Login';
         document.getElementById('loginBtn').onclick = () => showModal('login');
         document.getElementById('profileName').textContent = 'Guest User';
@@ -2165,224 +2120,6 @@ function removeFromCart(productId) {
         const items = products.filter(p => wishlist.includes(p.id));
         if (items.length === 0) { grid.innerHTML = ''; empty.style.display = 'block'; }
         else { empty.style.display = 'none'; grid.innerHTML = items.map(p => createProductCard(p)).join(''); }
-    }
-
-    function showAccountTab(tabId, clickedEl) {
-        ['profileTab','ordersTab','notifTab','privacyTab'].forEach(id => { const el = document.getElementById(id); if (el) el.style.display = 'none'; });
-        const tab = document.getElementById(tabId);
-        if (tab) tab.style.display = (tabId === 'profileTab' || tabId === 'privacyTab') ? 'flex' : 'block';
-        if (tabId === 'profileTab') document.getElementById('profileTab').style.flexDirection = 'column';
-        if (tabId === 'privacyTab') document.getElementById('privacyTab').style.flexDirection = 'column';
-        document.querySelectorAll('.acc-menu-item').forEach(m => { m.style.background = 'none'; m.style.borderLeft = 'none'; m.style.color = 'var(--text)'; m.style.fontWeight = '400'; });
-        if (clickedEl) { clickedEl.style.background = 'rgba(0,128,128,0.08)'; clickedEl.style.borderLeft = '3px solid var(--primary)'; clickedEl.style.color = 'var(--primary)'; clickedEl.style.fontWeight = '600'; }
-        if (tabId === 'ordersTab') loadMyOrders();
-    }
-
-   let allMyOrders = [];
-
-async function loadMyOrders() {
-        const phone = currentUser ? currentUser.phone : null;
-        if (!phone) {
-            document.getElementById('ordersListContainer').innerHTML = `<div class="orders-empty"><i class="fas fa-box-open"></i><h4>Login required</h4><p>Login to see your orders</p></div>`;
-            return;
-        }
-        try {
-            const res = await fetch('get_submissions.php?type=orders');
-            const data = await res.json();
-            allMyOrders = (Array.isArray(data) ? data : []).filter(o => (o.mobile || '').trim() === phone.trim());
-            filterOrders('all');
-        } catch (e) {
-            document.getElementById('ordersListContainer').innerHTML = `<div class="orders-empty"><i class="fas fa-exclamation-circle"></i><p>Unable to load orders</p></div>`;
-        }
-    }
-
-    function filterOrders(type, btnEl) {
-        document.querySelectorAll('.order-filter-btn').forEach(b => {
-            b.classList.remove('active-filter');
-            b.style.background = 'none';
-            b.style.color = b.style.borderColor;
-        });
-        const targetBtn = btnEl || document.querySelector(`.order-filter-btn[data-type="${type}"]`);
-        if (targetBtn) {
-            targetBtn.classList.add('active-filter');
-            targetBtn.style.background = targetBtn.style.borderColor;
-            targetBtn.style.color = 'white';
-        }
-        const filtered = (type === 'all') ? allMyOrders : allMyOrders.filter(o => (o.status || 'Ordered') === type);
-        renderMyOrders(filtered);
-    }
-
-    function renderMyOrders(orders) {
-        const container = document.getElementById('ordersListContainer');
-        if (!orders.length) {
-            container.innerHTML = `<div class="orders-empty"><i class="fas fa-box-open"></i><h4>No orders yet</h4><p>Start shopping to see your orders here!</p><button class="btn-primary" onclick="showSection('shop')">Shop Now</button></div>`;
-            return;
-        }
-        container.innerHTML = orders.map(o => {
-            const status = o.status || 'Ordered';
-            let statusClass = 'status-submitted';
-            if (status === 'Cancelled') statusClass = 'status-cancelled';
-            else if (status === 'Delivered') statusClass = 'status-delivered';
-            else if (status === 'Ordered') statusClass = 'status-placed';
-            const canCancel = status !== 'Cancelled' && status !== 'Delivered';
-
-            return `<div class="order-card">
-                <div class="order-card-header">
-                    <span class="order-id">Order ID: <span>#${o.id}</span></span>
-                    <span class="order-status-badge ${statusClass}">${status}</span>
-                </div>
-                <div class="order-card-body">
-                    <div class="order-product-info">
-                        <h4>${o.product}</h4>
-                        <p>${o.notes ? o.notes.substring(0, 60) + '...' : ''}</p>
-                        <div class="order-price">₹${o.amount}</div>
-                    </div>
-                </div>
-              ${buildTrackerHTML(status, o)}
-                ${status !== 'Cancelled' ? `
-                <div style="padding:0 20px 10px;">
-                    <span onclick="toggleOrderUpdates('${o.id}')" style="font-size:13px;color:var(--primary);font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:5px;">
-                        See All Updates <i class="fas fa-chevron-down" id="chev-${o.id}"></i>
-                    </span>
-                </div>
-                <div id="updates-${o.id}" style="display:none;padding:0 20px 16px;border-top:1px solid #f0f0f0;">
-                    ${buildDetailedTimeline(o)}
-                </div>` : ''}
-                <div class="order-card-footer">
-                    ${canCancel ? `<button class="btn-cancel-order" onclick="cancelMyOrder('${o.id}')">Cancel Order</button>` : ''}
-                </div>
-            </div>`;
-        }).join('');
-    }
-
-    // ✅ NEW — Flipkart style tracker with line + dots
-    function buildTrackerHTML(status, o) {
-        if (status === 'Cancelled') {
-            const dateStr = o && o.cancelled_at ? new Date(o.cancelled_at).toLocaleDateString('en-IN', {day:'numeric',month:'short'}) : '';
-            const reasonText = o && o.cancel_reason ? o.cancel_reason : 'Your order was cancelled as per your request';
-            return `<div style="display:flex;align-items:center;gap:10px;padding:14px 20px;">
-                <span style="width:10px;height:10px;border-radius:50%;background:var(--danger);flex-shrink:0;"></span>
-                <div>
-                    <div style="font-weight:700;font-size:14px;color:var(--text);">Cancelled${dateStr ? ' on '+dateStr : ''}</div>
-                    <div style="font-size:12px;color:var(--text-light);">${reasonText}</div>
-                </div>
-            </div>`;
-        }
-
-        const steps = ['Ordered', 'Processing', 'Delivered'];
-        const currentIdx = steps.indexOf(status);
-        const activeIdx = currentIdx === -1 ? 0 : currentIdx;
-        const fillPercent = activeIdx === 0 ? 0 : activeIdx === 1 ? 50 : 100;
-
-        const icons = { Ordered: 'fa-check', Processing: 'fa-cog', Delivered: 'fa-box-open' };
-
-        const stepsHTML = steps.map((step, i) => {
-            let dotClass = '', labelClass = '';
-            if (i < activeIdx) { dotClass = 'done'; labelClass = 'done-label'; }
-            else if (i === activeIdx) { dotClass = 'active'; labelClass = 'active-label'; }
-            const icon = i < activeIdx ? 'fa-check' : icons[step];
-            return `<div class="tracker-step">
-                <div class="tracker-dot ${dotClass}"><i class="fas ${icon}"></i></div>
-                <div class="tracker-label ${labelClass}">${step}</div>
-            </div>`;
-        }).join('');
-
-        return `<div class="order-tracker">
-            <div class="tracker-steps">
-                <div class="tracker-line-fill" style="width:${fillPercent}%;"></div>
-                ${stepsHTML}
-            </div>
-        </div>`;
-    }
-
-    // ✅ NEW — Flipkart-style detailed timeline shown under "See All Updates"
-    function buildDetailedTimeline(o) {
-        const steps = [
-            { label: 'Order Confirmed', time: o.created_at, done: true, sub: 'Your order has been placed.' },
-            { label: 'Processing', time: o.processing_at, done: !!o.processing_at, sub: 'Seller is processing your order.' },
-            { label: 'Delivered', time: o.delivered_at, done: !!o.delivered_at, sub: 'Your item has been delivered.' }
-        ];
-        return `<div style="padding-top:14px;">` + steps.map(s => `
-            <div style="display:flex;gap:12px;margin-bottom:16px;">
-                <div style="width:12px;height:12px;border-radius:50%;background:${s.done ? 'var(--primary)' : '#ddd'};margin-top:3px;flex-shrink:0;"></div>
-                <div>
-                    <div style="font-weight:700;font-size:13px;color:var(--text);">${s.label} <span style="font-weight:400;color:var(--text-light);font-size:12px;">${s.time ? new Date(s.time).toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'}) : ''}</span></div>
-                    ${s.done ? `<div style="font-size:12px;color:var(--text-light);margin-top:2px;">${s.sub}</div><div style="font-size:11px;color:var(--text-light);">${s.time ? new Date(s.time).toLocaleString('en-IN',{hour:'2-digit',minute:'2-digit'}) : ''}</div>` : `<div style="font-size:12px;color:var(--text-light);margin-top:2px;">Pending</div>`}
-                </div>
-            </div>`).join('') + `</div>`;
-    }
-
-    function toggleOrderUpdates(orderId) {
-        const el = document.getElementById('updates-' + orderId);
-        const chev = document.getElementById('chev-' + orderId);
-        if (!el) return;
-        if (el.style.display === 'none') {
-            el.style.display = 'block';
-            if (chev) chev.className = 'fas fa-chevron-up';
-        } else {
-            el.style.display = 'none';
-            if (chev) chev.className = 'fas fa-chevron-down';
-        }
-    }
-
-    async function cancelMyOrder(orderId) {
-        if (!confirm('Are you sure you want to cancel this order?')) return;
-        try {
-            const res = await fetch('update_order_status.php', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ id: orderId, status: 'Cancelled' })
-            });
-            const data = await res.json();
-            if (data.status === 'success') {
-                showToast('Order cancelled successfully', 'success');
-                loadMyOrders();
-            } else {
-                showToast(data.message || 'Unable to cancel order', 'error');
-            }
-        } catch (e) {
-            showToast('Unable to cancel order right now', 'error');
-        }
-    }
-
-    function toggleEditSection(sectionId, btn, cancel = false) {
-        const editDiv = document.getElementById(sectionId);
-        const isHidden = editDiv.style.display === 'none';
-        editDiv.style.display = cancel ? 'none' : (isHidden ? 'block' : 'none');
-        const viewMap = { personalEdit: 'personalView', emailEdit: 'emailView', mobileEdit: 'mobileView' };
-        const viewDiv = document.getElementById(viewMap[sectionId]);
-        if (viewDiv) viewDiv.style.display = (editDiv.style.display === 'block') ? 'none' : 'block';
-    }
-
-    function savePersonalInfo() {
-        const first = document.getElementById('editFirstName').value.trim();
-        const last = document.getElementById('editLastName').value.trim();
-        const fullName = [first, last].filter(Boolean).join(' ') || 'Guest User';
-        document.getElementById('viewFirstName').textContent = first || '—';
-        document.getElementById('viewLastName').textContent = last || '—';
-        document.getElementById('profileName').textContent = fullName;
-        if (currentUser) currentUser.name = fullName;
-        document.getElementById('loginBtn').textContent = currentUser ? 'Hi, ' + first : 'Login';
-        toggleEditSection('personalEdit', null, true);
-        showToast('Personal info updated!', 'success');
-    }
-
-    function saveEmail() {
-        const email = document.getElementById('editEmail').value.trim();
-        document.getElementById('profileEmail').textContent = email || 'Not provided';
-        if (currentUser) currentUser.email = email;
-        toggleEditSection('emailEdit', null, true);
-        showToast('Email updated!', 'success');
-    }
-
-    function saveMobile() {
-        const mobile = document.getElementById('editMobile').value.trim();
-        if (mobile && mobile.length !== 10) { showToast('Enter valid 10-digit number!', 'error'); return; }
-        document.getElementById('viewMobile').textContent = mobile ? '+91' + mobile : 'Not provided';
-        document.getElementById('profilePhone').textContent = mobile ? '+91' + mobile : 'Not logged in';
-        if (currentUser) currentUser.phone = mobile;
-        toggleEditSection('mobileEdit', null, true);
-        showToast('Mobile number updated!', 'success');
     }
 
     async function loadReviews() {
@@ -2560,6 +2297,36 @@ async function loadMyOrders() {
         setTimeout(() => toast.classList.remove('show'), 3000);
     }
 
+    // Listen for messages from the settings.html iframe (login popup, logout, navigation, user updates)
+    window.addEventListener('message', function(event) {
+        const data = event.data || {};
+        if (data.sumathiOpenLogin) {
+            showModal('login');
+        }
+        if (data.sumathiLogout) {
+            logout();
+        }
+        if (data.sumathiNav) {
+            showSection(data.sumathiNav);
+        }
+        if (data.sumathiUserUpdated) {
+            const u = data.sumathiUserUpdated;
+            currentUser = u;
+            if (u.name) {
+                document.getElementById('loginBtn').textContent = 'Hi, ' + u.name.split(' ')[0];
+                document.getElementById('loginBtn').onclick = () => showSection('settings');
+                document.getElementById('profileName').textContent = u.name;
+                document.getElementById('viewFirstName').textContent = u.name.split(' ')[0];
+                document.getElementById('viewLastName').textContent = u.name.split(' ').slice(1).join(' ') || '—';
+            }
+            if (u.phone) {
+                document.getElementById('profilePhone').textContent = '+91' + u.phone;
+                document.getElementById('viewMobile').textContent = '+91' + u.phone;
+            }
+            if (u.email) document.getElementById('profileEmail').textContent = u.email;
+        }
+    });
+
      function adjustHeaderOffsets() {
     const header = document.getElementById('siteHeader');
     const navbar = document.getElementById('navbar');
@@ -2583,6 +2350,20 @@ document.addEventListener('DOMContentLoaded', function() {
     loadReviews();
     updateCartUI();
     adjustHeaderOffsets();
+
+    // Restore login state from localStorage (shared with settings.html iframe)
+    try {
+        const savedUser = JSON.parse(localStorage.getItem('sumathiUser') || 'null');
+        if (savedUser && savedUser.phone) {
+            currentUser = savedUser;
+            document.getElementById('loginBtn').textContent = 'Hi, ' + (savedUser.name ? savedUser.name.split(' ')[0] : 'User');
+            document.getElementById('loginBtn').onclick = () => showSection('settings');
+            document.getElementById('profileName').textContent = savedUser.name || 'User';
+            document.getElementById('profilePhone').textContent = '+91' + savedUser.phone;
+            document.getElementById('viewMobile').textContent = '+91' + savedUser.phone;
+            if (savedUser.email) document.getElementById('profileEmail').textContent = savedUser.email;
+        }
+    } catch (e) {}
 
     window.addEventListener('scroll', function() {
         const navbar = document.getElementById('navbar');
