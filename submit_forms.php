@@ -11,6 +11,26 @@ function readJsonBody() {
     return is_array($data) ? $data : [];
 }
 
+// Generates order IDs like SS2026-0001, SS2026-0002 ... SS2027-0560, SS2027-0561 ...
+// The numeric counter NEVER resets when the year changes — it keeps increasing globally.
+function generateNextOrderId($conn) {
+    $yearNow = date('Y');
+    $nextNum = 1;
+
+    $result = $conn->query("SELECT order_id FROM orders WHERE order_id IS NOT NULL AND order_id != '' ORDER BY id DESC LIMIT 1");
+    if ($result && $result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $lastOrderId = $row['order_id']; // e.g. SS2026-0550
+        $parts = explode('-', $lastOrderId);
+        if (count($parts) === 2 && is_numeric($parts[1])) {
+            $nextNum = intval($parts[1]) + 1;
+        }
+    }
+
+    $paddedNum = str_pad($nextNum, 4, '0', STR_PAD_LEFT);
+    return 'SS' . $yearNow . '-' . $paddedNum;
+}
+
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     echo json_encode(['status' => 'error', 'message' => 'POST required']);
     exit();
@@ -34,14 +54,16 @@ if ($type === 'order') {
         exit();
     }
 
-    $stmt = $conn->prepare('INSERT INTO orders (name, mobile, product, amount, status, notes, source, measurement, voice_note) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)');
+    $orderId = generateNextOrderId($conn);
+
+    $stmt = $conn->prepare('INSERT INTO orders (order_id, name, mobile, product, amount, status, notes, source, measurement, voice_note) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
     if ($stmt === false) {
         echo json_encode(['status' => 'error', 'message' => 'Prepare failed: ' . $conn->error]);
         exit();
     }
 
     $status = 'Ordered';
-    $stmt->bind_param('sssdsssss', $name, $mobile, $product, $amount, $status, $notes, $source, $measurement, $voice_note);
+    $stmt->bind_param('sssssssss', $orderId, $name, $mobile, $product, $amount, $status, $notes, $source, $measurement, $voice_note);
     $ok = $stmt->execute();
     if (!$ok) {
         echo json_encode(['status' => 'error', 'message' => 'Execute failed: ' . $stmt->error]);
@@ -49,7 +71,7 @@ if ($type === 'order') {
         exit();
     }
     $stmt->close();
-    echo json_encode(['status' => 'success', 'message' => 'Order saved']);
+    echo json_encode(['status' => 'success', 'message' => 'Order saved', 'order_id' => $orderId]);
     exit();
 }
 
