@@ -424,12 +424,13 @@ select.status-select{padding:5px 8px;border-radius:6px;border:1.5px solid var(--
           </div>
           <!-- Search -->
           <div class="search-bar">
-            <input type="text" id="order-search" placeholder="🔍 Search by name / mobile / product..." oninput="renderOrders()"/>
+            <input type="text" id="order-search" placeholder="🔍 Search by Order ID / name / mobile / product..." oninput="renderOrders()"/>
             <select id="order-status-filter" onchange="renderOrders()">
               <option value="">All Status</option>
               <option>Ordered</option><option>Processing</option>
               <option>Delivered</option><option>Cancelled</option><option>Pending</option>
             </select>
+            <button class="btn btn-teal" style="font-size:12px;" onclick="searchByOrderId()">🔎 Find Order ID</button>
             <button class="btn btn-outline" style="font-size:12px;" onclick="printOrders()">🖨️ Print</button>
             <button class="btn btn-outline" style="font-size:12px;" onclick="exportOrdersCSV()">📥 Export CSV</button>
           </div>
@@ -536,6 +537,19 @@ select.status-select{padding:5px 8px;border-radius:6px;border:1.5px solid var(--
             <table>
               <thead><tr><th>Title</th><th>Message</th><th>Type</th><th>Sent On</th><th>Action</th></tr></thead>
               <tbody id="notifications-tbody"><tr><td colspan="5"><div class="empty"><div class="e-icon">🔔</div><p>No notifications sent yet</p></div></td></tr></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="section-card">
+          <h2>❌ Recent Cancellations</h2>
+          <div class="search-bar">
+            <input type="text" id="cancel-search" placeholder="🔍 Search by Order ID / name / mobile / product..." oninput="renderCancellations()"/>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Order ID</th><th>Customer</th><th>Mobile</th><th>Product</th><th>Cancellation Reason / Message</th><th>Cancelled Date</th><th>WhatsApp</th></tr></thead>
+              <tbody id="cancellations-tbody"><tr><td colspan="7"><div class="empty"><div class="e-icon">❌</div><p>No cancellations yet</p></div></td></tr></tbody>
             </table>
           </div>
         </div>
@@ -676,7 +690,7 @@ function showPage(id) {
   if(id==='customorder') renderCustomOrders();
   if(id==='contactform') renderContactForms();
   if(id==='contactform2') renderContactForms2();
-  if(id==='notifications') renderNotifications();
+  if(id==='notifications') { renderNotifications(); renderCancellations(); }
   if(id==='revenue') renderRevenue();
 }
 
@@ -692,19 +706,27 @@ async function loadOrdersFromServer(){
     const res=await fetch('get_submissions.php?type=orders');
     const data=await res.json();
     if(Array.isArray(data)){
-      const mapped=data.map(o=>({
-        id:o.id ? `#${o.id}` : '',
-        name:o.name||'',
-        mobile:o.mobile||'',
-        product:o.product||'',
-        amount:Number(o.amount||0),
-        status:o.status||'Ordered',
-        date:o.created_at ? new Date(o.created_at).toLocaleDateString('en-IN') : '',
-        source:o.source||'website',
-        measurement:o.measurement||'',
-        voiceNote:o.voice_note||'',
-        notes:o.notes||''
-      }));
+      const mapped=data.map(o=>{
+        // Normalize the Order ID so it always shows with a "#" prefix, Flipkart-style,
+        // whether it came from a proper order_id column or falls back to the raw numeric id.
+        const rawOrderId = o.order_id || o.id || '';
+        const orderId = rawOrderId ? ('#' + String(rawOrderId).replace(/^#/, '')) : '';
+        return {
+          id:o.id ? `#${o.id}` : '',
+          orderId:orderId,
+          name:o.name||'',
+          mobile:o.mobile||'',
+          product:o.product||'',
+          amount:Number(o.amount||0),
+          status:o.status||'Ordered',
+          date:o.created_at ? new Date(o.created_at).toLocaleDateString('en-IN') : '',
+          source:o.source||'website',
+          measurement:o.measurement||'',
+          voiceNote:o.voice_note||'',
+          notes:o.notes||'',
+          cancelReason:o.cancel_reason||''
+        };
+      });
       localStorage.setItem('ss_orders', JSON.stringify(mapped));
       return mapped;
     }
@@ -840,6 +862,41 @@ async function deleteNotification(id){
   } catch(e){toast('❌ Server error');}
 }
 
+// ══ RECENT CANCELLATIONS ══
+async function renderCancellations(){
+  const search=(document.getElementById('cancel-search')||{}).value||'';
+  const orders=await loadOrdersFromServer();
+  let cancelled=orders.filter(o=>o.status==='Cancelled');
+  if(search){
+    const s=search.toLowerCase().replace(/^#/,'');
+    cancelled=cancelled.filter(o=>
+      o.name.toLowerCase().includes(search.toLowerCase())||
+      o.mobile.includes(search)||
+      o.product.toLowerCase().includes(search.toLowerCase())||
+      String(o.orderId||'').toLowerCase().replace(/^#/,'').includes(s)
+    );
+  }
+  const tb=document.getElementById('cancellations-tbody');
+  if(!cancelled.length){
+    tb.innerHTML='<tr><td colspan="7"><div class="empty"><div class="e-icon">❌</div><p>No cancellations yet</p></div></td></tr>';
+    return;
+  }
+  tb.innerHTML=[...cancelled].reverse().map(o=>{
+    const reasonHTML=(o.cancelReason&&o.cancelReason.trim()!=='')
+      ?`<div style="font-size:12px;color:var(--danger);max-width:260px;white-space:normal;line-height:1.5;">${o.cancelReason}</div>`
+      :'<span style="color:var(--muted);font-size:11px;">—</span>';
+    return `<tr>
+      <td><b>${o.orderId}</b></td>
+      <td>${o.name}</td>
+      <td>📞 ${o.mobile}</td>
+      <td>${o.product}</td>
+      <td style="max-width:260px;">${reasonHTML}</td>
+      <td>${o.date}</td>
+      <td><button class="btn btn-wa" style="font-size:11px;padding:4px 10px;" onclick="waCustomer('${o.mobile}','${o.name}')">💬</button></td>
+    </tr>`;
+  }).join('');
+}
+
 // ══ INIT ══
 let monthlyChart=null, statusChart=null, revenueChart=null;
 function initDashboard(){
@@ -869,7 +926,7 @@ function refreshDashboard(){
     } else {
       tb.innerHTML=recent.map(o=>`
         <tr>
-          <td><b>#${o.id}</b></td><td>${o.name}</td>
+          <td><b>${o.orderId}</b></td><td>${o.name}</td>
           <td style="white-space:nowrap;">📞 ${o.mobile}</td><td>${o.product}</td>
           <td><b>₹${o.amount}</b></td>
           <td>${badgeHTML(o.status)}</td><td>${o.date}</td>
@@ -1099,7 +1156,15 @@ async function renderOrders(){
   const search=(document.getElementById('order-search')||{}).value||'';
   const statusF=(document.getElementById('order-status-filter')||{}).value||'';
   let orders=await loadOrdersFromServer();
-  if(search) orders=orders.filter(o=>o.name.toLowerCase().includes(search.toLowerCase())||o.mobile.includes(search)||o.product.toLowerCase().includes(search.toLowerCase()));
+  if(search){
+    const s=search.toLowerCase().replace(/^#/,'');
+    orders=orders.filter(o=>
+      o.name.toLowerCase().includes(search.toLowerCase())||
+      o.mobile.includes(search)||
+      o.product.toLowerCase().includes(search.toLowerCase())||
+      String(o.orderId||'').toLowerCase().replace(/^#/,'').includes(s)
+    );
+  }
   if(statusF) orders=orders.filter(o=>o.status===statusF);
   const tb=document.getElementById('orders-tbody');
   if(!orders.length){tb.innerHTML='<tr><td colspan="12"><div class="empty"><div class="e-icon">📭</div><p>No orders found</p></div></td></tr>';return;}
@@ -1114,8 +1179,8 @@ async function renderOrders(){
       ? `<audio controls style="height:28px;max-width:160px;"><source src="${o.voiceNote}" type="audio/webm"></audio>`
       : '<span style="color:var(--muted);font-size:11px;">—</span>';
     return `
-    <tr>
-      <td><b>#${o.id}</b></td><td>${o.name}</td>
+    <tr id="order-row-${String(o.orderId||'').replace(/[^a-zA-Z0-9]/g,'')}">
+      <td><b>${o.orderId}</b></td><td>${o.name}</td>
       <td> ${o.mobile}</td><td>${o.product}</td>
       <td><b>₹${o.amount}</b></td>
       <td style="max-width:150px;">${measurementHTML}</td>
@@ -1133,6 +1198,17 @@ async function renderOrders(){
       </td>
       <td><button class="btn btn-wa" style="font-size:11px;padding:4px 10px;" onclick="waNotify('${o.mobile}','${o.name}','${o.product}','${o.status}')">💬</button></td>
     </tr>`;}).join('');
+}
+
+// 🔎 Quick "search this exact Order ID" prompt — for when a customer calls and reads out their Order ID.
+// Filters the Orders table down to that one order so you don't have to scroll through thousands of rows.
+function searchByOrderId(){
+  const id=prompt('Enter the Order ID the customer gave you (e.g. #SS2026-0001):');
+  if(id===null) return;
+  const box=document.getElementById('order-search');
+  box.value=id.trim();
+  renderOrders();
+  toast('🔎 Showing results for ' + id.trim());
 }
 
 async function updateStatus(orderId, newStatus){
@@ -1164,7 +1240,7 @@ async function updateStatus(orderId, newStatus){
 function exportOrdersCSV(){
   const orders=getOrders();
   if(!orders.length){toast('⚠️ No orders to export');return;}
-  const rows=[['Order ID','Customer','Mobile','Product','Amount','Status','Date'],...orders.map(o=>[o.id,o.name,o.mobile,o.product,o.amount,o.status,o.date])];
+  const rows=[['Order ID','Customer','Mobile','Product','Amount','Status','Date'],...orders.map(o=>[o.orderId||o.id,o.name,o.mobile,o.product,o.amount,o.status,o.date])];
   const csv=rows.map(r=>r.join(',')).join('\n');
   const a=document.createElement('a');
   a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(csv);
@@ -1308,7 +1384,7 @@ async function renderRevenue(){
   // Delivered table
   const dtb=document.getElementById('delivered-tbody');
   dtb.innerHTML=delivered.length?[...delivered].reverse().map(o=>`
-    <tr><td><b>#${o.id}</b></td><td>${o.name}</td><td>${o.product}</td><td><b>₹${o.amount}</b></td><td>${o.date}</td></tr>`).join('')
+    <tr><td><b>${o.orderId}</b></td><td>${o.name}</td><td>${o.product}</td><td><b>₹${o.amount}</b></td><td>${o.date}</td></tr>`).join('')
   :'<tr><td colspan="5"><div class="empty"><div class="e-icon">📭</div><p>No delivered orders</p></div></td></tr>';
 }
 

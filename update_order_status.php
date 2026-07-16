@@ -22,8 +22,9 @@ if (empty($data)) {
     $data = $_POST;
 }
 
-$id     = intval($data['id'] ?? 0);
-$status = trim($data['status'] ?? '');
+$id            = intval($data['id'] ?? 0);
+$status        = trim($data['status'] ?? '');
+$cancel_reason = trim($data['cancel_reason'] ?? '');
 
 $allowed = ['Ordered', 'Processing', 'Delivered', 'Cancelled', 'Pending'];
 
@@ -37,13 +38,25 @@ if ($status === '' || !in_array($status, $allowed, true)) {
     exit();
 }
 
-$stmt = $conn->prepare('UPDATE orders SET status = ? WHERE id = ?');
-if ($stmt === false) {
-    echo json_encode(['status' => 'error', 'message' => 'Prepare failed: ' . $conn->error]);
-    exit();
+// If cancelling and a reason was sent, save status + reason together.
+// Otherwise (admin manually changing status from dropdown), just update status
+// and leave any existing cancel_reason untouched.
+if ($status === 'Cancelled' && $cancel_reason !== '') {
+    $stmt = $conn->prepare('UPDATE orders SET status = ?, cancel_reason = ? WHERE id = ?');
+    if ($stmt === false) {
+        echo json_encode(['status' => 'error', 'message' => 'Prepare failed: ' . $conn->error]);
+        exit();
+    }
+    $stmt->bind_param('ssi', $status, $cancel_reason, $id);
+} else {
+    $stmt = $conn->prepare('UPDATE orders SET status = ? WHERE id = ?');
+    if ($stmt === false) {
+        echo json_encode(['status' => 'error', 'message' => 'Prepare failed: ' . $conn->error]);
+        exit();
+    }
+    $stmt->bind_param('si', $status, $id);
 }
 
-$stmt->bind_param('si', $status, $id);
 $ok = $stmt->execute();
 
 if (!$ok) {
@@ -53,7 +66,6 @@ if (!$ok) {
 }
 
 if ($stmt->affected_rows === 0) {
-    // Either the id doesn't exist, or status was already the same value
     $check = $conn->prepare('SELECT id FROM orders WHERE id = ?');
     $check->bind_param('i', $id);
     $check->execute();

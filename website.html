@@ -103,8 +103,8 @@
 
         .categories-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px; }
         .category-card { background: var(--white); border-radius: 16px; padding: 18px 10px; text-align: center; cursor: pointer; transition: all 0.3s; box-shadow: var(--shadow); border: 2px solid transparent; position: relative; overflow: hidden; }
-        .category-icon { width: 90px; height: 110px; border-radius: 10px; overflow: hidden; margin: 0 auto 12px; background: #fff; box-shadow: 0 4px 15px rgba(0,128,128,0.15); }
-        .category-icon img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; transform: scale(1.15); }
+        .category-icon { width: 100%; height: 160px; border-radius: 10px; overflow: hidden; margin: 0 auto 12px; background: #fff; box-shadow: 0 4px 15px rgba(0,128,128,0.15); }
+        .category-icon img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; }
         .category-card:hover { transform: translateY(-8px); border-color: var(--secondary); box-shadow: var(--shadow-hover); }
         .category-card::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, var(--primary), var(--secondary)); opacity: 0; transition: opacity 0.3s; }
         .category-card:hover::after { opacity: 1; }
@@ -1294,8 +1294,11 @@
                 </div>
 
                 <!-- STEP 2: ORDER SUMMARY -->
-                <div id="checkoutStepSummary" class="checkout-panel" style="display:none;">
-                    <div class="co-deliver-to">
+                          <div id="checkoutStepSummary" class="checkout-panel" style="display:none;">
+    <div style="font-size:13px;color:var(--text-light);margin-bottom:14px;">
+        Order ID: <span id="coOrderId" style="color:var(--primary);font-weight:700;">—</span>
+    </div>
+    <div class="co-deliver-to">
                         <button class="co-change-btn" onclick="goToAddressStep()">Change</button>
                         <div style="font-weight:700;font-size:14px;">Deliver to: <span id="coName"></span><span class="co-tag">HOME</span></div>
                         <p id="coAddress" style="font-size:13px;color:var(--text-light);margin-top:6px;"></p>
@@ -1369,6 +1372,24 @@
     </div>
 
     <div class="toast" id="toast"></div>
+
+    <!-- ORDER CONFIRM MODAL -->
+<div class="modal-overlay" id="orderConfirmModal">
+    <div class="modal" style="max-width:420px; text-align:center;">
+        <button class="modal-close" onclick="closeModal('orderConfirm')"><i class="fas fa-times"></i></button>
+        <div style="width:70px;height:70px;border-radius:50%;background:linear-gradient(135deg,var(--success),#2ed573);display:flex;align-items:center;justify-content:center;margin:0 auto 15px;">
+            <i class="fas fa-check" style="color:#fff;font-size:32px;"></i>
+        </div>
+        <h2 style="margin-bottom:8px;">Order Placed!</h2>
+        <p style="color:var(--text-light);font-size:14px;margin-bottom:18px;">We'll contact you soon to confirm details.</p>
+        <div style="background:var(--gray);border-radius:12px;padding:16px;margin-bottom:20px;">
+            <div style="font-size:12px;color:var(--text-light);margin-bottom:4px;">YOUR ORDER ID</div>
+            <div id="orderConfirmId" style="font-size:20px;font-weight:700;color:var(--primary);letter-spacing:0.5px;">#OD00000000</div>
+        </div>
+        <p style="font-size:12px;color:var(--text-light);margin-bottom:15px;">Save this Order ID — mention it when you call us about this order.</p>
+        <button class="btn-enroll" onclick="closeModal('orderConfirm')"><i class="fas fa-check"></i> Okay, Got it</button>
+    </div>
+</div>
 
     <script>
 
@@ -1854,6 +1875,13 @@ function removeFromCart(productId) {
     function goToAddressStep() { checkoutStep = 1; updateCheckoutStepUI(); }
 
      function renderOrderSummaryPanel() {
+    if (!pendingOrder.tempOrderId) {
+        const yr = new Date().getFullYear();
+        const rand = String(Math.floor(1000 + Math.random() * 9000));
+        pendingOrder.tempOrderId = 'SS' + yr + '-' + rand;
+    }
+    document.getElementById('coOrderId').textContent = '#' + pendingOrder.tempOrderId;
+
     const name = document.getElementById('buyName').value.trim();
     const phone = document.getElementById('buyPhone').value.trim();
     const address = document.getElementById('buyAddress').value.trim();
@@ -1971,6 +1999,10 @@ function removeFromCart(productId) {
             const data = await res.json();
             if (data.status !== 'success') { showToast(data.message || 'Unable to save order', 'error'); return; }
 
+            // Order ID unga backend response la irundhu eduthu, # prefix oda kaamikirom
+            const rawId = data.order_id || data.orderId || data.id || data.orderID || '';
+            const displayOrderId = rawId ? ('#' + String(rawId).replace(/^#/, '')) : '#—';
+
             closeModal('buyNow');
             cart = [];
             updateCartUI();
@@ -1979,15 +2011,24 @@ function removeFromCart(productId) {
                 const upiId = 'shanusumi221525@okhdfcbank';
                 const amount = Number(pendingOrder.amount || 0);
                 const upiUrl = `upi://pay?pa=${upiId}&pn=Sumathi%27s%20Style&am=${amount}&cu=INR&tn=${encodeURIComponent('Order: ' + (pendingOrder.product || ''))}`;
-                showToast('Order saved! Opening UPI app for payment... 💳', 'success');
-                setTimeout(() => { window.location.href = upiUrl; }, 800);
+                showOrderConfirm(displayOrderId);
+                setTimeout(() => { window.location.href = upiUrl; }, 1500);
             } else {
-                showToast('Order placed successfully! We will contact you soon. 🎉', 'success');
+                showOrderConfirm(displayOrderId);
             }
         } catch (e) {
             showToast('Unable to save order right now', 'error');
         }
     }
+
+      function showOrderConfirm(orderId) {
+    try {
+        document.getElementById('orderConfirmId').textContent = orderId;
+        showModal('orderConfirm');
+    } catch (e) {
+        showToast('Unable to save order right now', 'error');
+    }
+}
 
    function buyNow(productId) {
     const product = products.find(p => p.id === productId);
