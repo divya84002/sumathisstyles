@@ -118,6 +118,11 @@
         .product-badge { position: absolute; top: 15px; left: 15px; background: linear-gradient(135deg, var(--secondary), var(--secondary-light)); color: var(--dark); padding: 5px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; }
         .product-badge.hot { background: linear-gradient(135deg, #ff4757, #ff6b81); color: white; }
         .product-badge.new { background: linear-gradient(135deg, var(--success), #2ed573); color: white; }
+        .product-rating-badge { position: absolute; bottom: -10px; left: 12px; background: #388e3c; color: #fff; font-size: 12px; font-weight: 700; padding: 3px 8px; border-radius: 4px; display: flex; align-items: center; gap: 3px; box-shadow: 0 2px 6px rgba(0,0,0,0.2); z-index: 3; }
+.product-price-row { display: flex; align-items: baseline; gap: 8px; margin-top: 8px; margin-bottom: 2px; }
+.product-price-original { font-size: 13px; color: #878787; text-decoration: line-through; }
+.product-price-discounted { font-size: 18px; font-weight: 700; color: #212121; }
+.product-offer-text { font-size: 12px; color: #26a541; font-weight: 600; margin-bottom: 10px; }
         .product-info { padding: 20px; display: flex; flex-direction: column; flex-grow: 1; }
         .product-info h3 { font-size: 16px; color: var(--text); margin-bottom: 6px; }
         .product-info p { font-size: 13px; color: var(--text-light); margin-bottom: 12px; flex-grow: 1; }
@@ -1707,29 +1712,25 @@ function pdUpdateDeliveryInfo() {
 
 
     /* Product Card — single price, no discount badge */
-      function createProductCard(p) {
+      
+    function createProductCard(p) {
     const isWishlisted = wishlist.includes(p.id);
     const inCart = cart.some(item => item.id === p.id);
     return `<div class="product-card fade-in">
-        <div style="position:relative;" onclick="openPDModal(${p.id})" style="cursor:pointer;">
-            <img src="${p.image}" class="product-img" alt="${p.name}" loading="lazy" style="cursor:pointer;">
-            ${p.badge ? `<span class="product-badge ${p.badge==='Hot'?'hot':p.badge==='New'?'new':''}">${p.badge}</span>` : ''}
-            <button onclick="event.stopPropagation();toggleWishlist(${p.id})" id="wishBtn${p.id}" style="position:absolute;top:10px;right:10px;background:white;border:none;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,0.15);font-size:16px;color:${isWishlisted?'#dc3545':'#bbb'};transition:all 0.2s;">
+        <div style="position:relative;">
+            <img src="${p.image}" class="product-img" alt="${p.name}" loading="lazy" style="cursor:pointer;" onclick="openPDModal(${p.id})">
+            <span class="product-rating-badge">${p.rating} <i class="fas fa-star" style="font-size:10px;"></i></span>
+            <button onclick="event.stopPropagation();toggleWishlist(${p.id})" id="wishBtn${p.id}" style="position:absolute;top:10px;right:10px;background:white;border:none;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,0.15);font-size:14px;color:${isWishlisted?'#dc3545':'#bbb'};transition:all 0.2s;">
                 <i class="${isWishlisted?'fas':'far'} fa-heart"></i>
             </button>
         </div>
-        <div class="product-info" onclick="openPDModal(${p.id})" style="cursor:pointer;">
-            <h3>${p.name}</h3>
-            <p>${p.desc}</p>
-            <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
-                <div style="display:inline-flex;align-items:center;gap:3px;background:#388e3c;color:#fff;font-size:12px;font-weight:700;padding:2px 8px;border-radius:4px;">
-                    ${p.rating} <i class="fas fa-star" style="font-size:10px;"></i>
-                </div>
-                <span style="font-size:12px;color:#878787;">(${p.ratingCount || '500+'})</span>
+        <div class="product-info" style="padding-top:16px;cursor:pointer;" onclick="openPDModal(${p.id})">
+            <h3 style="font-size:14px;font-weight:500;color:#212121;-webkit-line-clamp:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${p.name}</h3>
+            <div class="product-price-row">
+                <span class="product-price-original">₹${p.originalPrice}</span>
+                <span class="product-price-discounted">₹${p.price}</span>
             </div>
-            <div style="margin-bottom:12px;">
-                <span style="font-size:20px;font-weight:700;color:#212121;">₹${p.price}</span>
-            </div>
+            <div class="product-offer-text">₹${p.offerPrice} with UPI offer +more</div>
         </div>
         <div class="product-actions" style="padding:0 20px 16px;">
             ${inCart
@@ -1740,7 +1741,7 @@ function pdUpdateDeliveryInfo() {
         </div>
     </div>`;
 }
-
+    
     function renderProducts(containerId, productList) {
         const container = document.getElementById(containerId);
         if (!container) return;
