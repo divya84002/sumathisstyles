@@ -1730,16 +1730,8 @@ function pdUpdateDeliveryInfo() {
                 <span class="product-price-original">₹${p.originalPrice}</span>
                 <span class="product-price-discounted">₹${p.price}</span>
             </div>
-            <div class="product-offer-text">₹${p.offerPrice} with UPI offer +more</div>
         </div>
-        <div class="product-actions" style="padding:0 20px 16px;">
-            ${inCart
-                ? `<button class="btn-add-cart" style="background:linear-gradient(135deg,var(--secondary),var(--secondary-light));" onclick="event.stopPropagation();toggleCart()"><i class="fas fa-shopping-cart"></i> View Cart</button>`
-                : `<button class="btn-add-cart" onclick="event.stopPropagation();addToCart(${p.id})"><i class="fas fa-cart-plus"></i> Add to Cart</button>`
-            }
-            <button class="btn-buy" onclick="event.stopPropagation();buyNow(${p.id})"><i class="fas fa-bolt"></i> Buy Now</button>
-        </div>
-    </div>`;
+       </div>`;
 }
     
     function renderProducts(containerId, productList) {
