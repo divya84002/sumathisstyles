@@ -48,6 +48,8 @@ if ($type === 'order') {
     $source = trim($data['source'] ?? 'website');
     $measurement = trim($data['measurement'] ?? '');
     $voice_note = trim($data['voice_note'] ?? '');
+    $payment_method = trim($data['payment_method'] ?? 'N/A');
+    $payment_status = trim($data['payment_status'] ?? 'Not Required');
 
     if ($name === '' || $mobile === '') {
         echo json_encode(['status' => 'error', 'message' => 'Name and mobile are required']);
@@ -56,14 +58,14 @@ if ($type === 'order') {
 
     $orderId = generateNextOrderId($conn);
 
-    $stmt = $conn->prepare('INSERT INTO orders (order_id, name, mobile, product, amount, status, notes, source, measurement, voice_note) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
+    $stmt = $conn->prepare('INSERT INTO orders (order_id, name, mobile, product, amount, status, notes, source, measurement, voice_note, payment_method, payment_status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
     if ($stmt === false) {
         echo json_encode(['status' => 'error', 'message' => 'Prepare failed: ' . $conn->error]);
         exit();
     }
 
     $status = 'Ordered';
-    $stmt->bind_param('ssssdsssss', $orderId, $name, $mobile, $product, $amount, $status, $notes, $source, $measurement, $voice_note);
+    $stmt->bind_param('ssssdssssss s', $orderId, $name, $mobile, $product, $amount, $status, $notes, $source, $measurement, $voice_note, $payment_method, $payment_status);
     $ok = $stmt->execute();
     if (!$ok) {
         echo json_encode(['status' => 'error', 'message' => 'Execute failed: ' . $stmt->error]);

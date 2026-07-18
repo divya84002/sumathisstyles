@@ -436,8 +436,8 @@ select.status-select{padding:5px 8px;border-radius:6px;border:1.5px solid var(--
           </div>
           <div class="table-wrap">
             <table>
-              <thead><tr><th>Order ID</th><th>Customer</th><th>Mobile</th><th>Product</th><th>Amount</th><th>Measurement</th><th>Message</th><th>Voice Note</th><th>Status</th><th>Date</th><th>Update</th><th>WhatsApp</th></tr></thead>
-              <tbody id="orders-tbody"><tr><td colspan="12"><div class="empty"><div class="e-icon">📭</div><p>No orders yet</p></div></td></tr></tbody>
+               <thead><tr><th>Order ID</th><th>Customer</th><th>Mobile</th><th>Product</th><th>Amount</th><th>Payment</th><th>Measurement</th><th>Message</th><th>Voice Note</th><th>Status</th><th>Date</th><th>Update</th><th>WhatsApp</th></tr></thead>
+              <tbody id="orders-tbody"><tr><td colspan="13"><div class="empty"><div class="e-icon">📭</div><p>No orders yet</p></div></td></tr></tbody>
             </table>
           </div>
         </div>
@@ -724,7 +724,9 @@ async function loadOrdersFromServer(){
           measurement:o.measurement||'',
           voiceNote:o.voice_note||'',
           notes:o.notes||'',
-          cancelReason:o.cancel_reason||''
+          cancelReason:o.cancel_reason||'',
+          paymentMethod:o.payment_method||'N/A',
+          paymentStatus:o.payment_status||'Not Required'
         };
       });
       localStorage.setItem('ss_orders', JSON.stringify(mapped));
@@ -1167,7 +1169,7 @@ async function renderOrders(){
   }
   if(statusF) orders=orders.filter(o=>o.status===statusF);
   const tb=document.getElementById('orders-tbody');
-  if(!orders.length){tb.innerHTML='<tr><td colspan="12"><div class="empty"><div class="e-icon">📭</div><p>No orders found</p></div></td></tr>';return;}
+      if(!orders.length){tb.innerHTML='<tr><td colspan="13"><div class="empty"><div class="e-icon">📭</div><p>No orders found</p></div></td></tr>';return;}
   tb.innerHTML=[...orders].reverse().map(o=>{
     const measurementHTML = (o.measurement && o.measurement.trim() !== '')
       ? `<div style="font-size:11px;color:var(--teal-dark);max-width:180px;white-space:normal;line-height:1.5;">${o.measurement}</div>`
@@ -1178,11 +1180,14 @@ async function renderOrders(){
     const voiceHTML = (o.voiceNote && o.voiceNote.trim() !== '')
       ? `<audio controls style="height:28px;max-width:160px;"><source src="${o.voiceNote}" type="audio/webm"></audio>`
       : '<span style="color:var(--muted);font-size:11px;">—</span>';
+    const payColor = o.paymentStatus==='Paid' ? 'var(--success)' : (o.paymentStatus==='Not Required' ? 'var(--muted)' : 'var(--warning)');
+    const paymentHTML = `<div style="font-size:11px;font-weight:700;color:${payColor};">${o.paymentMethod||'N/A'}</div><div style="font-size:10px;color:${payColor};">${o.paymentStatus||''}</div>`;
     return `
     <tr id="order-row-${String(o.orderId||'').replace(/[^a-zA-Z0-9]/g,'')}">
       <td><b>${o.orderId}</b></td><td>${o.name}</td>
       <td> ${o.mobile}</td><td>${o.product}</td>
       <td><b>₹${o.amount}</b></td>
+      <td>${paymentHTML}</td>
       <td style="max-width:150px;">${measurementHTML}</td>
       <td style="max-width:150px;">${notesHTML}</td>
       <td>${voiceHTML}</td>

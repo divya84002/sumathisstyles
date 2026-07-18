@@ -119,9 +119,14 @@ function getConnection() {
             $orderColumns[] = $row['Field'];
         }
     }
+    
     $orderAlterQueries = [];
     if (!in_array('measurement', $orderColumns, true)) $orderAlterQueries[] = "ALTER TABLE orders ADD COLUMN measurement TEXT";
     if (!in_array('voice_note', $orderColumns, true)) $orderAlterQueries[] = "ALTER TABLE orders ADD COLUMN voice_note LONGTEXT";
+    if (!in_array('order_id', $orderColumns, true)) $orderAlterQueries[] = "ALTER TABLE orders ADD COLUMN order_id VARCHAR(30) DEFAULT ''";
+    if (!in_array('cancel_reason', $orderColumns, true)) $orderAlterQueries[] = "ALTER TABLE orders ADD COLUMN cancel_reason TEXT";
+    if (!in_array('payment_method', $orderColumns, true)) $orderAlterQueries[] = "ALTER TABLE orders ADD COLUMN payment_method VARCHAR(30) DEFAULT ''";
+    if (!in_array('payment_status', $orderColumns, true)) $orderAlterQueries[] = "ALTER TABLE orders ADD COLUMN payment_status VARCHAR(30) DEFAULT 'Not Required'";
     foreach ($orderAlterQueries as $query) {
         $conn->query($query);
     }

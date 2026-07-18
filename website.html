@@ -1933,7 +1933,7 @@ function removeFromCart(productId) {
             const upiUrl = `upi://pay?pa=${upiId}&pn=Sumathi%27s%20Style&am=${amount}&cu=INR&tn=${encodeURIComponent('Order: ' + (pendingOrder.product || ''))}`;
             const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 
-            if (isMobile) {
+           if (isMobile) {
                 detail.innerHTML = `
                     <div style="width:100%;text-align:left;">
                         <div style="display:flex;align-items:center;gap:12px;padding:14px;border:1.5px solid var(--primary);border-radius:10px;background:rgba(0,128,128,0.04);">
@@ -1943,7 +1943,7 @@ function removeFromCart(productId) {
                                 <div style="font-size:12px;color:#888;">Google Pay, PhonePe, Paytm & more</div>
                             </div>
                         </div>
-                        <button class="btn-enroll co-place-order-btn" style="margin-top:16px;" onclick="placeOrderFromCheckout('upi')">
+                        <button class="btn-enroll co-place-order-btn" style="margin-top:16px;" onclick="initiateUpiPay('${upiUrl.replace(/'/g, "\\'")}')">
                             <i class="fas fa-bolt"></i> Pay ₹${amount.toLocaleString()}
                         </button>
                         <p style="font-size:11px;color:#999;margin-top:10px;text-align:center;">Tapping Pay will open your UPI app to complete payment</p>
@@ -1956,7 +1956,7 @@ function removeFromCart(productId) {
                     <div class="co-qr-box"><img src="${qrImg}" alt="UPI QR"></div>
                     <p style="font-size:15px;font-weight:700;margin-top:14px;">₹${amount.toLocaleString()}</p>
                     <p style="font-size:12px;color:#888;margin-top:4px;">Scan using GPay, PhonePe, Paytm or any UPI app</p>
-                    <button class="btn-enroll co-place-order-btn" onclick="placeOrderFromCheckout('upi')"><i class="fas fa-bolt"></i> Pay & Place Order</button>
+                    <button class="btn-enroll co-place-order-btn" onclick="showUpiConfirmStep()"><i class="fas fa-check-circle"></i> I've Completed the Payment</button>
                 `;
             }
         } else if (type === 'cod') {
@@ -1970,7 +1970,34 @@ function removeFromCart(productId) {
         }
     }
 
-    async function placeOrderFromCheckout(method) {
+    function initiateUpiPay(upiUrl) {
+        window.location.href = upiUrl;
+        setTimeout(() => { showUpiConfirmStep(); }, 800);
+    }
+
+    function showUpiConfirmStep() {
+        const amount = Number(pendingOrder.amount || 0);
+        const detail = document.getElementById('coPaymentDetail');
+        detail.innerHTML = `
+            <i class="fas fa-hourglass-half" style="font-size:36px;color:var(--secondary);margin-bottom:12px;"></i>
+            <h4 style="color:var(--text);margin-bottom:10px;font-size:15px;">Have you completed the payment?</h4>
+            <p style="font-size:13px;color:#888;max-width:280px;margin-bottom:16px;">Confirm only after you've successfully paid ₹${amount.toLocaleString()} using your UPI app.</p>
+            <button class="btn-enroll co-place-order-btn" style="background:linear-gradient(135deg,var(--success),#2ed573);" onclick="placeOrderFromCheckout('upi')">
+                <i class="fas fa-check-circle"></i> Yes, I've Paid
+            </button>
+            <button class="btn-outline" style="margin-top:10px;width:100%;padding:10px;" onclick="retryUpiPay()">
+                <i class="fas fa-redo"></i> Not Yet / Retry
+            </button>
+        `;
+    }
+
+    function retryUpiPay() {
+        const selectedEl = document.querySelector('.co-pay-option.selected');
+        if (selectedEl) selectPayMethod('upi', selectedEl);
+    }
+
+
+       async function placeOrderFromCheckout(method) {
         const name = document.getElementById('buyName').value.trim();
         const phone = document.getElementById('buyPhone').value.trim();
         const address = document.getElementById('buyAddress').value.trim();
@@ -1985,30 +2012,22 @@ function removeFromCart(productId) {
             product: pendingOrder.product || 'Order from website',
             amount: Number(pendingOrder.amount || 0),
             notes: `Address: ${address}${city ? ', ' + city : ''}${pincode ? ', ' + pincode : ''}; Payment: ${selectedPayment}`,
-            source: 'website'
+            source: 'website',
+            payment_method: method === 'upi' ? 'UPI' : 'COD',
+            payment_status: method === 'upi' ? 'Paid' : 'Not Required'
         };
         try {
             const res = await fetch('submit_forms.php', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
             const data = await res.json();
             if (data.status !== 'success') { showToast(data.message || 'Unable to save order', 'error'); return; }
 
-            // Order ID unga backend response la irundhu eduthu, # prefix oda kaamikirom
             const rawId = data.order_id || data.orderId || data.id || data.orderID || '';
             const displayOrderId = rawId ? ('#' + String(rawId).replace(/^#/, '')) : '#—';
 
             closeModal('buyNow');
             cart = [];
             updateCartUI();
-
-            if (method === 'upi') {
-                const upiId = 'shanusumi221525@okhdfcbank';
-                const amount = Number(pendingOrder.amount || 0);
-                const upiUrl = `upi://pay?pa=${upiId}&pn=Sumathi%27s%20Style&am=${amount}&cu=INR&tn=${encodeURIComponent('Order: ' + (pendingOrder.product || ''))}`;
-                showOrderConfirm(displayOrderId);
-                setTimeout(() => { window.location.href = upiUrl; }, 1500);
-            } else {
-                showOrderConfirm(displayOrderId);
-            }
+            showOrderConfirm(displayOrderId);
         } catch (e) {
             showToast('Unable to save order right now', 'error');
         }
