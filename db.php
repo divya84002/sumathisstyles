@@ -89,6 +89,14 @@ function getConnection() {
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4");
 
+    $conn->query("CREATE TABLE IF NOT EXISTS data_export_requests (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        name VARCHAR(255) DEFAULT '',
+        phone VARCHAR(20) DEFAULT '',
+        email VARCHAR(255) DEFAULT '',
+        requested_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4");
+
     // Auto-add missing columns on products table (safety net)
     $columns = [];
     $res = $conn->query('SHOW COLUMNS FROM products');

@@ -12,7 +12,7 @@ header('Content-Type: application/json');
 
 // ============ EDIT THESE 2 LINES ============
 $SMTP_GMAIL_ADDRESS  = 'sumathisstyle@gmail.com';   // your gmail address
-$SMTP_GMAIL_APP_PASS = 'xxxx xxxx xxxx xxxx';        // 16-char App Password
+$SMTP_GMAIL_APP_PASS = 'sumathisstyles@11223344';        // 16-char App Password
 // ==============================================
 
 $input = json_decode(file_get_contents('php://input'), true);

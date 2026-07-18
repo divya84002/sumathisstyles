@@ -67,17 +67,17 @@
         .shop-cat-item.active span { color: var(--secondary-dark); font-weight: 700; }
         .shop-cat-products { flex: 1; min-width: 0; }
 
-        .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; }
-        .product-card { background: var(--white); border-radius: 20px; overflow: hidden; box-shadow: var(--shadow); transition: all 0.3s; position: relative; cursor: pointer; display: flex; flex-direction: column; height: 100%; }
+        .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 14px; }
+        .product-card { background: var(--white); border-radius: 12px; overflow: hidden; box-shadow: var(--shadow); transition: all 0.3s; position: relative; cursor: pointer; display: flex; flex-direction: column; height: 100%; }
         .product-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-hover); }
-        .product-img { width: 100%; height: 280px; object-fit: cover; display: block; }
-        .product-badge { position: absolute; top: 15px; left: 15px; background: linear-gradient(135deg, var(--secondary), var(--secondary-light)); color: var(--dark); padding: 5px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; }
+        .product-img { width: 100%; height: 170px; object-fit: cover; display: block; }
+        .product-badge { position: absolute; top: 10px; left: 10px; background: linear-gradient(135deg, var(--secondary), var(--secondary-light)); color: var(--dark); padding: 4px 10px; border-radius: 20px; font-size: 10px; font-weight: 700; }
         .product-badge.hot { background: linear-gradient(135deg, #ff4757, #ff6b81); color: white; }
         .product-badge.new { background: linear-gradient(135deg, var(--success), #2ed573); color: white; }
-        .product-info { padding: 20px; display: flex; flex-direction: column; flex-grow: 1; }
-        .product-info h3 { font-size: 16px; color: var(--text); margin-bottom: 6px; }
-        .product-info p { font-size: 13px; color: var(--text-light); margin-bottom: 12px; flex-grow: 1; }
-        .product-actions { display: flex; gap: 10px; margin-top: auto; padding: 0 20px 16px; }
+        .product-info { padding: 10px 12px 4px; display: flex; flex-direction: column; flex-grow: 1; }
+        .product-info h3 { font-size: 13px; font-weight: 500; color: var(--text); margin-bottom: 4px; display: -webkit-box; -webkit-line-clamp: 1; line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; }
+        .product-info p { display: none; }
+        .product-actions { display: flex; gap: 8px; margin-top: auto; padding: 0 12px 10px; }
         .btn-add-cart { flex: 1; background: linear-gradient(135deg, var(--primary), var(--primary-light)); color: var(--white); border: none; padding: 10px; border-radius: 10px; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.3s; }
         .btn-add-cart:hover { background: linear-gradient(135deg, var(--primary-dark), var(--primary)); }
         .btn-buy { flex: 1; background: linear-gradient(135deg, var(--secondary), var(--secondary-light)); color: var(--dark); border: none; padding: 10px; border-radius: 10px; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.3s; }

@@ -34,7 +34,7 @@ body{background:var(--bg);color:var(--text);min-height:100vh;}
 #app{display:none;flex-direction:row;min-height:100vh;}
 
 /* SIDEBAR */
-.sidebar{width:240px;min-height:100vh;background:var(--sidebar);display:flex;flex-direction:column;position:fixed;top:0;left:0;z-index:100;}
+.sidebar{width:240px;height:100vh;background:var(--sidebar);display:flex;flex-direction:column;position:fixed;top:0;left:0;z-index:100;overflow-y:auto;}
 .sidebar-brand{padding:22px 20px 18px;border-bottom:1px solid rgba(255,255,255,.1);}
 .brand-name{color:#fff;font-size:17px;font-weight:700;}
 .brand-tag{color:rgba(255,255,255,.55);font-size:11px;margin-top:2px;}
@@ -148,6 +148,8 @@ tr:hover td{background:#F9FAFB;}
 .badge-cancelled{background:#FFEBEE;color:var(--danger);}
 .badge-delivered{background:#E8F5E9;color:#2E7D32;}
 .badge-processing{background:#EDE7F6;color:#4527A0;}
+.badge-open{background:#FFF3E0;color:#E65100;}
+.badge-resolved{background:#E8F5E9;color:#2E7D32;}
 
 select.status-select{padding:5px 8px;border-radius:6px;border:1.5px solid var(--border);font-size:12px;font-weight:600;cursor:pointer;outline:none;background:#fff;}
 
@@ -240,6 +242,8 @@ select.status-select{padding:5px 8px;border-radius:6px;border:1.5px solid var(--
       <div class="nav-item" onclick="showPage('contactform2')"><span class="icon">🍽️</span> Catering Contact Form</div>
       <div class="nav-section">Engagement</div>
       <div class="nav-item" onclick="showPage('notifications')"><span class="icon">🔔</span>Notification and Cancellation msg</div>
+      <div class="nav-item" onclick="showPage('datarequests')"><span class="icon">📥</span>Request My Data / Consent Management</div>
+      <div class="nav-item" onclick="showPage('grievanceaccount')"><span class="icon">⚖️</span>Grievance / De-act & Delete Acc</div>
       <div class="nav-section">Finance</div>
       <div class="nav-item" onclick="showPage('revenue')"><span class="icon">💰</span> Revenue</div>
     </div>
@@ -555,6 +559,80 @@ select.status-select{padding:5px 8px;border-radius:6px;border:1.5px solid var(--
         </div>
       </div>
 
+      <!-- DATA REQUESTS / CONSENT MANAGEMENT -->
+      <div class="page" id="page-datarequests">
+        <div class="section-card">
+          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:16px;">
+            <h2 style="margin-bottom:0;">📥 Request My Data Submissions</h2>
+          </div>
+          <div class="search-bar">
+            <input type="text" id="datareq-search" placeholder="🔍 Search by name / phone / email..." oninput="renderDataRequests()"/>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Name</th><th>Phone</th><th>Email</th><th>Requested On</th></tr></thead>
+              <tbody id="datareq-tbody"><tr><td colspan="4"><div class="empty"><div class="e-icon">📥</div><p>No data export requests yet</p></div></td></tr></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="section-card">
+          <h2>🤝 Consent Management (Customer Preferences)</h2>
+          <div class="search-bar">
+            <input type="text" id="consent-search" placeholder="🔍 Search by phone number..." oninput="renderConsents()"/>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Phone</th><th>Marketing</th><th>Order Notif</th><th>Location</th><th>Analytics</th><th>WhatsApp</th><th>Updated On</th></tr></thead>
+              <tbody id="consent-tbody"><tr><td colspan="7"><div class="empty"><div class="e-icon">🤝</div><p>No consent records yet</p></div></td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- GRIEVANCE / DEACTIVATE / DELETE ACCOUNT -->
+      <div class="page" id="page-grievanceaccount">
+        <div class="section-card">
+          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:16px;">
+            <h2 style="margin-bottom:0;">⚖️ Grievance Redressal Complaints</h2>
+          </div>
+          <div class="search-bar">
+            <input type="text" id="grievance-search" placeholder="🔍 Search by name / phone / subject..." oninput="renderGrievances()"/>
+            <select id="grievance-status-filter" onchange="renderGrievances()">
+              <option value="">All Status</option>
+              <option>Open</option>
+              <option>Resolved</option>
+            </select>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Name</th><th>Phone</th><th>Subject</th><th>Order ID</th><th>Description</th><th>Status</th><th>Date</th><th>Action</th><th>WhatsApp</th></tr></thead>
+              <tbody id="grievance-tbody"><tr><td colspan="9"><div class="empty"><div class="e-icon">⚖️</div><p>No complaints yet</p></div></td></tr></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="section-card">
+          <h2>👤 De-activated Accounts</h2>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Phone</th><th>Reason</th><th>De-activated On</th><th>WhatsApp</th></tr></thead>
+              <tbody id="deactivated-tbody"><tr><td colspan="4"><div class="empty"><div class="e-icon">👤</div><p>No de-activated accounts</p></div></td></tr></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="section-card">
+          <h2>🗑️ Deleted Accounts</h2>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Phone</th><th>Deleted On</th></tr></thead>
+              <tbody id="deletedacc-tbody"><tr><td colspan="2"><div class="empty"><div class="e-icon">🗑️</div><p>No deleted accounts</p></div></td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
       <!-- REVENUE -->
       <div class="page" id="page-revenue">
         <div style="display:flex;justify-content:flex-end;margin-bottom:14px;">
@@ -674,8 +752,8 @@ window.onload = () => {
 };
 
 // ══ NAVIGATION ══
-const pages=['dashboard','upload','products','ordersmgmt','customorder','contactform','contactform2','notifications','revenue'];
-const titles={dashboard:'Dashboard',upload:'Product Upload',products:'All Products',ordersmgmt:'Orders',customorder:'Customized Order',contactform:'Boutique Contact Form',contactform2:'Catering Contact Form',notifications:'Send Notification',revenue:'Revenue'};
+const pages=['dashboard','upload','products','ordersmgmt','customorder','contactform','contactform2','notifications','datarequests','grievanceaccount','revenue'];
+const titles={dashboard:'Dashboard',upload:'Product Upload',products:'All Products',ordersmgmt:'Orders',customorder:'Customized Order',contactform:'Boutique Contact Form',contactform2:'Catering Contact Form',notifications:'Send Notification',datarequests:'Data & Consent Requests',grievanceaccount:'Grievance & Account Requests',revenue:'Revenue'};
 function showPage(id) {
   pages.forEach(p=>{document.getElementById('page-'+p).classList.remove('active');});
   document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
@@ -691,6 +769,8 @@ function showPage(id) {
   if(id==='contactform') renderContactForms();
   if(id==='contactform2') renderContactForms2();
   if(id==='notifications') { renderNotifications(); renderCancellations(); }
+  if(id==='datarequests') { renderDataRequests(); renderConsents(); }
+  if(id==='grievanceaccount') { renderGrievances(); renderDeactivated(); renderDeletedAccounts(); }
   if(id==='revenue') renderRevenue();
 }
 
@@ -895,6 +975,189 @@ async function renderCancellations(){
       <td style="max-width:260px;">${reasonHTML}</td>
       <td>${o.date}</td>
       <td><button class="btn btn-wa" style="font-size:11px;padding:4px 10px;" onclick="waCustomer('${o.mobile}','${o.name}')">💬</button></td>
+    </tr>`;
+  }).join('');
+}
+
+// ══ DATA REQUESTS (Request My Data submissions) ══
+async function loadDataRequestsFromServer(){
+  try{
+    const res=await fetch('get_customer_requests.php?type=data_export');
+    const data=await res.json();
+    return Array.isArray(data) ? data : [];
+  } catch(e){
+    return [];
+  }
+}
+async function renderDataRequests(){
+  const search=(document.getElementById('datareq-search')||{}).value||'';
+  let list=await loadDataRequestsFromServer();
+  if(search){
+    const s=search.toLowerCase();
+    list=list.filter(r=>(r.name||'').toLowerCase().includes(s)||(r.phone||'').includes(search)||(r.email||'').toLowerCase().includes(s));
+  }
+  const tb=document.getElementById('datareq-tbody');
+  if(!list.length){
+    tb.innerHTML='<tr><td colspan="4"><div class="empty"><div class="e-icon">📥</div><p>No data export requests yet</p></div></td></tr>';
+    return;
+  }
+  tb.innerHTML=[...list].reverse().map(r=>{
+    const date=r.requested_at?new Date(r.requested_at).toLocaleString('en-IN'):'';
+    return `<tr>
+      <td><b>${r.name||'Guest'}</b></td>
+      <td>${r.phone?'📞 '+r.phone:'—'}</td>
+      <td>${r.email||'—'}</td>
+      <td>${date}</td>
+    </tr>`;
+  }).join('');
+}
+
+// ══ CONSENT MANAGEMENT ══
+async function loadConsentsFromServer(){
+  try{
+    const res=await fetch('get_customer_requests.php?type=consents');
+    const data=await res.json();
+    return Array.isArray(data) ? data : [];
+  } catch(e){
+    return [];
+  }
+}
+async function renderConsents(){
+  const search=(document.getElementById('consent-search')||{}).value||'';
+  let list=await loadConsentsFromServer();
+  if(search){
+    list=list.filter(c=>(c.phone||'').includes(search));
+  }
+  const tb=document.getElementById('consent-tbody');
+  if(!list.length){
+    tb.innerHTML='<tr><td colspan="7"><div class="empty"><div class="e-icon">🤝</div><p>No consent records yet</p></div></td></tr>';
+    return;
+  }
+  const onOff = v => v==='1' ? '✅' : '❌';
+  tb.innerHTML=[...list].reverse().map(c=>{
+    const date=c.updated_at?new Date(c.updated_at).toLocaleString('en-IN'):'';
+    return `<tr>
+      <td>📞 ${c.phone||''}</td>
+      <td>${onOff(c.consentMarketing)}</td>
+      <td>${onOff(c.consentOrderNotif)}</td>
+      <td>${onOff(c.consentLocation)}</td>
+      <td>${onOff(c.consentAnalytics)}</td>
+      <td>${onOff(c.consentWhatsApp)}</td>
+      <td>${date}</td>
+    </tr>`;
+  }).join('');
+}
+
+// ══ GRIEVANCE REDRESSAL ══
+async function loadGrievancesFromServer(){
+  try{
+    const res=await fetch('get_customer_requests.php?type=grievances');
+    const data=await res.json();
+    return Array.isArray(data) ? data : [];
+  } catch(e){
+    return [];
+  }
+}
+async function renderGrievances(){
+  const search=(document.getElementById('grievance-search')||{}).value||'';
+  const statusF=(document.getElementById('grievance-status-filter')||{}).value||'';
+  let list=await loadGrievancesFromServer();
+  if(search){
+    const s=search.toLowerCase();
+    list=list.filter(g=>(g.name||'').toLowerCase().includes(s)||(g.phone||'').includes(search)||(g.subject||'').toLowerCase().includes(s));
+  }
+  if(statusF) list=list.filter(g=>g.status===statusF);
+  const tb=document.getElementById('grievance-tbody');
+  if(!list.length){
+    tb.innerHTML='<tr><td colspan="9"><div class="empty"><div class="e-icon">⚖️</div><p>No complaints yet</p></div></td></tr>';
+    return;
+  }
+  tb.innerHTML=[...list].reverse().map(g=>{
+    const date=g.created_at?new Date(g.created_at).toLocaleString('en-IN'):'';
+    const statusBadge = g.status==='Resolved' ? '<span class="badge badge-resolved">Resolved</span>' : '<span class="badge badge-open">Open</span>';
+    const nextAction = g.status==='Resolved'
+      ? `<button class="btn btn-outline" style="font-size:11px;padding:4px 10px;" onclick="markGrievance(${g.id},'Open')">↩️ Reopen</button>`
+      : `<button class="btn btn-teal" style="font-size:11px;padding:4px 10px;" onclick="markGrievance(${g.id},'Resolved')">✅ Mark Resolved</button>`;
+    return `<tr>
+      <td><b>${g.name||'Guest'}</b></td>
+      <td>${g.phone?'📞 '+g.phone:'—'}</td>
+      <td>${g.subject||''}</td>
+      <td>${g.order_id||'—'}</td>
+      <td style="max-width:220px;white-space:normal;">${g.description||''}</td>
+      <td>${statusBadge}</td>
+      <td>${date}</td>
+      <td>${nextAction}</td>
+      <td>${g.phone?`<button class="btn btn-wa" style="font-size:11px;padding:4px 10px;" onclick="waCustomer('${g.phone}','${g.name||'Customer'}')">💬</button>`:'—'}</td>
+    </tr>`;
+  }).join('');
+}
+async function markGrievance(id, newStatus){
+  const formData=new FormData();
+  formData.append('id', id);
+  formData.append('status', newStatus);
+  try{
+    const res=await fetch('resolve_grievance.php',{method:'POST',body:formData});
+    const data=await res.json();
+    if(data.status==='success'){
+      renderGrievances();
+      toast('✅ Complaint status → ' + newStatus);
+    } else {
+      toast('❌ ' + (data.message||'Failed to update'));
+    }
+  } catch(e){
+    toast('❌ Server error while updating complaint');
+  }
+}
+
+// ══ DE-ACTIVATED / DELETED ACCOUNTS ══
+async function loadDeactivatedFromServer(){
+  try{
+    const res=await fetch('get_customer_requests.php?type=deactivated');
+    const data=await res.json();
+    return Array.isArray(data) ? data : [];
+  } catch(e){
+    return [];
+  }
+}
+async function renderDeactivated(){
+  const list=await loadDeactivatedFromServer();
+  const tb=document.getElementById('deactivated-tbody');
+  if(!list.length){
+    tb.innerHTML='<tr><td colspan="4"><div class="empty"><div class="e-icon">👤</div><p>No de-activated accounts</p></div></td></tr>';
+    return;
+  }
+  tb.innerHTML=[...list].reverse().map(d=>{
+    const date=d.deactivated_at?new Date(d.deactivated_at).toLocaleString('en-IN'):'';
+    return `<tr>
+      <td>📞 ${d.phone||''}</td>
+      <td style="max-width:260px;white-space:normal;">${d.reason||'—'}</td>
+      <td>${date}</td>
+      <td><button class="btn btn-wa" style="font-size:11px;padding:4px 10px;" onclick="waCustomer('${d.phone}','Customer')">💬</button></td>
+    </tr>`;
+  }).join('');
+}
+
+async function loadDeletedAccountsFromServer(){
+  try{
+    const res=await fetch('get_customer_requests.php?type=deleted_accounts');
+    const data=await res.json();
+    return Array.isArray(data) ? data : [];
+  } catch(e){
+    return [];
+  }
+}
+async function renderDeletedAccounts(){
+  const list=await loadDeletedAccountsFromServer();
+  const tb=document.getElementById('deletedacc-tbody');
+  if(!list.length){
+    tb.innerHTML='<tr><td colspan="2"><div class="empty"><div class="e-icon">🗑️</div><p>No deleted accounts</p></div></td></tr>';
+    return;
+  }
+  tb.innerHTML=[...list].reverse().map(d=>{
+    const date=d.deleted_at?new Date(d.deleted_at).toLocaleString('en-IN'):'';
+    return `<tr>
+      <td>📞 ${d.phone||''}</td>
+      <td>${date}</td>
     </tr>`;
   }).join('');
 }
