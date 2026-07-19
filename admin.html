@@ -241,9 +241,8 @@ select.status-select{padding:5px 8px;border-radius:6px;border:1.5px solid var(--
       <div class="nav-item" onclick="showPage('contactform')"><span class="icon">📨</span> Boutique Contact Form</div>
       <div class="nav-item" onclick="showPage('contactform2')"><span class="icon">🍽️</span> Catering Contact Form</div>
       <div class="nav-section">Engagement</div>
-      <div class="nav-item" onclick="showPage('notifications')"><span class="icon">🔔</span>Notification and Cancellation msg</div>
-      <div class="nav-item" onclick="showPage('datarequests')"><span class="icon">📥</span>Request My Data / Consent Management</div>
-      <div class="nav-item" onclick="showPage('grievanceaccount')"><span class="icon">⚖️</span>Grievance / De-act & Delete Acc</div>
+      <div class="nav-item" onclick="showPage('notifications')"><span class="icon">🔔</span> Notification / Cancellation msg</div>
+      <div class="nav-item" onclick="showPage('datarequests')"><span class="icon">📥</span> Request My Data / Grievance / De-act &amp; Delete Acc</div>
       <div class="nav-section">Finance</div>
       <div class="nav-item" onclick="showPage('revenue')"><span class="icon">💰</span> Revenue</div>
     </div>
@@ -559,7 +558,7 @@ select.status-select{padding:5px 8px;border-radius:6px;border:1.5px solid var(--
         </div>
       </div>
 
-      <!-- DATA REQUESTS / CONSENT MANAGEMENT -->
+      <!-- DATA REQUESTS / GRIEVANCE / DE-ACT & DELETE (merged into ONE page) -->
       <div class="page" id="page-datarequests">
         <div class="section-card">
           <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:16px;">
@@ -576,22 +575,6 @@ select.status-select{padding:5px 8px;border-radius:6px;border:1.5px solid var(--
           </div>
         </div>
 
-        <div class="section-card">
-          <h2>🤝 Consent Management (Customer Preferences)</h2>
-          <div class="search-bar">
-            <input type="text" id="consent-search" placeholder="🔍 Search by phone number..." oninput="renderConsents()"/>
-          </div>
-          <div class="table-wrap">
-            <table>
-              <thead><tr><th>Phone</th><th>Marketing</th><th>Order Notif</th><th>Location</th><th>Analytics</th><th>WhatsApp</th><th>Updated On</th></tr></thead>
-              <tbody id="consent-tbody"><tr><td colspan="7"><div class="empty"><div class="e-icon">🤝</div><p>No consent records yet</p></div></td></tr></tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-
-      <!-- GRIEVANCE / DEACTIVATE / DELETE ACCOUNT -->
-      <div class="page" id="page-grievanceaccount">
         <div class="section-card">
           <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:16px;">
             <h2 style="margin-bottom:0;">⚖️ Grievance Redressal Complaints</h2>
@@ -752,14 +735,14 @@ window.onload = () => {
 };
 
 // ══ NAVIGATION ══
-const pages=['dashboard','upload','products','ordersmgmt','customorder','contactform','contactform2','notifications','datarequests','grievanceaccount','revenue'];
-const titles={dashboard:'Dashboard',upload:'Product Upload',products:'All Products',ordersmgmt:'Orders',customorder:'Customized Order',contactform:'Boutique Contact Form',contactform2:'Catering Contact Form',notifications:'Send Notification',datarequests:'Data & Consent Requests',grievanceaccount:'Grievance & Account Requests',revenue:'Revenue'};
+const pages=['dashboard','upload','products','ordersmgmt','customorder','contactform','contactform2','notifications','datarequests','revenue'];
+const titles={dashboard:'Dashboard',upload:'Product Upload',products:'All Products',ordersmgmt:'Orders',customorder:'Customized Order',contactform:'Boutique Contact Form',contactform2:'Catering Contact Form',notifications:'Send Notification',datarequests:'Request My Data / Grievance / De-act & Delete Acc',revenue:'Revenue'};
 function showPage(id) {
   pages.forEach(p=>{document.getElementById('page-'+p).classList.remove('active');});
   document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
   document.getElementById('page-'+id).classList.add('active');
   document.querySelectorAll('.nav-item').forEach(n=>{
-    if(n.textContent.trim().toLowerCase().includes(titles[id].split(' ')[0].toLowerCase())) n.classList.add('active');
+    if(n.getAttribute('onclick')===`showPage('${id}')`) n.classList.add('active');
   });
   document.getElementById('topbar-title').textContent=titles[id];
   if(id==='dashboard') refreshDashboard();
@@ -769,8 +752,7 @@ function showPage(id) {
   if(id==='contactform') renderContactForms();
   if(id==='contactform2') renderContactForms2();
   if(id==='notifications') { renderNotifications(); renderCancellations(); }
-  if(id==='datarequests') { renderDataRequests(); renderConsents(); }
-  if(id==='grievanceaccount') { renderGrievances(); renderDeactivated(); renderDeletedAccounts(); }
+  if(id==='datarequests') { renderDataRequests(); renderGrievances(); renderDeactivated(); renderDeletedAccounts(); }
   if(id==='revenue') renderRevenue();
 }
 
@@ -1029,6 +1011,7 @@ async function renderConsents(){
     list=list.filter(c=>(c.phone||'').includes(search));
   }
   const tb=document.getElementById('consent-tbody');
+  if(!tb) return;
   if(!list.length){
     tb.innerHTML='<tr><td colspan="7"><div class="empty"><div class="e-icon">🤝</div><p>No consent records yet</p></div></td></tr>';
     return;
