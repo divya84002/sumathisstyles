@@ -563,6 +563,7 @@ select.status-select{padding:5px 8px;border-radius:6px;border:1.5px solid var(--
         <div class="section-card">
           <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:16px;">
             <h2 style="margin-bottom:0;">📥 Request My Data Submissions</h2>
+            <button class="btn btn-danger" onclick="clearData('data_requests_all','⚠️ This will delete ALL \'Request My Data\' submissions. Do you want to continue?')">🗑️ Clear Data Requests</button>
           </div>
           <div class="search-bar">
             <input type="text" id="datareq-search" placeholder="🔍 Search by name / phone / email..." oninput="renderDataRequests()"/>
@@ -578,6 +579,7 @@ select.status-select{padding:5px 8px;border-radius:6px;border:1.5px solid var(--
         <div class="section-card">
           <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:16px;">
             <h2 style="margin-bottom:0;">⚖️ Grievance Redressal Complaints</h2>
+            <button class="btn btn-danger" onclick="clearData('grievances_all','⚠️ This will delete ALL Grievance complaints. Do you want to continue?')">🗑️ Clear Grievances</button>
           </div>
           <div class="search-bar">
             <input type="text" id="grievance-search" placeholder="🔍 Search by name / phone / subject..." oninput="renderGrievances()"/>
@@ -596,7 +598,10 @@ select.status-select{padding:5px 8px;border-radius:6px;border:1.5px solid var(--
         </div>
 
         <div class="section-card">
-          <h2>👤 De-activated Accounts</h2>
+          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:16px;">
+            <h2 style="margin-bottom:0;">👤 De-activated Accounts</h2>
+            <button class="btn btn-danger" onclick="clearData('deactivated_all','⚠️ This will delete ALL De-activated account records. Do you want to continue?')">🗑️ Clear De-activated</button>
+          </div>
           <div class="table-wrap">
             <table>
               <thead><tr><th>Phone</th><th>Reason</th><th>De-activated On</th><th>WhatsApp</th></tr></thead>
@@ -606,7 +611,10 @@ select.status-select{padding:5px 8px;border-radius:6px;border:1.5px solid var(--
         </div>
 
         <div class="section-card">
-          <h2>🗑️ Deleted Accounts</h2>
+          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:16px;">
+            <h2 style="margin-bottom:0;">🗑️ Deleted Accounts</h2>
+            <button class="btn btn-danger" onclick="clearData('deleted_accounts_all','⚠️ This will delete ALL Deleted account records. Do you want to continue?')">🗑️ Clear Deleted</button>
+          </div>
           <div class="table-wrap">
             <table>
               <thead><tr><th>Phone</th><th>Deleted On</th></tr></thead>
@@ -1730,6 +1738,10 @@ async function clearData(target, confirmMsg){
       renderRevenue();
       refreshDashboard();
       if(target==='notifications_all') renderNotifications();
+      if(target==='data_requests_all') renderDataRequests();
+      if(target==='grievances_all') renderGrievances();
+      if(target==='deactivated_all') renderDeactivated();
+      if(target==='deleted_accounts_all') renderDeletedAccounts();
     } else {
       toast('❌ ' + (data.message || 'clear failed'));
     }

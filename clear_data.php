@@ -28,6 +28,12 @@ $target = $_POST['target'] ?? '';
 // Table/column names - unga schema la vera peru irundha idha maathunga:
 // orders table:   id, name, mobile, product, amount, status, created_at, source, measurement, voice_note, notes
 // contacts table: id, name, phone, email, service, message, created_at
+//
+// ⚠️ Keela irukura 4 puthu cases (data_requests_all / grievances_all / deactivated_all /
+// deleted_accounts_all) — table names naan "get_customer_requests.php" file pattern paathu
+// GUESS pannirukken (data_requests, grievances, deactivated_accounts, deleted_accounts).
+// Unga get_customer_requests.php la exact table name vera maadhiri irundha, keela irukura
+// table name mattum maathi update pannunga.
 
 try {
     switch ($target) {
@@ -50,6 +56,31 @@ try {
         case 'contacts_catering':
             // Catering Contact Form page "Clear" button
             $conn->query("DELETE FROM contacts WHERE service LIKE '%catering%'");
+            break;
+
+        case 'notifications_all':
+            // Send Notification page "Clear All Notifications" button
+            $conn->query("DELETE FROM notifications");
+            break;
+
+        case 'data_requests_all':
+            // "Request My Data Submissions" section — Clear Data Requests button
+            $conn->query("DELETE FROM data_requests");
+            break;
+
+        case 'grievances_all':
+            // "Grievance Redressal Complaints" section — Clear Grievances button
+            $conn->query("DELETE FROM grievances");
+            break;
+
+        case 'deactivated_all':
+            // "De-activated Accounts" section — Clear De-activated button
+            $conn->query("DELETE FROM deactivated_accounts");
+            break;
+
+        case 'deleted_accounts_all':
+            // "Deleted Accounts" section — Clear Deleted button
+            $conn->query("DELETE FROM deleted_accounts");
             break;
 
         case 'all_demo_data':
