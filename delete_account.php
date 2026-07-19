@@ -1,5 +1,6 @@
 <?php
 // delete_account.php
+require_once __DIR__ . '/db.php';
 header('Content-Type: application/json');
 
 $input = json_decode(file_get_contents('php://input'), true);
@@ -11,19 +12,12 @@ if (!$input || empty($input['phone'])) {
 
 $phone = preg_replace('/[^0-9]/', '', $input['phone']);
 
-$file = __DIR__ . '/data_deleted_accounts.json';
-$list = [];
-if (file_exists($file)) {
-    $list = json_decode(file_get_contents($file), true) ?: [];
+try {
+    $stmt = $conn->prepare("INSERT INTO deleted_accounts (phone, deleted_at) VALUES (?, NOW())");
+    $stmt->bind_param('s', $phone);
+    $stmt->execute();
+    $stmt->close();
+    echo json_encode(['status' => 'success']);
+} catch (\Throwable $e) {
+    echo json_encode(['status' => 'error', 'message' => 'DB error: ' . $e->getMessage()]);
 }
-$list[] = [
-    'phone' => $phone,
-    'deleted_at' => date('c')
-];
-file_put_contents($file, json_encode($list, JSON_PRETTY_PRINT));
-
-// If you have a real users/orders database, this is where you'd permanently
-// DELETE FROM users WHERE phone = ?
-// DELETE FROM orders WHERE mobile = ?  (or anonymize instead of hard-delete, per your policy)
-
-echo json_encode(['status' => 'success']);

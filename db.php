@@ -97,6 +97,53 @@ function getConnection() {
         requested_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4");
 
+    // ===== NEW: Privacy Center tables =====
+    $conn->query("CREATE TABLE IF NOT EXISTS data_requests (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        name VARCHAR(255) DEFAULT '',
+        phone VARCHAR(20) DEFAULT '',
+        email VARCHAR(255) DEFAULT '',
+        requested_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4");
+
+    $conn->query("CREATE TABLE IF NOT EXISTS consents (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        phone VARCHAR(20) NOT NULL,
+        consent_marketing TINYINT(1) DEFAULT 0,
+        consent_order_notif TINYINT(1) DEFAULT 0,
+        consent_location TINYINT(1) DEFAULT 0,
+        consent_analytics TINYINT(1) DEFAULT 0,
+        consent_whatsapp TINYINT(1) DEFAULT 0,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+        UNIQUE KEY unique_phone (phone)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4");
+
+    $conn->query("CREATE TABLE IF NOT EXISTS grievances (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        name VARCHAR(255) DEFAULT '',
+        phone VARCHAR(20) DEFAULT '',
+        email VARCHAR(255) DEFAULT '',
+        subject VARCHAR(255) DEFAULT '',
+        order_id VARCHAR(50) DEFAULT '',
+        description TEXT,
+        status VARCHAR(30) DEFAULT 'Open',
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4");
+
+    $conn->query("CREATE TABLE IF NOT EXISTS deactivated_accounts (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        phone VARCHAR(20) NOT NULL,
+        reason TEXT,
+        deactivated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4");
+
+    $conn->query("CREATE TABLE IF NOT EXISTS deleted_accounts (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        phone VARCHAR(20) NOT NULL,
+        deleted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4");
+    // ===== END NEW =====
+
     // Auto-add missing columns on products table (safety net)
     $columns = [];
     $res = $conn->query('SHOW COLUMNS FROM products');

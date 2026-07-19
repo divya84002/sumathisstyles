@@ -1,5 +1,6 @@
 <?php
 // deactivate_account.php
+require_once __DIR__ . '/db.php';
 header('Content-Type: application/json');
 
 $input = json_decode(file_get_contents('php://input'), true);
@@ -12,18 +13,12 @@ if (!$input || empty($input['phone'])) {
 $phone  = preg_replace('/[^0-9]/', '', $input['phone']);
 $reason = $input['reason'] ?? '';
 
-$file = __DIR__ . '/data_deactivated_accounts.json';
-$list = [];
-if (file_exists($file)) {
-    $list = json_decode(file_get_contents($file), true) ?: [];
+try {
+    $stmt = $conn->prepare("INSERT INTO deactivated_accounts (phone, reason, deactivated_at) VALUES (?, ?, NOW())");
+    $stmt->bind_param('ss', $phone, $reason);
+    $stmt->execute();
+    $stmt->close();
+    echo json_encode(['status' => 'success']);
+} catch (\Throwable $e) {
+    echo json_encode(['status' => 'error', 'message' => 'DB error: ' . $e->getMessage()]);
 }
-$list[$phone] = [
-    'reason' => $reason,
-    'deactivated_at' => date('c')
-];
-file_put_contents($file, json_encode($list, JSON_PRETTY_PRINT));
-
-// If you have a real users table/database, this is where you'd set:
-// UPDATE users SET status = 'deactivated' WHERE phone = ?
-
-echo json_encode(['status' => 'success']);

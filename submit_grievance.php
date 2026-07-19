@@ -1,6 +1,6 @@
 <?php
 // submit_grievance.php
-// Upload this in the SAME folder as your get_submissions.php / update_order_status.php
+require_once __DIR__ . '/db.php';
 header('Content-Type: application/json');
 
 $input = json_decode(file_get_contents('php://input'), true);
@@ -10,26 +10,20 @@ if (!$input || empty($input['subject']) || empty($input['description'])) {
     exit;
 }
 
-$entry = [
-    'id'          => uniqid('GRV'),
-    'name'        => $input['name'] ?? 'Guest',
-    'phone'       => $input['phone'] ?? '',
-    'email'       => $input['email'] ?? '',
-    'subject'     => $input['subject'],
-    'order_id'    => $input['order_id'] ?? '',
-    'description' => $input['description'],
-    'status'      => 'Open',
-    'submitted_at'=> $input['submitted_at'] ?? date('c')
-];
+$name        = $input['name'] ?? 'Guest';
+$phone       = $input['phone'] ?? '';
+$email       = $input['email'] ?? '';
+$subject     = $input['subject'];
+$orderId     = $input['order_id'] ?? '';
+$description = $input['description'];
 
-$file = __DIR__ . '/data_grievances.json';
-$list = [];
-if (file_exists($file)) {
-    $list = json_decode(file_get_contents($file), true) ?: [];
+try {
+    $stmt = $conn->prepare("INSERT INTO grievances (name, phone, email, subject, order_id, description, status, created_at)
+                             VALUES (?, ?, ?, ?, ?, ?, 'Open', NOW())");
+    $stmt->bind_param('ssssss', $name, $phone, $email, $subject, $orderId, $description);
+    $stmt->execute();
+    $stmt->close();
+    echo json_encode(['status' => 'success']);
+} catch (\Throwable $e) {
+    echo json_encode(['status' => 'error', 'message' => 'DB error: ' . $e->getMessage()]);
 }
-$list[] = $entry;
-file_put_contents($file, json_encode($list, JSON_PRETTY_PRINT));
-
-// OPTIONAL: send yourself an email/WhatsApp notification here using mail() or an API
-
-echo json_encode(['status' => 'success']);
