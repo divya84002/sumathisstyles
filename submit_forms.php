@@ -65,7 +65,7 @@ if ($type === 'order') {
     }
 
     $status = 'Ordered';
-    $stmt->bind_param('ssssdssssss s', $orderId, $name, $mobile, $product, $amount, $status, $notes, $source, $measurement, $voice_note, $payment_method, $payment_status);
+    $stmt->bind_param('ssssdsssssss', $orderId, $name, $mobile, $product, $amount, $status, $notes, $source, $measurement, $voice_note, $payment_method, $payment_status);
     $ok = $stmt->execute();
     if (!$ok) {
         echo json_encode(['status' => 'error', 'message' => 'Execute failed: ' . $stmt->error]);
